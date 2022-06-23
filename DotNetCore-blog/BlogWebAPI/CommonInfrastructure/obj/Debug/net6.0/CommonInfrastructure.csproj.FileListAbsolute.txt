@@ -1,0 +1,15 @@
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\bin\Debug\net6.0\CommonInfrastructure.deps.json
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\bin\Debug\net6.0\CommonInfrastructure.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\bin\Debug\net6.0\CommonInfrastructure.pdb
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\bin\Debug\net6.0\DomainCommon.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\bin\Debug\net6.0\DomainCommon.pdb
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\obj\Debug\net6.0\CommonInfrastructure.csproj.AssemblyReference.cache
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\obj\Debug\net6.0\CommonInfrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\obj\Debug\net6.0\CommonInfrastructure.AssemblyInfoInputs.cache
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\obj\Debug\net6.0\CommonInfrastructure.AssemblyInfo.cs
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\obj\Debug\net6.0\CommonInfrastructure.csproj.CoreCompileInputs.cache
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\obj\Debug\net6.0\CommonInfrastructure.csproj.CopyComplete
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\obj\Debug\net6.0\CommonInfrastructure.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\obj\Debug\net6.0\refint\CommonInfrastructure.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\obj\Debug\net6.0\CommonInfrastructure.pdb
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\CommonInfrastructure\obj\Debug\net6.0\ref\CommonInfrastructure.dll

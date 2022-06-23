@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IBNZ/syPh9KdgGTJnZnu/hsrsRe285FAoXjhvsg3+fYt0E3iY8ix1ZYyX2ELrh66FByNXQuKwTVjx4bUGIDyjw==",
+  "dgSpecHash": "9fLDvdQV52dvsPajNOK3llhmcu9d0ja78pjVJQVknC3p1EEuXZ9CdCpUn+GK3FLGabtMNJbs44UVEWxMK+5fAA==",
   "success": true,
   "projectFilePath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\Ariticle.Domain.csproj",
   "expectedPackageFiles": [

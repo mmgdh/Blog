@@ -742,6 +742,23 @@
           "bin/placeholder/CommonInfrastructure.dll": {}
         }
       },
+      "CommonInitializer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "CommonInfrastructure": "1.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/CommonInitializer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommonInitializer.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "DomainCommon/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -2135,6 +2152,11 @@
       "path": "../CommonInfrastructure/CommonInfrastructure.csproj",
       "msbuildProject": "../CommonInfrastructure/CommonInfrastructure.csproj"
     },
+    "CommonInitializer/1.0.0": {
+      "type": "project",
+      "path": "../CommonInitializer/CommonInitializer.csproj",
+      "msbuildProject": "../CommonInitializer/CommonInitializer.csproj"
+    },
     "DomainCommon/1.0.0": {
       "type": "project",
       "path": "../BlogCommon/DomainCommon.csproj",
@@ -2144,6 +2166,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "CommonInfrastructure >= 1.0.0",
+      "CommonInitializer >= 1.0.0",
       "DomainCommon >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 6.0.6",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.6",
@@ -2189,6 +2212,9 @@
             },
             "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj": {
               "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj"
+            },
+            "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj": {
+              "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj"
             }
           }
         }

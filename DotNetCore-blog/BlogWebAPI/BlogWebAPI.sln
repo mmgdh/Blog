@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ariticle.Domain", "BlogWebAPI\Ariticle.Domain.csproj", "{9E8147F2-7DAB-4F04-9BA8-E6E501420900}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ariticle.Domain", "BlogWebAPI\Ariticle.Domain.csproj", "{9E8147F2-7DAB-4F04-9BA8-E6E501420900}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainCommon", "BlogCommon\DomainCommon.csproj", "{5BC37D96-9A8F-49B2-B155-39755C6089D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainCommon", "BlogCommon\DomainCommon.csproj", "{5BC37D96-9A8F-49B2-B155-39755C6089D7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C0400562-EB07-4DDA-994F-E3BAF8BA9D67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonInfrastructure", "CommonInfrastructure\CommonInfrastructure.csproj", "{3E1CF1DE-5051-4A89-BC50-9060884A05A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonInfrastructure", "CommonInfrastructure\CommonInfrastructure.csproj", "{3E1CF1DE-5051-4A89-BC50-9060884A05A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonInitializer", "CommonInitializer\CommonInitializer.csproj", "{4A6F1430-6523-4617-BFA4-567DEA85A096}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{3E1CF1DE-5051-4A89-BC50-9060884A05A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E1CF1DE-5051-4A89-BC50-9060884A05A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E1CF1DE-5051-4A89-BC50-9060884A05A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A6F1430-6523-4617-BFA4-567DEA85A096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A6F1430-6523-4617-BFA4-567DEA85A096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A6F1430-6523-4617-BFA4-567DEA85A096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A6F1430-6523-4617-BFA4-567DEA85A096}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5BC37D96-9A8F-49B2-B155-39755C6089D7} = {C0400562-EB07-4DDA-994F-E3BAF8BA9D67}
 		{3E1CF1DE-5051-4A89-BC50-9060884A05A1} = {C0400562-EB07-4DDA-994F-E3BAF8BA9D67}
+		{4A6F1430-6523-4617-BFA4-567DEA85A096} = {C0400562-EB07-4DDA-994F-E3BAF8BA9D67}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3E95441-400B-4DC3-95FC-51B201A85E65}
