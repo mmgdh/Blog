@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using CommonInfrastructure;
+using Common.Commons;
 
 namespace CommonInitializer
 {
@@ -26,6 +27,12 @@ namespace CommonInitializer
             //        option.UseSqlServer(connStr)
             //    });
             //});
+        }
+        public static void ConifgureExtraService(this WebApplicationBuilder builder)
+        {
+            IServiceCollection services = builder.Services;
+            var assemblies = ReflectionHelper.GetAllReferencedAssemblies();
+            services.RunModuleInitializers(assemblies);
         }
     }
 

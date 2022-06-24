@@ -1,12 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "l2Y2GkvfYxgx2gQXDE2IIjnMoQtqf22ER0xw7EqlQvLdyWXkSflE5u/3TMEIoO85ZyknhCrA1/A3Iuezaegz/w==",
+  "dgSpecHash": "nW9AOiNg/h5lCpqdKP9tk5DqZ2cuXIKfspEI93SAHykRQhPEbuNfSmGB2VgTMdFjPE8aHZo+8/vDJQCZWoqe/g==",
   "success": true,
   "projectFilePath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver\\4.11.1\\asmresolver.4.11.1.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver.dotnet\\4.11.1\\asmresolver.dotnet.4.11.1.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver.pe\\4.11.1\\asmresolver.pe.4.11.1.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver.pe.file\\4.11.1\\asmresolver.pe.file.4.11.1.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.6\\microsoft.entityframeworkcore.6.0.6.nupkg.sha512",
@@ -45,6 +50,8 @@
     "C:\\Users\\林庆汉\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\system.text.json\\6.0.4\\system.text.json.6.0.4.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
   "logs": []

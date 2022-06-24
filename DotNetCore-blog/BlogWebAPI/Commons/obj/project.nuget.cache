@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "DJC5r0aIgc71M8NxG+JRwY7Ggtg/zE/k0IzvqFI2mEDnfIAIj1Z7zrKRtFBtJMnksIqo+oGM8I6nicZ14Fk3bg==",
+  "success": true,
+  "projectFilePath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Commons\\Commons.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver\\4.11.1\\asmresolver.4.11.1.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver.dotnet\\4.11.1\\asmresolver.dotnet.4.11.1.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver.pe\\4.11.1\\asmresolver.pe.4.11.1.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver.pe.file\\4.11.1\\asmresolver.pe.file.4.11.1.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\system.text.json\\6.0.4\\system.text.json.6.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
