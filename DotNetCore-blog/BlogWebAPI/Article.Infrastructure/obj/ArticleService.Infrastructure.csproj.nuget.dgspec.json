@@ -1,0 +1,363 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Aritcle.Domian\\ArticleService.Domian.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Aritcle.Domian\\ArticleService.Domian.csproj",
+        "projectName": "ArticleService.Domian",
+        "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Aritcle.Domian\\ArticleService.Domian.csproj",
+        "packagesPath": "C:\\Users\\林庆汉\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Aritcle.Domian\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\林庆汉\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj": {
+                "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj"
+              },
+              "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj": {
+                "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj",
+        "projectName": "ArticleService.Infrastructure",
+        "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\林庆汉\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\林庆汉\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Aritcle.Domian\\ArticleService.Domian.csproj": {
+                "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Aritcle.Domian\\ArticleService.Domian.csproj"
+              },
+              "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj": {
+                "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj",
+        "projectName": "DomainCommon",
+        "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj",
+        "packagesPath": "C:\\Users\\林庆汉\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\林庆汉\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj",
+        "projectName": "CommonInfrastructure",
+        "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj",
+        "packagesPath": "C:\\Users\\林庆汉\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\林庆汉\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj": {
+                "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj",
+        "projectName": "CommonInitializer",
+        "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj",
+        "packagesPath": "C:\\Users\\林庆汉\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\林庆汉\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj": {
+                "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
