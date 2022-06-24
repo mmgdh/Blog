@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nW9AOiNg/h5lCpqdKP9tk5DqZ2cuXIKfspEI93SAHykRQhPEbuNfSmGB2VgTMdFjPE8aHZo+8/vDJQCZWoqe/g==",
+  "dgSpecHash": "326jztOQJOnXddOy7AnUnJeggUC/kH0fuukeDtbmKJnCWIealk91LRO2vmQGNRKRBq6sI8WqW+uA7CJiI1hQJQ==",
   "success": true,
   "projectFilePath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj",
   "expectedPackageFiles": [
@@ -8,10 +8,9 @@
     "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver.dotnet\\4.11.1\\asmresolver.dotnet.4.11.1.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver.pe\\4.11.1\\asmresolver.pe.4.11.1.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\asmresolver.pe.file\\4.11.1\\asmresolver.pe.file.4.11.1.nupkg.sha512",
-    "C:\\Users\\林庆汉\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
-    "C:\\Users\\林庆汉\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\林庆汉\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.6\\microsoft.entityframeworkcore.6.0.6.nupkg.sha512",

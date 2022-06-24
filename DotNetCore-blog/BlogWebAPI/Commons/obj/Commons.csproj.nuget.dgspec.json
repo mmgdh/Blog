@@ -47,10 +47,6 @@
             "AsmResolver.DotNet": {
               "target": "Package",
               "version": "[4.11.1, )"
-            },
-            "Microsoft.Extensions.DependencyInjection.Abstractions": {
-              "target": "Package",
-              "version": "[6.0.0, )"
             }
           },
           "imports": [

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace Common.Commons
+namespace CommonInitializer
 {
     public static class ModuleInitializerExtensions
     {

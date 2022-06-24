@@ -21,3 +21,5 @@ D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\obj\Debug\
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\obj\Debug\net6.0\ArticleService.Infrastructure.pdb
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\obj\Debug\net6.0\ArticleService.Infrastructure.genruntimeconfig.cache
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\obj\Debug\net6.0\ref\ArticleService.Infrastructure.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\Commons.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\Commons.pdb

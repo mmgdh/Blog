@@ -1,0 +1,12 @@
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\bin\Debug\net6.0\Commons.deps.json
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\bin\Debug\net6.0\Commons.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\bin\Debug\net6.0\Commons.pdb
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\obj\Debug\net6.0\Commons.csproj.AssemblyReference.cache
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\obj\Debug\net6.0\Commons.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\obj\Debug\net6.0\Commons.AssemblyInfoInputs.cache
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\obj\Debug\net6.0\Commons.AssemblyInfo.cs
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\obj\Debug\net6.0\Commons.csproj.CoreCompileInputs.cache
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\obj\Debug\net6.0\Commons.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\obj\Debug\net6.0\refint\Commons.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\obj\Debug\net6.0\Commons.pdb
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Commons\obj\Debug\net6.0\ref\Commons.dll
