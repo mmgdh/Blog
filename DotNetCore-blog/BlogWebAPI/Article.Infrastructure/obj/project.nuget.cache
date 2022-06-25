@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2ubsac7aiPp65NYYzj18luDAZje0wzEjiPb5zYo95sN8oE4ZFcXcWzNEwAc+fzAqA6QzrI9hV+Qe9cOySWF8sA==",
+  "dgSpecHash": "WIAcl19Qw3H3JQiiwniCDJMgZWvlwNL0sF66dcNkZItjBRd6vtT4vKgmk1BFR6sOXzGynR2frtEuQPux4EihOA==",
   "success": true,
   "projectFilePath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\MMGDH\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\MMGDH\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\MMGDH\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\MMGDH\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\10.0.1\\mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\MMGDH\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\MMGDH\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",

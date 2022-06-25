@@ -1,13 +1,11 @@
 ﻿using DomainCommon;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-
-namespace CommonInfrastructure
+namespace MediatR
 {
     public static class MediatorExtensions
     {

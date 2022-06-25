@@ -1,14 +1,21 @@
+using ArticleService.Infrastructure;
+using Common.Commons;
+using CommonInfrastructure;
 using CommonInitializer;
-
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var assemblies = ReflectionHelper.GetAllReferencedAssemblies();
 // Add services to the container.
-builder.ConfigureDbConfiguration();
+//builder.ConfigureDbConfiguration<ArticleDbContext>();
+builder.Services.AddDbContext<ArticleDbContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer")));
+builder.ConifgureExtraService();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMediatR(assemblies);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

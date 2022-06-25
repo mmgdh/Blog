@@ -63,18 +63,18 @@ public static class ReflectionHelper
     {
         AssemblyName asmName = AssemblyName.GetAssemblyName(asmPath);
         Assembly? asm=null;
-        try
-        {
-            asm = Assembly.Load(asmName);
-        }
-        catch (BadImageFormatException ex)
-        {
-            Debug.WriteLine(ex);
-        }
-        catch (FileLoadException ex)
-        {
-            Debug.WriteLine(ex);
-        }
+        //try
+        //{
+        //    asm = Assembly.Load(asmName);
+        //}
+        //catch (BadImageFormatException ex)
+        //{
+        //    Debug.WriteLine(ex);
+        //}
+        //catch (FileLoadException ex)
+        //{
+        //    Debug.WriteLine(ex);
+        //}
         
         if (asm == null)
         {

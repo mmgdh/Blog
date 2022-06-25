@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "7CYnyfOOsuPOyu8Vn2NWFDMOt/yxpNITYJ4dFHtu3VGiiwDEh6uc4nrOIrHrIM+tWGm5lDG1k3hYjeOTTsURdQ==",
+  "dgSpecHash": "ShwUaKGSUd5Bh5fLIE25m3ZYFUXtDzlc5t0+gcRVpKia74//K2MgI8m7M39PCvqf9PV/BEeK76/+JDwpJ5sS8w==",
   "success": true,
   "projectFilePath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MMGDH\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\MMGDH\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\MMGDH\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\10.0.1\\mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
     "C:\\Users\\MMGDH\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.6\\microsoft.entityframeworkcore.6.0.6.nupkg.sha512",
     "C:\\Users\\MMGDH\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.6\\microsoft.entityframeworkcore.abstractions.6.0.6.nupkg.sha512",
     "C:\\Users\\MMGDH\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.6\\microsoft.entityframeworkcore.analyzers.6.0.6.nupkg.sha512",

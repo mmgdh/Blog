@@ -69,6 +69,19 @@
           "lib/netstandard2.0/MediatR.Contracts.dll": {}
         }
       },
+      "MediatR.Extensions.Microsoft.DependencyInjection/10.0.1": {
+        "type": "package",
+        "dependencies": {
+          "MediatR": "10.0.1",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.5.0": {
         "type": "package",
         "compile": {
@@ -773,12 +786,42 @@
           }
         }
       },
+      "ArticleService.Domian/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "CommonInfrastructure": "1.0.0",
+          "DomainCommon": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/ArticleService.Domian.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ArticleService.Domian.dll": {}
+        }
+      },
+      "ArticleService.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "ArticleService.Domian": "1.0.0",
+          "CommonInitializer": "1.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/ArticleService.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ArticleService.Infrastructure.dll": {}
+        }
+      },
       "CommonInfrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "DomainCommon": "1.0.0",
-          "MediatR": "10.0.1",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1",
           "Microsoft.EntityFrameworkCore": "6.0.6"
         },
         "compile": {
@@ -931,6 +974,19 @@
         "lib/netstandard2.0/MediatR.Contracts.xml",
         "mediatr.contracts.1.0.1.nupkg.sha512",
         "mediatr.contracts.nuspec"
+      ]
+    },
+    "MediatR.Extensions.Microsoft.DependencyInjection/10.0.1": {
+      "sha512": "mYdfMvpkahCAj4tRfBoeMlUBZa2WthaONdQ4y5TtIyxcZYb5e7AE7c1eITTZVWcQhguxvD8AdExdaiAW6RhrVA==",
+      "type": "package",
+      "path": "mediatr.extensions.microsoft.dependencyinjection/10.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gradient_128x128.png",
+        "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll",
+        "mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
+        "mediatr.extensions.microsoft.dependencyinjection.nuspec"
       ]
     },
     "Microsoft.CSharp/4.5.0": {
@@ -2301,6 +2357,16 @@
         "version.txt"
       ]
     },
+    "ArticleService.Domian/1.0.0": {
+      "type": "project",
+      "path": "../Aritcle.Domian/ArticleService.Domian.csproj",
+      "msbuildProject": "../Aritcle.Domian/ArticleService.Domian.csproj"
+    },
+    "ArticleService.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Article.Infrastructure/ArticleService.Infrastructure.csproj",
+      "msbuildProject": "../Article.Infrastructure/ArticleService.Infrastructure.csproj"
+    },
     "CommonInfrastructure/1.0.0": {
       "type": "project",
       "path": "../CommonInfrastructure/CommonInfrastructure.csproj",
@@ -2324,9 +2390,11 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "ArticleService.Infrastructure >= 1.0.0",
       "CommonInfrastructure >= 1.0.0",
       "CommonInitializer >= 1.0.0",
       "DomainCommon >= 1.0.0",
+      "MediatR.Extensions.Microsoft.DependencyInjection >= 10.0.1",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -2361,6 +2429,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj": {
+              "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj"
+            },
             "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj": {
               "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj"
             },
@@ -2383,6 +2454,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "MediatR.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[10.0.1, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.2.3, )"

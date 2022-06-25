@@ -9,10 +9,10 @@ namespace CommonInitializer
 {
     public static class WebApplicationBuilderExtensions
     {
-        public static void ConfigureDbConfiguration(this WebApplicationBuilder builder)
+        public static void ConfigureDbConfiguration<T>(this WebApplicationBuilder builder) where T :BaseDbContext
         {
             string connStr = builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer");
-            builder.Services.AddDbContext<BaseDbContext>(option =>
+            builder.Services.AddDbContext<T>(option =>
             {
                 option.UseSqlServer(connStr);
             });
