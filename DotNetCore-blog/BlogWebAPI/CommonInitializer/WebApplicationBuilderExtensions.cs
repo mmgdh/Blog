@@ -33,6 +33,17 @@ namespace CommonInitializer
             IServiceCollection services = builder.Services;
             var assemblies = ReflectionHelper.GetAllReferencedAssemblies();
             services.RunModuleInitializers(assemblies);
+
+            services.AddCors(options =>
+            {
+                //更好的在Program.cs中用绑定方式读取配置的方法：https://github.com/dotnet/aspnetcore/issues/21491
+                //不过比较麻烦。
+                //var corsOpt = configuration.GetSection("Cors").Get<CorsSettings>();
+                string[] urls = new[] { "http://localhost:3000" };//corsOpt.Origins;
+                options.AddDefaultPolicy(builder => builder.WithOrigins(urls)
+                        .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            }
+);
         }
     }
 

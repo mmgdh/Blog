@@ -13,9 +13,9 @@ namespace ArticleService.WebAPI.Controllers
 
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<ActionResult<string>> Index()
         {
-            return View();
+            return Ok("11112222");
         }
 
         [HttpPost]
