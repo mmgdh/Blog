@@ -7,9 +7,9 @@ const routes:Array<RouteRecordRaw>=[
         component:()=>import('../components/b.vue')
     },
     {
-        path:"/a",
-        name:'a',
-        component:()=>import('../components/a.vue')
+        path:"/EditBlog",
+        name:'EditBlog',
+        component:()=>import('../components/EditBlog.vue')
     }
 ]
 
