@@ -10,8 +10,8 @@
               <span>文章</span>
             </span>
           </template>
-          <a-menu-item key="3" @click="AxiosFunc" >新增文章</a-menu-item>
-          <a-menu-item key="4" @click="topage('/EditBlog')">Bill</a-menu-item>
+          <a-menu-item key="3" @click="topage('/EditBlog')" >新增文章</a-menu-item>
+          <a-menu-item key="4" @click="AxiosFunc">Bill</a-menu-item>
           <a-menu-item key="5" @click="topage('/b')">Alex</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">
