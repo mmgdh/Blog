@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleService.Domian", "Ar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleService.Infrastructure", "Article.Infrastructure\ArticleService.Infrastructure.csproj", "{C512D1EA-3272-4248-8A29-5C4FF762D0B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Commons.csproj", "{6E418C5F-405E-4F8C-9B7E-31E75BF3AD5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commons", "Commons\Commons.csproj", "{6E418C5F-405E-4F8C-9B7E-31E75BF3AD5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

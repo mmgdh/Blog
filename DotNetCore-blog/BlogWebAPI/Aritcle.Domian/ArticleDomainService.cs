@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace ArticleService.Domian
+namespace ArticleService.Domain
 {
-    internal class ArticleDomainService
+    public class ArticleDomainService
     {
+        //public Article CreateArticle()
+        //{
+
+        //}
     }
 }

@@ -472,6 +472,15 @@
           }
         }
       },
+      "PinYinConverterCore/1.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/PinYinConverterCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/PinYinConverterCore.dll": {}
+        }
+      },
       "Swashbuckle.AspNetCore/6.2.3": {
         "type": "package",
         "dependencies": {
@@ -791,6 +800,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "CommonInfrastructure": "1.0.0",
+          "Commons": "1.0.0",
           "DomainCommon": "1.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.6"
         },
@@ -853,7 +863,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "AsmResolver.DotNet": "4.11.1"
+          "AsmResolver.DotNet": "4.11.1",
+          "PinYinConverterCore": "1.0.2"
         },
         "compile": {
           "bin/placeholder/Commons.dll": {}
@@ -1711,6 +1722,21 @@
         "version.txt"
       ]
     },
+    "PinYinConverterCore/1.0.2": {
+      "sha512": "GWGUL7HYyyTZeVltwgJ2sr8ER+Wyj1aR44KN1A5GS0iB3j/JqXDG62OHupz3iFczCQ4797IhHSSqOet7MvsWJQ==",
+      "type": "package",
+      "path": "pinyinconvertercore/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/PinYinConverterCore.dll",
+        "lib/net45/PinYinConverterCore.xml",
+        "lib/netstandard2.0/PinYinConverterCore.dll",
+        "lib/netstandard2.0/PinYinConverterCore.xml",
+        "pinyinconvertercore.1.0.2.nupkg.sha512",
+        "pinyinconvertercore.nuspec"
+      ]
+    },
     "Swashbuckle.AspNetCore/6.2.3": {
       "sha512": "cnzQDn0Le+hInsw2SYwlOhOCPXpYi/szcvnyqZJ12v+QyrLBwAmWXBg6RIyHB18s/mLeywC+Rg2O9ndz0IUNYQ==",
       "type": "package",
@@ -2399,47 +2425,49 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MMGDH\\.nuget\\packages\\": {},
+    "C:\\Users\\林庆汉\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\ArticleService.WebAPI.csproj",
+      "projectUniqueName": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\ArticleService.WebAPI.csproj",
       "projectName": "ArticleService.WebAPI",
-      "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\ArticleService.WebAPI.csproj",
-      "packagesPath": "C:\\Users\\MMGDH\\.nuget\\packages\\",
-      "outputPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\obj\\",
+      "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\ArticleService.WebAPI.csproj",
+      "packagesPath": "C:\\Users\\林庆汉\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\MMGDH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\林庆汉\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj": {
-              "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj"
+            "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj": {
+              "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj"
             },
-            "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj": {
-              "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj"
+            "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj": {
+              "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj"
             },
-            "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj": {
-              "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj"
+            "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj": {
+              "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj"
             },
-            "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj": {
-              "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj"
+            "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj": {
+              "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj"
             }
           }
         }

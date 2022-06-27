@@ -48,6 +48,15 @@
           "lib/net6.0/AsmResolver.PE.File.dll": {}
         }
       },
+      "PinYinConverterCore/1.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/PinYinConverterCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/PinYinConverterCore.dll": {}
+        }
+      },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
         "type": "package",
         "compile": {
@@ -168,6 +177,21 @@
         "lib/netstandard2.0/AsmResolver.PE.File.xml"
       ]
     },
+    "PinYinConverterCore/1.0.2": {
+      "sha512": "GWGUL7HYyyTZeVltwgJ2sr8ER+Wyj1aR44KN1A5GS0iB3j/JqXDG62OHupz3iFczCQ4797IhHSSqOet7MvsWJQ==",
+      "type": "package",
+      "path": "pinyinconvertercore/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/PinYinConverterCore.dll",
+        "lib/net45/PinYinConverterCore.xml",
+        "lib/netstandard2.0/PinYinConverterCore.dll",
+        "lib/netstandard2.0/PinYinConverterCore.xml",
+        "pinyinconvertercore.1.0.2.nupkg.sha512",
+        "pinyinconvertercore.nuspec"
+      ]
+    },
     "System.Runtime.CompilerServices.Unsafe/6.0.0": {
       "sha512": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
       "type": "package",
@@ -277,34 +301,37 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "AsmResolver.DotNet >= 4.11.1"
+      "AsmResolver.DotNet >= 4.11.1",
+      "PinYinConverterCore >= 1.0.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MMGDH\\.nuget\\packages\\": {},
+    "C:\\Users\\林庆汉\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\Commons\\Commons.csproj",
+      "projectUniqueName": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Commons\\Commons.csproj",
       "projectName": "Commons",
-      "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\Commons\\Commons.csproj",
-      "packagesPath": "C:\\Users\\MMGDH\\.nuget\\packages\\",
-      "outputPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\Commons\\obj\\",
+      "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Commons\\Commons.csproj",
+      "packagesPath": "C:\\Users\\林庆汉\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Commons\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\MMGDH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\林庆汉\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -326,6 +353,10 @@
           "AsmResolver.DotNet": {
             "target": "Package",
             "version": "[4.11.1, )"
+          },
+          "PinYinConverterCore": {
+            "target": "Package",
+            "version": "[1.0.2, )"
           }
         },
         "imports": [

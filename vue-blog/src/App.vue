@@ -10,7 +10,7 @@
               <span>文章</span>
             </span>
           </template>
-          <a-menu-item key="3" @click="topage('/EditBlog')" >新增文章</a-menu-item>
+          <a-menu-item key="3" @click="topage('/EditBlog')">新增文章</a-menu-item>
           <a-menu-item key="4" @click="AxiosFunc">Bill</a-menu-item>
           <a-menu-item key="5" @click="topage('/b')">Alex</a-menu-item>
         </a-sub-menu>
@@ -57,26 +57,26 @@ import {
   FileOutlined,
 } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
-import {get,post} from './axiosInstance'
-import {ArticleService} from './Services/ArticleService'
-import {useRouter} from 'vue-router'
+import { get, post } from './axiosInstance'
+import { ArticleService } from './Services/ArticleService'
+import { useRouter } from 'vue-router'
 
-    let router=useRouter()
-     let collapsed = ref<boolean>(false)
-     let selectedKeys = ref<string[]>(['1'])
+let router = useRouter()
+let collapsed = ref<boolean>(false)
+let selectedKeys = ref<string[]>(['1'])
 
-     let AxiosFunc=async ()=>{
-         ArticleService.prototype.getArticle()
-              .then((res)=>{
-                  console.log(res); 
-              }).catch(()=>{console.log("失败了")})
-              .finally(()=>{
-                console.log("over")
-              })
-     }
-     let topage=(url:string)=>{
-      router.push(url)
-    }
+let AxiosFunc = async () => {
+  ArticleService.prototype.getArticle()
+    .then((res) => {
+      console.log(res);
+    }).catch(() => { console.log("失败了") })
+    .finally(() => {
+      console.log("over")
+    })
+}
+let topage = (url: string) => {
+  router.push(url)
+}
 
 </script>
 <style>
@@ -89,11 +89,12 @@ import {useRouter} from 'vue-router'
 .site-layout .site-layout-background {
   background: #fff;
 }
+
 [data-theme='dark'] .site-layout .site-layout-background {
   background: #141414;
 }
 
-#md-editor-v3{
-  height: 1000px;
+#md-editor-v3 {
+  height: 600px;
 }
 </style>

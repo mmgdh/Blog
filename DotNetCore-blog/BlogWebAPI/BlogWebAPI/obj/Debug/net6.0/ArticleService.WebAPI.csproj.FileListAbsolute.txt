@@ -151,3 +151,8 @@ C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\obj\Debug\net6.0\Artic
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\obj\Debug\net6.0\ArticleService.WebAPI.genruntimeconfig.cache
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\obj\Debug\net6.0\ref\ArticleService.WebAPI.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domian.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Infrastructure.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Infrastructure.pdb
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domian.pdb

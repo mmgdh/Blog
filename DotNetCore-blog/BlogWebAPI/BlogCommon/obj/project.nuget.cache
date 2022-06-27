@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ZgzUfW4Es5ZqC+Hnk0R2FoEOP3Iy0S//awFqIYkGm9HWJPMKRKRgGt5j888c3vQImZmPU6HuRgKtPQKZELZ17A==",
+  "dgSpecHash": "XkvnFanisd45S1ezI6CmFoQ4O5OogyHqRmjCxZ4Gq89mB6v1fxOmXIseEUDdi9MPSMPSV7+FN4kRVOi/L1HmHA==",
   "success": true,
-  "projectFilePath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj",
+  "projectFilePath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\MMGDH\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
-    "C:\\Users\\MMGDH\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512"
+    "C:\\Users\\林庆汉\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
+    "C:\\Users\\林庆汉\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512"
   ],
   "logs": []
 }

@@ -625,38 +625,40 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MMGDH\\.nuget\\packages\\": {},
+    "C:\\Users\\林庆汉\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj",
+      "projectUniqueName": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj",
       "projectName": "CommonInfrastructure",
-      "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj",
-      "packagesPath": "C:\\Users\\MMGDH\\.nuget\\packages\\",
-      "outputPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\obj\\",
+      "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj",
+      "packagesPath": "C:\\Users\\林庆汉\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\MMGDH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\林庆汉\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj": {
-              "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj"
+            "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj": {
+              "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj"
             }
           }
         }
