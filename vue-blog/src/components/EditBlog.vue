@@ -10,22 +10,20 @@
 
     <a-drawer v-model:visible="visible" class="custom-class" title="博文信息" placement="right"
         @after-visible-change="afterVisibleChange">
-        <a-form :model="formState" v-bind="layout" name="nest-messages" :validate-messages="validateMessages"
+        <a-form :model="SubmitArticle" v-bind="layout" name="nest-messages" :validate-messages="validateMessages"
             @finish="onFinish">
             <a-form-item :name="['Article', 'Title']" label="标题" :rules="[{ required: true }]">
-                <a-input v-model:value="formState.Article.Title" />
+                <a-input v-model:value="SubmitArticle.Title" />
             </a-form-item>
-            <a-form-item :name="['Article', 'Tags']" label="Email" :rules="[{ type: 'email' }]">
-                <a-input v-model:value="formState.user.email" />
-            </a-form-item>
-            <a-form-item :name="['user', 'age']" label="Age" :rules="[{ type: 'number', min: 0, max: 99 }]">
-                <a-input-number v-model:value="formState.user.age" />
-            </a-form-item>
-            <a-form-item :name="['user', 'website']" label="Website">
-                <a-input v-model:value="formState.user.website" />
-            </a-form-item>
-            <a-form-item :name="['user', 'introduction']" label="Introduction">
-                <a-textarea v-model:value="formState.user.introduction" />
+            <a-form-item :name="['Article', 'Tags']" label="标签">
+                <div :style="{float:'left'}">
+                    <a-popover v-model:visible="TagCardVisible" title="标签" trigger="click">
+                        <template #content>
+                            <a @click="hide">Close</a>
+                        </template>
+                        <a-input aria-readonly="true" v-model:value="SubmitArticle.Tags" />
+                    </a-popover>                   
+                </div>
             </a-form-item>
             <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
                 <a-button type="primary" html-type="submit">Submit</a-button>
@@ -71,18 +69,41 @@ const validateMessages = {
     },
 };
 
-const formState = reactive({
-    Article: {
-        Title: '',
-        Tags: undefined,
-        email: '',
-        website: '',
-        introduction: '',
-    },
+interface ArticleTag {
+    TagName: string,
+    Id: string
+}
+
+interface Article {
+    Title: string,
+    Tags: Array<ArticleTag>,
+}
+let SelectArticleTags: Array<ArticleTag> = [];
+
+const AddTags = () => {
+    let _ArticleTag: ArticleTag = {
+        TagName: '1',
+        Id: ''
+    }
+    SelectArticleTags.push(_ArticleTag)
+}
+
+
+const SubmitArticle: Article = reactive({
+    Title: "1",
+    Tags: SelectArticleTags
 });
 const onFinish = (values: any) => {
     console.log('Success:', values);
 };
+
+//#region 表单内Tag的气泡卡片
+const TagCardVisible = ref<boolean>(false);
+
+const hide = () => {
+    TagCardVisible.value = false;
+};
+//#endregion
 //#endregion
 </script>
 

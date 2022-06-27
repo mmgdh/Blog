@@ -21,10 +21,10 @@ const service = axios.create({
  * @param params
  * @returns {Promise}
  */
-export function get (url:any, params:any, time:any) {
+export function get (url:any, params:any, timeout:number=10000) {
       return new Promise((resolve, reject) => {
         service
-          .get(url, { params: params,timeout:time})
+          .get(url, { params: params,timeout:timeout})
           .then((response) => {
             resolve(response.data)
           })
@@ -45,9 +45,9 @@ export function get (url:any, params:any, time:any) {
  * @param data
  * @returns {Promise}
  */
-export function post (url:any, data = {}, time :any) {
+export function post (url:any, data = {}, timeout:number=10000) {
       return new Promise((resolve, reject) => {
-        service.post(url, data, { timeout: time }).then(
+        service.post(url, data, { timeout: timeout }).then(
           (response) => {
             resolve(response.data)
           },
