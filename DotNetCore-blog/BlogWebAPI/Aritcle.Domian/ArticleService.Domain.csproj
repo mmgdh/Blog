@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BlogCommon\DomainCommon.csproj" />
     <ProjectReference Include="..\CommonInfrastructure\CommonInfrastructure.csproj" />
+    <ProjectReference Include="..\CommonInitializer\CommonInitializer.csproj" />
     <ProjectReference Include="..\Commons\Commons.csproj" />
   </ItemGroup>
 

@@ -5,17 +5,28 @@ namespace ArticleService.Domain
 {
     public class ArticleTag:BaseEntity
     {
-        public string TagName { get; set; }
+        private string _TagName;
+        public string TagName
+        {
+            get
+            {
+                return _TagName;
+            }
+            set
+            {
+                _TagName =value;
+                PinYin = PinYinHelper.GetFrist(value);
+            }
+        }
 
-        public string PinYin { get; set; }
+        public string PinYin { get;private set; }
         public List<Article> Articles { get; set; }
 
-        public ArticleTag Create(string TagName)
+        public static ArticleTag Create(string TagName)
         {
             return new ArticleTag
             {
-                TagName = TagName,
-                PinYin = PinYinHelper.GetFrist(TagName)
+                TagName = TagName
             };
         }
     }

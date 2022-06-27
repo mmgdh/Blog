@@ -122,7 +122,6 @@ C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\runti
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domian.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Infrastructure.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\CommonInfrastructure.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\CommonInitializer.dll
@@ -132,7 +131,6 @@ C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\Artic
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\DomainCommon.pdb
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\CommonInfrastructure.pdb
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\CommonInitializer.pdb
-C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domian.pdb
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\Commons.pdb
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\obj\Debug\net6.0\ArticleService.WebAPI.csproj.AssemblyReference.cache
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\obj\Debug\net6.0\ArticleService.WebAPI.GeneratedMSBuildEditorConfig.editorconfig
@@ -156,3 +154,6 @@ D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\Artic
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Infrastructure.dll
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Infrastructure.pdb
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domian.pdb
+C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\PinYinConverterCore.dll
+C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domain.dll
+C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domain.pdb

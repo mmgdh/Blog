@@ -795,27 +795,28 @@
           }
         }
       },
-      "ArticleService.Domian/1.0.0": {
+      "ArticleService.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "CommonInfrastructure": "1.0.0",
+          "CommonInitializer": "1.0.0",
           "Commons": "1.0.0",
           "DomainCommon": "1.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.6"
         },
         "compile": {
-          "bin/placeholder/ArticleService.Domian.dll": {}
+          "bin/placeholder/ArticleService.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ArticleService.Domian.dll": {}
+          "bin/placeholder/ArticleService.Domain.dll": {}
         }
       },
       "ArticleService.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "ArticleService.Domian": "1.0.0",
+          "ArticleService.Domain": "1.0.0",
           "CommonInitializer": "1.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.6"
         },
@@ -2383,10 +2384,10 @@
         "version.txt"
       ]
     },
-    "ArticleService.Domian/1.0.0": {
+    "ArticleService.Domain/1.0.0": {
       "type": "project",
-      "path": "../Aritcle.Domian/ArticleService.Domian.csproj",
-      "msbuildProject": "../Aritcle.Domian/ArticleService.Domian.csproj"
+      "path": "../Aritcle.Domian/ArticleService.Domain.csproj",
+      "msbuildProject": "../Aritcle.Domian/ArticleService.Domain.csproj"
     },
     "ArticleService.Infrastructure/1.0.0": {
       "type": "project",
@@ -2425,49 +2426,47 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\林庆汉\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages": {},
+    "C:\\Users\\MMGDH\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\ArticleService.WebAPI.csproj",
+      "projectUniqueName": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\ArticleService.WebAPI.csproj",
       "projectName": "ArticleService.WebAPI",
-      "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\ArticleService.WebAPI.csproj",
-      "packagesPath": "C:\\Users\\林庆汉\\.nuget\\packages\\",
-      "outputPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\obj\\",
+      "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\ArticleService.WebAPI.csproj",
+      "packagesPath": "C:\\Users\\MMGDH\\.nuget\\packages\\",
+      "outputPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\林庆汉\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+        "C:\\Users\\MMGDH\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj": {
-              "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj"
+            "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj": {
+              "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\Article.Infrastructure\\ArticleService.Infrastructure.csproj"
             },
-            "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj": {
-              "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj"
+            "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj": {
+              "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\BlogCommon\\DomainCommon.csproj"
             },
-            "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj": {
-              "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj"
+            "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj": {
+              "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInfrastructure\\CommonInfrastructure.csproj"
             },
-            "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj": {
-              "projectPath": "D:\\Code\\GitHub\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj"
+            "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj": {
+              "projectPath": "C:\\Code\\Github\\Blog\\DotNetCore-blog\\BlogWebAPI\\CommonInitializer\\CommonInitializer.csproj"
             }
           }
         }

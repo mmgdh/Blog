@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aritcle.Domian\ArticleService.Domian.csproj" />
+    <ProjectReference Include="..\Aritcle.Domian\ArticleService.Domain.csproj" />
     <ProjectReference Include="..\CommonInitializer\CommonInitializer.csproj" />
   </ItemGroup>
 

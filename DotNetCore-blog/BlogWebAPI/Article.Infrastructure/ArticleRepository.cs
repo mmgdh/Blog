@@ -1,28 +1,36 @@
 ﻿using ArticleService.Domain;
-using ArticleService.Domian;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ArticleService.Infrastructure
 {
     public class ArticleRepository : IArticleRepository
     {
-        public Task<Article> GetArticleByIdAsync(Guid ArticleId)
+        private readonly ArticleDbContext dbCtx;
+        public ArticleRepository(ArticleDbContext _dbCtx)
         {
-            throw new NotImplementedException();
+            dbCtx = _dbCtx;
         }
 
-        public Task<Article[]> GetArticlesByArticleTagId(Guid ArticleTagId)
+        public async Task<Article?> GetArticleByIdAsync(Guid ArticleId)
         {
-            throw new NotImplementedException();
+            return await dbCtx.FindAsync<Article>(ArticleId);
         }
 
-        public Task<ArticleTag> GetArticleTagByIdAsync(Guid ArticleTagId)
+        public  async Task<Article[]> GetArticlesByArticleTagId(Guid ArticleTagId)
         {
-            throw new NotImplementedException();
+            var Tag= await dbCtx.Tags.FindAsync(ArticleTagId);
+            if (Tag == null)
+                throw new Exception("未找到对应的Tag");
+            return dbCtx.Articles.Where(x => x.Tags.Contains(Tag)).ToArray();
+        }
+
+        public async Task<ArticleTag?> GetArticleTagByIdAsync(Guid ArticleTagId)
+        {
+            return await dbCtx.Tags.FindAsync(ArticleTagId);
+        }
+
+        public bool TagNameIsExist(string TagName)
+        {
+            return dbCtx.Tags.Any(x => x.TagName == TagName);
         }
     }
 }

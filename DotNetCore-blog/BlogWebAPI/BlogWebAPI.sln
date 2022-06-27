@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonInitializer", "Common
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArticleService", "ArticleService", "{B19F3090-D6AC-484B-9CD7-F97B8BBF310E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleService.Domian", "Aritcle.Domian\ArticleService.Domian.csproj", "{40CA84A8-5621-47DB-B890-4314B62F5C5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleService.Domain", "Aritcle.Domian\ArticleService.Domain.csproj", "{40CA84A8-5621-47DB-B890-4314B62F5C5D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleService.Infrastructure", "Article.Infrastructure\ArticleService.Infrastructure.csproj", "{C512D1EA-3272-4248-8A29-5C4FF762D0B2}"
 EndProject

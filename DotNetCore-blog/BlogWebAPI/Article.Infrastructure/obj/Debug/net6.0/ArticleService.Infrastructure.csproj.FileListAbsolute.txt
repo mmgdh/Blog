@@ -27,12 +27,10 @@ C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Infrastructure.runtimeconfig.json
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Infrastructure.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Infrastructure.pdb
-C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Domian.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\CommonInfrastructure.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\CommonInitializer.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\Commons.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\DomainCommon.dll
-C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Domian.pdb
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\CommonInitializer.pdb
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\CommonInfrastructure.pdb
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\Commons.pdb
@@ -48,3 +46,5 @@ C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\obj\Debug\
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\obj\Debug\net6.0\ArticleService.Infrastructure.pdb
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\obj\Debug\net6.0\ArticleService.Infrastructure.genruntimeconfig.cache
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\obj\Debug\net6.0\ref\ArticleService.Infrastructure.dll
+C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Domain.dll
+C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Domain.pdb

@@ -13,7 +13,7 @@
         <a-form :model="formState" v-bind="layout" name="nest-messages" :validate-messages="validateMessages"
             @finish="onFinish">
             <a-form-item :name="['Article', 'Title']" label="标题" :rules="[{ required: true }]">
-                <a-input v-model:value="formState.user.name" />
+                <a-input v-model:value="formState.Article.Title" />
             </a-form-item>
             <a-form-item :name="['Article', 'Tags']" label="Email" :rules="[{ type: 'email' }]">
                 <a-input v-model:value="formState.user.email" />

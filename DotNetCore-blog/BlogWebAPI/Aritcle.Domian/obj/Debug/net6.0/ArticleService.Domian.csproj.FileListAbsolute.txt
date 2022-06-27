@@ -32,3 +32,5 @@ C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Aritcle.Domian\obj\Debug\net6.0\A
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Aritcle.Domian\obj\Debug\net6.0\refint\ArticleService.Domian.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Aritcle.Domian\obj\Debug\net6.0\ArticleService.Domian.pdb
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Aritcle.Domian\obj\Debug\net6.0\ref\ArticleService.Domian.dll
+C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Aritcle.Domian\bin\Debug\net6.0\Commons.dll
+C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Aritcle.Domian\bin\Debug\net6.0\Commons.pdb
