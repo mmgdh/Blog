@@ -58,7 +58,7 @@ import {
 } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 import { get, post } from './axiosInstance'
-import { ArticleService } from './Services/ArticleService'
+import  ArticleService  from './Services/ArticleService'
 import { useRouter } from 'vue-router'
 
 let router = useRouter()

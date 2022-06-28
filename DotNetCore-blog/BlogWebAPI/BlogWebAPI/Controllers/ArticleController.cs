@@ -33,10 +33,15 @@ namespace ArticleService.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> AddTag(string TagName)
         {
-            var Tag = domainService.CreateTag(TagName);
+            var Tag =await domainService.CreateTag(TagName);
             dbCtx.Add(Tag);
             await dbCtx.SaveChangesAsync();
             return Ok();
+        }
+        [HttpGet]
+        public async Task<ActionResult<ArticleTag[]>> GetAllTags()
+        {
+            return await repository.GetAllArticleTagsAsync();
         }
     }
 }

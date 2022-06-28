@@ -2,11 +2,9 @@ D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Infrastructure.runtimeconfig.json
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Infrastructure.dll
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Infrastructure.pdb
-D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Domian.dll
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\CommonInfrastructure.dll
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\CommonInitializer.dll
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\DomainCommon.dll
-D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Domian.pdb
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\CommonInitializer.pdb
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\CommonInfrastructure.pdb
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\DomainCommon.pdb
@@ -48,3 +46,5 @@ C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\obj\Debug\
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\obj\Debug\net6.0\ref\ArticleService.Infrastructure.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Domain.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Domain.pdb
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Domain.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\Article.Infrastructure\bin\Debug\net6.0\ArticleService.Domain.pdb

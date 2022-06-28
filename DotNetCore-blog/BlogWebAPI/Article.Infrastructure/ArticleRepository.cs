@@ -1,4 +1,5 @@
 ﻿using ArticleService.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace ArticleService.Infrastructure
 {
@@ -20,7 +21,7 @@ namespace ArticleService.Infrastructure
             var Tag= await dbCtx.Tags.FindAsync(ArticleTagId);
             if (Tag == null)
                 throw new Exception("未找到对应的Tag");
-            return dbCtx.Articles.Where(x => x.Tags.Contains(Tag)).ToArray();
+            return await dbCtx.Articles.Where(x => x.Tags.Contains(Tag)).ToArrayAsync();
         }
 
         public async Task<ArticleTag?> GetArticleTagByIdAsync(Guid ArticleTagId)
@@ -28,9 +29,14 @@ namespace ArticleService.Infrastructure
             return await dbCtx.Tags.FindAsync(ArticleTagId);
         }
 
-        public bool TagNameIsExist(string TagName)
+        public async Task<ArticleTag[]> GetAllArticleTagsAsync()
         {
-            return dbCtx.Tags.Any(x => x.TagName == TagName);
+            return await dbCtx.Tags.ToArrayAsync();
+        }
+
+        public async Task<bool> TagNameIsExist(string TagName)
+        {
+            return await dbCtx.Tags.AnyAsync(x => x.TagName == TagName);
         }
     }
 }

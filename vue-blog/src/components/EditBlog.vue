@@ -3,7 +3,10 @@
 
     <div id="BlogButton">
         <a-button shape="round" type="primary" @click="showDrawer">提交</a-button>
-        <a-button>草稿</a-button>
+        <a-button @click="Test">草稿</a-button>
+        <div v-for="Tag in AllTags">
+            <a-button color="success">{{Tag.tagName}}</a-button>
+        </div>
     </div>
 
 
@@ -16,13 +19,16 @@
                 <a-input v-model:value="SubmitArticle.Title" />
             </a-form-item>
             <a-form-item :name="['Article', 'Tags']" label="标签">
-                <div :style="{float:'left'}">
-                    <a-popover v-model:visible="TagCardVisible" title="标签" trigger="click">
+                <div :style="{ float: 'left' }">
+                    <a-popover v-model:visible="TagCardVisible" title="标签" trigger="click" placement="left">
                         <template #content>
-                            <a @click="hide">Close</a>
+                            <div v-for="Tag in AllTags">
+                                <a-tag color="success">success</a-tag>
+                            </div>
+                            <a-tag color="success">success</a-tag>
                         </template>
                         <a-input aria-readonly="true" v-model:value="SubmitArticle.Tags" />
-                    </a-popover>                   
+                    </a-popover>
                 </div>
             </a-form-item>
             <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
@@ -34,9 +40,11 @@
 
 
 <script setup lang='ts'>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onBeforeMount, toRaw } from 'vue'
 import Md from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
+import { Article, ArticleTag } from '../Entities/E_Article'
+import ArticleService from '../Services/ArticleService'
 //#region  markdown
 const content = ref<string>('');
 //#endregion
@@ -69,15 +77,6 @@ const validateMessages = {
     },
 };
 
-interface ArticleTag {
-    TagName: string,
-    Id: string
-}
-
-interface Article {
-    Title: string,
-    Tags: Array<ArticleTag>,
-}
 let SelectArticleTags: Array<ArticleTag> = [];
 
 const AddTags = () => {
@@ -96,15 +95,32 @@ const SubmitArticle: Article = reactive({
 const onFinish = (values: any) => {
     console.log('Success:', values);
 };
-
 //#region 表单内Tag的气泡卡片
 const TagCardVisible = ref<boolean>(false);
 
 const hide = () => {
     TagCardVisible.value = false;
 };
+
+
+let AllTags: any= ref([]);
 //#endregion
 //#endregion
+
+onBeforeMount(() => {
+
+    const abc=async()=>{
+        let ret =await ArticleService.prototype.GetAllArticleTags();
+        AllTags.value=ret;
+    }
+        abc();
+    //  ArticleService.prototype.GetAllArticleTags().then((res:any)=>AllTags=ref(res).value)
+    // AllTags = reactive(res);
+})
+
+const Test = () => {
+    console.log(AllTags);
+}
 </script>
 
 <style>

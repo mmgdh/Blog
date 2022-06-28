@@ -9,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 var assemblies = ReflectionHelper.GetAllReferencedAssemblies();
 // Add services to the container.
 //builder.ConfigureDbConfiguration<ArticleDbContext>();
-builder.Services.AddDbContext<ArticleDbContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer")));
+//builder.Services.AddDbContext<ArticleDbContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer")));
+builder.Services.AddDbContext<ArticleDbContext>(option => option.UseSqlServer(Environment.GetEnvironmentVariable("DefaultDB:ConnStr")?? builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer")));
 builder.ConifgureExtraService();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

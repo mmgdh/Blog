@@ -150,10 +150,11 @@ C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\obj\Debug\net6.0\Artic
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\obj\Debug\net6.0\ref\ArticleService.WebAPI.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
-D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domian.dll
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Infrastructure.dll
 D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Infrastructure.pdb
-D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domian.pdb
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\PinYinConverterCore.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domain.dll
 C:\Code\Github\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domain.pdb
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\PinYinConverterCore.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domain.dll
+D:\Code\GitHub\Blog\DotNetCore-blog\BlogWebAPI\BlogWebAPI\bin\Debug\net6.0\ArticleService.Domain.pdb

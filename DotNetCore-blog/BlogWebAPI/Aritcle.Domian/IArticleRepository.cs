@@ -8,8 +8,8 @@
 
         public Task<ArticleTag?> GetArticleTagByIdAsync(Guid ArticleTagId);
 
-        public bool TagNameIsExist(string TagName);
+        public Task<bool> TagNameIsExist(string TagName);
 
-
+        public Task<ArticleTag[]> GetAllArticleTagsAsync();
     }
 }

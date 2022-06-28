@@ -8,9 +8,9 @@
             repository = _repository;
         }
 
-        public  ArticleTag CreateTag(string TagName)
+        public async  Task<ArticleTag> CreateTag(string TagName)
         {
-            if (repository.TagNameIsExist(TagName))
+            if (await repository.TagNameIsExist(TagName))
             {
                 throw new Exception("该标签已存在");
             }
