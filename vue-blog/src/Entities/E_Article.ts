@@ -6,5 +6,5 @@ export interface Article{
 
 export interface ArticleTag {
     TagName: string,
-    Id: string
+    id: string
 }
