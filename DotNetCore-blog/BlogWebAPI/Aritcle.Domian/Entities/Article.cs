@@ -18,7 +18,7 @@ namespace ArticleService.Domain
             set
             {
                 Title = value;
-                PinYin = PinYinHelper.GetFrist(value);
+                PinYin = "";//PinYinHelper.GetFrist(value)
             }
         }
 

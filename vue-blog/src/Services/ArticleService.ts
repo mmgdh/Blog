@@ -7,6 +7,10 @@ export default class ArticleService{
        return await get("Article/Index",undefined,timeout)
     }
 
+    async AddArticle(Article: Article){
+        return await post('Article/Add',Article)
+    }
+
     async AddArticleTag(parames:Parameters<any>){
         return await post("Article/AddTag",parames)
     }

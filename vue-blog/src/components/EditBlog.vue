@@ -38,7 +38,7 @@ import Md from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { Article, ArticleTag } from '../Entities/E_Article'
 import ArticleTagSelectVue from './common/ArticleTagSelect.vue'
-import { string } from 'vue-types'
+import ArticleService from '../Services/ArticleService'
 
 //#region  markdown
 const content = ref<string>('');
@@ -78,8 +78,10 @@ let SubmitArticle = ref({
         Content: content,
         Tags: undefined
 });
-const onFinish = (values: any) => {
+const onFinish = (values: Article) => {
     console.log('Success:', values);
+    values.Content=content.value;
+    ArticleService.prototype.AddArticle(values)
 };
 
 //#endregion

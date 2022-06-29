@@ -1,5 +1,6 @@
 ﻿using ArticleService.Domain;
 using ArticleService.Infrastructure;
+using ArticleService.WebAPI.Controllers.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArticleService.WebAPI.Controllers
@@ -25,7 +26,12 @@ namespace ArticleService.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Add(string Json)
+        public async Task<ActionResult<Guid>> Add(ArticleAddRequest request)
+        {
+            return Ok();
+        }
+        [HttpPost]
+        public ActionResult ABC(ArticleAddRequest a)
         {
             return Ok();
         }

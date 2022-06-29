@@ -1,6 +1,7 @@
 
 export interface Article{
     Title: string,
+    Content:string
     Tags: Array<ArticleTag>,
 }
 
