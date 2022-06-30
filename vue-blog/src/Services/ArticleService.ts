@@ -15,9 +15,8 @@ export default class ArticleService{
         return await post("Article/AddTag",parames)
     }
 
-     GetAllArticleTags() : any {
-        var ret =  get('Article/GetAllTags',undefined)
-        return ret
+    async  GetAllArticleTags() {
+        return await  get('Article/GetAllTags',undefined)
     }
 
 }

@@ -42,6 +42,31 @@ import ArticleService from '../Services/ArticleService'
 
 //#region  markdown
 const content = ref<string>('');
+
+//MarkDown图片上传功能
+const onUploadImg = async (files : any, callback :any) => {
+  const res = await Promise.all(
+    files.map((file :any) => {
+      return new Promise((rev, rej) => {
+        const form = new FormData();
+        form.append('file', file);
+
+        axios
+          .post('/api/img/upload', form, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then((res :any) => rev(res))
+          .catch((error :any) => rej(error));
+      });
+    })
+  );
+
+  callback(res.map((item) => item.data.url));
+};
+
+
 //#endregion
 
 //#region 右侧抽屉
