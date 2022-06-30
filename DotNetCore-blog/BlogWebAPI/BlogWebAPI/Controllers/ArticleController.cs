@@ -2,6 +2,7 @@
 using ArticleService.Infrastructure;
 using ArticleService.WebAPI.Controllers.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ArticleService.WebAPI.Controllers
 {
@@ -29,16 +30,15 @@ namespace ArticleService.WebAPI.Controllers
         public async Task<ActionResult<Guid>> Add(ArticleAddRequest request)
         {
             List<Guid> TagsGuid = request.Tags.Select(x => x.id).ToList();
-            var ArticleTags = dbCtx.Tags.Where(x => TagsGuid.Contains(x.Id));
+
             //var ArticleTags = request.ToArticleTagArray(request.Tags);
-            Article AddArticle = Article.Create(request.Title, request.content, ArticleTags.ToList());
-            dbCtx.Add(AddArticle);
+            Article AddArticle = Article.Create(request.Title, request.content);
+            var ArticleTags = dbCtx.Tags.Where(x => TagsGuid.Contains(x.Id)).ToList();
+            AddArticle.Tags = ArticleTags;
+            ArticleTags.ForEach(x => x.Articles = new List<Article>() { AddArticle });
+            dbCtx.Articles.Add(AddArticle);
+            dbCtx.Tags.UpdateRange(ArticleTags);
             await dbCtx.SaveChangesAsync();
-            return Ok();
-        }
-        [HttpPost]
-        public ActionResult ABC(ArticleAddRequest a)
-        {
             return Ok();
         }
 

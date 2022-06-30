@@ -20,7 +20,7 @@ namespace ArticleService.Domain
         }
 
         public string PinYin { get;private set; }
-        public List<Article> Articles { get; set; }
+        public List<Article> Articles { get; set; } = new List<Article>();
 
         public static ArticleTag Create(string TagName)
         {

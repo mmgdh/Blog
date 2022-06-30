@@ -30,19 +30,17 @@ namespace ArticleService.Domain
         /// <summary>
         /// 标签
         /// </summary>
-        public List<ArticleTag> Tags { get; set; }
+        public List<ArticleTag> Tags { get; set; } = new List<ArticleTag>();
 
 
 
-        public static Article Create(string Title,string Content,List<ArticleTag> tags)
+        public static Article Create(string Title,string Content)
         {
             try
             {
                 var r = new Article();
                 r.Title = Title;
                 r.Content = Content;
-                tags.ForEach(x => x.Articles.Add(r));
-                r.Tags = tags;
                 return r;
             }
             catch(Exception ex)
