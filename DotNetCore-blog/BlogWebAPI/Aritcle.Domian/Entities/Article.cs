@@ -17,8 +17,8 @@ namespace ArticleService.Domain
             }
             set
             {
-                Title = value;
-                PinYin = "";//PinYinHelper.GetFrist(value)
+                _Title = value;
+                PinYin = PinYinHelper.GetFrist(value);
             }
         }
 
@@ -31,5 +31,27 @@ namespace ArticleService.Domain
         /// 标签
         /// </summary>
         public List<ArticleTag> Tags { get; set; }
+
+
+
+        public static Article Create(string Title,string Content,List<ArticleTag> tags)
+        {
+            try
+            {
+                var r = new Article();
+                r.Title = Title;
+                r.Content = Content;
+                tags.ForEach(x => x.Articles.Add(r));
+                r.Tags = tags;
+                return r;
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+
+            return null;
+        }
     }
 }

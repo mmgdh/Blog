@@ -28,6 +28,12 @@ namespace ArticleService.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> Add(ArticleAddRequest request)
         {
+            List<Guid> TagsGuid = request.Tags.Select(x => x.id).ToList();
+            var ArticleTags = dbCtx.Tags.Where(x => TagsGuid.Contains(x.Id));
+            //var ArticleTags = request.ToArticleTagArray(request.Tags);
+            Article AddArticle = Article.Create(request.Title, request.content, ArticleTags.ToList());
+            dbCtx.Add(AddArticle);
+            await dbCtx.SaveChangesAsync();
             return Ok();
         }
         [HttpPost]

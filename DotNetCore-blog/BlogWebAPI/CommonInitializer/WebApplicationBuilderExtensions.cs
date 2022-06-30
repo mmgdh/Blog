@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using CommonInfrastructure;
 using Common.Commons;
+using FluentValidation.AspNetCore;
 
 namespace CommonInitializer
 {
     public static class WebApplicationBuilderExtensions
     {
-        public static void ConfigureDbConfiguration<T>(this WebApplicationBuilder builder) where T :BaseDbContext
+        public static void ConfigureDbConfiguration<T>(this WebApplicationBuilder builder) where T : BaseDbContext
         {
             string connStr = builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer");
             builder.Services.AddDbContext<T>(option =>
@@ -42,8 +43,11 @@ namespace CommonInitializer
                 string[] urls = new[] { "http://localhost:3000" };//corsOpt.Origins;
                 options.AddDefaultPolicy(builder => builder.WithOrigins(urls)
                         .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-            }
-);
+            });
+            services.AddFluentValidation(fv =>
+            {
+                fv.RegisterValidatorsFromAssemblies(assemblies);
+            });
         }
     }
 

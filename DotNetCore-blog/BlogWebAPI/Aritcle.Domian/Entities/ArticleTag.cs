@@ -29,5 +29,13 @@ namespace ArticleService.Domain
                 TagName = TagName
             };
         }
+
+        //public static ArticleTag Get(string id)
+        //{
+        //    return new ArticleTag
+        //    {
+        //        TagName = TagName
+        //    };
+        //}
     }
 }
