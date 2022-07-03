@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlogCommon\DomainCommon.csproj" />
+    <ProjectReference Include="..\CommonInitializer\CommonInitializer.csproj" />
+  </ItemGroup>
+
 </Project>

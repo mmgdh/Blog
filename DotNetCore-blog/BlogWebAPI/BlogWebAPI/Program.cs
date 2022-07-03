@@ -1,6 +1,5 @@
 using ArticleService.Infrastructure;
 using Common.Commons;
-using CommonInfrastructure;
 using CommonInitializer;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

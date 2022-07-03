@@ -21,13 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleService.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commons", "Commons\Commons.csproj", "{6E418C5F-405E-4F8C-9B7E-31E75BF3AD5A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImageService", "ImageService", "{81541347-2862-400F-B09F-C2D5D6415841}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileService", "FileService", "{81541347-2862-400F-B09F-C2D5D6415841}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.Domain", "ImageService.Domain\ImageService.Domain.csproj", "{CA29C2C2-3FEC-4E05-8AB2-810FF6CD2EBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileService.Domain", "ImageService.Domain\FileService.Domain.csproj", "{CA29C2C2-3FEC-4E05-8AB2-810FF6CD2EBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.Infrastructure", "ImageService.Infrastructure\ImageService.Infrastructure.csproj", "{E2A0A0BB-096B-48CE-9EDD-8F1CE5029AC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileService.Infrastructure", "ImageService.Infrastructure\FileService.Infrastructure.csproj", "{E2A0A0BB-096B-48CE-9EDD-8F1CE5029AC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.WebAPI", "ImageService.WebAPI\ImageService.WebAPI.csproj", "{EEEDA83D-739E-4F45-A0B2-0ACBEDF0B646}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileService.WebAPI", "ImageService.WebAPI\FileService.WebAPI.csproj", "{EEEDA83D-739E-4F45-A0B2-0ACBEDF0B646}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

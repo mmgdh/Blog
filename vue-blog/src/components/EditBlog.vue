@@ -1,5 +1,5 @@
 <template>
-    <Md v-model="content"></Md>
+    <Md v-model="content" @on-upload-img="onUploadImg"></Md>
 
     <div id="BlogButton">
         <a-button shape="round" type="primary" @click="showDrawer">提交</a-button>
@@ -39,6 +39,7 @@ import 'md-editor-v3/lib/style.css'
 import { Article, ArticleTag } from '../Entities/E_Article'
 import ArticleTagSelectVue from './common/ArticleTagSelect.vue'
 import ArticleService from '../Services/ArticleService'
+import UploadService from '../Services/UploadService'
 
 //#region  markdown
 const content = ref<string>('');
@@ -51,19 +52,14 @@ const onUploadImg = async (files : any, callback :any) => {
         const form = new FormData();
         form.append('file', file);
 
-        axios
-          .post('/api/img/upload', form, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          })
+ UploadService.prototype.UploadImg(form)
           .then((res :any) => rev(res))
           .catch((error :any) => rej(error));
       });
     })
   );
 
-  callback(res.map((item) => item.data.url));
+  callback(res.map((item) => item));
 };
 
 

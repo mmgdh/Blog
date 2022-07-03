@@ -4,7 +4,7 @@ import { number } from 'vue-types'
 // axios 配置
 const service = axios.create({
       // 联调
-      baseURL: 'https://localhost:7177',
+      baseURL: 'http://localhost:83',
       headers: {              
     //     get: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
     //     post: { 'Content-Type': 'application/json;charset=utf-8' }
