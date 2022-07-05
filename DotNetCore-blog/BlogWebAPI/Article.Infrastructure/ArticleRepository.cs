@@ -16,7 +16,7 @@ namespace ArticleService.Infrastructure
             return await dbCtx.FindAsync<Article>(ArticleId);
         }
 
-        public  async Task<Article[]> GetArticlesByArticleTagId(Guid ArticleTagId)
+        public  async Task<Article[]> GetArticlesByArticleTagIdAsync(Guid ArticleTagId)
         {
             var Tag= await dbCtx.Tags.FindAsync(ArticleTagId);
             if (Tag == null)
@@ -34,9 +34,14 @@ namespace ArticleService.Infrastructure
             return await dbCtx.Tags.ToArrayAsync();
         }
 
-        public async Task<bool> TagNameIsExist(string TagName)
+        public async Task<bool> TagNameIsExistAsync(string TagName)
         {
             return await dbCtx.Tags.AnyAsync(x => x.TagName == TagName);
+        }
+
+        public async Task<Article[]> GetArticleByPageAsync(int page, int pageSize)
+        {
+            return await dbCtx.Articles.Include(x => x.Tags).OrderByDescending(x => x.CreationTime).Skip(page * pageSize).Take(pageSize).ToArrayAsync();
         }
     }
 }

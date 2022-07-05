@@ -11,7 +11,7 @@
 
         public async  Task<ArticleTag> CreateTag(string TagName)
         {
-            if (await repository.TagNameIsExist(TagName))
+            if (await repository.TagNameIsExistAsync(TagName))
             {
                 throw new Exception("该标签已存在");
             }

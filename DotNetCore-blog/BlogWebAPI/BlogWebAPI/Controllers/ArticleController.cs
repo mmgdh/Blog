@@ -55,5 +55,15 @@ namespace ArticleService.WebAPI.Controllers
         {
             return await repository.GetAllArticleTagsAsync();
         }
+        [HttpGet]
+        public async Task<ActionResult<Article[]>> GetArticleByPage(int? page,int? pageSize)
+        {
+            if (page == null)
+                page = 0;
+            if (pageSize == null)
+                pageSize = 10;
+            var ret = await repository.GetArticleByPageAsync((int)page, (int)pageSize);
+            return ret;
+        }
     }
 }

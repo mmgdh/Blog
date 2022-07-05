@@ -11,7 +11,7 @@
             </span>
           </template>
           <a-menu-item key="3" @click="topage('/EditBlog')">新增文章</a-menu-item>
-          <a-menu-item key="4" @click="AxiosFunc">Bill</a-menu-item>
+          <a-menu-item key="4" @click="topage('/ArticleList')">文章列表</a-menu-item>
           <a-menu-item key="5" @click="topage('/b')">Alex</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">

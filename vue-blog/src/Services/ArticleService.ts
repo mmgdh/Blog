@@ -19,4 +19,8 @@ export default class ArticleService{
         return await  get('Article/GetAllTags',undefined)
     }
 
+    async GetArticleByPage(parames:any){
+        return await get('Article/GetArticleByPage',parames);
+    }
+
 }
