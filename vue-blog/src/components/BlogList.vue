@@ -1,17 +1,17 @@
     <template>
-      <div v-for="item in ArticleList">
-        {{ item.Title }}
-      </div>
-      <a-descriptions title="User Info" bordered>
-        <a-descriptions-item label="UserName">Zhou Maomao</a-descriptions-item>
-        <a-descriptions-item label="Telephone">1810000000</a-descriptions-item>
-        <a-descriptions-item label="Live">Hangzhou, Zhejiang</a-descriptions-item>
-        <a-descriptions-item label="Remark">empty</a-descriptions-item>
-        <a-descriptions-item label="Address">
-          No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-        </a-descriptions-item>
-      </a-descriptions>
-    </template>
+  <div v-for="item in ArticleList">
+    <a-descriptions :title="item.title" bordered>
+      <a-descriptions-item label="UserName">Zhou Maomao</a-descriptions-item>
+      <a-descriptions-item label="Telephone">1810000000</a-descriptions-item>
+      <a-descriptions-item label="Live">Hangzhou, Zhejiang</a-descriptions-item>
+      <a-descriptions-item label="Remark">empty</a-descriptions-item>
+      <a-descriptions-item label="Address">
+        No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+      </a-descriptions-item>
+    </a-descriptions>
+  </div>
+
+</template>
 
 <script setup lang='ts'>
 import { ref, onBeforeMount } from 'vue'

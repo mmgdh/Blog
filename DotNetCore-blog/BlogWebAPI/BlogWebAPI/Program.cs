@@ -12,7 +12,6 @@ var assemblies = ReflectionHelper.GetAllReferencedAssemblies();
 builder.Services.AddDbContext<ArticleDbContext>(option => option.UseSqlServer(Environment.GetEnvironmentVariable("DefaultDB:ConnStr") ?? builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer")));
 //builder.Services.AddDbContext<ArticleDbContext>(option=>option.UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Database=Blog;Trusted_Connection=True"));
 builder.ConifgureExtraService();
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

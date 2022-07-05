@@ -16,6 +16,10 @@
             <a-form-item name="Title" label="标题" :rules="[{ required: true }]">
                 <a-input v-model:value="SubmitArticle.Title" />
             </a-form-item>
+            <a-select v-model:value="SubmitArticle.Class" placeholder="Please select a country">
+                <a-select-option value="china">China</a-select-option>
+                <a-select-option value="usa">U.S.A</a-select-option>
+            </a-select>
             <a-form-item name='Tags' label="标签">
                 <ArticleTagSelectVue v-model:value="SubmitArticle.Tags">
 
@@ -45,21 +49,21 @@ import UploadService from '../Services/UploadService'
 const content = ref<string>('');
 
 //MarkDown图片上传功能
-const onUploadImg = async (files : any, callback :any) => {
-  const res = await Promise.all(
-    files.map((file :any) => {
-      return new Promise((rev, rej) => {
-        const form = new FormData();
-        form.append('file', file);
+const onUploadImg = async (files: any, callback: any) => {
+    const res = await Promise.all(
+        files.map((file: any) => {
+            return new Promise((rev, rej) => {
+                const form = new FormData();
+                form.append('file', file);
 
- UploadService.prototype.UploadImg(form)
-          .then((res :any) => rev(res))
-          .catch((error :any) => rej(error));
-      });
-    })
-  );
+                UploadService.prototype.UploadImg(form)
+                    .then((res: any) => rev(res))
+                    .catch((error: any) => rej(error));
+            });
+        })
+    );
 
-  callback(res.map((item) => item));
+    callback(res.map((item) => item));
 };
 
 
@@ -76,7 +80,7 @@ const showDrawer = () => {
     visible.value = true;
 };
 //#endregion
- let TagSelectRef = ref()
+let TagSelectRef = ref()
 //#region 抽屉内表单
 const layout = {
     labelCol: { span: 8 },
@@ -95,13 +99,15 @@ const validateMessages = {
 };
 
 let SubmitArticle = ref({
-        Title: '',
-        Content: content,
-        Tags: undefined
+    Title: '',
+    Class:"",
+    Image:"",
+    Content: content,
+    Tags: undefined
 });
 const onFinish = (values: Article) => {
     console.log('Success:', values);
-    values.Content=content.value;
+    values.Content = content.value;
     ArticleService.prototype.AddArticle(values)
 };
 

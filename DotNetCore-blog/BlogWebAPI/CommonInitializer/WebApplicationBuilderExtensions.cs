@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using CommonInfrastructure;
 using Common.Commons;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 namespace CommonInitializer
 {
@@ -48,6 +49,10 @@ namespace CommonInitializer
             {
                 fv.RegisterValidatorsFromAssemblies(assemblies);
             });
+
+            services.AddControllers().AddNewtonsoftJson(option =>
+            option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
         }
     }
 

@@ -9,7 +9,7 @@ namespace CommonInitializer
         {
             var connStr = Environment.GetEnvironmentVariable("DefaultDB:ConnStr");
             var optionsBuilder = new DbContextOptionsBuilder<TDbContext>();
-            connStr = "Server=(LocalDb)\\MSSQLLocalDB;Database=Blog;Trusted_Connection=True";
+            Console.WriteLine(connStr);
             optionsBuilder.UseSqlServer(connStr);
             return optionsBuilder;
         }
