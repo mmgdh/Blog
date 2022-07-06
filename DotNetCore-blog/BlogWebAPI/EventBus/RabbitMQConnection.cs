@@ -11,10 +11,9 @@ namespace EventBus
         private bool _disposed;
         private readonly object sync_root = new object();
 
-        public RabbitMQConnection(IConnectionFactory connectionFactory, IConnection connection)
+        public RabbitMQConnection(IConnectionFactory connectionFactory)
         {
             _connectionFactory = connectionFactory;
-            _connection = connection;
         }
 
         public bool IsConnected
