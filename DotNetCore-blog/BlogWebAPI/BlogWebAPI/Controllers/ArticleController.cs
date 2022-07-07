@@ -65,5 +65,6 @@ namespace ArticleService.WebAPI.Controllers
             var ret = await repository.GetArticleByPageAsync((int)page, (int)pageSize);
             return ret;
         }
+
     }
 }

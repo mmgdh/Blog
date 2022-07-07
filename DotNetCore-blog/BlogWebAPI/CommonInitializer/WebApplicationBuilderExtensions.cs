@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Common.Commons;
 using CommonInfrastructure;
-using Common.Commons;
+using EventBus;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using MediatR;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CommonInitializer
 {
@@ -13,6 +14,7 @@ namespace CommonInitializer
     {
         public static void ConfigureDbConfiguration<T>(this WebApplicationBuilder builder) where T : BaseDbContext
         {
+
             string connStr = builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer");
             builder.Services.AddDbContext<T>(option =>
             {
@@ -30,29 +32,45 @@ namespace CommonInitializer
             //    });
             //});
         }
-        public static void ConifgureExtraService(this WebApplicationBuilder builder)
+        public static void ConifgureExtraService(this WebApplicationBuilder builder, InitializerOptions initOptions)
         {
+            IConfiguration configuration = builder.Configuration;
             IServiceCollection services = builder.Services;
             var assemblies = ReflectionHelper.GetAllReferencedAssemblies();
             services.RunModuleInitializers(assemblies);
 
+            #region MediaR
+            builder.Services.AddMediatR(assemblies); 
+            #endregion
+
+            #region 跨域cors
             services.AddCors(options =>
-            {
+    {
                 //更好的在Program.cs中用绑定方式读取配置的方法：https://github.com/dotnet/aspnetcore/issues/21491
                 //不过比较麻烦。
                 //var corsOpt = configuration.GetSection("Cors").Get<CorsSettings>();
                 string[] urls = new[] { "http://localhost:3000", "http://localhost:83" };//corsOpt.Origins;
                 options.AddDefaultPolicy(builder => builder.WithOrigins(urls)
-                        .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-            });
+                .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+    });
+            #endregion
+
+            #region EventBus配置
+            var ret = configuration.GetSection("RabbitMQ");
+            services.Configure<IntegrationEventRabbitMQOptions>(configuration.GetSection("RabbitMQ"));
+            services.AddEventBus(initOptions.EventBusQueueName, assemblies);
+            #endregion
+
             services.AddFluentValidation(fv =>
             {
                 fv.RegisterValidatorsFromAssemblies(assemblies);
             });
 
+            #region 解决ef实体层层调用导致的json生成问题。
             services.AddControllers().AddNewtonsoftJson(option =>
-            option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+    option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+    ); 
+            #endregion
         }
     }
 

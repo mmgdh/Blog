@@ -52,14 +52,17 @@ namespace EventBus
                 var optionMQ = sp.GetRequiredService<IOptions<IntegrationEventRabbitMQOptions>>().Value;
                 var factory = new ConnectionFactory()
                 {
-                    HostName = optionMQ.HostName,
-                    DispatchConsumersAsync = true
+                    HostName = "192.168.203.128",
+                    
+                    DispatchConsumersAsync = true,
+                    UserName = "mmgdh",
+                    Password = "123"
                 };
                 //eventBus归DI管理，释放的时候会调用Dispose
                 //eventbus的Dispose中会销毁RabbitMQConnection
                 RabbitMQConnection mqConnection = new RabbitMQConnection(factory);
                 var serviceScopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-                var eventBus = new RabbitMQEventBus(mqConnection, serviceScopeFactory, optionMQ.ExchangeName, queueName);
+                var eventBus = new RabbitMQEventBus(mqConnection, serviceScopeFactory, "mmgdh_Excahnge", queueName);
                 //遍历所有实现了IIntegrationEventHandler接口的类，然后把它们批量注册到eventBus
                 foreach (Type type in eventHandlerTypes)
                 {

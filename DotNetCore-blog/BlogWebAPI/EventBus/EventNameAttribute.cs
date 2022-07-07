@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EventBus
 {
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class EventNameAttribute :Attribute
     {
         public string Name { get; set; }
