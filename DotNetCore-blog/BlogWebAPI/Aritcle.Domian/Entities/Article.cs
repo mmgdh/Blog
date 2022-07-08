@@ -21,6 +21,9 @@ namespace ArticleService.Domain
                 PinYin = PinYinHelper.GetFrist(value);
             }
         }
+        public string Class { get; private set; }
+
+        public Guid ImageId { get; set; }
 
         public string PinYin { get; private set; }
         /// <summary>
