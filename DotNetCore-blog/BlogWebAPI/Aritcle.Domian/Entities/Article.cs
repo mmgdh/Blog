@@ -1,7 +1,7 @@
 ﻿using Commons;
 using DomainCommon;
 
-namespace ArticleService.Domain
+namespace ArticleService.Domain.Entities
 {
     public class Article : AggregateRootEntity
     {
@@ -21,7 +21,7 @@ namespace ArticleService.Domain
                 PinYin = PinYinHelper.GetFrist(value);
             }
         }
-        public string Class { get; private set; }
+        public ArticleClassify Classify { get; set; }
 
         public Guid ImageId { get; set; }
 

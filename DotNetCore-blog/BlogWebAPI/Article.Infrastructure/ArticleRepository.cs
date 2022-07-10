@@ -1,4 +1,5 @@
 ﻿using ArticleService.Domain;
+using ArticleService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ArticleService.Infrastructure

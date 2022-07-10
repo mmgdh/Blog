@@ -3,6 +3,7 @@ using ArticleService.Infrastructure;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using CommonInfrastructure;
+using ArticleService.Domain.Entities;
 
 namespace ArticleService.WebAPI.Controllers.ViewModels
 {

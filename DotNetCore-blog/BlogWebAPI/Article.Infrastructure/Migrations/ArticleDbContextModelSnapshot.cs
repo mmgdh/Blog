@@ -37,10 +37,13 @@ namespace ArticleService.Infrastructure.Migrations
                     b.ToTable("T_Articles_Tags", (string)null);
                 });
 
-            modelBuilder.Entity("ArticleService.Domain.Article", b =>
+            modelBuilder.Entity("ArticleService.Domain.Entities.Article", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ClassifyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Content")
@@ -52,6 +55,9 @@ namespace ArticleService.Infrastructure.Migrations
 
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ImageId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -71,10 +77,30 @@ namespace ArticleService.Infrastructure.Migrations
 
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
 
+                    b.HasIndex("ClassifyId");
+
                     b.ToTable("T_Articles", (string)null);
                 });
 
-            modelBuilder.Entity("ArticleService.Domain.ArticleTag", b =>
+            modelBuilder.Entity("ArticleService.Domain.Entities.ArticleClassify", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ClassifyText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("DefaultImgId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("T_ArticleClassify", (string)null);
+                });
+
+            modelBuilder.Entity("ArticleService.Domain.Entities.ArticleTag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,22 +116,40 @@ namespace ArticleService.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
                     b.ToTable("T_ArticleTags", (string)null);
                 });
 
             modelBuilder.Entity("ArticleArticleTag", b =>
                 {
-                    b.HasOne("ArticleService.Domain.Article", null)
+                    b.HasOne("ArticleService.Domain.Entities.Article", null)
                         .WithMany()
                         .HasForeignKey("ArticlesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ArticleService.Domain.ArticleTag", null)
+                    b.HasOne("ArticleService.Domain.Entities.ArticleTag", null)
                         .WithMany()
                         .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ArticleService.Domain.Entities.Article", b =>
+                {
+                    b.HasOne("ArticleService.Domain.Entities.ArticleClassify", "Classify")
+                        .WithMany("Articles")
+                        .HasForeignKey("ClassifyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Classify");
+                });
+
+            modelBuilder.Entity("ArticleService.Domain.Entities.ArticleClassify", b =>
+                {
+                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

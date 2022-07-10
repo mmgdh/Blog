@@ -10,11 +10,11 @@ namespace ArticleService.Domain.Entities
     /// <summary>
     /// 文章分类
     /// </summary>
-    internal class ArticleClassify : BaseEntity
+    public class ArticleClassify : BaseEntity
     {
         public string ClassifyText { get; set; }
 
-        public List<Article> Articles { get; private set; }
+        public List<Article> Articles { get;  set; } = new List<Article>();
 
         public Guid DefaultImgId { get; set; }
     }

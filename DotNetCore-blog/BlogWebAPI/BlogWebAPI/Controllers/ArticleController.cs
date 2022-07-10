@@ -1,4 +1,5 @@
 ﻿using ArticleService.Domain;
+using ArticleService.Domain.Entities;
 using ArticleService.Infrastructure;
 using ArticleService.WebAPI.Controllers.ViewModels;
 using Microsoft.AspNetCore.Mvc;

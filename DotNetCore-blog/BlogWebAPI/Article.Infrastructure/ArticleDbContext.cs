@@ -1,4 +1,4 @@
-﻿using ArticleService.Domain;
+﻿using ArticleService.Domain.Entities;
 using CommonInfrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +13,7 @@ namespace ArticleService.Infrastructure
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticleTag> Tags { get; set; }
+        public DbSet<ArticleClassify> articleClassifies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

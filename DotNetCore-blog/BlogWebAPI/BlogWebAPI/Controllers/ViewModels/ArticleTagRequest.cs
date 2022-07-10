@@ -1,4 +1,5 @@
 ﻿using ArticleService.Domain;
+using ArticleService.Domain.Entities;
 
 namespace ArticleService.WebAPI.Controllers.ViewModels
 {

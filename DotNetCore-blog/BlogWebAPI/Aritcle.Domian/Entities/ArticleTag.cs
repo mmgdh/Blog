@@ -1,7 +1,7 @@
 ﻿using Commons;
 using DomainCommon;
 
-namespace ArticleService.Domain
+namespace ArticleService.Domain.Entities
 {
     public class ArticleTag:BaseEntity
     {

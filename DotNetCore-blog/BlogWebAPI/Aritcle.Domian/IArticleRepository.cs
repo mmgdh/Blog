@@ -1,4 +1,6 @@
-﻿namespace ArticleService.Domain
+﻿using ArticleService.Domain.Entities;
+
+namespace ArticleService.Domain
 {
     public interface IArticleRepository
     {
