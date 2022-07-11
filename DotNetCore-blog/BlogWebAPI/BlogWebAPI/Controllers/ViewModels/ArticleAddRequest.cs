@@ -7,7 +7,7 @@ using ArticleService.Domain.Entities;
 
 namespace ArticleService.WebAPI.Controllers.ViewModels
 {
-    public record ArticleAddRequest(string? Title,string? content, ArticleTagRequest[]? Tags)
+    public record ArticleAddRequest(string? Title,string? content,string? Classify,Guid ImgId, ArticleTagRequest[]? Tags)
     {
         public ArticleTag[] ToArticleTagArray(ArticleTagRequest[] tagRequests)
         {

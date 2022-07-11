@@ -1,19 +1,22 @@
 ﻿using ArticleService.Domain.Entities;
+using ArticleService.Domain.IRepository;
 
 namespace ArticleService.Domain
 {
     public class ArticleDomainService
     {
-        private readonly IArticleRepository repository;
-        public ArticleDomainService(IArticleRepository _repository)
+        private readonly IArticleTagRepository TagRepository;
+        private readonly IArticleClassifyRepository ClassifyRepository;
+        public ArticleDomainService(IArticleTagRepository tagRepository, IArticleClassifyRepository classifyRepository)
         {
-            repository = _repository;
+            TagRepository = tagRepository;
+            ClassifyRepository = classifyRepository;
         }
 
 
         public async  Task<ArticleTag> CreateTag(string TagName)
         {
-            if (await repository.TagNameIsExistAsync(TagName))
+            if (await TagRepository.TagNameIsExistAsync(TagName))
             {
                 throw new Exception("该标签已存在");
             }
@@ -21,6 +24,16 @@ namespace ArticleService.Domain
             return Tag;
         }
 
-     
+        public async Task<ArticleClassify> CreateClassify(string ClassifyName)
+        {
+            if (await ClassifyRepository.ArticleClassifyNameIsExistAsync(ClassifyName))
+            {
+                throw new Exception("该分类已存在");
+            }
+            ArticleClassify Classify = ArticleClassify.Create(ClassifyName,null);
+            return Classify;
+        }
+
+
     }
 }

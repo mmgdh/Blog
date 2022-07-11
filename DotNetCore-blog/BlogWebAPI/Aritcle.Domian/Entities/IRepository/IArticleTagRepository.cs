@@ -1,23 +1,14 @@
 ﻿using ArticleService.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ArticleService.Domain
+namespace ArticleService.Domain.IRepository
 {
-    public interface IArticleRepository
+    public interface IArticleTagRepository
     {
-        /// <summary>
-        /// 根据ID获取对应文章
-        /// </summary>
-        /// <param name="ArticleId"></param>
-        /// <returns></returns>
-        public Task<Article?> GetArticleByIdAsync(Guid ArticleId);
-        /// <summary>
-        /// 分页获取文章
-        /// </summary>
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        public Task<Article[]> GetArticleByPageAsync(int page,int pageSize);
-     
         /// <summary>
         /// 获取所有标签
         /// </summary>
@@ -41,6 +32,5 @@ namespace ArticleService.Domain
         /// <param name="TagName"></param>
         /// <returns></returns>
         public Task<bool> TagNameIsExistAsync(string TagName);
-
     }
 }

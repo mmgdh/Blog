@@ -1,4 +1,5 @@
 ﻿using ArticleService.Domain;
+using ArticleService.Domain.IRepository;
 using ArticleService.Infrastructure;
 using EventBus;
 

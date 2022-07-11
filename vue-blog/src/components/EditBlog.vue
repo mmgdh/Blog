@@ -16,7 +16,7 @@
             <a-form-item name="Title" label="标题" :rules="[{ required: true }]">
                 <a-input v-model:value="SubmitArticle.Title" />
             </a-form-item>
-            <a-select v-model:value="SubmitArticle.Class" placeholder="Please select a country">
+            <a-select v-model:value="SubmitArticle.Classify" placeholder="Please select a country">
                 <a-select-option value="china">China</a-select-option>
                 <a-select-option value="usa">U.S.A</a-select-option>
             </a-select>
@@ -65,8 +65,6 @@ const onUploadImg = async (files: any, callback: any) => {
 
     callback(res.map((item) => item));
 };
-
-
 //#endregion
 
 //#region 右侧抽屉
@@ -80,7 +78,6 @@ const showDrawer = () => {
     visible.value = true;
 };
 //#endregion
-let TagSelectRef = ref()
 //#region 抽屉内表单
 const layout = {
     labelCol: { span: 8 },
@@ -100,7 +97,7 @@ const validateMessages = {
 
 let SubmitArticle = ref({
     Title: '',
-    Class:"",
+    Classify:"",
     Image:"",
     Content: content,
     Tags: undefined

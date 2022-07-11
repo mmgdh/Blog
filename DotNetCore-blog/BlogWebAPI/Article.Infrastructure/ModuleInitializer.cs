@@ -1,11 +1,7 @@
-﻿using ArticleService.Domain;
+﻿using ArticleService.Domain.IRepository;
+using ArticleService.Infrastructure.Repository;
 using CommonInitializer;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ArticleService.Infrastructure
 {
@@ -14,6 +10,8 @@ namespace ArticleService.Infrastructure
         public void Initialize(IServiceCollection services)
         {
             services.AddScoped<IArticleRepository,ArticleRepository>();
+            services.AddScoped<IArticleClassifyRepository,ArticleClassifyRepository>();
+            services.AddScoped<IArticleTagRepository,ArticleTagRepository>();
         }
     }
 }
