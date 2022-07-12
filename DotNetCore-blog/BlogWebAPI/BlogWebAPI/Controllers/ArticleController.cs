@@ -3,6 +3,7 @@ using ArticleService.Domain.Entities;
 using ArticleService.Domain.IRepository;
 using ArticleService.Infrastructure;
 using ArticleService.WebAPI.Controllers.ViewModels;
+using EventBus;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArticleService.WebAPI.Controllers
@@ -16,12 +17,15 @@ namespace ArticleService.WebAPI.Controllers
         private readonly ArticleDomainService domainService;
         private readonly ArticleDbContext dbCtx;
 
-        public ArticleController(IArticleRepository _repository, ArticleDomainService _domainService, ArticleDbContext _dbCTx, IArticleTagRepository tagrepository)
+        private IEventBus eventBus;
+
+        public ArticleController(IArticleRepository _repository, ArticleDomainService _domainService, ArticleDbContext _dbCTx, IArticleTagRepository tagrepository, IEventBus eventBus)
         {
             repository = _repository;
             domainService = _domainService;
             dbCtx = _dbCTx;
             Tagrepository = tagrepository;
+            this.eventBus = eventBus;
         }
 
         #region Article相关API
@@ -79,9 +83,10 @@ namespace ArticleService.WebAPI.Controllers
 
         #region Classify相关API
         [HttpPost]
-        public async Task<ActionResult<Guid>> AddClassify(string ClassifyName,IFormFile file)
+        public async Task<ActionResult<Guid>> AddClassify(string ClassName, IFormFile formFile)
         {
-            var Classify = await domainService.CreateClassify(ClassifyName);
+            eventBus.publish("FileUpload", formFile);
+            var Classify = await domainService.CreateClassify(ClassName);
             dbCtx.Add(Classify);
             await dbCtx.SaveChangesAsync();
             return Ok();

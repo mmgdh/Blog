@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FileService.Infrastructure.Migrations
 {
-    public partial class AddUpload : Migration
+    public partial class create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "uploads",
+                name: "T_UploadItem",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -21,11 +21,12 @@ namespace FileService.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_uploads", x => x.Id);
+                    table.PrimaryKey("PK_T_UploadItem", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                 });
 
             migrationBuilder.CreateTable(
-                name: "urls",
+                name: "T_UploadUrl",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -35,28 +36,29 @@ namespace FileService.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_urls", x => x.Id);
+                    table.PrimaryKey("PK_T_UploadUrl", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                     table.ForeignKey(
-                        name: "FK_urls_uploads_UploadItemId",
+                        name: "FK_T_UploadUrl_T_UploadItem_UploadItemId",
                         column: x => x.UploadItemId,
-                        principalTable: "uploads",
+                        principalTable: "T_UploadItem",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_urls_UploadItemId",
-                table: "urls",
+                name: "IX_T_UploadUrl_UploadItemId",
+                table: "T_UploadUrl",
                 column: "UploadItemId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "urls");
+                name: "T_UploadUrl");
 
             migrationBuilder.DropTable(
-                name: "uploads");
+                name: "T_UploadItem");
         }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FileService.Infrastructure.Migrations
 {
     [DbContext(typeof(UploadDbContext))]
-    [Migration("20220702040439_AddUpload")]
-    partial class AddUpload
+    [Migration("20220711141226_create")]
+    partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,7 +46,9 @@ namespace FileService.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("uploads");
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.ToTable("T_UploadItem", (string)null);
                 });
 
             modelBuilder.Entity("FileService.Domain.Entities.UploadUrl", b =>
@@ -67,9 +69,11 @@ namespace FileService.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
                     b.HasIndex("UploadItemId");
 
-                    b.ToTable("urls");
+                    b.ToTable("T_UploadUrl", (string)null);
                 });
 
             modelBuilder.Entity("FileService.Domain.Entities.UploadUrl", b =>
