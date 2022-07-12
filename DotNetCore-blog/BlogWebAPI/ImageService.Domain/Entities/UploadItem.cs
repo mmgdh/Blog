@@ -24,7 +24,7 @@ namespace FileService.Domain.Entities
         /// <summary>
         /// 存放地址
         /// </summary>
-        public List<UploadUrl> Uris { get; private set; }=new List<UploadUrl>();
+        public List<UploadUri> Uris { get; private set; }=new List<UploadUri>();
 
         public static UploadItem Create(long fileSizeInBytes, string fileName, string fileSHA256Hash)
         {

@@ -8,7 +8,7 @@ namespace FileService.Infrastructure
     public class UploadDbContext : BaseDbContext
     {
         public DbSet<UploadItem> uploads { get; set; }
-        public DbSet<UploadUrl> urls { get; set; }
+        public DbSet<UploadUri> urls { get; set; }
 
         public UploadDbContext(DbContextOptions options, IMediator? mediator) : base(options, mediator)
         {

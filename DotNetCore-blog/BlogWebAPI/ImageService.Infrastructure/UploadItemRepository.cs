@@ -2,7 +2,6 @@
 using Commons;
 using FileService.Domain;
 using FileService.Domain.Entities;
-using FileService.Infrastructure.StorageClients;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,12 +19,24 @@ namespace FileService.Infrastructure
             storageClients = _storageClients.ToList();
         }
 
+        public async Task<Uri> GetFastURI(Guid id)
+        {
+            var Item =await GetUploadItemAsync(id);
+            List<Task<Uri>> uploadTasks = new List<Task<Uri>>();
+            foreach(var uploadUri in Item.Uris)
+            {
+                var storage = storageClients.FirstOrDefault(x => x.StorageType == uploadUri.UrlType);
+                if (storage == null) continue;
+                var ret =
+            }
+        }
+
         public async Task<UploadItem?> GetUploadItemAsync(Guid id)
         {
             return await _context.Query<UploadItem>().Include(x => x.Uris).SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Uri> UploadFileAsync(IFormFile file)
+        public async Task<UploadItem> UploadFileAsync(IFormFile file)
         {
             using Stream stream = file.OpenReadStream();
             string fileName = file.FileName;
@@ -40,14 +51,14 @@ namespace FileService.Infrastructure
                 var task = Task.Run(() =>
                  {
                      var ret = storage.UploadFileASync(key, file).Result;
-                     uploadItem.Uris.Add(UploadUrl.CreateUploadUrl(ret.AbsoluteUri, storageClients.First().StorageType));
+                     uploadItem.Uris.Add(UploadUri.CreateUploadUrl(ret.AbsoluteUri, storageClients.First().StorageType));
                      return ret;
                  });
                 uploadTasks.Add(task);
             }
             _context.uploads.Add(uploadItem);
-            var ret = Task.WhenAny(uploadTasks);
-            return ret.Result.Result;
+            var ret = await Task.WhenAny(uploadTasks);
+            return uploadItem;
 
 
         }

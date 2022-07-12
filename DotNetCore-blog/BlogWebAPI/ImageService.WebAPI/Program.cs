@@ -2,6 +2,8 @@ using Common.Commons;
 using CommonInitializer;
 using FileService.Infrastructure;
 using MediatR;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +17,12 @@ builder.ConifgureExtraService(new InitializerOptions
 {
     EventBusQueueName="FileService"
 });
-
+//记录文件上次API的地址
+builder.Services.AddSingleton(serviceProvider =>
+{
+    var server = serviceProvider.GetRequiredService<IServer>();
+    return server.Features.Get<IServerAddressesFeature>()!;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -27,7 +27,14 @@ namespace FileService.WebAPI.Controllers
             var file = request.File;
             var ret = await repository.UploadFileAsync(file);
             await _context.SaveChangesAsync();
-            return ret;
+            Uri uri = new Uri(ret.Uris.First().Uri);
+            return uri;
+        }
+
+        public async Task<Uri> GetUri(Guid Id)
+        {
+            var Item =await repository.GetUploadItemAsync(Id);
+            return Item.Uris.First();
         }
     }
 } 

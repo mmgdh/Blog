@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AsmResolver.DotNet" Version="4.11.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="PinYinConverterCore" Version="1.0.2" />
   </ItemGroup>
 

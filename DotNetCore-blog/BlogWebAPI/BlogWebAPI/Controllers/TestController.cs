@@ -17,7 +17,7 @@ namespace ArticleService.WebAPI.Controllers
         [HttpPost]
         public int Test(string name)
         {
-            eventBus.publish("FileUpload", name);
+            eventBus.publish(ConstEventName.FileUpload, name);
             return 123;
         }
     }

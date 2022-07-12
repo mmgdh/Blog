@@ -1,12 +1,8 @@
 ﻿using FileService.Domain;
 using FileService.Domain.Entities;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileService.Infrastructure.StorageClients
 {
@@ -15,12 +11,14 @@ namespace FileService.Infrastructure.StorageClients
         public EnumStorageType StorageType => EnumStorageType.Local;
 
         private readonly IWebHostEnvironment hostEnv;
-        private readonly IHttpContextAccessor httpContextAccessor;
+        //private readonly IHttpContextAccessor httpContextAccessor;
 
-        public LocalStorage(IWebHostEnvironment webHost, IHttpContextAccessor httpContext)
+        private IServerAddressesFeature Iserver { get; set; }
+
+        public LocalStorage(IWebHostEnvironment webHost,IServerAddressesFeature iserver)
         {
             hostEnv = webHost;
-            httpContextAccessor = httpContext;
+            Iserver = iserver;
         }
 
         public async Task<Uri> UploadFileASync(string key, IFormFile formFile)
@@ -42,9 +40,15 @@ namespace FileService.Infrastructure.StorageClients
             }
             using FileStream outStream = new FileStream(fullPath, FileMode.Create);
             await formFile.CopyToAsync(outStream);
-            var req = httpContextAccessor.HttpContext.Request;
-            string url = req.Scheme + "://" + req.Host + "/" + key;
+            //var req = httpContextAccessor.HttpContext.Request;
+            //string url = req.Scheme + "://" + req.Host + "/" + key;
+            string url = Iserver.Addresses.First() + "/" + key;
             return new Uri(url);
+        }
+
+        public Task<Uri> GetUploadUri(UploadUri uploadUri)
+        {
+            var ret =
         }
     }
 }

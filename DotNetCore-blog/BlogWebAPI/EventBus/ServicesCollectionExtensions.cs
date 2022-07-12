@@ -52,8 +52,10 @@ namespace EventBus
                 var optionMQ = sp.GetRequiredService<IOptions<IntegrationEventRabbitMQOptions>>().Value;
                 var factory = new ConnectionFactory()
                 {
-                    HostName = "172.22.214.241",
-                    
+                    //HostName = "172.22.214.241",
+                    HostName= "192.168.203.128",
+
+
                     DispatchConsumersAsync = true,
                     UserName = "mmgdh",
                     Password = "123"

@@ -13,6 +13,6 @@ namespace FileService.Domain
         EnumStorageType StorageType { get; }
         public  Task<Uri> UploadFileASync(string key,IFormFile stream);
 
-        //public Task<string> GetUploadUrl(string key);
+        public Task<Uri> GetUploadUri(UploadUri uploadUri);
     }
 }

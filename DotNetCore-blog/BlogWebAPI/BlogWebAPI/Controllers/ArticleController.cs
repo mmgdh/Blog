@@ -3,6 +3,7 @@ using ArticleService.Domain.Entities;
 using ArticleService.Domain.IRepository;
 using ArticleService.Infrastructure;
 using ArticleService.WebAPI.Controllers.ViewModels;
+using Commons;
 using EventBus;
 using Microsoft.AspNetCore.Mvc;
 
@@ -85,7 +86,8 @@ namespace ArticleService.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> AddClassify(string ClassName, IFormFile formFile)
         {
-            eventBus.publish("FileUpload", formFile);
+            var RetMessage = ImageHelper.UploadImage(formFile);
+            eventBus.publish(ConstEventName.FileUpload, RetMessage);
             var Classify = await domainService.CreateClassify(ClassName);
             dbCtx.Add(Classify);
             await dbCtx.SaveChangesAsync();

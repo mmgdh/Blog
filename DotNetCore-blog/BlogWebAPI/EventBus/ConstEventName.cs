@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Commons
+namespace EventBus
 {
-    public class JsonConvertHelper
+    public class ConstEventName
     {
+        public const string FileUpload = "FileUpload";
     }
 }
