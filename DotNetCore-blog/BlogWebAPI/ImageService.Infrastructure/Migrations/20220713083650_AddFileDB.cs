@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FileService.Infrastructure.Migrations
 {
-    public partial class create : Migration
+    public partial class AddFileDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,7 @@ namespace FileService.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Uri = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UrlType = table.Column<int>(type: "int", nullable: false),
                     UploadItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },

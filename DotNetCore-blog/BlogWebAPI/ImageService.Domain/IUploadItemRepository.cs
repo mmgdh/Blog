@@ -14,7 +14,7 @@ namespace FileService.Domain
 
         public Task<UploadItem> UploadFileAsync(IFormFile formFile);
 
-        public Task<Uri> GetFastURI(Guid id);
+        public Task<byte[]> GetFastFile(Guid id);
         
     }
 }

@@ -3,6 +3,7 @@ using FileService.Domain.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
+using System.Drawing;
 
 namespace FileService.Infrastructure.StorageClients
 {
@@ -10,15 +11,17 @@ namespace FileService.Infrastructure.StorageClients
     {
         public EnumStorageType StorageType => EnumStorageType.Local;
 
+        private readonly IHttpClientFactory httpClientFactory;
         private readonly IWebHostEnvironment hostEnv;
         //private readonly IHttpContextAccessor httpContextAccessor;
 
         private IServerAddressesFeature Iserver { get; set; }
 
-        public LocalStorage(IWebHostEnvironment webHost,IServerAddressesFeature iserver)
+        public LocalStorage(IWebHostEnvironment webHost, IServerAddressesFeature iserver, IHttpClientFactory httpClientFactory)
         {
             hostEnv = webHost;
             Iserver = iserver;
+            this.httpClientFactory = httpClientFactory;
         }
 
         public async Task<Uri> UploadFileASync(string key, IFormFile formFile)
@@ -46,9 +49,29 @@ namespace FileService.Infrastructure.StorageClients
             return new Uri(url);
         }
 
-        public Task<Uri> GetUploadUri(UploadUri uploadUri)
+        public async Task<byte[]> GetUploadFileByteArray(UploadUri uploadUri)
         {
-            var ret =
+            HttpClient client = httpClientFactory.CreateClient();
+            var resp = await client.GetAsync(uploadUri.Uri);
+            try
+            {
+                if (resp.IsSuccessStatusCode)
+                {
+                    var b = resp.Content;
+                    var bytes =await resp.Content.ReadAsByteArrayAsync();
+                    return bytes;
+                }
+                else
+                {
+                   await Task.Delay(3000);
+                }
+
+            }
+            catch
+            {
+
+            }
+            return null;
         }
     }
 }

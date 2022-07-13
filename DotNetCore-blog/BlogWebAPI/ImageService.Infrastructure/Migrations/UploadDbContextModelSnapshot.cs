@@ -49,7 +49,7 @@ namespace FileService.Infrastructure.Migrations
                     b.ToTable("T_UploadItem", (string)null);
                 });
 
-            modelBuilder.Entity("FileService.Domain.Entities.UploadUrl", b =>
+            modelBuilder.Entity("FileService.Domain.Entities.UploadUri", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,7 +58,7 @@ namespace FileService.Infrastructure.Migrations
                     b.Property<Guid>("UploadItemId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Url")
+                    b.Property<string>("Uri")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -74,7 +74,7 @@ namespace FileService.Infrastructure.Migrations
                     b.ToTable("T_UploadUrl", (string)null);
                 });
 
-            modelBuilder.Entity("FileService.Domain.Entities.UploadUrl", b =>
+            modelBuilder.Entity("FileService.Domain.Entities.UploadUri", b =>
                 {
                     b.HasOne("FileService.Domain.Entities.UploadItem", "UploadItem")
                         .WithMany("Uris")

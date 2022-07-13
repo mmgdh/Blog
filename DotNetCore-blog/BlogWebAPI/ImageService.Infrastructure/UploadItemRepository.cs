@@ -19,16 +19,23 @@ namespace FileService.Infrastructure
             storageClients = _storageClients.ToList();
         }
 
-        public async Task<Uri> GetFastURI(Guid id)
+        public async Task<byte[]> GetFastFile(Guid id)
         {
             var Item =await GetUploadItemAsync(id);
-            List<Task<Uri>> uploadTasks = new List<Task<Uri>>();
+            List<Task<byte[]>> uploadTasks = new List<Task<byte[]>>();
             foreach(var uploadUri in Item.Uris)
             {
                 var storage = storageClients.FirstOrDefault(x => x.StorageType == uploadUri.UrlType);
                 if (storage == null) continue;
-                var ret =
+                var task = Task.Run(() =>
+                {
+                    var ret = storage.GetUploadFileByteArray(uploadUri);
+                    return ret;
+                });
+                uploadTasks.Add(task);
             }
+            var ret = await Task.WhenAny(uploadTasks);
+            return ret.Result;
         }
 
         public async Task<UploadItem?> GetUploadItemAsync(Guid id)

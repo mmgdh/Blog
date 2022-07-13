@@ -3,7 +3,7 @@ using ArticleService.Domain.IRepository;
 using ArticleService.Infrastructure;
 using EventBus;
 
-namespace ArticleService.WebAPI.Controllers.EventHandlers
+namespace ArticleService.WebAPI.EventHandlers
 {
     [EventName("TitleImageUpload")]
     public class ImageUpdateEventHandler : DynamicIntegrationEventHandler

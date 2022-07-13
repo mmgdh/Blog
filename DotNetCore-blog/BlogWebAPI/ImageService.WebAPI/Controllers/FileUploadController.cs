@@ -27,14 +27,23 @@ namespace FileService.WebAPI.Controllers
             var file = request.File;
             var ret = await repository.UploadFileAsync(file);
             await _context.SaveChangesAsync();
-            Uri uri = new Uri(ret.Uris.First().Uri);
+            var ip = "localhost";
+            if (hostEnv.IsProduction())
+            {
+                HttpContext.Connection.LocalIpAddress?.MapToIPv4()?.ToString();
+            }
+            var port = HttpContext.Connection.LocalPort;
+            //"https://localhost:7282/FileUpload/GetImage?Id=171ece50-6c34-44d6-b6c6-8880861e4820";
+            var GetImgUrl = $"https://{ip}:{port}/FileUpload/GetImage?Id={ret.Id}";
+            Uri uri = new Uri(GetImgUrl);
             return uri;
         }
-
-        public async Task<Uri> GetUri(Guid Id)
+        [HttpGet]
+        public async Task<FileContentResult> GetImage(Guid Id)
         {
-            var Item =await repository.GetUploadItemAsync(Id);
-            return Item.Uris.First();
+            var byteArray =await repository.GetFastFile(Id);
+            byte[] a = null;
+            return new FileContentResult(byteArray, "image/jpeg");
         }
     }
 } 
