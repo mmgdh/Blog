@@ -31,6 +31,6 @@ namespace ArticleService.Domain.IRepository
         /// </summary>
         /// <param name="TagName"></param>
         /// <returns></returns>
-        public Task<bool> ArticleClassifyNameIsExistAsync(string TagName);
+        public  Task<bool> ArticleClassifyNameIsExistAsync(string TagName);
     }
 }

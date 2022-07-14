@@ -9,5 +9,13 @@ namespace EventBus
     public class ConstEventName
     {
         public const string FileUpload = "FileUpload";
+        public const string Article_FileCallBackUpdated = "ArticleFileCallBackUpdated";
     }
+
+    public enum EnumCallBackEntity
+    {
+        ArticleClassify,
+        ArticleImage
+    }
+    
 }

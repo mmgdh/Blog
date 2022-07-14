@@ -63,7 +63,7 @@ namespace ArticleService.WebAPI.Controllers
                 pageSize = 10;
             var ret = await repository.GetArticleByPageAsync((int)page, (int)pageSize);
             return ret;
-        } 
+        }
         #endregion
 
         #region Tag相关API
@@ -86,13 +86,15 @@ namespace ArticleService.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> AddClassify(string ClassName, IFormFile formFile)
         {
-            var RetMessage = ImageHelper.UploadImage(formFile);
-            eventBus.publish(ConstEventName.FileUpload, RetMessage);
             var Classify = await domainService.CreateClassify(ClassName);
             dbCtx.Add(Classify);
+            var UploadFile = EventBusHelper.IFormFileToEventBusParameter(formFile);
+            var CallBackNeed = new EventBusParameter.CallBackNeed(Classify.Id,EnumCallBackEntity.ArticleClassify,ConstEventName.Article_FileCallBackUpdated);
+            EventBusParameter.FileUpload_Parameter parameter = new EventBusParameter.FileUpload_Parameter(UploadFile, CallBackNeed);
+            eventBus.publish(ConstEventName.FileUpload, parameter);
             await dbCtx.SaveChangesAsync();
-            return Ok();
-        } 
+            return Classify.Id;
+        }
         #endregion
 
 

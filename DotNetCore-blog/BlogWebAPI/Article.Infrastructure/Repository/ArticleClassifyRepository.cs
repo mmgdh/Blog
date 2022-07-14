@@ -1,5 +1,6 @@
 ﻿using ArticleService.Domain.Entities;
 using ArticleService.Domain.IRepository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,24 +18,27 @@ namespace ArticleService.Infrastructure.Repository
             this.dbCtx = dbCtx;
         }
 
-        public Task<bool> ArticleClassifyNameIsExistAsync(string TagName)
+        public async Task<bool> ArticleClassifyNameIsExistAsync(string ClassifyName)
         {
-            throw new NotImplementedException();
+            return await dbCtx.ArticleClassifies.AnyAsync(x => x.ClassifyName == ClassifyName);
         }
 
-        public Task<ArticleClassify[]> GetAllArticleClassifyAsync()
+        public async Task<ArticleClassify[]> GetAllArticleClassifyAsync()
         {
-            throw new NotImplementedException();
+            return await dbCtx.ArticleClassifies.ToArrayAsync();
         }
 
-        public Task<ArticleClassify?> GetArticleClassifyByIdAsync(Guid ArticleTagId)
+        public async Task<ArticleClassify?> GetArticleClassifyByIdAsync(Guid ClassifyId)
         {
-            throw new NotImplementedException();
+            return await dbCtx.ArticleClassifies.FindAsync(ClassifyId);
         }
 
-        public Task<Article[]> GetArticlesByArticleClassifyIdAsync(Guid ArticleTagId)
+        public async Task<Article[]> GetArticlesByArticleClassifyIdAsync(Guid ClassifyId)
         {
-            throw new NotImplementedException();
+            var Classify = await dbCtx.ArticleClassifies.FindAsync(ClassifyId);
+            if (Classify == null)
+                throw new Exception("未找到对应的Tag");
+            return await dbCtx.Articles.Where(x => x.Classify== Classify).ToArrayAsync();
         }
     }
 }

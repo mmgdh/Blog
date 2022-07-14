@@ -5,8 +5,8 @@ using EventBus;
 
 namespace ArticleService.WebAPI.EventHandlers
 {
-    [EventName("TitleImageUpload")]
-    public class ImageUpdateEventHandler : DynamicIntegrationEventHandler
+    [EventName(ConstEventName.Article_FileCallBackUpdated)]
+    public class ImageUpdateEventHandler : JsonIntegrationEventHandler<EventBusParameter.CallBackUpdateEntity>
     {
         IArticleRepository articleRepository;
         ArticleDbContext dbContext;
@@ -17,11 +17,18 @@ namespace ArticleService.WebAPI.EventHandlers
             this.dbContext = dbContext;
         }
 
-        public override Task HandleDynamic(string eventName, dynamic eventData)
+        public override async Task HandleJson(string eventName, EventBusParameter.CallBackUpdateEntity? eventData)
         {
-            Guid guid = eventData.Id;
-            var Article = dbContext.Articles.Find(guid);
-            return Task.CompletedTask;
+            var ret = eventData.CallBackNeed;
+            if (ret == null) return;
+            switch (ret.CallBackEntity)
+            {
+                case EnumCallBackEntity.ArticleClassify:
+                    var ArticleClassify = await dbContext.ArticleClassifies.FindAsync(ret.MasterGuidId);
+                    ArticleClassify.DefaultImgId = eventData.FileGuidId;
+                    break;
+            }
+            await dbContext.SaveChangesAsync();
         }
     }
 }
