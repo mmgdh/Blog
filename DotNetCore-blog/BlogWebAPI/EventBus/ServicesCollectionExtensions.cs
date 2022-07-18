@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 
 namespace EventBus
 {
@@ -44,6 +45,9 @@ namespace EventBus
             {
                 services.AddScoped(type, type);
             }
+            var RabbitConfig= Environment.GetEnvironmentVariable("RabbitMqConfigure");
+            if (RabbitConfig == null) throw new Exception("RabbitMq环境变量配置有误");
+            var configure = JsonSerializer.Deserialize<RabbitMqConfigure>(RabbitConfig);
 
             services.AddSingleton<IEventBus>(sp =>
             {
@@ -52,13 +56,13 @@ namespace EventBus
                 var optionMQ = sp.GetRequiredService<IOptions<IntegrationEventRabbitMQOptions>>().Value;
                 var factory = new ConnectionFactory()
                 {
-                    HostName = "172.27.94.7",
+                    HostName = configure.IP,
                     //HostName= "192.168.203.128",
 
 
                     DispatchConsumersAsync = true,
-                    UserName = "mmgdh",
-                    Password = "123"
+                    UserName = configure.User,
+                    Password = configure.PassWord
                 };
                 //eventBus归DI管理，释放的时候会调用Dispose
                 //eventbus的Dispose中会销毁RabbitMQConnection
@@ -83,6 +87,15 @@ namespace EventBus
                 return eventBus;
             });
             return services;
+        }
+
+
+
+        private class RabbitMqConfigure
+        {
+            public string IP { get; set; }
+            public string User { get; set; }
+            public string PassWord { get; set; }
         }
     }
 }
