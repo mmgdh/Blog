@@ -30,7 +30,7 @@ namespace FileService.WebAPI.Controllers
             var ip = "localhost";
             if (hostEnv.IsProduction())
             {
-                HttpContext.Connection.LocalIpAddress?.MapToIPv4()?.ToString();
+                ip = HttpContext.Connection.LocalIpAddress?.MapToIPv4()?.ToString();
             }
             var port = HttpContext.Connection.LocalPort;
             //"https://localhost:7282/FileUpload/GetImage?Id=171ece50-6c34-44d6-b6c6-8880861e4820";

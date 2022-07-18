@@ -1,7 +1,7 @@
 ﻿using ArticleService.Domain;
 using ArticleService.Domain.Entities;
 
-namespace ArticleService.WebAPI.Controllers.ViewModels
+namespace ArticleService.WebAPI.Controllers.ViewModels.RequestModel
 {
     public record ArticleTagRequest(string TagName, Guid id)
     {
@@ -11,7 +11,7 @@ namespace ArticleService.WebAPI.Controllers.ViewModels
             {
                 TagName = TagName,
                 Id = id,
-                Articles=new List<Article>()
+                Articles = new List<Article>()
             };
         }
     }

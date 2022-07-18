@@ -2,7 +2,8 @@
 using ArticleService.Domain.Entities;
 using ArticleService.Domain.IRepository;
 using ArticleService.Infrastructure;
-using ArticleService.WebAPI.Controllers.ViewModels;
+using ArticleService.WebAPI.Controllers.ViewModels.RequestModel;
+using ArticleService.WebAPI.Controllers.ViewModels.ResponseModel;
 using Commons;
 using EventBus;
 using Microsoft.AspNetCore.Mvc;
@@ -64,14 +65,16 @@ namespace ArticleService.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Article[]>> GetArticleByPage(int? page, int? pageSize)
+        public async Task<ActionResult<ArticleResp[]?>> GetArticleByPage(int? page, int? pageSize)
         {
             if (page == null)
                 page = 0;
             if (pageSize == null)
                 pageSize = 10;
             var ret = await repository.GetArticleByPageAsync((int)page, (int)pageSize);
-            return ret;
+            var response = ret.Select(x => ArticleResp.Create(x)).ToArray();
+
+            return response;
         }
         #endregion
 

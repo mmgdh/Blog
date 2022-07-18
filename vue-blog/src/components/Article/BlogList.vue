@@ -1,8 +1,11 @@
 <template>
-  <div v-for="_Article in Ref_ArticleList">
-    <div>{{ _Article.Title }}</div>
+  <div class="ArticleStyle"  v-for="_Article in Ref_ArticleList">
+    <div class="TitleStyle">{{ _Article.Title }}</div>
+    <span class="TagStyle" v-for="_Tag in _Article.Tags">
+      {{ _Tag.TagName }}
+    </span>
+    <!-- <div>{{ _Article.title }}</div> -->
   </div>
-  123
 </template>
 
 <script setup lang='ts'>
@@ -22,11 +25,12 @@ const pageRequest: requestData = {
 let ArticleList: Array<Article> = []
 let Ref_ArticleList = ref(ArticleList)
 
-onBeforeMount(() =>
+onBeforeMount(() => {
   ArticleService.prototype.GetArticleByPage(pageRequest)
     .then(ret =>
       Ref_ArticleList.value = ret
-    )
+    );
+}
 );
 
 
@@ -36,4 +40,22 @@ onBeforeMount(() =>
 </script>
 
 <style>
+.ArticleStyle{
+  border: 3px;
+  border-style: solid;
+  border-color: aqua;
+  margin: 10px;
+  width: 300px;
+}
+
+.TitleStyle{
+  font-size: large;
+  color:cornflowerblue;
+}
+
+.TagStyle {
+  color: red;
+  width: 30px;
+  margin: 10px;
+}
 </style>

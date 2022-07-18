@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 
 namespace CommonInitializer
 {
@@ -42,18 +43,18 @@ namespace CommonInitializer
             services.RunModuleInitializers(assemblies);
 
             #region MediaR
-            builder.Services.AddMediatR(assemblies); 
+            builder.Services.AddMediatR(assemblies);
             #endregion
 
             #region 跨域cors
             services.AddCors(options =>
     {
-                //更好的在Program.cs中用绑定方式读取配置的方法：https://github.com/dotnet/aspnetcore/issues/21491
-                //不过比较麻烦。
-                //var corsOpt = configuration.GetSection("Cors").Get<CorsSettings>();
-                string[] urls = new[] { "http://localhost:3000", "http://localhost:83" };//corsOpt.Origins;
-                options.AddDefaultPolicy(builder => builder.WithOrigins(urls)
-                .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+        //更好的在Program.cs中用绑定方式读取配置的方法：https://github.com/dotnet/aspnetcore/issues/21491
+        //不过比较麻烦。
+        //var corsOpt = configuration.GetSection("Cors").Get<CorsSettings>();
+        string[] urls = new[] { "http://localhost:3000", "http://localhost:83" };//corsOpt.Origins;
+        options.AddDefaultPolicy(builder => builder.WithOrigins(urls)
+        .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
     });
             #endregion
 
@@ -70,8 +71,10 @@ namespace CommonInitializer
 
             #region 解决ef实体层层调用导致的json生成问题。
             services.AddControllers().AddNewtonsoftJson(option =>
-    option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-    ); 
+            {
+                option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                option.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });
             #endregion
         }
     }

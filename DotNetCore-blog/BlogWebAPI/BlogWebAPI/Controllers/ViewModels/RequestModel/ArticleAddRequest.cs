@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using CommonInfrastructure;
 using ArticleService.Domain.Entities;
 
-namespace ArticleService.WebAPI.Controllers.ViewModels
+namespace ArticleService.WebAPI.Controllers.ViewModels.RequestModel
 {
-    public record ArticleAddRequest(string Title,string content,Guid Classify, Guid? ImgId, ArticleTagRequest[]? Tags)
+    public record ArticleAddRequest(string Title, string content, Guid Classify, Guid? ImgId, ArticleTagRequest[]? Tags)
     {
         public ArticleTag[] ToArticleTagArray(ArticleTagRequest[] tagRequests)
         {
-           return tagRequests.Select(x => x.ToArticleTag()).ToArray();
+            return tagRequests.Select(x => x.ToArticleTag()).ToArray();
         }
     }
 
@@ -23,8 +23,8 @@ namespace ArticleService.WebAPI.Controllers.ViewModels
             RuleFor(x => x.content).NotEmpty();
             RuleFor(x => x.Tags).NotEmpty();
 
-            RuleFor(x => x.Tags).MustAsync((Tags, cancle) => dbCtx.Query<ArticleTag>().AnyAsync(T=> Tags.Select(x=>x.id).Contains(T.Id)))
-                .WithMessage(c=>$"所选标签在数据库内不存在，请重新选择");
+            RuleFor(x => x.Tags).MustAsync((Tags, cancle) => dbCtx.Query<ArticleTag>().AnyAsync(T => Tags.Select(x => x.id).Contains(T.Id)))
+                .WithMessage(c => $"所选标签在数据库内不存在，请重新选择");
         }
     }
 }
