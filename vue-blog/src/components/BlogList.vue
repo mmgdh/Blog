@@ -1,16 +1,8 @@
-    <template>
-  <div v-for="item in ArticleList">
-    <a-descriptions :title="item.title" bordered>
-      <a-descriptions-item label="UserName">Zhou Maomao</a-descriptions-item>
-      <a-descriptions-item label="Telephone">1810000000</a-descriptions-item>
-      <a-descriptions-item label="Live">Hangzhou, Zhejiang</a-descriptions-item>
-      <a-descriptions-item label="Remark">empty</a-descriptions-item>
-      <a-descriptions-item label="Address">
-        No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-      </a-descriptions-item>
-    </a-descriptions>
+<template>
+  <div v-for="_Article in Ref_ArticleList">
+    <div>{{ _Article.Title }}</div>
   </div>
-
+  123
 </template>
 
 <script setup lang='ts'>
@@ -27,12 +19,13 @@ const pageRequest: requestData = {
   pageSize: 10
 }
 
-let ArticleList: any = ref([])
+let ArticleList: Array<Article> = []
+let Ref_ArticleList = ref(ArticleList)
 
 onBeforeMount(() =>
   ArticleService.prototype.GetArticleByPage(pageRequest)
     .then(ret =>
-      ArticleList.value = ret
+      Ref_ArticleList.value = ret
     )
 );
 

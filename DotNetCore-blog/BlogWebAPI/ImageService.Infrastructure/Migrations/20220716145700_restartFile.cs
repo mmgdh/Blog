@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FileService.Infrastructure.Migrations
 {
-    public partial class AddFileDB : Migration
+    public partial class restartFile : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

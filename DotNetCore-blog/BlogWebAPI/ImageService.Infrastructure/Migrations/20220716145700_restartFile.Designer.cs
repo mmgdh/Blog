@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FileService.Infrastructure.Migrations
 {
     [DbContext(typeof(UploadDbContext))]
-    [Migration("20220713083650_AddFileDB")]
-    partial class AddFileDB
+    [Migration("20220716145700_restartFile")]
+    partial class restartFile
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

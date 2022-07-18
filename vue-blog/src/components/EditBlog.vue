@@ -10,16 +10,20 @@
 
     <a-drawer v-model:visible="visible" class="custom-class" title="博文信息" placement="right"
         @after-visible-change="afterVisibleChange">
-
         <a-form :model="SubmitArticle" v-bind="layout" name="nest-messages" :validate-messages="validateMessages"
             @finish="onFinish">
             <a-form-item name="Title" label="标题" :rules="[{ required: true }]">
                 <a-input v-model:value="SubmitArticle.Title" />
             </a-form-item>
-            <a-select v-model:value="SubmitArticle.Classify" placeholder="Please select a country">
-                <a-select-option value="china">China</a-select-option>
-                <a-select-option value="usa">U.S.A</a-select-option>
-            </a-select>
+            <a-form-item name="Classify" label="分类" has-feedback
+                :rules="[{ required: true, message: 'Please select your Classify!' }]">
+                <a-select v-model:value="SubmitArticle.Classify" placeholder="Please select a Classify">
+                    <a-select-option v-for="classify in Ref_ArticleCLassify" :value="classify.id"
+                        :key="classify.id">
+                        {{ classify.classifyName }}
+                    </a-select-option>
+                </a-select>
+            </a-form-item>
             <a-form-item name='Tags' label="标签">
                 <ArticleTagSelectVue v-model:value="SubmitArticle.Tags">
 
@@ -29,7 +33,6 @@
                 <a-button type="primary" html-type="submit">Submit</a-button>
             </a-form-item>
         </a-form>
-
     </a-drawer>
 
 
@@ -37,13 +40,22 @@
 
 
 <script setup lang='ts'>
-import { ref, reactive, onMounted, toRaw } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import Md from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
-import { Article, ArticleTag } from '../Entities/E_Article'
+import { Article, ArticleTag, ArticleClassify } from '../Entities/E_Article'
 import ArticleTagSelectVue from './common/ArticleTagSelect.vue'
 import ArticleService from '../Services/ArticleService'
 import UploadService from '../Services/UploadService'
+import { computed } from '@vue/reactivity'
+
+
+let _ArticleCLassify: Array<ArticleClassify> = [];
+let Ref_ArticleCLassify = ref(_ArticleCLassify);
+
+onBeforeMount(async () => {
+    ArticleService.prototype.GetAllArticleClassify().then((res: any) => Ref_ArticleCLassify.value = res)
+})
 
 //#region  markdown
 const content = ref<string>('');
@@ -84,6 +96,7 @@ const layout = {
     wrapperCol: { span: 16 },
 };
 
+
 const validateMessages = {
     required: '${label} is required!',
     types: {
@@ -97,8 +110,8 @@ const validateMessages = {
 
 let SubmitArticle = ref({
     Title: '',
-    Classify:"",
-    Image:"",
+    Classify: "",
+    Image: "",
     Content: content,
     Tags: undefined
 });

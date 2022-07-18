@@ -15,18 +15,20 @@ namespace ArticleService.WebAPI.Controllers
     {
         private readonly IArticleRepository repository;
         private readonly IArticleTagRepository Tagrepository;
+        private readonly IArticleClassifyRepository classifyRepository;
         private readonly ArticleDomainService domainService;
         private readonly ArticleDbContext dbCtx;
 
         private IEventBus eventBus;
 
-        public ArticleController(IArticleRepository _repository, ArticleDomainService _domainService, ArticleDbContext _dbCTx, IArticleTagRepository tagrepository, IEventBus eventBus)
+        public ArticleController(IArticleRepository _repository, ArticleDomainService _domainService, ArticleDbContext _dbCTx, IArticleTagRepository tagrepository, IEventBus eventBus, IArticleClassifyRepository classifyRepository)
         {
             repository = _repository;
             domainService = _domainService;
             dbCtx = _dbCTx;
             Tagrepository = tagrepository;
             this.eventBus = eventBus;
+            this.classifyRepository = classifyRepository;
         }
 
         #region Article相关API
@@ -37,20 +39,27 @@ namespace ArticleService.WebAPI.Controllers
 
             //var ArticleTags = request.ToArticleTagArray(request.Tags);
             Article AddArticle = Article.Create(request.Title, request.content);
+            try
+            {
+                //从数据库获取Classify并保存关系
+                var Classify = await dbCtx.ArticleClassifies.FindAsync(request.Classify);
+                AddArticle.Classify = Classify;
+                Classify.Articles.Add(AddArticle);
+                //从数据库获取对应的Tags并保存关系
+                var ArticleTags = dbCtx.Tags.Where(x => TagsGuid.Contains(x.Id)).ToList();
+                AddArticle.Tags = ArticleTags;
+                ArticleTags.ForEach(x => x.Articles = new List<Article>() { AddArticle });
 
-            //从数据库获取Classify并保存关系
-            var Classify = await dbCtx.ArticleClassifies.FindAsync(request.Classify);
-            AddArticle.Classify = Classify;
-            Classify.Articles.Add(AddArticle);
-            //从数据库获取对应的Tags并保存关系
-            var ArticleTags = dbCtx.Tags.Where(x => TagsGuid.Contains(x.Id)).ToList();
-            AddArticle.Tags = ArticleTags;
-            ArticleTags.ForEach(x => x.Articles = new List<Article>() { AddArticle });
 
+                dbCtx.Articles.Add(AddArticle);
+                dbCtx.Tags.UpdateRange(ArticleTags);
+                await dbCtx.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
 
-            dbCtx.Articles.Add(AddArticle);
-            dbCtx.Tags.UpdateRange(ArticleTags);
-            await dbCtx.SaveChangesAsync();
+            }
+
             return Ok();
         }
 
@@ -94,6 +103,11 @@ namespace ArticleService.WebAPI.Controllers
             eventBus.publish(ConstEventName.FileUpload, parameter);
             await dbCtx.SaveChangesAsync();
             return Classify.Id;
+        }
+        [HttpGet]
+        public async Task<ActionResult<ArticleClassify[]>> GetAllArticleClassify()
+        {
+           return await classifyRepository.GetAllArticleClassifyAsync();
         }
         #endregion
 

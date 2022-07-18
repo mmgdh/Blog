@@ -16,11 +16,15 @@ export default class ArticleService{
     }
 
     async  GetAllArticleTags() {
-        return await  get('Article/GetAllTags',undefined)
+        return await  get('Article/GetAllTags')
     }
 
     async GetArticleByPage(parames:any){
         return await get('Article/GetArticleByPage',parames);
+    }
+
+    public async  GetAllArticleClassify() {
+        return await get('Article/GetAllArticleClassify')
     }
 
 }

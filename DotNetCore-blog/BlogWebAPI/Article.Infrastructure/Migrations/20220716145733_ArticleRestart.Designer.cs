@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArticleService.Infrastructure.Migrations
 {
     [DbContext(typeof(ArticleDbContext))]
-    [Migration("20220711141142_adjust")]
-    partial class adjust
+    [Migration("20220716145733_ArticleRestart")]
+    partial class ArticleRestart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

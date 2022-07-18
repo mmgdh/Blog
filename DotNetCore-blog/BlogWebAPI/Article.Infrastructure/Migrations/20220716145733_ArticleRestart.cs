@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ArticleService.Infrastructure.Migrations
 {
-    public partial class ReStart : Migration
+    public partial class ArticleRestart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,9 @@ namespace ArticleService.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ClassifyText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DefaultImgId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ClassifyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PinYin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DefaultImgId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
