@@ -49,7 +49,7 @@ namespace FileService.Infrastructure.StorageClients
             return new Uri(url);
         }
 
-        public async Task<byte[]> GetUploadFileByteArray(UploadUri uploadUri)
+        public async Task<Tuple<byte[],string>> GetUploadFileByteArray(UploadUri uploadUri)
         {
             HttpClient client = httpClientFactory.CreateClient();
             var resp = await client.GetAsync(uploadUri.Uri);
@@ -57,9 +57,9 @@ namespace FileService.Infrastructure.StorageClients
             {
                 if (resp.IsSuccessStatusCode)
                 {
-                    var b = resp.Content;
                     var bytes =await resp.Content.ReadAsByteArrayAsync();
-                    return bytes;
+                    if (resp.Content.Headers.ContentType == null) throw new Exception("获取资源失败");
+                    return new Tuple<byte[], string>(bytes, resp.Content.Headers.ContentType.ToString());
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace FileService.Infrastructure.StorageClients
             {
 
             }
-            return null;
+            throw new Exception("获取资源失败");
         }
     }
 }

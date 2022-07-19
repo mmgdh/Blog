@@ -41,9 +41,8 @@ namespace FileService.WebAPI.Controllers
         [HttpGet]
         public async Task<FileContentResult> GetImage(Guid Id)
         {
-            var byteArray =await repository.GetFastFile(Id);
-            byte[] a = null;
-            return new FileContentResult(byteArray, "image/jpeg");
+            var Tuple =await repository.GetFastFile(Id);
+            return new FileContentResult(Tuple.Item1, Tuple.Item2);
         }
     }
 } 

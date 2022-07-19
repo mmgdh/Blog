@@ -9,7 +9,7 @@ const routes:Array<RouteRecordRaw>=[
     {
         path:"/ArticleList",
         name:'ArticleList',
-        component:()=>import('../components/BlogList.vue')
+        component:()=>import('../components/Article/BlogList.vue')
     }
 ]
 

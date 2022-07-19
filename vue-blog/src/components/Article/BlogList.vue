@@ -11,8 +11,8 @@
 <script setup lang='ts'>
 import { ref, onBeforeMount } from 'vue'
 import { number } from 'vue-types';
-import ArticleService from '../Services/ArticleService';
-import { Article } from '../Entities/E_Article'
+import ArticleService from '../../Services/ArticleService';
+import { Article } from '../../Entities/E_Article'
 interface requestData {
   page: number,
   pageSize: number
