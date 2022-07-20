@@ -54,11 +54,13 @@ namespace CommonMiddleWare
                 {
                     info.requestdata = request.QueryString.Value;
                 }
-
+                var json = JsonConvert.SerializeObject(info);
+                logger.LogWarning("*************************");
+                logger.LogInformation(json);
                 var originalBodyStream = context.Response.Body;
                 using (var responseBody = new MemoryStream())
                 {
-                    context.Response.Body = responseBody;
+                    //context.Response.Body = responseBody;
                     await _next(context);
 
                     //返回结果                        
@@ -85,7 +87,7 @@ namespace CommonMiddleWare
                     context.Response.Body = originalBodyStream;
                 }
 
-                var json = JsonConvert.SerializeObject(info);
+                json = JsonConvert.SerializeObject(info);
                 logger.LogInformation(json);
 
             }

@@ -65,16 +65,25 @@ namespace ArticleService.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ArticleResp[]?>> GetArticleByPage(int? page, int? pageSize)
+        public async Task<ActionResult<lstArticleResp[]?>> GetArticleByPage(int? page, int? pageSize)
         {
             if (page == null)
                 page = 0;
             if (pageSize == null)
                 pageSize = 10;
             var ret = await repository.GetArticleByPageAsync((int)page, (int)pageSize);
-            var response = ret.Select(x => ArticleResp.Create(x)).ToArray();
-
+            var response = lstArticleResp.Create(ret);
             return response;
+        }
+        [HttpGet]
+        public async Task<ArticleResp> GetArticleById(Guid id)
+        {
+            var ret = await repository.GetArticleByIdAsync(id);
+            if (ret == null)
+            {
+                throw new Exception("未找到对应的文章");
+            }
+            return ArticleResp.Create(ret);
         }
         #endregion
 

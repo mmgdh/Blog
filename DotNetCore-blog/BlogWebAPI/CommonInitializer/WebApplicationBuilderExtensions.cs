@@ -69,11 +69,13 @@ namespace CommonInitializer
                 fv.RegisterValidatorsFromAssemblies(assemblies);
             });
 
-            #region 解决ef实体层层调用导致的json生成问题。
+            #region NewtonsoftJson
             services.AddControllers().AddNewtonsoftJson(option =>
             {
+                //解决ef实体层层调用导致的json生成问题。
                 option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                option.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //使返回格式不再是默认的小驼峰
+                //option.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
             #endregion
         }

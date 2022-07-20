@@ -3,8 +3,8 @@ import { Article,ArticleTag } from '../Entities/E_Article'
 
 
 export default class ArticleService{
-    async getArticle(timeout:number=1000){
-       return await get("Article/Index",undefined,timeout)
+    async GetArticleById(id:string){
+       return await get("Article/GetArticleById",id)
     }
 
     async AddArticle(Article: Article){

@@ -1,12 +1,13 @@
 
 export interface Article {
-    Title: string,
-    Content: string,
-    Tags: Array<ArticleTag>
+    id:string,
+    title: string,
+    content: string,
+    tags: Array<ArticleTag>
 }
 
 export interface ArticleTag {
-    TagName: string,
+    tagName: string,
     id: string
 }
 
