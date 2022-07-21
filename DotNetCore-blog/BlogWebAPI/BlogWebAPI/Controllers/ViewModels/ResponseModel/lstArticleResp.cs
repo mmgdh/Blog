@@ -12,9 +12,13 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.ResponseModel
 
         public string PinYin { get; private set; }
         /// <summary>
-        /// 文章内容
+        /// 文章内容描述
         /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// 创建日期
+        /// </summary>
+        public DateTime CreateDateTime { get; set; }
         /// <summary>
         /// 标签
         /// </summary>
@@ -37,6 +41,7 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.ResponseModel
                 resp.Tags = article.Tags;
                 resp.PinYin = article.PinYin;
                 resp.ImageId = article.ImageId;
+                resp.CreateDateTime = article.CreationTime;
                 return resp;
             });
             return ret.ToArray();

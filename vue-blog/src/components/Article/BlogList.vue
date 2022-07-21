@@ -13,12 +13,10 @@ import { ref, onBeforeMount } from 'vue'
 import { number } from 'vue-types';
 import ArticleService from '../../Services/ArticleService';
 import { Article } from '../../Entities/E_Article'
+import {PageRequest} from '../../Entities/CommomEntity'
 import { useRouter } from 'vue-router'
-interface requestData {
-  page: number,
-  pageSize: number
-}
-const pageRequest: requestData = {
+
+const pageRequest: PageRequest = {
   page: 0,
   pageSize: 10
 }

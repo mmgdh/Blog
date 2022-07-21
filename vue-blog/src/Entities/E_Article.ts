@@ -3,7 +3,10 @@ export interface Article {
     id:string,
     title: string,
     content: string,
-    tags: Array<ArticleTag>
+    classify:ArticleClassify,
+    createDateTime:Date,
+    tags: Array<ArticleTag>,
+    pinYin:string
 }
 
 export interface ArticleTag {
@@ -14,5 +17,5 @@ export interface ArticleTag {
 export interface ArticleClassify {
     id: string,
     classifyName: string,
-    pinyin: string
+    pinYin: string
 }

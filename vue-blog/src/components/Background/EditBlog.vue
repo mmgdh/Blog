@@ -43,10 +43,10 @@
 import { ref, onBeforeMount } from 'vue'
 import Md from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
-import { Article, ArticleTag, ArticleClassify } from '../Entities/E_Article'
-import ArticleTagSelectVue from './common/ArticleTagSelect.vue'
-import ArticleService from '../Services/ArticleService'
-import UploadService from '../Services/UploadService'
+import { Article, ArticleTag, ArticleClassify } from '../../Entities/E_Article'
+import ArticleTagSelectVue from '../common/ArticleTagSelect.vue'
+import ArticleService from '../../Services/ArticleService'
+import UploadService from '../../Services/UploadService'
 import { computed } from '@vue/reactivity'
 
 
@@ -117,7 +117,7 @@ let SubmitArticle = ref({
 });
 const onFinish = (values: Article) => {
     console.log('Success:', values);
-    values.Content = content.value;
+    values.content = content.value;
     ArticleService.prototype.AddArticle(values)
 };
 

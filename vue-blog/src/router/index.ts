@@ -4,12 +4,17 @@ const routes:Array<RouteRecordRaw>=[
     {
         path:"/EditBlog",
         name:'EditBlog',
-        component:()=>import('../components/EditBlog.vue')
+        component:()=>import('../components/Background/EditBlog.vue')
     },
     {
         path:"/ArticleList",
         name:'ArticleList',
         component:()=>import('../components/Article/BlogList.vue')
+    },
+    {
+        path:"/ArticleTable",
+        name:'ArticleTable',
+        component:()=>import('../components/Background/ArticleTable.vue')
     },
     {
         path:"/ShowArticle",

@@ -14,12 +14,13 @@ import {Article} from "../../Entities/E_Article"
 
 let router =useRoute();
 let ArticleId:string;
+let content =ref('');
 ArticleId=router.query.ArticleId as string;
 console.log(ArticleId);
-var aa=await ArticleService.prototype.GetArticleById(ArticleId) 
-let _Article:Article =aa as Article;
-let content =ref('');
-content.value=_Article.content;
+ArticleService.prototype.GetArticleById(ArticleId).then(ret=>{
+content.value=ret.content;
+});
+
 
 </script>
 <style scoped lang='less'>
