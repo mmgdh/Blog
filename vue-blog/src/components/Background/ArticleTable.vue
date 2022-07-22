@@ -8,6 +8,9 @@
           </a-tag>
         </span>
       </template>
+      <template v-else-if="column.key === 'createDateTime'">
+        {{ record.createDateTime }}
+      </template>
       <template v-else-if="column.key === 'classify'">
         <span>
           {{ record.classify.classifyName }}
@@ -15,25 +18,29 @@
       </template>
       <template v-else-if="column.key === 'action'">
         <span>
-          <a>Invite 一 {{ record.name }}</a>
+          <a>编辑</a>
           <a-divider type="vertical" />
-          <a>Delete</a>
+          <a @click="DeleteClick(record)">删除</a>
           <a-divider type="vertical" />
           <a class="ant-dropdown-link">
             More actions
-            <down-outlined />
           </a>
         </span>
       </template>
     </template>
 
   </a-table>
+  <a-modal v-model:visible="DeletMsgVisible" title="Basic Modal" @ok="DeleteFunc(curRecord.id)">
+    确定删除该文章[{{ curRecord.title }}]吗
+  </a-modal>
+  <button @click="a">123</button>
 </template>
 <script setup lang="ts">
 import { Article } from "../../Entities/E_Article";
 import { ref, onBeforeMount } from 'vue'
 import ArticleService from "../../Services/ArticleService"
 import { PageRequest } from "../../Entities/CommomEntity"
+import MsgBox from "../common/MessageBox.vue"
 import { any } from "vue-types";
 
 let Articles: Article[] = [];
@@ -42,15 +49,23 @@ let pageRequestData: PageRequest = {
   pageSize: 10
 };
 let Ref_ArticleList = ref(Articles);
-
+const a = () => { console.log(curRecord) }
 ArticleService.prototype.GetArticleByPage(pageRequestData)
   .then(ret => {
     Ref_ArticleList.value = ret;
     console.log(Ref_ArticleList.value);
   }
   );
+let curRecord: any=ref(any);
+let DeletMsgVisible = ref(false);
+const DeleteClick = (record: any) => {
+  curRecord.value = record;
+  DeletMsgVisible.value = true;
 
-
+}
+const DeleteFunc = (id: string) => {
+  DeletMsgVisible.value = false;
+}
 const columns = [
   {
     title: '标题',

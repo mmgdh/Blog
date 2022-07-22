@@ -11,6 +11,10 @@ export default class ArticleService{
         return await post('Article/Add',Article)
     }
 
+    async ModifyArticle(Article: Article){
+        return await post('Article/Modify',Article)
+    }
+
     async AddArticleTag(parames:Parameters<any>){
         return await post("Article/AddTag",parames)
     }

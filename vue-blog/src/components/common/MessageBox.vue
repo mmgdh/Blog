@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-modal v-model:visible="_visible" title="Basic Modal" @ok="clickTap">
+        <a-modal v-model:visible="_visible" title="Basic Modal" @ok="clickTap" @cancle="clickCancle">
         <p>{{ContentMsg}}</p>
         </a-modal>
     </div>
@@ -13,9 +13,13 @@ defineProps<{
     ContentMsg:string
 }>()
 
-const emit = defineEmits(['ok'])
+const emit = defineEmits(['ok','cancle'])
 const clickTap = () => {
     emit('ok')
+}
+const clickCancle = () => {
+    emit('cancle')
+    
 }
 </script>
 

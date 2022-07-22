@@ -18,8 +18,7 @@
             <a-form-item name="Classify" label="分类" has-feedback
                 :rules="[{ required: true, message: 'Please select your Classify!' }]">
                 <a-select v-model:value="SubmitArticle.Classify" placeholder="Please select a Classify">
-                    <a-select-option v-for="classify in Ref_ArticleCLassify" :value="classify.id"
-                        :key="classify.id">
+                    <a-select-option v-for="classify in Ref_ArticleCLassify" :value="classify.id" :key="classify.id">
                         {{ classify.classifyName }}
                     </a-select-option>
                 </a-select>
@@ -36,6 +35,7 @@
     </a-drawer>
 
 
+    <MessageBox :_visible='SaveMessageShow' :ContentMsg="Message" @ok="CCC"></MessageBox>
 </template>
 
 
@@ -47,9 +47,11 @@ import { Article, ArticleTag, ArticleClassify } from '../../Entities/E_Article'
 import ArticleTagSelectVue from '../common/ArticleTagSelect.vue'
 import ArticleService from '../../Services/ArticleService'
 import UploadService from '../../Services/UploadService'
-import { computed } from '@vue/reactivity'
+import MessageBox from '../common/MessageBox.vue'
+import { useRouter } from 'vue-router'
+import { message } from 'ant-design-vue';
 
-
+let router = useRouter()
 let _ArticleCLassify: Array<ArticleClassify> = [];
 let Ref_ArticleCLassify = ref(_ArticleCLassify);
 
@@ -115,12 +117,32 @@ let SubmitArticle = ref({
     Content: content,
     Tags: undefined
 });
+let SaveMessageShow = ref(false);
+const Message: string = "保存成功"
 const onFinish = (values: Article) => {
     console.log('Success:', values);
     values.content = content.value;
-    ArticleService.prototype.AddArticle(values)
-};
+    ArticleService.prototype.AddArticle(values).then((res) => {
+        if (res != "") {
+            SaveMessageShow.value = true;
+            message.success("保存成功!")
+            router.push("/ArticleTable");
+        }
+        else{
+            message.error("保存失败");
+        }
 
+    });
+};
+let CCC = () => {
+    SaveMessageShow.value = false;
+}
+
+let Clear = () => {
+    visible.value = false;
+    content.value = "";
+
+}
 //#endregion
 </script>
 

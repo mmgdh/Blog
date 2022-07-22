@@ -49,7 +49,7 @@ namespace ArticleService.WebAPI.Controllers
                 //从数据库获取对应的Tags并保存关系
                 var ArticleTags = dbCtx.Tags.Where(x => TagsGuid.Contains(x.Id)).ToList();
                 AddArticle.Tags = ArticleTags;
-                ArticleTags.ForEach(x => x.Articles = new List<Article>() { AddArticle });
+                ArticleTags.ForEach(x => x.Articles.Add(AddArticle));
 
 
                 dbCtx.Articles.Add(AddArticle);
@@ -61,7 +61,40 @@ namespace ArticleService.WebAPI.Controllers
 
             }
 
-            return Ok();
+            return AddArticle.Id;
+        }
+        [HttpPut]
+        public async Task<Article> Modify(ArticleModifyRequest request)
+        {
+            List<Guid> TagsGuid = request.Tags.Select(x => x.id).ToList();
+            Article? ModifyArticle = await dbCtx.Articles.FindAsync(request.Id);
+            if (ModifyArticle == null) throw new Exception("更新文章失败，通过Id未找到对应的文章");
+            ModifyArticle.Title = request.Title;
+            ModifyArticle.Content = request.Content;
+
+            //从数据库获取Classify并保存关系
+            var Classify = await dbCtx.ArticleClassifies.FindAsync(request.classify);
+            ModifyArticle.Classify = Classify;
+            Classify.Articles.Add(ModifyArticle);
+            //从数据库获取对应的Tags并保存关系
+            var ArticleTags = dbCtx.Tags.Where(x => TagsGuid.Contains(x.Id)).ToList();
+            ModifyArticle.Tags = ArticleTags;
+            ArticleTags.ForEach(x => x.Articles.Add(ModifyArticle));
+
+            dbCtx.Update(ModifyArticle);
+            dbCtx.Update(Classify);
+            dbCtx.Update(ArticleTags);
+            await dbCtx.SaveChangesAsync();
+
+            return ModifyArticle;
+        }
+
+        [HttpDelete]
+        public async Task<bool> Delete(Guid id)
+        {
+            Article? DeleteArticle = await dbCtx.Articles.FindAsync(id);
+            //if (DeleteArticle == null) throw new Exception("文章已被删除");
+            return true;
         }
 
         [HttpGet]

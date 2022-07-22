@@ -57,3 +57,23 @@ export function post (url:any, data = {}, timeout:number=50000):any {
         )
       })
     }
+
+
+    /**
+ * post 请求方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+export function put (url:any, data = {}, timeout:number=50000):any {
+      return new Promise((resolve, reject) => {
+        service.put(url, data, { timeout: timeout }).then(
+          (response) => {
+            resolve(response.data)
+          },
+          (err) => {
+            reject(err)
+          }
+        )
+      })
+    }
