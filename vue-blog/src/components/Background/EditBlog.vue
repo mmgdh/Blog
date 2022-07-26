@@ -13,7 +13,7 @@
         <a-form :model="SubmitArticle" v-bind="layout" name="nest-messages" :validate-messages="validateMessages"
             @finish="onFinish">
             <a-form-item name="Title" label="标题" :rules="[{ required: true }]">
-                <a-input v-model:value="SubmitArticle.Title" />
+                <a-input v-model:value="SubmitArticle.title" />
             </a-form-item>
             <a-form-item name="Classify" label="分类" has-feedback
                 :rules="[{ required: true, message: 'Please select your Classify!' }]">
@@ -33,9 +33,6 @@
             </a-form-item>
         </a-form>
     </a-drawer>
-
-
-    <MessageBox :_visible='SaveMessageShow' :ContentMsg="Message" @ok="CCC"></MessageBox>
 </template>
 
 
@@ -47,16 +44,19 @@ import { Article, ArticleTag, ArticleClassify } from '../../Entities/E_Article'
 import ArticleTagSelectVue from '../common/ArticleTagSelect.vue'
 import ArticleService from '../../Services/ArticleService'
 import UploadService from '../../Services/UploadService'
-import MessageBox from '../common/MessageBox.vue'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue';
 
 let router = useRouter()
 let _ArticleCLassify: Array<ArticleClassify> = [];
 let Ref_ArticleCLassify = ref(_ArticleCLassify);
-
+let ArticleId: string;
+ArticleId = router.currentRoute.value.query.ArticleId as string;
 onBeforeMount(async () => {
     ArticleService.prototype.GetAllArticleClassify().then((res: any) => Ref_ArticleCLassify.value = res)
+    ArticleService.prototype.GetArticleById(ArticleId).then(ret => { SubmitArticle.value=ret ;
+    SubmitArticle.value.Classify=ret.classify.id; 
+    content.value=ret.content;   console.log('内容：');console.log(SubmitArticle.value)});
 })
 
 //#region  markdown
@@ -76,12 +76,12 @@ const onUploadImg = async (files: any, callback: any) => {
             });
         })
     );
-
     callback(res.map((item) => item));
 };
 //#endregion
 
 //#region 右侧抽屉
+
 const visible = ref<boolean>(false);
 
 const afterVisibleChange = (bool: boolean) => {
@@ -92,6 +92,7 @@ const showDrawer = () => {
     visible.value = true;
 };
 //#endregion
+
 //#region 抽屉内表单
 const layout = {
     labelCol: { span: 8 },
@@ -111,38 +112,26 @@ const validateMessages = {
 };
 
 let SubmitArticle = ref({
-    Title: '',
+    title: '112211',
     Classify: "",
     Image: "",
     Content: content,
     Tags: undefined
 });
-let SaveMessageShow = ref(false);
-const Message: string = "保存成功"
 const onFinish = (values: Article) => {
     console.log('Success:', values);
     values.content = content.value;
     ArticleService.prototype.AddArticle(values).then((res) => {
         if (res != "") {
-            SaveMessageShow.value = true;
             message.success("保存成功!")
             router.push("/ArticleTable");
         }
-        else{
+        else {
             message.error("保存失败");
         }
 
     });
 };
-let CCC = () => {
-    SaveMessageShow.value = false;
-}
-
-let Clear = () => {
-    visible.value = false;
-    content.value = "";
-
-}
 //#endregion
 </script>
 

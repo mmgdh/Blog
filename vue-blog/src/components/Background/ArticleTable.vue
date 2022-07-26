@@ -18,7 +18,7 @@
       </template>
       <template v-else-if="column.key === 'action'">
         <span>
-          <a>编辑</a>
+          <a @click="router.push({path:'EditBlog',query:{'ArticleId':record.id}})">编辑</a>
           <a-divider type="vertical" />
           <a @click="DeleteClick(record)">删除</a>
           <a-divider type="vertical" />
@@ -33,7 +33,6 @@
   <a-modal v-model:visible="DeletMsgVisible" title="Basic Modal" @ok="DeleteFunc(curRecord.id)">
     确定删除该文章[{{ curRecord.title }}]吗
   </a-modal>
-  <button @click="a">123</button>
 </template>
 <script setup lang="ts">
 import { Article } from "../../Entities/E_Article";
@@ -42,30 +41,40 @@ import ArticleService from "../../Services/ArticleService"
 import { PageRequest } from "../../Entities/CommomEntity"
 import MsgBox from "../common/MessageBox.vue"
 import { any } from "vue-types";
+import {useRouter} from 'vue-router'
 
+const router =useRouter();
 let Articles: Article[] = [];
 let pageRequestData: PageRequest = {
   page: 0,
   pageSize: 10
 };
 let Ref_ArticleList = ref(Articles);
-const a = () => { console.log(curRecord) }
-ArticleService.prototype.GetArticleByPage(pageRequestData)
-  .then(ret => {
-    Ref_ArticleList.value = ret;
-    console.log(Ref_ArticleList.value);
-  }
-  );
-let curRecord: any=ref(any);
+const Func_RefreshArtifcle = () => {
+  ArticleService.prototype.GetArticleByPage(pageRequestData)
+    .then(ret => {
+      Ref_ArticleList.value = ret;
+      console.log(Ref_ArticleList.value);
+    }
+    );
+};
+Func_RefreshArtifcle();
+
+
+let curRecord: any = ref(any);
 let DeletMsgVisible = ref(false);
 const DeleteClick = (record: any) => {
   curRecord.value = record;
   DeletMsgVisible.value = true;
-
 }
-const DeleteFunc = (id: string) => {
+const DeleteFunc = async (id: string) => {
+  var ret = await ArticleService.prototype.DeleteArticle(id);
+  if (ret == true) {
+    Func_RefreshArtifcle()
+  }
   DeletMsgVisible.value = false;
 }
+
 const columns = [
   {
     title: '标题',

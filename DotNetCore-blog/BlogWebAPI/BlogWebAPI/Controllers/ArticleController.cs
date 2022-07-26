@@ -93,6 +93,10 @@ namespace ArticleService.WebAPI.Controllers
         public async Task<bool> Delete(Guid id)
         {
             Article? DeleteArticle = await dbCtx.Articles.FindAsync(id);
+            if (DeleteArticle == null)
+                return false;
+            dbCtx.Remove(DeleteArticle);
+            await dbCtx.SaveChangesAsync();
             //if (DeleteArticle == null) throw new Exception("文章已被删除");
             return true;
         }

@@ -77,3 +77,22 @@ export function put (url:any, data = {}, timeout:number=50000):any {
         )
       })
     }
+
+    /**
+ * Delete 请求方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+export function Delete (url:any, data = {}, timeout:number=50000):any {
+      return new Promise((resolve, reject) => {
+        service.delete(url, {params:data}).then(
+          (response) => {
+            resolve(response.data)
+          },
+          (err) => {
+            reject(err)
+          }
+        )
+      })
+    }

@@ -16,7 +16,6 @@ let router =useRoute();
 let ArticleId:string;
 let content =ref('');
 ArticleId=router.query.ArticleId as string;
-console.log(ArticleId);
 ArticleService.prototype.GetArticleById(ArticleId).then(ret=>{
 content.value=ret.content;
 });
