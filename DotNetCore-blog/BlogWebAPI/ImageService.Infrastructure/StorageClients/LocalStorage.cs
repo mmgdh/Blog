@@ -33,7 +33,7 @@ namespace FileService.Infrastructure.StorageClients
             string workingDir = Path.Combine(hostEnv.ContentRootPath, "wwwroot");
             string fullPath = Path.Combine(workingDir, key);
             string? fullDir = Path.GetDirectoryName(fullPath);//get the directory
-            if (!Directory.Exists(fullDir))//automatically create dir
+            if (!string.IsNullOrEmpty(fullDir) &&!Directory.Exists(fullDir))//automatically create dir
             {
                 Directory.CreateDirectory(fullDir);
             }

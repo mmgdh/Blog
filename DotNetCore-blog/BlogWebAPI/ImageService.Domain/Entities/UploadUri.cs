@@ -4,11 +4,11 @@ namespace FileService.Domain.Entities
 {
     public class UploadUri :BaseEntity
     {
-        public string Uri { get; private set; }   
+        public string Uri { get; private set; } = "";   
 
         public EnumStorageType UrlType { get; private set; }
 
-        public UploadItem UploadItem { get; private set; }
+        public UploadItem UploadItem { get; private set; } = new UploadItem();
 
 
 

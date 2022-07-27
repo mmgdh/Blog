@@ -5,18 +5,18 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.ResponseModel
     public class lstArticleResp
     {
         public Guid id { get; set; }
-        public string Title { get; set; }
-        public ArticleClassify Classify { get; set; }
+        public string Title { get; set; } = "";
+        public ArticleClassify? Classify { get; set; }
 
         public Guid ImageId { get; set; }
         /// <summary>
         /// 拼音
         /// </summary>
-        public string PinYin { get; private set; }
+        public string? PinYin { get; private set; }
         /// <summary>
         /// 文章内容描述
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
         /// <summary>
         /// 创建日期
         /// </summary>

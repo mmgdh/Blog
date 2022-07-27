@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref,onBeforeMount} from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import { ArticleTag } from '../../Entities/E_Article';
 import ArticleService from '../../Services/ArticleService'
 
@@ -33,20 +33,25 @@ const TagCardVisible = ref<boolean>(false);
 const InputValue = ref<string>('');
 
 onBeforeMount(() => {
-    ArticleService.prototype.GetAllArticleTags().then((res: any) => AllTags.value = res)
+    ArticleService.prototype.GetAllArticleTags().then((res: any) => {
+        AllTags.value = res;
+        console.log(SelectArticleTags);
+        if(props.FSelectArticleTags!=null&&props.FSelectArticleTags.length>0){
+            props.FSelectArticleTags.forEach(x=>AddTags(x));
+            console.log(SelectArticleTags);
+        }
+    })
 })
 const props = defineProps({
     FSelectArticleTags: Array<ArticleTag>,
-    value:Array<ArticleTag>
 }
 )
-const emit = defineEmits(['update:FSelectArticleTags','update:value'])
+const emit = defineEmits(['update:FSelectArticleTags'])
 const AddTags = (Tag: ArticleTag) => {
     SelectArticleTags.value.push(Tag)
     let index = AllTags.value.findIndex((_Tag: any) => _Tag.id === Tag.id); //find index in your array
     AllTags.value.splice(index, 1);//remove element from array
     emit('update:FSelectArticleTags', SelectArticleTags.value)
-    emit('update:value',SelectArticleTags.value);
 
 }
 const RemoveTags = (Tag: ArticleTag) => {
@@ -54,7 +59,6 @@ const RemoveTags = (Tag: ArticleTag) => {
     SelectArticleTags.value.splice(index, 1);//remove element from array
     AllTags.value.push(Tag)
     emit('update:FSelectArticleTags', SelectArticleTags.value)
-    emit('update:value',SelectArticleTags.value);
 }
 const GetOrCreate = (searchValue: string) => {
     let index = AllTags.value.findIndex((_Tag: any) => _Tag.tagName === searchValue); //find index in your array

@@ -8,6 +8,6 @@ namespace CommonInitializer
 {
     public class InitializerOptions
     {
-        public string EventBusQueueName { get; set; }
+        public string? EventBusQueueName { get; set; }
     }
 }

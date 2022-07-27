@@ -13,7 +13,7 @@ namespace ArticleService.Domain.Entities
     /// </summary>
     public class ArticleClassify : BaseEntity
     {
-        private string _ClassifyName;
+        private string _ClassifyName = "";
         /// <summary>
         /// 标题
         /// </summary>
@@ -29,7 +29,7 @@ namespace ArticleService.Domain.Entities
                 PinYin = PinYinHelper.GetFrist(value);
             }
         }
-        public string PinYin { get; private set; }
+        public string PinYin { get; private set; } = "";
         public List<Article> Articles { get;  set; } = new List<Article>();
 
         public Guid? DefaultImgId { get; set; }

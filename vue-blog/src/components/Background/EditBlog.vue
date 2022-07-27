@@ -12,32 +12,33 @@
         @after-visible-change="afterVisibleChange">
         <a-form :model="SubmitArticle" v-bind="layout" name="nest-messages" :validate-messages="validateMessages"
             @finish="onFinish">
-            <a-form-item name="Title" label="标题" :rules="[{ required: true }]">
+            <a-form-item name="title" label="标题" :rules="[{ required: true }]">
                 <a-input v-model:value="SubmitArticle.title" />
             </a-form-item>
-            <a-form-item name="Classify" label="分类" has-feedback
+            <a-form-item name="classify" label="分类" has-feedback
                 :rules="[{ required: true, message: 'Please select your Classify!' }]">
-                <a-select v-model:value="SubmitArticle.Classify" placeholder="Please select a Classify">
+                <a-select v-model:value="SubmitArticle.classify" placeholder="Please select a Classify">
                     <a-select-option v-for="classify in Ref_ArticleCLassify" :value="classify.id" :key="classify.id">
                         {{ classify.classifyName }}
                     </a-select-option>
                 </a-select>
             </a-form-item>
-            <a-form-item name='Tags' label="标签">
-                <ArticleTagSelectVue v-model:value="SubmitArticle.Tags">
+            <a-form-item name='tags' label="标签">
+                <ArticleTagSelectVue v-model:FSelectArticleTags="SubmitArticle.tags">
 
                 </ArticleTagSelectVue>
             </a-form-item>
             <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
-                <a-button type="primary" html-type="submit">Submit</a-button>
+                <a-button type="primary" html-type="submit">保存</a-button>
             </a-form-item>
         </a-form>
+        <button @click="func1">123</button>
     </a-drawer>
 </template>
 
 
 <script setup lang='ts'>
-import { ref, onBeforeMount } from 'vue'
+import { ref, onBeforeMount, onMounted } from 'vue'
 import Md from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { Article, ArticleTag, ArticleClassify } from '../../Entities/E_Article'
@@ -46,17 +47,42 @@ import ArticleService from '../../Services/ArticleService'
 import UploadService from '../../Services/UploadService'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue';
+import { string } from 'vue-types'
 
 let router = useRouter()
 let _ArticleCLassify: Array<ArticleClassify> = [];
 let Ref_ArticleCLassify = ref(_ArticleCLassify);
 let ArticleId: string;
-ArticleId = router.currentRoute.value.query.ArticleId as string;
-onBeforeMount(async () => {
-    ArticleService.prototype.GetAllArticleClassify().then((res: any) => Ref_ArticleCLassify.value = res)
-    ArticleService.prototype.GetArticleById(ArticleId).then(ret => { SubmitArticle.value=ret ;
-    SubmitArticle.value.Classify=ret.classify.id; 
-    content.value=ret.content;   console.log('内容：');console.log(SubmitArticle.value)});
+interface InterfaceSubmitArticle {
+    title: string,
+    classify?: string,
+    image: string,
+    content: string,
+    tags: Array<ArticleTag>
+}
+let _SubmitArticle: InterfaceSubmitArticle = {
+    title: '112211',
+    classify: '',
+    image: "",
+    content: '',
+    tags: [] as Array<ArticleTag>
+};
+const func1 = () => {
+    SubmitArticle.value.tags.pop();
+}
+let SubmitArticle = ref(_SubmitArticle);
+onMounted(() => {
+    ArticleId = router.currentRoute.value.query.ArticleId as string;
+    ArticleService.prototype.GetAllArticleClassify().then((res: any) =>
+        Ref_ArticleCLassify.value = res
+    )
+    if (ArticleId != null) {
+        ArticleService.prototype.GetArticleById(ArticleId).then(ret => {
+            SubmitArticle.value = ret;
+            SubmitArticle.value.classify = ret.classify.id;
+            content.value = ret.content;
+        })
+    }
 })
 
 //#region  markdown
@@ -85,7 +111,7 @@ const onUploadImg = async (files: any, callback: any) => {
 const visible = ref<boolean>(false);
 
 const afterVisibleChange = (bool: boolean) => {
-    console.log('visible', bool);
+
 };
 
 const showDrawer = () => {
@@ -110,27 +136,39 @@ const validateMessages = {
         range: '${label} must be between ${min} and ${max}',
     },
 };
-
-let SubmitArticle = ref({
-    title: '112211',
-    Classify: "",
-    Image: "",
-    Content: content,
-    Tags: undefined
-});
 const onFinish = (values: Article) => {
     console.log('Success:', values);
     values.content = content.value;
-    ArticleService.prototype.AddArticle(values).then((res) => {
-        if (res != "") {
-            message.success("保存成功!")
-            router.push("/ArticleTable");
-        }
-        else {
-            message.error("保存失败");
-        }
 
-    });
+    if (ArticleId != null) {
+        values.id = ArticleId;
+        ArticleService.prototype.ModifyArticle(values).then((res) => {
+            if (res != "") {
+                message.success("保存成功!");
+                console.log(res);
+                router.push("/ArticleTable");
+            }
+            else {
+                message.error("保存失败");
+            }
+
+        });
+    }
+    else {
+        ArticleService.prototype.AddArticle(values).then((res) => {
+            if (res != "") {
+                message.success("保存成功!")
+                router.push("/ArticleTable");
+            }
+            else {
+                message.error("保存失败");
+            }
+
+        });
+    }
+
+
+
 };
 //#endregion
 </script>

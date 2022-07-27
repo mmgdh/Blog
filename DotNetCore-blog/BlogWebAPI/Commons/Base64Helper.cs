@@ -10,11 +10,11 @@ namespace Commons
     {
         public static String FileToBase64(Stream fs)
         {
-            string strRet = null;
+            string strRet = "";
 
             try
             {
-                if (fs == null) return null;
+                if (fs == null) return "";
                 byte[] bt = new byte[fs.Length];
                 fs.Read(bt,0 , bt.Length);
                 strRet = Convert.ToBase64String(bt);
@@ -22,7 +22,7 @@ namespace Commons
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.ToString());
             }
 
             return strRet;

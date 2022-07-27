@@ -5,7 +5,7 @@ namespace ArticleService.Domain.Entities
 {
     public class Article : AggregateRootEntity
     {
-        private string _Title;
+        private string _Title="";
         /// <summary>
         /// 标题
         /// </summary>
@@ -21,15 +21,15 @@ namespace ArticleService.Domain.Entities
                 PinYin = PinYinHelper.GetFrist(value);
             }
         }
-        public ArticleClassify Classify { get; set; }
+        public ArticleClassify Classify { get; set; } = new ArticleClassify();
 
         public Guid ImageId { get; set; }
 
-        public string PinYin { get; private set; }
+        public string PinYin { get; private set; } = "";
         /// <summary>
         /// 文章内容
         /// </summary>
-        public string Content { get; set; }
+        public string Content { get; set; } = "";
         /// <summary>
         /// 标签
         /// </summary>
@@ -39,20 +39,10 @@ namespace ArticleService.Domain.Entities
 
         public static Article Create(string Title,string Content)
         {
-            try
-            {
-                var r = new Article();
-                r.Title = Title;
-                r.Content = Content;
-                return r;
-            }
-            catch(Exception ex)
-            {
-
-            }
-
-
-            return null;
+            var article = new Article();
+            article.Title = Title;
+            article.Content = Content;
+            return article;
         }
     }
 }

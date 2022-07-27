@@ -93,7 +93,7 @@ namespace CommonMiddleWare
             }
             catch(Exception ex)
             {
-
+                logger.LogError(ex.ToString());
             }
         }
 
@@ -154,21 +154,21 @@ namespace CommonMiddleWare
         }
 
 
-        public record RequestInParam()
+        public class RequestInParam
         {
-            public string remoteIp { get; set; }
-            public string path { get; set; }
-            public string requesttype { get; set; }
-            public string scheme { get; set; }
-            public DateTime createTime { get; set; }
+            public string? remoteIp { get; set; }
+            public string? path { get; set; }
+            public string? requesttype { get; set; }
+            public string? scheme { get; set; }
+            public DateTime? createTime { get; set; }
 
-            public string requestdata { get; set; }
+            public string? requestdata { get; set; }
 
-            public double actiontime { get; set; }
+            public double? actiontime { get; set; }
 
-            public string resultdata { get; set; }
+            public string? resultdata { get; set; }
 
-            public string statuscode { get; set; }
+            public string? statuscode { get; set; }
         }
     }
 }

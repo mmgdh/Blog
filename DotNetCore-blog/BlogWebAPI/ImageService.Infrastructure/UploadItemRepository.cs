@@ -22,6 +22,7 @@ namespace FileService.Infrastructure
         public async Task<Tuple<Byte[],string>> GetFastFile(Guid id)
         {
             var Item =await GetUploadItemAsync(id);
+            if (Item == null) throw new Exception("获取文件相关信息失败");
             List<Task<Tuple<Byte[], string>>> uploadTasks = new List<Task<Tuple<Byte[], string>>>();
             foreach(var uploadUri in Item.Uris)
             {

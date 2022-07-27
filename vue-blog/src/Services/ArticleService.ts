@@ -1,4 +1,4 @@
-import {get,post,Delete} from '../axiosInstance'
+import {get,post,Delete, put} from '../axiosInstance'
 import { Article,ArticleTag } from '../Entities/E_Article'
 
 
@@ -12,7 +12,7 @@ export default class ArticleService{
     }
 
     async ModifyArticle(Article: Article){
-        return await post('Article/Modify',Article)
+        return await put('Article/Modify',Article)
     }
 
     async DeleteArticle(ArticleId: string){

@@ -5,7 +5,7 @@ namespace ArticleService.Domain.Entities
 {
     public class ArticleTag:BaseEntity
     {
-        private string _TagName;
+        private string _TagName = "";
         public string TagName
         {
             get
@@ -19,7 +19,7 @@ namespace ArticleService.Domain.Entities
             }
         }
 
-        public string PinYin { get;private set; }
+        public string PinYin { get; private set; } = "";
         public List<Article> Articles { get; set; } = new List<Article>();
 
         public static ArticleTag Create(string TagName)

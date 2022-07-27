@@ -5,14 +5,14 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.ResponseModel
     public class ArticleResp
     {
         public Guid id { get; set; }
-        public string Title { get; set; }
-        public ArticleClassify Classify { get; set; }
+        public string? Title { get; set; }
+        public ArticleClassify? Classify { get; set; }
 
-        public string PinYin { get; private set; }
+        public string? PinYin { get; private set; }
         /// <summary>
         /// 文章内容
         /// </summary>
-        public string Content { get; set; }
+        public string? Content { get; set; }
         /// <summary>
         /// 标签
         /// </summary>
