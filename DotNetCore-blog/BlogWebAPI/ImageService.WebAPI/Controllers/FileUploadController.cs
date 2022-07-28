@@ -25,7 +25,7 @@ namespace FileService.WebAPI.Controllers
         public async Task<Uri> Upload([FromForm] UploadRequest request)
         {
             
-            var file = request.File;
+            var file = request.File;          
             var ret = await repository.UploadFileAsync(file);
             await _context.SaveChangesAsync();
             var ip = "localhost";

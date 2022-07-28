@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
+using System.Reflection;
 
 namespace CommonInitializer
 {
@@ -40,6 +41,7 @@ namespace CommonInitializer
             IConfiguration configuration = builder.Configuration;
             IServiceCollection services = builder.Services;
             var assemblies = ReflectionHelper.GetAllReferencedAssemblies();
+            var assembly = initOptions.curAssembly;
             services.RunModuleInitializers(assemblies);
 
             #region MediaR
@@ -64,20 +66,22 @@ namespace CommonInitializer
             services.AddEventBus(initOptions.EventBusQueueName, assemblies);
             #endregion
 
-            services.AddFluentValidation(fv =>
-            {
-                fv.RegisterValidatorsFromAssemblies(assemblies);
-            });
-
             #region NewtonsoftJson
             services.AddControllers().AddNewtonsoftJson(option =>
             {
                 //解决ef实体层层调用导致的json生成问题。
                 option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                //设置返回的时间格式不带T
+                option.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
                 //使返回格式不再是默认的小驼峰
                 //option.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
             #endregion
+
+            services.AddFluentValidation(fv =>
+            {
+                fv.RegisterValidatorsFromAssembly(assembly);
+            });
         }
     }
 

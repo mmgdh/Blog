@@ -1,21 +1,21 @@
 using ArticleService.Infrastructure;
 using Common.Commons;
 using CommonInitializer;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-var assemblies = ReflectionHelper.GetAllReferencedAssemblies();
-// Add services to the container.
+var curAssembly = Assembly.GetExecutingAssembly();
 //builder.ConfigureDbConfiguration<ArticleDbContext>();
-//builder.Services.AddDbContext<ArticleDbContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer")));
 builder.Services.AddDbContext<ArticleDbContext>(option => option.UseSqlServer(Environment.GetEnvironmentVariable("DefaultDB:ConnStr") ?? builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer")));
-//builder.Services.AddDbContext<ArticleDbContext>(option=>option.UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Database=Blog;Trusted_Connection=True"));
 builder.ConifgureExtraService(new InitializerOptions
 {
-    EventBusQueueName = "ArticleService"
+    EventBusQueueName = "ArticleService",
+    curAssembly= curAssembly
 });
-
+//builder.Services.AddValidatorsFromAssemblyContaining<ArticleService.WebAPI.Controllers.ViewModels.RequestModel.ArticleAddRequestValidator>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

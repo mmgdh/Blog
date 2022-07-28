@@ -5,15 +5,18 @@ using MediatR;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 var assemblies = ReflectionHelper.GetAllReferencedAssemblies();
+var CurAssembly = Assembly.GetExecutingAssembly();
 // Add services to the container.
 //builder.ConfigureDbConfiguration<ArticleDbContext>();
 builder.Services.AddDbContext<UploadDbContext>(option => option.UseSqlServer(Environment.GetEnvironmentVariable("DefaultDB:ConnStr") ?? builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer")));
 builder.ConifgureExtraService(new InitializerOptions
 {
-    EventBusQueueName="FileService"
+    EventBusQueueName="FileService",
+    curAssembly= CurAssembly
 });
 //记录文件上次API的地址
 builder.Services.AddSingleton(serviceProvider =>
