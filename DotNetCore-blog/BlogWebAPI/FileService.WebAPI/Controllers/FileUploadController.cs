@@ -1,5 +1,4 @@
 ﻿using FileService.Domain;
-using FileService.Domain.Entities;
 using FileService.Infrastructure;
 using FileService.WebAPI.ViewModels;
 using Microsoft.AspNetCore.Mvc;

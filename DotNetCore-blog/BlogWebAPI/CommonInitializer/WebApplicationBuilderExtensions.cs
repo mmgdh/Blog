@@ -60,6 +60,11 @@ namespace CommonInitializer
     });
             #endregion
 
+            services.AddFluentValidation(fv =>
+            {
+                fv.RegisterValidatorsFromAssemblies(assemblies);
+            });
+
             #region EventBus配置
             var ret = configuration.GetSection("RabbitMQ");
             services.Configure<IntegrationEventRabbitMQOptions>(configuration.GetSection("RabbitMQ"));
@@ -78,10 +83,7 @@ namespace CommonInitializer
             });
             #endregion
 
-            services.AddFluentValidation(fv =>
-            {
-                fv.RegisterValidatorsFromAssembly(assembly);
-            });
+
         }
     }
 

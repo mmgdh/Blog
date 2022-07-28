@@ -14,6 +14,8 @@
     <ProjectReference Include="..\CommonInfrastructure\CommonInfrastructure.csproj" />
     <ProjectReference Include="..\Commons\Commons.csproj" />
     <ProjectReference Include="..\EventBus\EventBus.csproj" />
+    <ProjectReference Include="..\FileService.Domain\FileService.Domain.csproj" />
+    <ProjectReference Include="..\FileService.Infrastructure\FileService.Infrastructure.csproj" />
     <ProjectReference Include="..\ImageService.Domain\FileService.Domain.csproj" />
     <ProjectReference Include="..\ImageService.Infrastructure\FileService.Infrastructure.csproj" />
   </ItemGroup>

@@ -30,17 +30,17 @@ public static class ReflectionHelper
     {
         var moduleDef = AsmResolver.DotNet.ModuleDefinition.FromFile(asmPath);
         var assembly = moduleDef.Assembly;
-        if(assembly==null)
+        if (assembly == null)
         {
             return false;
         }
         var asmCompanyAttr = assembly.CustomAttributes.FirstOrDefault(c => c.Constructor?.DeclaringType?.FullName == typeof(AssemblyCompanyAttribute).FullName);
-        if(asmCompanyAttr==null)
+        if (asmCompanyAttr == null)
         {
             return false;
         }
         var companyName = ((AsmResolver.Utf8String?)asmCompanyAttr.Signature?.FixedArguments[0]?.Element)?.Value;
-        if(companyName==null)
+        if (companyName == null)
         {
             return false;
         }
@@ -56,26 +56,26 @@ public static class ReflectionHelper
     {
         using var fs = File.OpenRead(file);
         using PEReader peReader = new PEReader(fs);
-        return peReader.HasMetadata&&peReader.GetMetadataReader().IsAssembly;
+        return peReader.HasMetadata && peReader.GetMetadataReader().IsAssembly;
     }
 
     private static Assembly? TryLoadAssembly(string asmPath)
     {
         AssemblyName asmName = AssemblyName.GetAssemblyName(asmPath);
-        Assembly? asm=null;
-        //try
-        //{
-        //    asm = Assembly.Load(asmName);
-        //}
-        //catch (BadImageFormatException ex)
-        //{
-        //    Debug.WriteLine(ex);
-        //}
-        //catch (FileLoadException ex)
-        //{
-        //    Debug.WriteLine(ex);
-        //}
-        
+        Assembly? asm = null;
+        try
+        {
+            asm = Assembly.Load(asmName);
+        }
+        catch (BadImageFormatException ex)
+        {
+            Debug.WriteLine(ex);
+        }
+        catch (FileLoadException ex)
+        {
+            Debug.WriteLine(ex);
+        }
+
         if (asm == null)
         {
             try
@@ -90,7 +90,7 @@ public static class ReflectionHelper
             {
                 Debug.WriteLine(ex);
             }
-        }            
+        }
         return asm;
     }
 
@@ -144,7 +144,7 @@ public static class ReflectionHelper
             if (!IsManagedAssembly(asmPath))
             {
                 continue;
-            }            
+            }
             AssemblyName asmName = AssemblyName.GetAssemblyName(asmPath);
             //如果程序集已经加载过了就不再加载
             if (returnAssemblies.Any(x => AssemblyName.ReferenceMatchesDefinition(x.GetName(), asmName)))
@@ -156,7 +156,7 @@ public static class ReflectionHelper
                 continue;
             }
             Assembly? asm = TryLoadAssembly(asmPath);
-            if(asm==null)
+            if (asm == null)
             {
                 continue;
             }
