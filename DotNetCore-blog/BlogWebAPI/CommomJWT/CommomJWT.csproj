@@ -7,14 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlogCommon\DomainCommon.csproj" />
-    <ProjectReference Include="..\CommonInfrastructure\CommonInfrastructure.csproj" />
     <ProjectReference Include="..\CommonInitializer\CommonInitializer.csproj" />
-    <ProjectReference Include="..\Commons\CommonHelpers.csproj" />
   </ItemGroup>
 
 </Project>

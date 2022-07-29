@@ -1,5 +1,6 @@
 ﻿using DomainCommon;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace CommonInfrastructure
 {
@@ -10,20 +11,22 @@ namespace CommonInfrastructure
             return ctx.Set<T>().AsNoTracking();
         }
 
-        public static void TryUpdateManyToMany<T, TKey>(this DbContext db, IEnumerable<T> currentItems, IEnumerable<T> newItems, Func<T, TKey> getKey) where T : class
+        /// <summary>
+        /// set global 'IsDeleted=false' queryfilter for every entity
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        public static void EnableSoftDeletionGlobalFilter(this ModelBuilder modelBuilder)
         {
-            db.Set<T>().RemoveRange(currentItems.Except(newItems, getKey));
-            db.Set<T>().AddRange(newItems.Except(currentItems, getKey));
-        }
+            var entityTypesHasSoftDeletion = modelBuilder.Model.GetEntityTypes()
+                .Where(e => e.ClrType.IsAssignableTo(typeof(ISoftDelete)));
 
-        public static IEnumerable<T> Except<T, TKey>(this IEnumerable<T> items, IEnumerable<T> other, Func<T, TKey> getKeyFunc)
-        {
-            var ret = items
-                .GroupJoin(other, getKeyFunc, getKeyFunc, (item, tempItems) => new { item, tempItems })
-                .SelectMany(t => t.tempItems.DefaultIfEmpty(), (t, temp) => new { t, temp })
-                .Where(t => ReferenceEquals(null, t.temp) || t.temp.Equals(default(T)))
-                .Select(t => t.t.item);
-            return ret;
+            foreach (var entityType in entityTypesHasSoftDeletion)
+            {
+                var isDeletedProperty = entityType.FindProperty(nameof(ISoftDelete.IsDeleted));
+                var parameter = Expression.Parameter(entityType.ClrType, "p");
+                var filter = Expression.Lambda(Expression.Not(Expression.Property(parameter, isDeletedProperty.PropertyInfo)), parameter);
+                entityType.SetQueryFilter(filter);
+            }
         }
     }
 }
