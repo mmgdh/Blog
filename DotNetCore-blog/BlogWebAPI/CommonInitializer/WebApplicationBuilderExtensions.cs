@@ -63,6 +63,8 @@ namespace CommonInitializer
             //IdentityService项目还需要启用AddIdentityCore
             builder.Services.AddAuthorization();
             builder.Services.AddAuthentication();
+            var aa = configuration.GetSection("JWT");
+            var bb = aa.GetChildren();
             services.Configure<JWTOptions>(configuration.GetSection("JWT"));
             JWTOptions jwtOpt = configuration.GetSection("JWT").Get<JWTOptions>();
             builder.Services.AddJWTAuthentication(jwtOpt);
@@ -79,8 +81,8 @@ namespace CommonInitializer
             });
 
             #region EventBus配置
-            var ret = configuration.GetSection("RabbitMQ");
-            services.Configure<IntegrationEventRabbitMQOptions>(configuration.GetSection("RabbitMQ"));
+            var ret = configuration.GetSection("RabbitMqConfigure");
+            services.Configure<IntegrationEventRabbitMQOptions>(configuration.GetSection("RabbitMqConfigure"));
             services.AddEventBus(initOptions.EventBusQueueName, assemblies);
             #endregion
 
