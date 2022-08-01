@@ -32,7 +32,8 @@ namespace IdentityService.WebAPI.Controllers
                 return StatusCode((int)HttpStatusCode.Conflict, "已经初始化过了");
             }
             User user = new User("admin");
-            var r = await repository.CreateAsync(user, "123456");
+            
+            var r = await repository.CreateAsync(user, "123");
             Debug.Assert(r.Succeeded);
             var token = await repository.GenerateChangePhoneNumberTokenAsync(user, "18758084825");
             var cr = await repository.ChangePhoneNumAsync(user.Id, "18758084825 ", token);

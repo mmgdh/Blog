@@ -63,6 +63,7 @@ namespace CommonInitializer
             //IdentityService项目还需要启用AddIdentityCore
             builder.Services.AddAuthorization();
             builder.Services.AddAuthentication();
+            services.Configure<JWTOptions>(configuration.GetSection("JWT"));
             JWTOptions jwtOpt = configuration.GetSection("JWT").Get<JWTOptions>();
             builder.Services.AddJWTAuthentication(jwtOpt);
             //启用Swagger中的【Authorize】按钮。这样就不用每个项目的AddSwaggerGen中单独配置了

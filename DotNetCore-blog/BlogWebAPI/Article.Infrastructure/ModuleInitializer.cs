@@ -1,6 +1,6 @@
 ﻿using ArticleService.Domain.IRepository;
 using ArticleService.Infrastructure.Repository;
-using CommonInfrastructure;
+using CommomInterface;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ArticleService.Infrastructure

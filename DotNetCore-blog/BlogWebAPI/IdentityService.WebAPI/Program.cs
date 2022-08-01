@@ -31,7 +31,7 @@ IdentityBuilder idBuilder = builder.Services.AddIdentityCore<User>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
-    options.Password.RequiredLength = 6;
+    options.Password.RequiredLength = 3;
     //不能设定RequireUniqueEmail，否则不允许邮箱为空
     //options.User.RequireUniqueEmail = true;
     //以下两行，把GenerateEmailConfirmationTokenAsync验证码缩短

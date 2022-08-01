@@ -68,11 +68,11 @@ namespace IdentityService.Infrastructure
         }
         public async Task<IdentityResult> ChangePasswordAsync(Guid userId, string password)
         {
-            if (password.Length < 6)
+            if (password.Length < 3)
             {
                 IdentityError err = new IdentityError();
                 err.Code = "Password Invalid";
-                err.Description = "密码长度不能少于6";
+                err.Description = "密码长度不能少于3";
                 return IdentityResult.Failed(err);
             }
             var user = await userManager.FindByIdAsync(userId.ToString());

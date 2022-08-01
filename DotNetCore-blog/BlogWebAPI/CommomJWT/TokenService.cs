@@ -16,7 +16,8 @@ namespace CommomJWT
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
             var tokenDescriptor = new JwtSecurityToken(options.Issuer, options.Audience, claims,
                 expires: DateTime.Now.Add(ExpiryDuration), signingCredentials: credentials);
-            return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
+            var ret = new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
+            return ret;
         }
     }
 }

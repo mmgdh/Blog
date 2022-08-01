@@ -1,4 +1,4 @@
-﻿using CommonInfrastructure;
+﻿using CommomInterface;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ArticleService.Domain

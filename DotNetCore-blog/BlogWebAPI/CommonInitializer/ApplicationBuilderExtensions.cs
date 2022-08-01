@@ -14,7 +14,9 @@ namespace CommonInitializer
         {
             app.UseEventBus();
             app.UseCors();//启用Cors
-            //app.UseRequetOperateMiddleware();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseRequetOperateMiddleware();
             return app;
         }
     }

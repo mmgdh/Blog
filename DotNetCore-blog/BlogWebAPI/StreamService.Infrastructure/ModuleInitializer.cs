@@ -1,4 +1,4 @@
-﻿using CommonInfrastructure;
+﻿using CommomInterface;
 using Microsoft.Extensions.DependencyInjection;
 using StreamService.Domain;
 using StreamService.Infrastructure.StorageClients;

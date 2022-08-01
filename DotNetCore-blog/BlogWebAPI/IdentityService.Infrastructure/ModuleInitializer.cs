@@ -1,4 +1,4 @@
-﻿using CommonInfrastructure;
+﻿using CommomInterface;
 using IdentityService.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
