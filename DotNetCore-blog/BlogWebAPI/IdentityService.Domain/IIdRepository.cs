@@ -96,5 +96,11 @@ namespace IdentityService.Domain
         /// <param name="id"></param>
         /// <returns>返回值第三个是生成的密码</returns>
         public Task<(IdentityResult, User?, string? password)> ResetPasswordAsync(Guid id);
+        /// <summary>
+        /// 解除用户锁定
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public Task<IdentityResult> SetUserUnLock(User user);
     }
 }

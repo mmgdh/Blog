@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace CommonInitializer
+namespace CommonInfrastructure
 {
     /// <summary>
     /// 所有项目中的实现了IModuleInitializer接口都会被调用，请在Initialize中编写注册本模块需要的服务。

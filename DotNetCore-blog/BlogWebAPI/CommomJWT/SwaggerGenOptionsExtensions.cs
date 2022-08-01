@@ -3,7 +3,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
 
-namespace JWT
+namespace CommomJWT
 {
     public static class SwaggerGenOptionsExtensions
     {

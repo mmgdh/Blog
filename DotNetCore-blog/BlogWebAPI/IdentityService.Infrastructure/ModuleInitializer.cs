@@ -1,13 +1,15 @@
 ﻿using CommonInfrastructure;
+using IdentityService.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CommomJWT
+namespace IdentityService.Infrastructure
 {
     class ModuleInitializer : IModuleInitializer
     {
         public void Initialize(IServiceCollection services)
         {
-            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IdDomainService>();
+            services.AddScoped<IIdRepository, IdRepository>();
         }
     }
 }

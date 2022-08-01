@@ -265,5 +265,11 @@ namespace IdentityService.Infrastructure
                 password.Append((char)random.Next(65, 91));
             return password.ToString();
         }
+
+        public async Task<IdentityResult> SetUserUnLock(User user)
+        {
+            var ret = await userManager.SetLockoutEnabledAsync(user, false);
+            return ret;
+        }
     }
 }

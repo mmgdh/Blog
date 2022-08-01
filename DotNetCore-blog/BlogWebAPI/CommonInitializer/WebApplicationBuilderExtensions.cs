@@ -1,16 +1,14 @@
-﻿using Common.Commons;
+﻿using CommomJWT;
+using Common.Commons;
 using CommonInfrastructure;
 using EventBus;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization;
-using System.Reflection;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace CommonInitializer
 {
@@ -58,6 +56,20 @@ namespace CommonInitializer
         options.AddDefaultPolicy(builder => builder.WithOrigins(urls)
         .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
     });
+            #endregion
+
+            #region JWT配置
+            //只要需要校验Authentication报文头的地方（非IdentityService.WebAPI项目）也需要启用这些
+            //IdentityService项目还需要启用AddIdentityCore
+            builder.Services.AddAuthorization();
+            builder.Services.AddAuthentication();
+            JWTOptions jwtOpt = configuration.GetSection("JWT").Get<JWTOptions>();
+            builder.Services.AddJWTAuthentication(jwtOpt);
+            //启用Swagger中的【Authorize】按钮。这样就不用每个项目的AddSwaggerGen中单独配置了
+            builder.Services.Configure<SwaggerGenOptions>(c =>
+            {
+                c.AddAuthenticationHeader();
+            });
             #endregion
 
             services.AddFluentValidation(fv =>

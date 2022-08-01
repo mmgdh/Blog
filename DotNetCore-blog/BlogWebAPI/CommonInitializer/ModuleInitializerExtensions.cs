@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommonInfrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace CommonInitializer

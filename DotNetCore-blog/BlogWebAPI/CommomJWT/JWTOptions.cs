@@ -1,4 +1,4 @@
-﻿namespace JWT
+﻿namespace CommomJWT
 {
     public class JWTOptions
     {
