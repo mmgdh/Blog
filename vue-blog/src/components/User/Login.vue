@@ -21,11 +21,13 @@
 </template>
 
 <script setup lang="ts">
+import {ref} from 'vue';
 
-var form: {
+var _form = {
   username: "admin",
   password: "admin",
-};
+}
+var form =ref(_form);
 const onSubmit = () => {
   console.log("登陆成功！");
 }
@@ -45,7 +47,7 @@ const onSubmit = () => {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url("../../assets/mcdku.jpg") no-repeat;
+  background: url("../../assets/BackGroud.jpg") no-repeat;
   background-size: 100% 100%;
 }
 

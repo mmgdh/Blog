@@ -24,28 +24,23 @@
 <script setup lang="ts">
 import { ref, onBeforeMount } from 'vue';
 import { ArticleTag } from '../../Entities/E_Article';
-import ArticleService from '../../Services/ArticleService'
+import { useArticleStore } from '../../Store/Store'
 
 let SelectArticleTags: any = ref([]);
 let AllTags: any = ref([]);
 let MessageBoxVisible = ref<boolean>(false);
 const TagCardVisible = ref<boolean>(false);
 const InputValue = ref<string>('');
-
-onBeforeMount(() => {
-    ArticleService.prototype.GetAllArticleTags().then((res: any) => {
-        AllTags.value = res;
-        console.log(SelectArticleTags);
-        if(props.FSelectArticleTags!=null&&props.FSelectArticleTags.length>0){
-            props.FSelectArticleTags.forEach(x=>AddTags(x));
-            console.log(SelectArticleTags);
-        }
-    })
-})
+const ArticleStore = useArticleStore();
 const props = defineProps({
     FSelectArticleTags: Array<ArticleTag>,
 }
 )
+AllTags.value = ArticleStore.$state.Tags;
+if (props.FSelectArticleTags != null && props.FSelectArticleTags.length > 0) {
+    props.FSelectArticleTags.forEach(x => AddTags(x));
+}
+
 const emit = defineEmits(['update:FSelectArticleTags'])
 const AddTags = (Tag: ArticleTag) => {
     SelectArticleTags.value.push(Tag)

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace CommonInitializer
@@ -37,6 +38,7 @@ namespace CommonInitializer
         public static void ConifgureExtraService(this WebApplicationBuilder builder, InitializerOptions initOptions)
         {
             IConfiguration configuration = builder.Configuration;
+            builder.Configuration.AddEnvironmentVariables();
             IServiceCollection services = builder.Services;
             var assemblies = ReflectionHelper.GetAllReferencedAssemblies();
             var assembly = initOptions.curAssembly;
@@ -63,10 +65,11 @@ namespace CommonInitializer
             //IdentityService项目还需要启用AddIdentityCore
             builder.Services.AddAuthorization();
             builder.Services.AddAuthentication();
-            var aa = configuration.GetSection("JWT");
-            var bb = aa.GetChildren();
             services.Configure<JWTOptions>(configuration.GetSection("JWT"));
-            JWTOptions jwtOpt = configuration.GetSection("JWT").Get<JWTOptions>();
+
+            //JWTOptions jwtOpt = configuration.GetSection("JWT2").Get<JWTOptions>();
+            JWTOptions? jwtOpt = JsonConvert.DeserializeObject<JWTOptions>(configuration.GetSection("JWT").Value??"");
+            if (jwtOpt == null) throw new Exception("获取JWT配置出错");
             builder.Services.AddJWTAuthentication(jwtOpt);
             //启用Swagger中的【Authorize】按钮。这样就不用每个项目的AddSwaggerGen中单独配置了
             builder.Services.Configure<SwaggerGenOptions>(c =>

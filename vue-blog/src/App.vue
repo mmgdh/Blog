@@ -3,6 +3,15 @@
 </template>
 <script setup lang="ts">
 import Main from "./components/Background/Main.vue"
+import {onBeforeMount} from 'vue'
+import {useArticleStore} from './Store/Store'
+
+const ArticleStore=useArticleStore();
+
+onBeforeMount(() => {
+  ArticleStore.GetTags();
+  ArticleStore.GetClassifies();
+})
 
 </script>
 <style>

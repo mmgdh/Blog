@@ -39,8 +39,6 @@ import { Article } from "../../Entities/E_Article";
 import { ref, onBeforeMount } from 'vue'
 import ArticleService from "../../Services/ArticleService"
 import { PageRequest } from "../../Entities/CommomEntity"
-import MsgBox from "../common/MessageBox.vue"
-import { any } from "vue-types";
 import {useRouter} from 'vue-router'
 
 const router =useRouter();
@@ -61,7 +59,7 @@ const Func_RefreshArtifcle = () => {
 Func_RefreshArtifcle();
 
 
-let curRecord: any = ref(any);
+let curRecord: any = ref();
 let DeletMsgVisible = ref(false);
 const DeleteClick = (record: any) => {
   curRecord.value = record;

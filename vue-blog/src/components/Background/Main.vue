@@ -18,10 +18,10 @@
           <template #title>
             <span>
               <team-outlined />
-              <span>Team</span>
+              <span>User</span>
             </span>
           </template>
-          <a-menu-item key="6">Team 1</a-menu-item>
+          <a-menu-item key="6" @click="topage('/Login')">登录</a-menu-item>
           <a-menu-item key="8">Team 2</a-menu-item>
         </a-sub-menu>
         <a-menu-item key="9">
@@ -31,34 +31,27 @@
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0" />
+      <!-- <a-layout-header style="background: #fff; padding: 0" /> -->
       <a-layout-content style="margin: 0 16px">
         <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item>User</a-breadcrumb-item>
           <a-breadcrumb-item>Bill</a-breadcrumb-item>
         </a-breadcrumb>
-        <!-- <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-          
-        </div> -->
         <router-view></router-view>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
+        MMGDH-Blog@2022
       </a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
 <script setup lang="ts">
 import {
-  PieChartOutlined,
-  DesktopOutlined,
   UserOutlined,
   TeamOutlined,
   FileOutlined,
 } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-import { get, post } from '../../axiosInstance'
-import  ArticleService  from '../../Services/ArticleService'
+import {  ref } from 'vue';
 import { useRouter } from 'vue-router'
 
 let router = useRouter()

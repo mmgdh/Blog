@@ -20,6 +20,11 @@ const routes:Array<RouteRecordRaw>=[
         path:"/ShowArticle",
         name:"ShowArticle",
         component:()=>import('../components/Article/ShowArticle.vue')
+    },
+    {
+        path:"/Login",
+        name:"Login",
+        component:()=>import('../components/User/Login.vue')
     }
 ]
 

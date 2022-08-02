@@ -32,7 +32,6 @@
                 <a-button type="primary" html-type="submit">保存</a-button>
             </a-form-item>
         </a-form>
-        <button @click="func1">123</button>
     </a-drawer>
 </template>
 
@@ -47,9 +46,10 @@ import ArticleService from '../../Services/ArticleService'
 import UploadService from '../../Services/UploadService'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue';
-import { string } from 'vue-types'
+import { useArticleStore } from '../../Store/Store'
 
-let router = useRouter()
+let router = useRouter();
+let ArticleStore = useArticleStore();
 let _ArticleCLassify: Array<ArticleClassify> = [];
 let Ref_ArticleCLassify = ref(_ArticleCLassify);
 let ArticleId: string;
@@ -61,21 +61,17 @@ interface InterfaceSubmitArticle {
     tags: Array<ArticleTag>
 }
 let _SubmitArticle: InterfaceSubmitArticle = {
-    title: '112211',
+    title: '',
     classify: '',
     image: "",
     content: '',
     tags: [] as Array<ArticleTag>
 };
-const func1 = () => {
-    SubmitArticle.value.tags.pop();
-}
 let SubmitArticle = ref(_SubmitArticle);
 onMounted(() => {
     ArticleId = router.currentRoute.value.query.ArticleId as string;
-    ArticleService.prototype.GetAllArticleClassify().then((res: any) =>
-        Ref_ArticleCLassify.value = res
-    )
+    Ref_ArticleCLassify.value = ArticleStore.$state.Classifies
+    //若ArticleId不为空，则代表编辑状态，查询对应的文章
     if (ArticleId != null) {
         ArticleService.prototype.GetArticleById(ArticleId).then(ret => {
             SubmitArticle.value = ret;
