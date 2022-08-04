@@ -26,22 +26,16 @@ import { ref, onBeforeMount } from 'vue';
 import { ArticleTag } from '../../Entities/E_Article';
 import { useArticleStore } from '../../Store/Store'
 
+const ArticleStore = useArticleStore();
 let SelectArticleTags: any = ref([]);
 let AllTags: any = ref([]);
 let MessageBoxVisible = ref<boolean>(false);
 const TagCardVisible = ref<boolean>(false);
 const InputValue = ref<string>('');
-const ArticleStore = useArticleStore();
 const props = defineProps({
     FSelectArticleTags: Array<ArticleTag>,
 }
 )
-AllTags.value = ArticleStore.$state.Tags;
-if (props.FSelectArticleTags != null && props.FSelectArticleTags.length > 0) {
-    props.FSelectArticleTags.forEach(x => AddTags(x));
-}
-
-const emit = defineEmits(['update:FSelectArticleTags'])
 const AddTags = (Tag: ArticleTag) => {
     SelectArticleTags.value.push(Tag)
     let index = AllTags.value.findIndex((_Tag: any) => _Tag.id === Tag.id); //find index in your array
@@ -49,6 +43,7 @@ const AddTags = (Tag: ArticleTag) => {
     emit('update:FSelectArticleTags', SelectArticleTags.value)
 
 }
+const emit = defineEmits(['update:FSelectArticleTags'])
 const RemoveTags = (Tag: ArticleTag) => {
     let index = SelectArticleTags.value.findIndex((_Tag: any) => _Tag.id === Tag.id); //find index in your array
     SelectArticleTags.value.splice(index, 1);//remove element from array
@@ -61,6 +56,13 @@ const GetOrCreate = (searchValue: string) => {
         MessageBoxVisible.value = true;
     }
 };
+
+AllTags.value = ArticleStore.$state.Tags;
+if (props.FSelectArticleTags != null && props.FSelectArticleTags.length > 0) {
+    props.FSelectArticleTags.forEach(x => AddTags(x));
+}
+
+
 </script>
 <style scoped>
 #DisPlayTags {

@@ -1,17 +1,168 @@
-import axios from 'axios'
-import { config } from 'md-editor-v3/lib/MdEditor/config'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { message } from 'ant-design-vue';
 
-// axios 配置
 const service = axios.create({
-      baseURL: 'http://localhost:83',
-      headers: {              
-        'Content-Type': 'application/json;charset=utf-8' 
-      },
-      timeout:10000,
-      validateStatus () {
-        return true
-      }
-    })
-service.interceptors.request.use(config=>{
-    
+  // 联调
+  baseURL: 'http://localhost:83',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8'
+  },
+  // 是否跨站点访问控制请求
+  withCredentials: true,
+  timeout: 1000*60*5,
+  validateStatus () {
+    // 使用async-await，处理reject情况较为繁琐，所以全部返回resolve，在业务代码中处理异常
+    return true
+  },
+
 })
+
+// 请求拦截器
+service.interceptors.request.use((config: AxiosRequestConfig) => {
+  
+    return config
+}, (error) => {
+    // 错误抛到业务代码
+    error.data = {}
+    error.data.msg = '服务器异常，请联系管理员！'
+    return Promise.resolve(error)
+})
+
+// 响应拦截器
+service.interceptors.response.use((response: AxiosResponse) => {
+    const status = response.status
+    let msg = ''
+    if (status < 200 || status >= 300) {
+        // 处理http错误，抛到业务代码
+        msg =response.data?? showStatus(status)
+        message.warn(msg);
+        if (typeof response.data === 'string') {
+            response.data = {msg}
+        } else {
+            response.data.msg = msg
+        }
+    }
+    return response
+}, (error) => {
+    // 错误抛到业务代码
+    error.data = {}
+    error.data.msg = '请求超时或服务器异常，请检查网络或联系管理员！'
+    return Promise.resolve(error)
+})
+
+/**
+ * get 请求方法
+ * @param url
+ * @param params
+ * @returns {Promise}
+ */
+export function get (url:any, params:any=undefined, timeout:number=1000*60*5):any {
+    return new Promise((resolve, reject) => {
+      service
+        .get(url, { params: params,timeout:timeout})
+        .then((response) => {
+          resolve(response.data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  }
+/**
+ * post 请求方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+export function post (url:any, data = {}, timeout:number=1000*60*5):any {
+    return new Promise((resolve, reject) => {
+      service.post(url, data, { timeout: timeout }).then(
+        (response) => {
+          resolve(response.data)
+        },
+        (err) => {
+          reject(err)
+        }
+      )
+    })
+  }
+  /**
+ * post 请求方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+export function put (url:any, data = {}, timeout:number=1000*60*5):any {
+    return new Promise((resolve, reject) => {
+      service.put(url, data, { timeout: timeout }).then(
+        (response) => {
+          resolve(response.data)
+        },
+        (err) => {
+          reject(err)
+        }
+      )
+    })
+  }
+
+  /**
+ * Delete 请求方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+export function Delete (url:any, data = {}, timeout:number=1000*60*5):any {
+    return new Promise((resolve, reject) => {
+      service.delete(url, {params:data}).then(
+        (response) => {
+          resolve(response.data)
+        },
+        (err) => {
+          reject(err)
+        }
+      )
+    })
+  }
+
+
+  const showStatus = (status: number) => {
+    let message = ''
+    switch (status) {
+      case 400:
+        message = '请求错误(400)'
+        break
+      case 401:
+        message = '未授权，请重新登录(401)'
+        break
+      case 403:
+        message = '拒绝访问(403)'
+        break
+      case 404:
+        message = '请求出错(404)'
+        break
+      case 408:
+        message = '请求超时(408)'
+        break
+      case 500:
+        message = '服务器错误(500)'
+        break
+      case 501:
+        message = '服务未实现(501)'
+        break
+      case 502:
+        message = '网络错误(502)'
+        break
+      case 503:
+        message = '服务不可用(503)'
+        break
+      case 504:
+        message = '网络超时(504)'
+        break
+      case 505:
+        message = 'HTTP版本不受支持(505)'
+        break
+      default:
+        message = `连接出错(${status})!`
+    }
+    return `${message}，请检查网络或联系管理员！`
+  }

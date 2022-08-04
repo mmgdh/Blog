@@ -1,35 +1,41 @@
 <template>
   <div class="login-container">
     <h2 class="login-title">我的登陆页面</h2>
-    <a-form ref="form" :model="form" class="login-form">
+    <a-form :model="form" class="login-form" @finish="onSubmit">
       <h2 class="title">用户登录 LOGIN</h2>
-      <a-form-item>
-        <a-input v-model="form.username">
+      <a-form-item name="userName">
+        <a-input v-model:value="form.userName">
           <a-icon slot="prefix" type="user" />
         </a-input>
       </a-form-item>
-      <a-form-item>
-        <a-input-password v-model="form.password">
+      <a-form-item name="passWord">
+        <a-input-password v-model:value="form.passWord">
           <a-icon slot="prefix" type="unlock" />
         </a-input-password>
       </a-form-item>
       <a-form-item>
-        <a-button class="submit" type="primary" @click="onSubmit">登录</a-button>
+        <a-button class="submit" type="primary" html-type="submit">保存</a-button>
       </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import { ref } from 'vue';
+import { UserLogin } from '../../Entities/E_Users.js';
+import UserLoginService from '../../Services/UserLoginService.js';
 
-var _form = {
-  username: "admin",
-  password: "admin",
+var _form: UserLogin = {
+  userName: "",
+  passWord: "",
 }
-var form =ref(_form);
-const onSubmit = () => {
-  console.log("登陆成功！");
+var form = ref(_form);
+const onSubmit = (value: UserLogin) => {
+  UserLoginService.prototype.Login(value).then(token => {
+    if (token!="")
+      console.log("登陆成功！");
+  });
+
 }
 
 </script>

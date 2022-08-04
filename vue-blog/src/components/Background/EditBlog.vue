@@ -133,7 +133,6 @@ const validateMessages = {
     },
 };
 const onFinish = (values: Article) => {
-    console.log('Success:', values);
     values.content = content.value;
 
     if (ArticleId != null) {

@@ -1,4 +1,4 @@
-import {get,post} from '../axiosInstance'
+import {get,post} from './_Service'
 
 
 export default class UploadService{

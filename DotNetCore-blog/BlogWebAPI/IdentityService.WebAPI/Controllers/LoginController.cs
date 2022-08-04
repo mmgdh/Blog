@@ -57,7 +57,7 @@ namespace IdentityService.WebAPI.Controllers
             }
             //出于安全考虑，不要机密信息传递到客户端
             //除非确认没问题，否则尽量不要直接把实体类对象返回给前端
-            return new UserResponse(user.Id, user.PhoneNumber, user.CreationTime);
+            return new UserResponse(user.Id,user.UserName, user.PhoneNumber, user.CreationTime);
         }
 
         //书中的项目只提供根据用户名登录的功能，以及管理员增删改查，像用户主动注册、手机验证码登录等功能都不弄。
