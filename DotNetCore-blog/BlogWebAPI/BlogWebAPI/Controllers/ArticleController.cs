@@ -7,6 +7,7 @@ using ArticleService.WebAPI.Controllers.ViewModels.ResponseModel;
 using CommonInfrastructure;
 using Commons;
 using EventBus;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,7 @@ namespace ArticleService.WebAPI.Controllers
 
         #region Article相关API
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> Add(ArticleAddRequest request)
         {
             List<Guid> TagsGuid = new List<Guid>();
@@ -61,6 +63,7 @@ namespace ArticleService.WebAPI.Controllers
             return AddArticle.Id;
         }
         [HttpPut]
+        [Authorize]
         public async Task<Article> Modify(ArticleModifyRequest request)
         {
 
@@ -84,6 +87,7 @@ namespace ArticleService.WebAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<bool> Delete(Guid id)
         {
             Article? DeleteArticle = await dbCtx.Articles.FindAsync(id);
@@ -120,6 +124,7 @@ namespace ArticleService.WebAPI.Controllers
 
         #region Tag相关API
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> AddTag(string TagName)
         {
             var Tag = await domainService.CreateTag(TagName);
@@ -136,6 +141,7 @@ namespace ArticleService.WebAPI.Controllers
 
         #region Classify相关API
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> AddClassify(string ClassName, IFormFile formFile)
         {
             var Classify = await domainService.CreateClassify(ClassName);

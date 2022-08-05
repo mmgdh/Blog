@@ -32,8 +32,11 @@ var _form: UserLogin = {
 var form = ref(_form);
 const onSubmit = (value: UserLogin) => {
   UserLoginService.prototype.Login(value).then(token => {
-    if (token!="")
+    if (token!=""){
+      localStorage.setItem('JWT', token);
       console.log("登陆成功！");
+    }
+
   });
 
 }
@@ -44,7 +47,7 @@ const onSubmit = (value: UserLogin) => {
   width: 565px;
   height: 372px;
   margin: 0 auto;
-  background: url("../../assets/houTaiKuang.png");
+  /* background: url("../../assets/houTaiKuang.png"); */
   padding: 40px 110px;
 }
 

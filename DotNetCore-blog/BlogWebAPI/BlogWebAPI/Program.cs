@@ -30,11 +30,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
 app.UseDefault();
+app.MapControllers();
 
 app.Run();

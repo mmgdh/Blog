@@ -67,8 +67,7 @@ namespace CommonInitializer
             builder.Services.AddAuthentication();
             services.Configure<JWTOptions>(configuration.GetSection("JWT"));
 
-            //JWTOptions jwtOpt = configuration.GetSection("JWT2").Get<JWTOptions>();
-            JWTOptions? jwtOpt = JsonConvert.DeserializeObject<JWTOptions>(configuration.GetSection("JWT").Value??"");
+            JWTOptions jwtOpt = configuration.GetSection("JWT").Get<JWTOptions>();
             if (jwtOpt == null) throw new Exception("获取JWT配置出错");
             builder.Services.AddJWTAuthentication(jwtOpt);
             //启用Swagger中的【Authorize】按钮。这样就不用每个项目的AddSwaggerGen中单独配置了
