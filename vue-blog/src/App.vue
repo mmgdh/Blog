@@ -1,8 +1,8 @@
 <template>
-  <Main></Main>
+  <Manage></Manage>
 </template>
 <script setup lang="ts">
-import Main from "./components/Background/Main.vue"
+import Manage from "./components/Background/Manage.vue"
 import {onBeforeMount} from 'vue'
 import {useArticleStore} from './Store/Store'
 

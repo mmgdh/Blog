@@ -6,8 +6,8 @@
                     @search="GetOrCreate" />
                 <a-divider>选择</a-divider>
 
-                <div :class="{ width: '100px' }">
-                    <a-tag v-for="Tag in AllTags" color="success" :key="Tag.id" @click="AddTags(Tag)">{{ Tag.tagName }}
+                <div class="WaitSelectTag">
+                    <a-tag class="Tag"  v-for="Tag in AllTags" color="success" :key="Tag.id" @click="AddTags(Tag)">{{ Tag.tagName }}
                     </a-tag>
                 </div>
 
@@ -23,6 +23,7 @@
 
 <script setup lang="ts">
 import { ref, onBeforeMount } from 'vue';
+import { array } from 'vue-types';
 import { ArticleTag } from '../../Entities/E_Article';
 import { useArticleStore } from '../../Store/Store'
 
@@ -57,7 +58,7 @@ const GetOrCreate = (searchValue: string) => {
     }
 };
 
-AllTags.value = ArticleStore.$state.Tags;
+AllTags.value = [...ArticleStore.Tags];
 if (props.FSelectArticleTags != null && props.FSelectArticleTags.length > 0) {
     props.FSelectArticleTags.forEach(x => AddTags(x));
 }
@@ -70,5 +71,15 @@ if (props.FSelectArticleTags != null && props.FSelectArticleTags.length > 0) {
     height: 200px;
     border: 2px;
     background-color: aquamarine;
+}
+.WaitSelectTag{
+    width: 300px;
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+}
+.Tag{
+    flex: 0 1 ;
+    margin-bottom: 10px;
 }
 </style>
