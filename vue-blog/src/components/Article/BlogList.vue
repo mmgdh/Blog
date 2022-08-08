@@ -1,12 +1,17 @@
 <template>
-  <div class="ArticleStyle" v-for="_Article in Ref_ArticleList" :key="_Article.id"
+  <div class="hvr-grow ArticleStyle" v-for="_Article in Ref_ArticleList" :key="_Article.id"
     @click="router.push({ path: 'ShowArticle', query: { 'ArticleId': _Article.id } })">
     <div class="TitleStyle">{{ _Article.title }}</div>
-    <ClockCircleOutlined />
-    <span>{{ _Article.createDateTime }}</span>
-    <span class="TagStyle" v-for="_Tag in _Article.tags">
-      {{ _Tag.tagName }}
-    </span>
+
+    <div class="BottomStyle">
+      <ClockCircleOutlined />
+      <span>{{ ToDate(_Article.createDateTime) }}</span>
+      <span>分类：{{ _Article.classify.classifyName }}</span>
+      <span class="TagStyle" v-for="_Tag in _Article.tags">
+        {{ _Tag.tagName }}
+      </span>
+    </div>
+
   </div>
 </template>
 
@@ -28,14 +33,18 @@ let Ref_ArticleList = ref(ArticleList)
 
 onBeforeMount(() => {
   ArticleService.prototype.GetArticleByPage(pageRequest)
-    .then(ret =>
+    .then(ret => {
       Ref_ArticleList.value = ret
+    }
     );
 }
 );
 let router = useRouter()
 
-
+const ToDate = (DateTime: Date) => {
+  let NewDate = new Date(DateTime);
+  return NewDate.toLocaleDateString();
+}
 
 
 
@@ -43,22 +52,36 @@ let router = useRouter()
 
 <style>
 .ArticleStyle {
-  border: 3px;
-  border-style: solid;
-  border-color: pink;
+  background-color: white;
   font-size: large;
   margin: 10px;
-  width: 300px;
+  width: 600px;
+  height: 200px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px rgba(33, 44, 55, .3);
+}
+
+.ArticleStyle span {
+  padding-left: 5px;
 }
 
 .TitleStyle {
-  font-size: large;
-  color: cornflowerblue;
+  font-family: "Microsoft YaHei", 微软雅黑;
+  font-size: x-large;
+  color: black;
+}
+
+.BottomStyle {
+  bottom: 0px;
+  position: absolute;
+  height: 30px;
 }
 
 .TagStyle {
   color: red;
   width: 30px;
   margin: 10px;
+  /* float: bottom; */
 }
 </style>
