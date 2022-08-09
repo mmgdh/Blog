@@ -17,9 +17,9 @@
 
 <script setup lang='ts'>
 import { ref, onBeforeMount } from 'vue'
-import ArticleService from '../../Services/ArticleService';
-import { Article } from '../../Entities/E_Article'
-import { PageRequest } from '../../Entities/CommomEntity'
+import ArticleService from '../../../Services/ArticleService';
+import { Article } from '../../../Entities/E_Article'
+import { PageRequest } from '../../../Entities/CommomEntity'
 import { useRouter } from 'vue-router'
 import { ClockCircleOutlined } from '@ant-design/icons-vue'
 
@@ -70,18 +70,25 @@ const ToDate = (DateTime: Date) => {
   font-family: "Microsoft YaHei", 微软雅黑;
   font-size: x-large;
   color: black;
+  text-align: center;
+  width: 100%;
 }
 
 .BottomStyle {
   bottom: 0px;
   position: absolute;
+  width: 100%;
   height: 30px;
+    font-size: small;
+
 }
 
 .TagStyle {
-  color: red;
-  width: 30px;
-  margin: 10px;
-  /* float: bottom; */
+  background-color: darkorange;
+  color: white;
+  float: right;
+  border-radius: 5px;
+  text-align: center;
+  margin-right: 10px;
 }
 </style>

@@ -21,8 +21,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { UserLogin } from '../../Entities/E_Users.js';
-import UserLoginService from '../../Services/UserLoginService.js';
+import { UserLogin } from '../../../Entities/E_Users';
+import UserLoginService from '../../../Services/UserLoginService';
 import { useRouter } from 'vue-router';
 
 let router = useRouter()
