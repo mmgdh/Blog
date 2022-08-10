@@ -1,5 +1,5 @@
 <template>
-  <div class="hvr-grow ArticleStyle" v-for="_Article in Ref_ArticleList" :key="_Article.id"
+  <div class="hvr-grow ArticleStyle DivCSS" v-for="_Article in Ref_ArticleList" :key="_Article.id"
     @click="router.push({ path: 'ShowArticle', query: { 'ArticleId': _Article.id } })">
     <div class="TitleStyle">{{ _Article.title }}</div>
 
@@ -52,14 +52,12 @@ const ToDate = (DateTime: Date) => {
 
 <style>
 .ArticleStyle {
-  background-color: white;
+
   font-size: large;
   margin: 10px;
-  width: 600px;
-  height: 200px;
+  width: 700px;
+  height: 150px;
   position: relative;
-  border-radius: 10px;
-  box-shadow: 10px 10px 20px rgba(33, 44, 55, .3);
 }
 
 .ArticleStyle span {
@@ -69,7 +67,6 @@ const ToDate = (DateTime: Date) => {
 .TitleStyle {
   font-family: "Microsoft YaHei", 微软雅黑;
   font-size: x-large;
-  color: black;
   text-align: center;
   width: 100%;
 }

@@ -58,7 +58,7 @@ const onSubmit = (value: UserLogin) => {
 .login-container {
   /* background: url("../../assets/BackGroud.jpg") no-repeat; */
   background-size: 100% 100%;
-  background-color: #2c3e50;
+  /* background-color: #2c3e50; */
   display: flex;
   flex-direction: column;
   justify-content: center;

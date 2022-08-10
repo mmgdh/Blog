@@ -7,8 +7,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../components/Background/EditBlog.vue')
     },
     {
-        path: "/ArticleList",
-        name: 'ArticleList',
+        path: "/BlogList",
+        name: 'BlogList',
         component: () => import('../components/Blog/Article/BlogList.vue')
     },
     {
@@ -29,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/Login",
         name: "Login",
-        component: () => import('../components/Background/User/Login.vue')
+        component: () => import('../components/User/Login.vue')
     }
 ]
 
