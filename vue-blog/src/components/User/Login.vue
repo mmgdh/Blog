@@ -13,7 +13,7 @@
         </a-input-password>
       </a-form-item>
       <a-form-item>
-        <a-button shape="round" class="submit">保存</a-button>
+        <a-button shape="round" class="submit" html-type="submit">保存</a-button>
       </a-form-item>
     </a-form>
   </div>

@@ -55,8 +55,8 @@ const ToDate = (DateTime: Date) => {
 
   font-size: large;
   margin: 10px;
-  width: 700px;
-  height: 150px;
+  width: 90%;
+  height: 200px;
   position: relative;
 }
 

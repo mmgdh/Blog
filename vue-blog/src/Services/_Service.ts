@@ -36,7 +36,13 @@ service.interceptors.response.use((response: AxiosResponse) => {
   let msg = ''
   if (status < 200 || status >= 300) {
     // 处理http错误，抛到业务代码
-    msg = response.data ?? showStatus(status)
+    if(response.data==""||response.data){
+      msg = showStatus(status)
+    }
+    else{
+      msg=response.data
+    }
+    
     message.warn(msg);
     if (typeof response.data === 'string') {
       response.data = { msg }

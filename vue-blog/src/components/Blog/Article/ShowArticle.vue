@@ -48,6 +48,7 @@ ArticleService.prototype.GetArticleById(ArticleId).then(ret => {
 }
 .mdStyle {
   width: 100%;
+  height: 1500px;
   background-color: #2c3e50;
   padding: 20px;
 }

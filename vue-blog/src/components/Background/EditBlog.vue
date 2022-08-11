@@ -138,7 +138,7 @@ const onFinish = (values: Article) => {
     if (ArticleId != null) {
         values.id = ArticleId;
         ArticleService.prototype.ModifyArticle(values).then((res) => {
-            if (res != "") {
+            if (res.msg != "") {
                 message.success("保存成功!");
                 console.log(res);
                 router.push("/ArticleTable");
@@ -151,12 +151,11 @@ const onFinish = (values: Article) => {
     }
     else {
         ArticleService.prototype.AddArticle(values).then((res) => {
-            if (res != "") {
+            if (res.msg == "") {
                 message.success("保存成功!")
                 router.push("/ArticleTable");
             }
             else {
-                message.error("保存失败");
             }
 
         });

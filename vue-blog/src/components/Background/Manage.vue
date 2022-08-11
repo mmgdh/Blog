@@ -22,7 +22,7 @@
             </span>
           </template>
           <a-menu-item key="6" @click="topage('/Login')">登录</a-menu-item>
-          <a-menu-item key="8">Team 2</a-menu-item>
+          <a-menu-item key="8" @click="topage('/BlogMain')">回到主页</a-menu-item>
         </a-sub-menu>
         <a-menu-item key="9">
           <file-outlined />

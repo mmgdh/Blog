@@ -6,7 +6,7 @@
                 <ul>
                     <li><a href="#" class="current">Home</a> </li>
                     <li><a href="#">T1</a> </li>
-                    <li><a href="#">T2</a> </li>
+                    <li><a @click="topage('/BlogManage')">管理</a> </li>
                     <li><a @click="topage('/Login')">登录</a> </li>
                 </ul>
             </div>

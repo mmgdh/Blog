@@ -4,18 +4,25 @@
       <h1>Welcome To My Website</h1>
       <p>Picture,Techonolege...</p>
     </div>
+    <div class="IndexContainer">
+      <div class="IndexBlogList">
+        <BlogList></BlogList>
+      </div>
+      <div class="IndexRightContent">
+        <Introduction></Introduction>
+      </div>
+    </div>
 
-    <BlogList></BlogList>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed } from 'vue';
 import BlogList from './Article/BlogList.vue'
+import Introduction from './IndexContent/Introduction.vue'
 
 </script>
 <style scoped>
-
 .IndexText {
   display: flex;
   height: 100vh;
@@ -27,7 +34,6 @@ import BlogList from './Article/BlogList.vue'
   margin-bottom: 20px;
 
 }
-
 .IndexText h1 {
   color: #fff;
   font-size: 46px;
@@ -37,5 +43,18 @@ import BlogList from './Article/BlogList.vue'
 .IndexText p {
   font-size: 20px;
   letter-spacing: 1px;
+}
+.IndexContainer{
+  width: 100%;
+  display: flex;
+  
+}
+.IndexBlogList{
+  flex: 4;
+}
+.IndexRightContent{
+  display: flex;
+  justify-content: center;
+  flex: 1;
 }
 </style>

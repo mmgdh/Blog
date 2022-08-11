@@ -1,13 +1,18 @@
 <template>
-  <Main></Main>
+  <router-view></router-view>
+  <!-- <Main></Main> -->
 </template>
 <script setup lang="ts">
 import Manage from "./components/Background/Manage.vue"
-import Main from "./components/Blog/Main.vue"
-import {onBeforeMount} from 'vue'
-import {useArticleStore} from './Store/Store'
+import Main from "./components/Blog/BlogMain.vue"
+import { onBeforeMount } from 'vue'
+import { useArticleStore } from './Store/Store'
+import { useRouter } from 'vue-router'
 
-const ArticleStore=useArticleStore();
+const router =useRouter();
+router.push('./BlogMain');
+
+const ArticleStore = useArticleStore();
 
 onBeforeMount(() => {
   ArticleStore.GetTags();

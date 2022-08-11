@@ -7,7 +7,8 @@ export default class UserLoginService {
     public async Login(parames: UserLogin): Promise<string> {
         var ret = await post(controler + "/LoginByUserNameAndPwd", parames)
         if (ret.msg)
-            console.log(ret.msg);
-        return ret;
+            return '';
+        else
+            return ret;
     }
 }
