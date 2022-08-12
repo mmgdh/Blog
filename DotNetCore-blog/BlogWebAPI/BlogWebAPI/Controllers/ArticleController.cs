@@ -120,6 +120,11 @@ namespace ArticleService.WebAPI.Controllers
             }
             return ArticleResp.Create(ret);
         }
+        [HttpGet]
+        public async Task<int> GetArticleCount()
+        {
+            return await dbCtx.Articles.CountAsync();
+        }
         #endregion
 
         #region Tag相关API

@@ -10,7 +10,8 @@ namespace StreamService.Infrastructure
         public void Initialize(IServiceCollection services)
         {
             services.AddScoped<IUploadItemRepository, UploadItemRepository>();
-            services.AddScoped<IStorageClient, LocalStorage>();
+            //services.AddScoped<IStorageClient, LocalStorage>();
+            services.AddScoped<IStorageClient, ImgUrlStorage>();
         }
     }
 }

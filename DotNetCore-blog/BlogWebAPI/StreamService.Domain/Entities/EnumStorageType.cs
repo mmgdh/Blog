@@ -2,6 +2,7 @@
 {
     public enum EnumStorageType
     {
-        Local
+        Local,
+        UrlImg
     }
 }

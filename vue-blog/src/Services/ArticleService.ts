@@ -5,7 +5,7 @@ import { Article,ArticleTag } from '../Entities/E_Article'
 const controler="Article";
 
 export default class ArticleService{
-    async GetArticleById(_id:string){
+    public async GetArticleById(_id:string){
        return await get(controler+"/GetArticleById",{id:_id})
     }
 
@@ -35,6 +35,10 @@ export default class ArticleService{
 
     public async  GetAllArticleClassify() {
         return await get(controler+'/GetAllArticleClassify')
+    }
+
+    public async GetArticleCount(){
+        return await get(controler+'/GetArticleCount');
     }
 
 }

@@ -13,6 +13,11 @@
     </div>
 
   </div>
+
+  <div class="PageStyle">
+    <a-pagination :show-quick-jumper="false" v-model="refPage.page" :total="ArticleCount"
+      :page-size='pageRequest.pageSize' show-less-items @change="onChange" />
+  </div>
 </template>
 
 <script setup lang='ts'>
@@ -23,30 +28,49 @@ import { PageRequest } from '../../../Entities/CommomEntity'
 import { useRouter } from 'vue-router'
 import { ClockCircleOutlined } from '@ant-design/icons-vue'
 
+let router = useRouter()
 const pageRequest: PageRequest = {
-  page: 0,
-  pageSize: 10
+  page: 2,
+  pageSize: 6
 }
-
+let refPage = ref(pageRequest);
 let ArticleList: Array<Article> = []
-let Ref_ArticleList = ref(ArticleList)
+let Ref_ArticleList = ref(ArticleList);
+let ArticleCount = ref(1)
+let ShowQuikJumper = ref(false)
 
 onBeforeMount(() => {
-  ArticleService.prototype.GetArticleByPage(pageRequest)
+  FuncGetArticleByPage();
+  ArticleAllCount();
+}
+);
+//获取总页码
+const ArticleAllCount = () => {
+  ArticleService.prototype.GetArticleCount().then(res => {
+    ArticleCount.value = res
+    if (res > 30) {
+      ShowQuikJumper.value = true;
+    }
+  })
+}
+//页码改变
+const onChange = (pageNumber: number) => {
+  refPage.value.page = pageNumber;
+  FuncGetArticleByPage();
+}
+//根据页码获取文章列表
+const FuncGetArticleByPage = () => {
+  ArticleService.prototype.GetArticleByPage(refPage.value)
     .then(ret => {
       Ref_ArticleList.value = ret
     }
     );
 }
-);
-let router = useRouter()
-
+//日期转换
 const ToDate = (DateTime: Date) => {
   let NewDate = new Date(DateTime);
   return NewDate.toLocaleDateString();
 }
-
-
 
 </script>
 
@@ -76,7 +100,7 @@ const ToDate = (DateTime: Date) => {
   position: absolute;
   width: 100%;
   height: 30px;
-    font-size: small;
+  font-size: small;
 
 }
 
@@ -87,5 +111,13 @@ const ToDate = (DateTime: Date) => {
   border-radius: 5px;
   text-align: center;
   margin-right: 10px;
+}
+
+.PageStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin: 10px;
 }
 </style>

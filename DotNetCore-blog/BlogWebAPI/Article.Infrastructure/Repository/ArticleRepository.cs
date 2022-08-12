@@ -20,7 +20,7 @@ namespace ArticleService.Infrastructure
 
         public async Task<Article[]> GetArticleByPageAsync(int page, int pageSize)
         {
-            return await dbCtx.Articles.Include(x => x.Tags).Include(x=>x.Classify).OrderByDescending(x => x.CreationTime).Skip(page * pageSize).Take(pageSize).ToArrayAsync();
+            return await dbCtx.Articles.Include(x => x.Tags).Include(x=>x.Classify).OrderByDescending(x => x.CreationTime).Skip((page-1) * pageSize).Take(pageSize).ToArrayAsync();
         }
     }
 }

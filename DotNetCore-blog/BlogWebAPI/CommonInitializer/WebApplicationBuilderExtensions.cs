@@ -99,8 +99,6 @@ namespace CommonInitializer
                 //option.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
             #endregion
-
-
         }
     }
 
