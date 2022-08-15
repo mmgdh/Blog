@@ -12,7 +12,8 @@ export const useArticleStore = defineStore('Article', {
       } as Array<ArticleTag>,
       Classifies: {
 
-      } as Array<ArticleClassify>
+      } as Array<ArticleClassify>,
+      AllArticleCount:Number
     }
   },
   actions: {
@@ -22,6 +23,9 @@ export const useArticleStore = defineStore('Article', {
     },
     async GetClassifies() {
       this.Classifies = await ArticleService.prototype.GetAllArticleClassify();
+    },
+    async GetArticleCount(){
+      this.AllArticleCount=await ArticleService.prototype.GetArticleCount();
     }
   }
 })

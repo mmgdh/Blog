@@ -10,6 +10,7 @@
       </div>
       <div class="IndexRightContent">
         <Introduction></Introduction>
+        <ArticleClssifyList></ArticleClssifyList>
       </div>
     </div>
 
@@ -20,6 +21,7 @@
 <script setup lang="ts">
 import BlogList from './Article/BlogList.vue'
 import Introduction from './IndexContent/Introduction.vue'
+import ArticleClssifyList from './Article/ArticleClassifyList.vue';
 
 </script>
 <style scoped>
@@ -54,7 +56,11 @@ import Introduction from './IndexContent/Introduction.vue'
 }
 .IndexRightContent{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-content: center; */
   flex: 1;
+}
+  .IndexContainer  div{
+    margin-bottom: 20px;
 }
 </style>

@@ -66,14 +66,27 @@ namespace StreamService.Infrastructure.StorageClients
 
                 form.Add(new StringContent("json"), "format");
 
-                HttpResponseMessage res = client.PostAsync(url, form).Result;
-                var resContent = await res.Content.ReadAsStringAsync();
-                var json = JsonConvert.DeserializeObject<ResponseData>(resContent);
-                return new Uri(json.data.url);
+                HttpResponseMessage resp = client.PostAsync(url, form).Result;
+                var resContent = await resp.Content.ReadAsStringAsync();
+
+                if (resp.IsSuccessStatusCode)
+                {
+                    var json = JsonConvert.DeserializeObject<ResponseData>(resContent);
+                    if (json != null && json.success)
+                    {
+                        return new Uri(json.data.url);
+                    }
+                }
+                else
+                {
+                    throw new Exception("上传图片至SMMS失败，错误信息：" + resp.ToString());
+                }
+                throw new Exception("上传图片至SMMS失败，错误信息：" + resContent);
             }
         }
         private class ResponseData
         {
+            public bool success { get; set; }
             public Data data { get; set; }
         }
         private class Data

@@ -1,5 +1,5 @@
 <template>
-  <a-table :dataSource="Ref_ArticleList" :columns="columns">
+  <a-table :dataSource="Ref_ArticleList" :columns="columns" :pagination="pagination" @change="Func_RefreshArtifcle">
     <template #bodyCell="{ column, record }">
       <template v-if="column.key === 'tags'">
         <span>
@@ -18,7 +18,7 @@
       </template>
       <template v-else-if="column.key === 'action'">
         <span>
-          <a @click="router.push({path:'EditBlog',query:{'ArticleId':record.id}})">编辑</a>
+          <a @click="router.push({ path: 'EditBlog', query: { 'ArticleId': record.id } })">编辑</a>
           <a-divider type="vertical" />
           <a @click="DeleteClick(record)">删除</a>
           <a-divider type="vertical" />
@@ -36,28 +36,34 @@
 </template>
 <script setup lang="ts">
 import { Article } from "../../Entities/E_Article";
-import { ref, onBeforeMount } from 'vue'
+import { ref, computed } from 'vue'
 import ArticleService from "../../Services/ArticleService"
 import { PageRequest } from "../../Entities/CommomEntity"
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
 
-const router =useRouter();
+const router = useRouter();
 let Articles: Article[] = [];
 let pageRequestData: PageRequest = {
-  page: 0,
+  page: 1,
   pageSize: 10
 };
+let refPageData=ref(pageRequestData);
 let Ref_ArticleList = ref(Articles);
-const Func_RefreshArtifcle = () => {
-  ArticleService.prototype.GetArticleByPage(pageRequestData)
+const Func_RefreshArtifcle = (pag: { pageSize: number; current: number }) => {
+  refPageData.value.page=pag.current;
+  ArticleService.prototype.GetArticleByPage(refPageData.value)
     .then(ret => {
       Ref_ArticleList.value = ret;
-      console.log(Ref_ArticleList.value);
     }
     );
 };
-Func_RefreshArtifcle();
+Func_RefreshArtifcle({ pageSize: refPageData.value.pageSize, current: refPageData.value.page });
 
+const pagination = computed(() => ({
+  total: 200,
+  current: refPageData.value.page,
+  pageSize: refPageData.value.pageSize,
+}));
 
 let curRecord: any = ref();
 let DeletMsgVisible = ref(false);
@@ -68,7 +74,7 @@ const DeleteClick = (record: any) => {
 const DeleteFunc = async (id: string) => {
   var ret = await ArticleService.prototype.DeleteArticle(id);
   if (ret == true) {
-    Func_RefreshArtifcle()
+    Func_RefreshArtifcle({ pageSize: refPageData.value.pageSize, current: refPageData.value.page });
   }
   DeletMsgVisible.value = false;
 }

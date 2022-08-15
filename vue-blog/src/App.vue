@@ -17,6 +17,7 @@ const ArticleStore = useArticleStore();
 onBeforeMount(() => {
   ArticleStore.GetTags();
   ArticleStore.GetClassifies();
+  ArticleStore.GetArticleCount();
 })
 
 </script>
