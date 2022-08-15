@@ -3,6 +3,7 @@
     public enum EnumStorageType
     {
         Local,
-        UrlImg
+        UrlImg,
+        SMMS
     }
 }

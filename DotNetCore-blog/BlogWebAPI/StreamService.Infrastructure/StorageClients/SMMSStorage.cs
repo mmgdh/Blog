@@ -1,18 +1,23 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using StreamService.Domain;
 using StreamService.Domain.Entities;
-using System.Net;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace StreamService.Infrastructure.StorageClients
 {
-    internal class ImgUrlStorage : IStorageClient
+    internal class SMMSStorage : IStorageClient
     {
-        public EnumStorageType StorageType => EnumStorageType.UrlImg;
-        private IHttpClientFactory httpClientFactory;
+        public EnumStorageType StorageType => EnumStorageType.SMMS;
 
-        public ImgUrlStorage(IHttpClientFactory httpClientFactory)
+        public IHttpClientFactory httpClientFactory;
+
+        public SMMSStorage(IHttpClientFactory httpClientFactory)
         {
             this.httpClientFactory = httpClientFactory;
         }
@@ -44,28 +49,36 @@ namespace StreamService.Infrastructure.StorageClients
 
         public async Task<Uri> UploadFileASync(string key, IFormFile file)
         {
-            var url = "https://www.imgurl.org/api/v2/upload";
+            var url = "https://sm.ms/api/v2/upload";
             string str = "";
             //上传图片到服务器
             using (Stream fs = file.OpenReadStream())
             {
-                HttpClient client = new HttpClient();
+                HttpClient client = httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("acMnBVLpF7wZVWiY8eLhxWKY57cU6eus");
                 MultipartFormDataContent form = new MultipartFormDataContent();//表单
                 StreamContent fileContent = new StreamContent(fs);//图片stream
                 fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
                 fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
                 fileContent.Headers.ContentDisposition.FileName = file.FileName;
-                fileContent.Headers.ContentDisposition.Name = "file";
+                fileContent.Headers.ContentDisposition.Name = "smfile";
                 form.Add(fileContent);
 
-                form.Add(new StringContent("e9e3f2673be6f9be08198525b1bb1176"), "uid");
-                form.Add(new StringContent("3e65eb5281910b46104e813b3cc529e8"), "token");
+                form.Add(new StringContent("json"), "format");
 
                 HttpResponseMessage res = client.PostAsync(url, form).Result;
-                str = res.Content.ReadAsStringAsync().Result;
-
-                return new Uri(str);
+                var resContent = await res.Content.ReadAsStringAsync();
+                var json = JsonConvert.DeserializeObject<ResponseData>(resContent);
+                return new Uri(json.data.url);
             }
+        }
+        private class ResponseData
+        {
+            public Data data { get; set; }
+        }
+        private class Data
+        {
+            public string url { get; set; }
         }
     }
 }

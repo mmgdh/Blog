@@ -11,7 +11,8 @@ namespace StreamService.Infrastructure
         {
             services.AddScoped<IUploadItemRepository, UploadItemRepository>();
             //services.AddScoped<IStorageClient, LocalStorage>();
-            services.AddScoped<IStorageClient, ImgUrlStorage>();
+            //services.AddScoped<IStorageClient, ImgUrlStorage>();
+            services.AddScoped<IStorageClient, SMMSStorage>();
         }
     }
 }

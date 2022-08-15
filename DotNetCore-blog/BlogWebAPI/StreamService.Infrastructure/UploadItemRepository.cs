@@ -67,9 +67,6 @@ namespace StreamService.Infrastructure
             _context.uploads.Add(uploadItem);
             var ret = await Task.WhenAny(uploadTasks);
             return uploadItem;
-
-
         }
-
     }
 }
