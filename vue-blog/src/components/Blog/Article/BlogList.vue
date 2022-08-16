@@ -30,7 +30,7 @@ import { ClockCircleOutlined } from '@ant-design/icons-vue'
 
 let router = useRouter()
 const pageRequest: PageRequest = {
-  page: 2,
+  page: 1,
   pageSize: 6
 }
 let refPage = ref(pageRequest);
