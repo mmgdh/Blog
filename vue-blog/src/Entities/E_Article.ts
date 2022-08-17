@@ -19,5 +19,6 @@ export interface ArticleTag {
 export interface ArticleClassify {
     id: string,
     classifyName: string,
-    pinYin: string
+    pinYin: string,
+    articleCount:number
 }

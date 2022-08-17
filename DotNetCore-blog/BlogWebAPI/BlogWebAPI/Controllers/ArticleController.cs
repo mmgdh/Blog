@@ -159,9 +159,11 @@ namespace ArticleService.WebAPI.Controllers
             return Classify.Id;
         }
         [HttpGet]
-        public async Task<ActionResult<ArticleClassify[]>> GetAllArticleClassify()
+        public async Task<ActionResult<ArticleClassifyResponse[]>> GetAllArticleClassify()
         {
-            return await classifyRepository.GetAllArticleClassifyAsync();
+            var classifys = await classifyRepository.GetAllArticleClassifyAsync();
+            var ret = classifys.Select(x => new ArticleClassifyResponse(x));
+            return Ok(ret);
         }
         #endregion
 

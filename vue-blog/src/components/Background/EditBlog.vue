@@ -1,5 +1,5 @@
 <template>
-    <Md v-model="content" @on-upload-img="onUploadImg"></Md>
+    <Md id="MdStyle" v-model="content" @on-upload-img="onUploadImg"></Md>
 
     <div id="BlogButton">
         <a-button shape="round" type="primary" @click="showDrawer">提交</a-button>
@@ -174,5 +174,8 @@ const onFinish = (values: Article) => {
     justify-content: right;
     align-items: center;
     gap: 20px;
+}
+#MdStyle{
+    height: 80vh;
 }
 </style>

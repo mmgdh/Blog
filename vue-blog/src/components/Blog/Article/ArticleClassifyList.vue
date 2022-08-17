@@ -3,8 +3,8 @@
     <div class="Title">博客分类</div>
     <div class="ClassifyDiv" v-for="classify in ArticleClassifies">
         {{classify.classifyName}}
-        <span>
-          
+        <span class="ArticleCount">
+          {{classify.articleCount}}
         </span>
     </div>
   </div>
@@ -31,9 +31,14 @@ console.log(ArticleClassifies.value)
 }
 .ClassifyDiv{
   padding: 3px;
+  width: 100%;
 }
 .ClassifyDiv:hover{
   background-color: rgb(66, 104, 137);
   color: pink;
+}
+.ArticleCount{
+    float: right;
+    margin-right: 5px;
 }
 </style>

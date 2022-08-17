@@ -5,11 +5,14 @@ using EventBus;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using StackExchange.Redis;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using CommonHelpers;
 
 namespace CommonInitializer
 {
@@ -98,6 +101,17 @@ namespace CommonInitializer
                 //使返回格式不再是默认的小驼峰
                 //option.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
+            #endregion
+
+            #region Redis
+            string redisConnStr = configuration.GetValue<string>("Redis:ConnStr");
+            IConnectionMultiplexer redisConnMultiplexer = ConnectionMultiplexer.Connect(redisConnStr);
+            services.AddSingleton(typeof(IConnectionMultiplexer), redisConnMultiplexer);
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.All;
+            });
+            services.AddSingleton(new RedisHelper(redisConnMultiplexer));
             #endregion
         }
     }

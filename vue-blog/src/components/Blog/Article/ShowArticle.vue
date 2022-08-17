@@ -65,5 +65,6 @@ ArticleService.prototype.GetArticleById(ArticleId).then(ret => {
   /* background-color: #2c3e50; */
   padding: 20px;
   color: black;
+  min-height: 100vh;
 }
 </style>

@@ -25,12 +25,12 @@ namespace ArticleService.Infrastructure.Repository
 
         public async Task<ArticleClassify[]> GetAllArticleClassifyAsync()
         {
-            return await dbCtx.ArticleClassifies.ToArrayAsync();
+            return await dbCtx.ArticleClassifies.Include(x => x.Articles).ToArrayAsync();
         }
 
         public async Task<ArticleClassify?> GetArticleClassifyByIdAsync(Guid ClassifyId)
         {
-            return await dbCtx.ArticleClassifies.FindAsync(ClassifyId);
+            return await dbCtx.ArticleClassifies.Include(x => x.Articles).FirstOrDefaultAsync(x => x.Id == ClassifyId);
         }
 
         public async Task<Article[]> GetArticlesByArticleClassifyIdAsync(Guid ClassifyId)
@@ -38,7 +38,7 @@ namespace ArticleService.Infrastructure.Repository
             var Classify = await dbCtx.ArticleClassifies.FindAsync(ClassifyId);
             if (Classify == null)
                 throw new Exception("未找到对应的Tag");
-            return await dbCtx.Articles.Where(x => x.Classify== Classify).ToArrayAsync();
+            return await dbCtx.Articles.Where(x => x.Classify == Classify).ToArrayAsync();
         }
     }
 }
