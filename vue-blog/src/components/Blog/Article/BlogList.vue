@@ -21,50 +21,31 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, onBeforeMount } from 'vue'
+import { ref, onBeforeMount, watch } from 'vue'
 import ArticleService from '../../../Services/ArticleService';
 import { Article } from '../../../Entities/E_Article'
-import { PageRequest } from '../../../Entities/CommomEntity'
 import { useRouter } from 'vue-router'
 import { ClockCircleOutlined } from '@ant-design/icons-vue'
+import { useArticleStore } from '../../../Store/Store'
+import { storeToRefs } from 'pinia';
 
+let ArticleStore = useArticleStore();
 let router = useRouter()
-const pageRequest: PageRequest = {
-  page: 1,
-  pageSize: 6
-}
-let refPage = ref(pageRequest);
-let ArticleList: Array<Article> = []
-let Ref_ArticleList = ref(ArticleList);
-let ArticleCount = ref(1)
+let refStore = storeToRefs(ArticleStore);
+let refPage = refStore.PageRequestParm;
+let Ref_ArticleList = refStore.CurPageArticles;
+let ArticleCount = refStore.AllArticleCount;
 let ShowQuikJumper = ref(false)
 
-onBeforeMount(() => {
-  FuncGetArticleByPage();
-  ArticleAllCount();
-}
-);
-//获取总页码
-const ArticleAllCount = () => {
-  ArticleService.prototype.GetArticleCount().then(res => {
-    ArticleCount.value = res
-    if (res > 30) {
-      ShowQuikJumper.value = true;
-    }
-  })
-}
+watch(ArticleCount.value, (newvalue, oldvalue) => {
+  if (newvalue > 30) {
+    ShowQuikJumper.value = true;
+  }
+})
+let pageRequest=refStore.PageRequestParm;
 //页码改变
 const onChange = (pageNumber: number) => {
   refPage.value.page = pageNumber;
-  FuncGetArticleByPage();
-}
-//根据页码获取文章列表
-const FuncGetArticleByPage = () => {
-  ArticleService.prototype.GetArticleByPage(refPage.value)
-    .then(ret => {
-      Ref_ArticleList.value = ret
-    }
-    );
 }
 //日期转换
 const ToDate = (DateTime: Date) => {

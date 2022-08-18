@@ -4,6 +4,7 @@ using ArticleService.Domain.IRepository;
 using ArticleService.Infrastructure;
 using ArticleService.WebAPI.Controllers.ViewModels.RequestModel;
 using ArticleService.WebAPI.Controllers.ViewModels.ResponseModel;
+using CommonHelpers;
 using CommonInfrastructure;
 using Commons;
 using EventBus;
@@ -23,9 +24,11 @@ namespace ArticleService.WebAPI.Controllers
         private readonly ArticleDomainService domainService;
         private readonly ArticleDbContext dbCtx;
 
+        private RedisHelper redisHelper;
+
         private IEventBus eventBus;
 
-        public ArticleController(IArticleRepository _repository, ArticleDomainService _domainService, ArticleDbContext _dbCTx, IArticleTagRepository tagrepository, IEventBus eventBus, IArticleClassifyRepository classifyRepository)
+        public ArticleController(IArticleRepository _repository, ArticleDomainService _domainService, ArticleDbContext _dbCTx, IArticleTagRepository tagrepository, IEventBus eventBus, IArticleClassifyRepository classifyRepository, RedisHelper redisHelper)
         {
             repository = _repository;
             domainService = _domainService;
@@ -33,6 +36,7 @@ namespace ArticleService.WebAPI.Controllers
             Tagrepository = tagrepository;
             this.eventBus = eventBus;
             this.classifyRepository = classifyRepository;
+            this.redisHelper = redisHelper;
         }
 
         #region Article相关API
@@ -106,6 +110,11 @@ namespace ArticleService.WebAPI.Controllers
                 page = 0;
             if (pageSize == null)
                 pageSize = 10;
+
+            //if(await redisHelper.database.KeyExistsAsync("1"))
+            //{
+
+            //}
             var ret = await repository.GetArticleByPageAsync((int)page, (int)pageSize);
             var response = lstArticleResp.Create(ret);
             return response;

@@ -6,7 +6,7 @@ namespace CommonHelpers
     public class RedisHelper
     {
         private IConnectionMultiplexer connectionMultiplexer;
-        private IDatabase database;
+        public IDatabase database;
 
         public RedisHelper(IConnectionMultiplexer connectionMultiplexer)
         {
@@ -14,16 +14,15 @@ namespace CommonHelpers
             database = connectionMultiplexer.GetDatabase();
         }
 
-        public bool AddList<T>(IEnumerable<T> values)
+        public bool AddList<T>(string key, IEnumerable<T> values)
         {
-            var a = JsonConvert.SerializeObject(values);
-            IEnumerable<RedisValue> redisValues = values.Select(x =>new RedisValue(a));
-
-            database.StringGetAsync("");
-            database.ListRightPush("", redisValues.ToArray());
-
+            var value = values.Select(x => JsonConvert.SerializeObject(x));
+            IEnumerable<RedisValue> redisValues = value.Select(x =>new RedisValue(x));
+            database.ListRightPush(key, redisValues.ToArray());
             return true;
         }
+
+        
 
     }
 }
