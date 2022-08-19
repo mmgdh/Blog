@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { message } from 'ant-design-vue';
+import qs from 'qs'
 
 const service = axios.create({
   // 联调
@@ -14,7 +15,11 @@ const service = axios.create({
     // 使用async-await，处理reject情况较为繁琐，所以全部返回resolve，在业务代码中处理异常
     return true
   },
-
+  paramsSerializer: params => {
+    return qs.stringify(params, {
+        indices: false
+      })
+  }
 })
 
 // 请求拦截器

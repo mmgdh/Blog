@@ -104,19 +104,20 @@ namespace ArticleService.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<lstArticleResp[]?>> GetArticleByPage(int? page, int? pageSize)
+        public async Task<ActionResult<lstArticleResp?>> GetArticleByPage([FromQuery]ArticleQueryRequest request)
         {
-            if (page == null)
-                page = 0;
-            if (pageSize == null)
-                pageSize = 10;
 
-            //if(await redisHelper.database.KeyExistsAsync("1"))
-            //{
+            var query = dbCtx.Articles.Include(x => x.Tags).Include(x => x.Classify).Where(x=>1==1);
+            if (request.ClassifyIds != null && request.ClassifyIds.Count() > 0)
+            {
+                query = query.Where(x => request.ClassifyIds.Any(y=>y==x.Classify.Id.ToString()));
+            }
+            var ArticleCount = query.Count();
+            var ret = await query.OrderByDescending(x => x.CreationTime).Skip((request.page - 1) * request.pageSize).Take(request.pageSize).ToArrayAsync();
+            lstArticleResp response = new lstArticleResp();
 
-            //}
-            var ret = await repository.GetArticleByPageAsync((int)page, (int)pageSize);
-            var response = lstArticleResp.Create(ret);
+            response.articles = lstArticleResp.CreateArticles(ret);
+            response.PageArticleCount = ArticleCount;
             return response;
         }
         [HttpGet]

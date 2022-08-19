@@ -17,10 +17,5 @@ namespace ArticleService.Infrastructure
         {
             return await dbCtx.Articles.Include(x => x.Classify).Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == ArticleId);
         }
-
-        public async Task<Article[]> GetArticleByPageAsync(int page, int pageSize)
-        {
-            return await dbCtx.Articles.Include(x => x.Tags).Include(x=>x.Classify).OrderByDescending(x => x.CreationTime).Skip((page-1) * pageSize).Take(pageSize).ToArrayAsync();
-        }
     }
 }

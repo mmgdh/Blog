@@ -1,7 +1,7 @@
 <template>
   <div class="Comtainer DivCSS hvr-grow">
     <div class="Title">博客分类</div>
-    <div class="ClassifyDiv" v-for="classify in ArticleClassifies" :key="classify.id" @click="">
+    <div class="ClassifyDiv" v-for="classify in ArticleClassifies" :key="classify.id" @click="clickFunc(classify.id)">
       {{ classify.classifyName }}
       <span class="ArticleCount">
         {{ classify.articleCount }}
@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed } from 'vue';
+import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed, watch } from 'vue';
 import { ArticleClassify } from '../../../Entities/E_Article';
 import { useArticleStore } from '../../../Store/Store'
 import { storeToRefs } from 'pinia';
@@ -22,7 +22,9 @@ ArticleClassifies = storeToRefs(ArticleStore).Classifies;
 
 const clickFunc = (Id: string) => {
   ArticleStore.$patch((state) => {
-    state.PageRequestParm.classifyId = Id;
+    state.PageRequestParm.page=1;
+    state.PageRequestParm.ClassifyIds=[];
+    state.PageRequestParm.ClassifyIds.push(Id);
   });
 }
 </script>

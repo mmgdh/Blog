@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Commons\CommonHelpers.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\QueryParameter\" />
+  </ItemGroup>
+
 </Project>

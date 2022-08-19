@@ -34,15 +34,26 @@ let router = useRouter()
 let refStore = storeToRefs(ArticleStore);
 let refPage = refStore.PageRequestParm;
 let Ref_ArticleList = refStore.CurPageArticles;
-let ArticleCount = refStore.AllArticleCount;
+let ArticleCount = refStore.CurArticleCount;
 let ShowQuikJumper = ref(false)
+
+watch(refPage.value, () => {
+  ArticleStore.GetArticleByPage();
+})
 
 watch(ArticleCount.value, (newvalue, oldvalue) => {
   if (newvalue > 30) {
     ShowQuikJumper.value = true;
   }
 })
-let pageRequest=refStore.PageRequestParm;
+
+ArticleStore.$patch((state) => {
+  state.PageRequestParm.page = 1;
+  state.PageRequestParm.pageSize = 6
+});
+
+
+let pageRequest = refStore.PageRequestParm;
 //页码改变
 const onChange = (pageNumber: number) => {
   refPage.value.page = pageNumber;

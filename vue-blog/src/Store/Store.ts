@@ -14,19 +14,18 @@ export const useArticleStore = defineStore('Article', {
       Classifies: {
 
       } as Array<ArticleClassify>,
-      AllArticleCount: Number,
+      CurArticleCount: Number,
+      CurPageArticles: {
+
+      } as Array<Article>,
       PageRequestParm: {
         page: 1,
-        pageSize: 6,
-        classifyId: ''
+        pageSize: 10,
+        ClassifyIds: [] as Array<string>,
+        TagIds: [] as Array<string>,
+        CreateTime:{} as Date
       }
     }
-  },
-  getters:{
-     async CurPageArticles():Promise<Array<Article>> {
-      var ret =await ArticleService.prototype.GetArticleByPage(this.PageRequestParm)
-      return ret;
-    },
   },
   actions: {
     async GetTags() {
@@ -36,12 +35,13 @@ export const useArticleStore = defineStore('Article', {
     async GetClassifies() {
       this.Classifies = await ArticleService.prototype.GetAllArticleClassify();
     },
-    async GetArticleCount() {
-      this.AllArticleCount = await ArticleService.prototype.GetArticleCount();
-    },
-    // async GetArticleByPage() {
-    //   if (this.PageRequestParm.page == 0)
-    //     this.CurPageArticles = await ArticleService.prototype.GetArticleByPage(this.PageRequestParm);
-    // }
+    // async GetArticleCount() {
+    //   this.AllArticleCount = await ArticleService.prototype.GetArticleCount();
+    // },
+    async GetArticleByPage() {
+      var ret  = await ArticleService.prototype.GetArticleByPage(this.PageRequestParm);
+      this.CurPageArticles=ret.articles;
+      this.CurArticleCount=ret.pageArticleCount;
+    }
   }
 })

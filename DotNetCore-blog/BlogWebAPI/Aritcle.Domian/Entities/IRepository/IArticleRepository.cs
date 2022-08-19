@@ -10,13 +10,6 @@ namespace ArticleService.Domain.IRepository
         /// <param name="ArticleId"></param>
         /// <returns></returns>
         public Task<Article?> GetArticleByIdAsync(Guid ArticleId);
-        /// <summary>
-        /// 分页获取文章
-        /// </summary>
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        public Task<Article[]> GetArticleByPageAsync(int page,int pageSize);
      
 
 
