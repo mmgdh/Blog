@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ArticleService.Infrastructure.Migrations
 {
-    public partial class ArticleRestart : Migration
+    public partial class RestartArticle : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,7 +46,6 @@ namespace ArticleService.Infrastructure.Migrations
                     ClassifyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ImageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PinYin = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -60,6 +59,25 @@ namespace ArticleService.Infrastructure.Migrations
                         name: "FK_T_Articles_T_ArticleClassify_ClassifyId",
                         column: x => x.ClassifyId,
                         principalTable: "T_ArticleClassify",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "T_ArticleContent",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ArticleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_T_ArticleContent", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_T_ArticleContent_T_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "T_Articles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -89,6 +107,12 @@ namespace ArticleService.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_T_ArticleContent_ArticleId",
+                table: "T_ArticleContent",
+                column: "ArticleId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_T_Articles_ClassifyId",
                 table: "T_Articles",
                 column: "ClassifyId");
@@ -101,6 +125,9 @@ namespace ArticleService.Infrastructure.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "T_ArticleContent");
+
             migrationBuilder.DropTable(
                 name: "T_Articles_Tags");
 

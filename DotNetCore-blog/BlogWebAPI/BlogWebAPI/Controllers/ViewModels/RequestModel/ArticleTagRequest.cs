@@ -1,5 +1,6 @@
 ﻿using ArticleService.Domain;
 using ArticleService.Domain.Entities;
+using FluentValidation;
 
 namespace ArticleService.WebAPI.Controllers.ViewModels.RequestModel
 {
@@ -14,6 +15,14 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.RequestModel
                 Articles = new List<Article>()
             };
         }
+        public class ArticleTagRequestValidator : AbstractValidator<ArticleTagRequest>
+        {
+            public ArticleTagRequestValidator()
+            {
+                RuleFor(x => x.id).NotEmpty();
+            }
+        }
+
     }
 
 }

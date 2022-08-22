@@ -29,7 +29,7 @@ namespace ArticleService.Domain.Entities
         /// <summary>
         /// 文章内容
         /// </summary>
-        public string Content { get; set; } = "";
+        public ArticleContent articleContent { get; set; } = new ArticleContent();
         /// <summary>
         /// 标签
         /// </summary>
@@ -39,10 +39,18 @@ namespace ArticleService.Domain.Entities
 
         public static Article Create(string Title,string Content)
         {
-            var article = new Article();
-            article.Title = Title;
-            article.Content = Content;
-            return article;
+            try
+            {
+                var article = new Article();
+                article.Title = Title;
+                article.articleContent = ArticleContent.Create(article, Content);
+                return article;
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
     }
 }

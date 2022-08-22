@@ -58,7 +58,15 @@ namespace StreamService.Infrastructure.StorageClients
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("acMnBVLpF7wZVWiY8eLhxWKY57cU6eus");
                 MultipartFormDataContent form = new MultipartFormDataContent();//表单
                 StreamContent fileContent = new StreamContent(fs);//图片stream
-                fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+                if (string.IsNullOrEmpty(file.Headers.ContentType))
+                {
+                    fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+                }
+                else
+                {
+                    fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.Headers.ContentType);
+                }
+
                 fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
                 fileContent.Headers.ContentDisposition.FileName = file.FileName;
                 fileContent.Headers.ContentDisposition.Name = "smfile";

@@ -35,7 +35,7 @@
   </a-modal>
 </template>
 <script setup lang="ts">
-import { Article } from "../../Entities/E_Article";
+import { Article ,ArticlePageRequest} from "../../Entities/E_Article";
 import { ref, computed } from 'vue'
 import ArticleService from "../../Services/ArticleService"
 import { PageRequest } from "../../Entities/CommomEntity"
@@ -45,22 +45,27 @@ const router = useRouter();
 let Articles: Article[] = [];
 let pageRequestData: PageRequest = {
   page: 1,
-  pageSize: 10
-};
-let refPageData=ref(pageRequestData);
+  pageSize: 10,
+  ClassifyIds: [],
+  TagIds: [],
+  CreateTime: {} as Date
+} as ArticlePageRequest
+let refPageData = ref(pageRequestData);
 let Ref_ArticleList = ref(Articles);
+let Ref_pageArticleCount=ref(1);
 const Func_RefreshArtifcle = (pag: { pageSize: number; current: number }) => {
-  refPageData.value.page=pag.current;
+  refPageData.value.page = pag.current;
   ArticleService.prototype.GetArticleByPage(refPageData.value)
     .then(ret => {
-      Ref_ArticleList.value = ret;
+      Ref_ArticleList.value=ret.articles;
+      Ref_pageArticleCount.value=ret.pageArticleCount;
     }
     );
 };
 Func_RefreshArtifcle({ pageSize: refPageData.value.pageSize, current: refPageData.value.page });
 
 const pagination = computed(() => ({
-  total: 200,
+  total: Ref_pageArticleCount.value,
   current: refPageData.value.page,
   pageSize: refPageData.value.pageSize,
 }));

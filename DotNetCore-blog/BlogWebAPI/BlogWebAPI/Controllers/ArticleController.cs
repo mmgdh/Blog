@@ -75,7 +75,7 @@ namespace ArticleService.WebAPI.Controllers
             Article? ModifyArticle = await dbCtx.Articles.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == request.id);
             if (ModifyArticle == null) throw new Exception("更新文章失败，通过Id未找到对应的文章");
             ModifyArticle.Title = request.title;
-            ModifyArticle.Content = request.Content;
+            ModifyArticle.articleContent = ArticleContent.Create(ModifyArticle,request.Content);
 
             //从数据库获取Classify并保存关系
             var Classify = await dbCtx.ArticleClassifies.FindAsync(request.classify);
@@ -147,6 +147,15 @@ namespace ArticleService.WebAPI.Controllers
             await dbCtx.SaveChangesAsync();
             return Ok();
         }
+        [HttpPut]
+        [Authorize]
+        public async Task<ActionResult<ArticleTag>> ModifyTag(ArticleTagRequest articleTag)
+        {
+            var Tag = await dbCtx.Tags.FindAsync(articleTag.id);
+            Tag.TagName = articleTag.TagName;
+            await dbCtx.SaveChangesAsync();
+            return Tag;
+        }
         [HttpGet]
         public async Task<ActionResult<ArticleTag[]>> GetAllTags()
         {
@@ -161,12 +170,21 @@ namespace ArticleService.WebAPI.Controllers
         {
             var Classify = await domainService.CreateClassify(ClassName);
             dbCtx.Add(Classify);
-            var UploadFile = EventBusHelper.IFormFileToEventBusParameter(formFile);
-            var CallBackNeed = new EventBusParameter.CallBackNeed(Classify.Id, EnumCallBackEntity.ArticleClassify, ConstEventName.Article_FileCallBackUpdated);
-            EventBusParameter.FileUpload_Parameter parameter = new EventBusParameter.FileUpload_Parameter(UploadFile, CallBackNeed);
-            eventBus.publish(ConstEventName.FileUpload, parameter);
+            EventBusHelper.EventBusFunc_UploadImg(formFile, Classify.Id, eventBus);
             await dbCtx.SaveChangesAsync();
             return Classify.Id;
+        }
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<bool>> ModifyCLassify(ArticleClassifyRequest articleClassify)
+        {
+            var Classify = await dbCtx.ArticleClassifies.FindAsync(articleClassify.Id);
+            if (Classify == null) throw new Exception("未找到对应的文章分类");
+            Classify.ClassifyName = articleClassify.ClassifyName;
+            if (articleClassify.Img != null)
+                EventBusHelper.EventBusFunc_UploadImg(articleClassify.Img, Classify.Id, eventBus);
+            await dbCtx.SaveChangesAsync();
+            return true;
         }
         [HttpGet]
         public async Task<ActionResult<ArticleClassifyResponse[]>> GetAllArticleClassify()

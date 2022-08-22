@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,13 +30,21 @@ namespace EventBus
                 {
                     throw ex;
                 }
-                EventBusParameter.UploadFile ret = new EventBusParameter.UploadFile(strRet, offset, bt.Length, file.Name, file.FileName);
+                EventBusParameter.UploadFile ret = new EventBusParameter.UploadFile(strRet, offset, bt.Length, file.Name, file.FileName,file.ContentType);
                 return ret;
             }
             catch (Exception ex)
             {
                 return null;
             }
+        }
+
+        public static void EventBusFunc_UploadImg(IFormFile formFile,Guid MasterId,IEventBus eventBus)
+        {
+            var UploadFile = EventBusHelper.IFormFileToEventBusParameter(formFile);
+            var CallBackNeed = new EventBusParameter.CallBackNeed(MasterId, EnumCallBackEntity.ArticleClassify, ConstEventName.Article_FileCallBackUpdated);
+            EventBusParameter.FileUpload_Parameter parameter = new EventBusParameter.FileUpload_Parameter(UploadFile, CallBackNeed);
+            eventBus.publish(ConstEventName.FileUpload, parameter);
         }
     }
 }

@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArticleService.Infrastructure.Migrations
 {
     [DbContext(typeof(ArticleDbContext))]
-    [Migration("20220716145733_ArticleRestart")]
-    partial class ArticleRestart
+    [Migration("20220822072009_RestartArticle")]
+    partial class RestartArticle
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -47,10 +47,6 @@ namespace ArticleService.Infrastructure.Migrations
 
                     b.Property<Guid>("ClassifyId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
@@ -106,6 +102,27 @@ namespace ArticleService.Infrastructure.Migrations
                     b.ToTable("T_ArticleClassify", (string)null);
                 });
 
+            modelBuilder.Entity("ArticleService.Domain.Entities.ArticleContent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ArticleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId")
+                        .IsUnique();
+
+                    b.ToTable("T_ArticleContent", (string)null);
+                });
+
             modelBuilder.Entity("ArticleService.Domain.Entities.ArticleTag", b =>
                 {
                     b.Property<Guid>("Id")
@@ -151,6 +168,23 @@ namespace ArticleService.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Classify");
+                });
+
+            modelBuilder.Entity("ArticleService.Domain.Entities.ArticleContent", b =>
+                {
+                    b.HasOne("ArticleService.Domain.Entities.Article", "article")
+                        .WithOne("articleContent")
+                        .HasForeignKey("ArticleService.Domain.Entities.ArticleContent", "ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("article");
+                });
+
+            modelBuilder.Entity("ArticleService.Domain.Entities.Article", b =>
+                {
+                    b.Navigation("articleContent")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ArticleService.Domain.Entities.ArticleClassify", b =>

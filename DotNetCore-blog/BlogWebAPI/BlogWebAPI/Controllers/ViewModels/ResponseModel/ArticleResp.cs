@@ -27,7 +27,7 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.ResponseModel
             resp.id = article.Id;
             resp.Title = article.Title;
             resp.Classify = article.Classify;
-            resp.Content = article.Content;
+            resp.Content = article.articleContent.Content;
             resp.Tags = article.Tags;
             resp.PinYin = article.PinYin;
             return resp;
