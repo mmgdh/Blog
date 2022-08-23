@@ -14,7 +14,7 @@ namespace ArticleService.Domain
         }
 
 
-        public async  Task<ArticleTag> CreateTag(string TagName)
+        public async Task<ArticleTag> CreateTag(string TagName)
         {
             if (await TagRepository.TagNameIsExistAsync(TagName))
             {
@@ -30,7 +30,7 @@ namespace ArticleService.Domain
             {
                 throw new Exception("该分类已存在");
             }
-            ArticleClassify Classify = ArticleClassify.Create(ClassifyName,null);
+            ArticleClassify Classify = ArticleClassify.Create(ClassifyName, null);
             return Classify;
         }
 

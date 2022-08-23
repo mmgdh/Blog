@@ -9,12 +9,15 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.ResponseModel
         public string pinYin { get; set; }
         public int ArticleCount { get; set; }
 
+        public Guid? ImgId { get; set; }
+
         public ArticleClassifyResponse(ArticleClassify articleClassify)
         {
             this.id = articleClassify.Id.ToString();
             this.classifyName = articleClassify.ClassifyName;
             this.pinYin = articleClassify.PinYin;
             this.ArticleCount = articleClassify.Articles.Count;
+            this.ImgId = articleClassify.DefaultImgId;
         }
     }
 

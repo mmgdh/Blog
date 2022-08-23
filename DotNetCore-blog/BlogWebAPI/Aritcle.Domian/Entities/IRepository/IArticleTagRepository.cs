@@ -32,5 +32,13 @@ namespace ArticleService.Domain.IRepository
         /// <param name="TagName"></param>
         /// <returns></returns>
         public Task<bool> TagNameIsExistAsync(string TagName);
+        /// <summary>
+        /// 判断标签是否被文章使用
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Task<bool> TagIsUsedByArticle(Guid id);
+
+        public Task<bool> TagDeletAsync(Guid id);
     }
 }

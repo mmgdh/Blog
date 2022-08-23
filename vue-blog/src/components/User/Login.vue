@@ -37,7 +37,7 @@ const onSubmit = (value: UserLogin) => {
     if (token != "") {
       localStorage.setItem('JWT', token);
       console.log("登陆成功！");
-      router.push('/ArticleTable')
+      router.push('/BlogManage')
     }
 
   });

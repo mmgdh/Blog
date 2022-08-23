@@ -17,6 +17,21 @@ namespace ArticleService.Infrastructure.Repository
         {
             this.dbCtx = dbCtx;
         }
+        public async Task<bool> ClassifyIsUsedByArticle(Guid id)
+        {
+            var Tag = await dbCtx.Tags.Include(x => x.Articles).FirstOrDefaultAsync(x => x.Id == id);
+            return Tag != null && Tag.Articles.Any();
+        }
+        public async Task<bool> ArticleClassifyDelete(Guid id)
+        {
+            var tag = await dbCtx.ArticleClassifies.FirstAsync(x => x.Id == id);
+            if (await ClassifyIsUsedByArticle(id))
+            {
+                throw new Exception("该分类已被使用，无法删除");
+            }
+            dbCtx.Remove(tag);
+            return true;
+        }
 
         public async Task<bool> ArticleClassifyNameIsExistAsync(string ClassifyName)
         {

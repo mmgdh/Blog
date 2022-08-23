@@ -7,14 +7,24 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../components/Background/Manage.vue'),
         children: [
             {
-                path: "/ArticleTable",
-                name: 'ArticleTable',
-                component: () => import('../components/Background/ArticleTable.vue')
+                path: "/ArticleManage",
+                name: 'ArticleManage',
+                component: () => import('../components/Background/ArticleManage.vue')
             },
             {
                 path: "/EditBlog",
                 name: 'EditBlog',
                 component: () => import('../components/Background/EditBlog.vue')
+            },
+            {
+                path: "/TagManage",
+                name: 'TagManage',
+                component: () => import('../components/Background/TagManage.vue')
+            },
+            {
+                path: "/ClassifyManage",
+                name: 'ClassifyManage',
+                component: () => import('../components/Background/ClassifyManage.vue')
             },
         ]
     },

@@ -10,8 +10,10 @@
               <span>文章</span>
             </span>
           </template>
-          <a-menu-item key="3" @click="topage('/EditBlog')">新增文章</a-menu-item>
-          <a-menu-item key="5" @click="topage('/ArticleTable')">文章表格</a-menu-item>
+          <a-menu-item key="1" @click="topage('/EditBlog')">新增文章</a-menu-item>
+          <a-menu-item key="2" @click="topage('/ArticleManage')">文章管理</a-menu-item>
+          <a-menu-item key="3" @click="topage('/TagManage')">标签管理</a-menu-item>
+          <a-menu-item key="4" @click="topage('/ClassifyManage')">分类管理</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">
           <template #title>
@@ -20,7 +22,7 @@
               <span>User</span>
             </span>
           </template>
-          <a-menu-item key="6" @click="topage('/Login')">登录</a-menu-item>
+          <a-menu-item key="7" @click="topage('/Login')">登录</a-menu-item>
           <a-menu-item key="8" @click="topage('/BlogMain')">回到主页</a-menu-item>
         </a-sub-menu>
         <a-menu-item key="9">

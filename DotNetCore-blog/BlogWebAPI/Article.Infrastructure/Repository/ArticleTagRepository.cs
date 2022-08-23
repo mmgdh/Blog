@@ -40,5 +40,22 @@ namespace ArticleService.Infrastructure.Repository
         {
             return await dbCtx.Tags.AnyAsync(x => x.TagName == TagName);
         }
+
+        public async Task<bool> TagIsUsedByArticle(Guid id)
+        {
+            var Tag = await dbCtx.Tags.Include(x => x.Articles).FirstOrDefaultAsync(x => x.Id == id);
+            return Tag != null && Tag.Articles.Any();
+        }
+
+        public async Task<bool> TagDeletAsync(Guid id)
+        {
+            var tag = await dbCtx.Tags.FirstAsync(x => x.Id == id);
+            if (await TagIsUsedByArticle(id))
+            {
+                throw new Exception("该标签已被使用，无法删除");
+            }
+            dbCtx.Remove(tag);
+            return true;
+        }
     }
 }

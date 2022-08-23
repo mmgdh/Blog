@@ -75,7 +75,7 @@ namespace ArticleService.WebAPI.Controllers
             Article? ModifyArticle = await dbCtx.Articles.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == request.id);
             if (ModifyArticle == null) throw new Exception("更新文章失败，通过Id未找到对应的文章");
             ModifyArticle.Title = request.title;
-            ModifyArticle.articleContent = ArticleContent.Create(ModifyArticle,request.Content);
+            ModifyArticle.articleContent = ArticleContent.Create(ModifyArticle, request.Content);
 
             //从数据库获取Classify并保存关系
             var Classify = await dbCtx.ArticleClassifies.FindAsync(request.classify);
@@ -104,13 +104,13 @@ namespace ArticleService.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<lstArticleResp?>> GetArticleByPage([FromQuery]ArticleQueryRequest request)
+        public async Task<ActionResult<lstArticleResp?>> GetArticleByPage([FromQuery] ArticleQueryRequest request)
         {
 
-            var query = dbCtx.Articles.Include(x => x.Tags).Include(x => x.Classify).Where(x=>1==1);
+            var query = dbCtx.Articles.Include(x => x.Tags).Include(x => x.Classify).Where(x => 1 == 1);
             if (request.ClassifyIds != null && request.ClassifyIds.Count() > 0)
             {
-                query = query.Where(x => request.ClassifyIds.Any(y=>y==x.Classify.Id.ToString()));
+                query = query.Where(x => request.ClassifyIds.Any(y => y == x.Classify.Id.ToString()));
             }
             var ArticleCount = query.Count();
             var ret = await query.OrderByDescending(x => x.CreationTime).Skip((request.page - 1) * request.pageSize).Take(request.pageSize).ToArrayAsync();
@@ -140,9 +140,9 @@ namespace ArticleService.WebAPI.Controllers
         #region Tag相关API
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Guid>> AddTag(string TagName)
+        public async Task<ActionResult<Guid>> AddTag(ArticleTagAddRequest AddRequest)
         {
-            var Tag = await domainService.CreateTag(TagName);
+            var Tag = await domainService.CreateTag(AddRequest.tagName);
             dbCtx.Add(Tag);
             await dbCtx.SaveChangesAsync();
             return Ok();
@@ -155,6 +155,15 @@ namespace ArticleService.WebAPI.Controllers
             Tag.TagName = articleTag.TagName;
             await dbCtx.SaveChangesAsync();
             return Tag;
+        }
+        [HttpDelete]
+        [Authorize]
+        public async Task<bool> DeleteTag(Guid id)
+        {
+            var ret = await Tagrepository.TagDeletAsync(id);
+            if (ret)
+                await dbCtx.SaveChangesAsync();
+            return ret;
         }
         [HttpGet]
         public async Task<ActionResult<ArticleTag[]>> GetAllTags()
@@ -174,7 +183,7 @@ namespace ArticleService.WebAPI.Controllers
             await dbCtx.SaveChangesAsync();
             return Classify.Id;
         }
-        [HttpPost]
+        [HttpPut]
         [Authorize]
         public async Task<ActionResult<bool>> ModifyCLassify(ArticleClassifyRequest articleClassify)
         {
@@ -185,6 +194,15 @@ namespace ArticleService.WebAPI.Controllers
                 EventBusHelper.EventBusFunc_UploadImg(articleClassify.Img, Classify.Id, eventBus);
             await dbCtx.SaveChangesAsync();
             return true;
+        }
+        [HttpDelete]
+        [Authorize]
+        public async Task<ActionResult<bool>> DeleteClassify(Guid id)
+        {
+            var ret = await classifyRepository.ArticleClassifyDelete(id);
+            if (ret)
+                await dbCtx.SaveChangesAsync();
+            return ret;
         }
         [HttpGet]
         public async Task<ActionResult<ArticleClassifyResponse[]>> GetAllArticleClassify()

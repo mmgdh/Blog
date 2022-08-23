@@ -20,7 +20,8 @@ export interface ArticleClassify {
     id: string,
     classifyName: string,
     pinYin: string,
-    articleCount: number
+    articleCount: number,
+    imgId:string
 }
 
 export interface ArticlePageRequest {
