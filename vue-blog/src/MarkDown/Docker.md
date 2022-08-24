@@ -11,7 +11,9 @@ docker run  -p 6379:6379 --name myredis -v /root/AppConfig/Redis/redis.conf:/etc
 
 
 
-
+## docker 进入和退出容器
+进入：docker exec -it 容器 /bin/bash
+退出 exit
 
 
 
