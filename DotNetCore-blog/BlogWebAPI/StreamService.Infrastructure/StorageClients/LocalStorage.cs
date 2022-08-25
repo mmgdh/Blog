@@ -23,7 +23,7 @@ namespace StreamService.Infrastructure.StorageClients
             this.httpClientFactory = httpClientFactory;
         }
 
-        public async Task<Uri> UploadFileASync(string key, IFormFile formFile)
+        public async Task<Tuple<string, string>> UploadFileASync(string key, IFormFile formFile)
         {
             if (key.StartsWith('/'))
             {
@@ -45,7 +45,7 @@ namespace StreamService.Infrastructure.StorageClients
             //var req = httpContextAccessor.HttpContext.Request;
             //string url = req.Scheme + "://" + req.Host + "/" + key;
             string url = Iserver.Addresses.First() + "/" + key;
-            return new Uri(url);
+            return new Tuple<string, string>(url, "");
         }
 
         public async Task<Tuple<byte[],string>> GetUploadFileByteArray(UploadUri uploadUri)

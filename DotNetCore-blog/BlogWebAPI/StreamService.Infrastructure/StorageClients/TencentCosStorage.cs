@@ -15,7 +15,7 @@ namespace StreamService.Infrastructure.StorageClients
 {
     internal class TencentCosStorage : IStorageClient
     {
-        public EnumStorageType StorageType => throw new NotImplementedException();
+        public EnumStorageType StorageType => EnumStorageType.TencentCos;
         CosXmlConfig config;
         CosXml cosXml;
         QCloudCredentialProvider cosCredentialProvider;
@@ -27,12 +27,48 @@ namespace StreamService.Infrastructure.StorageClients
             this.cosCredentialProvider = cosCredentialProvider;
         }
 
-        public Task<Tuple<byte[], string>> GetUploadFileByteArray(UploadUri uploadUri)
+        public async Task<Tuple<byte[], string>> GetUploadFileByteArray(UploadUri uploadUri)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // 存储桶名称，此处填入格式必须为 bucketname-APPID, 其中 APPID 获取参考 https://console.cloud.tencent.com/developer
+                string bucket = "blog-img-1302438275";
+                string key = uploadUri.Key; //对象键
+
+                GetObjectBytesRequest request = new GetObjectBytesRequest(bucket, key);
+                //设置进度回调
+                request.SetCosProgressCallback(delegate (long completed, long total)
+                {
+                    Console.WriteLine(String.Format("progress = {0:##.##}%", completed * 100.0 / total));
+                });
+                //执行请求
+                GetObjectBytesResult result = cosXml.GetObject(request);
+                //获取内容到 byte 数组中
+                byte[] content = result.content;
+                //请求成功
+                var ret = result.GetResultInfo();
+
+                var ContentTypeKeyValue = result.responseHeaders.Where(x => x.Key == "Content-Type").FirstOrDefault();
+                var ContentType = ContentTypeKeyValue.Value.FirstOrDefault();
+                return new Tuple<byte[], string>(content, ContentType ?? "");
+            }
+            catch (COSXML.CosException.CosClientException clientEx)
+            {
+                await Task.Delay(3000);
+                //请求失败
+                throw new Exception("获取腾讯云资源失败" + clientEx);
+            }
+            catch (COSXML.CosException.CosServerException serverEx)
+            {
+                await Task.Delay(3000);
+                //请求失败
+                throw new Exception("获取腾讯云资源失败" + serverEx.GetInfo());
+            }
+
+
         }
 
-        public async Task<Uri> UploadFileASync(string key, IFormFile file)
+        public async Task<Tuple<string, string>> UploadFileASync(string key, IFormFile file)
         {
             try
             {
@@ -58,6 +94,7 @@ namespace StreamService.Infrastructure.StorageClients
                 string crc64ecma = result.crc64ecma;
                 //打印请求结果
                 Console.WriteLine(result.GetResultInfo());
+                var aa = result.GetResultInfo();
             }
             catch (COSXML.CosException.CosClientException clientEx)
             {
@@ -70,9 +107,7 @@ namespace StreamService.Infrastructure.StorageClients
                 Console.WriteLine("CosServerException: " + serverEx.GetInfo());
             }
 
-
-
-            return new Uri("123");
+            return new Tuple<string, string>("", key);
         }
     }
 }

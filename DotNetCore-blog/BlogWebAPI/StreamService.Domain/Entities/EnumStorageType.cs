@@ -4,6 +4,7 @@
     {
         Local,
         UrlImg,
-        SMMS
+        SMMS,
+        TencentCos
     }
 }

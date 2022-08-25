@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using CommomConst;
 namespace EventBus
 {
     public class EventBusHelper
@@ -39,11 +34,11 @@ namespace EventBus
             }
         }
 
-        public static void EventBusFunc_UploadImg(IFormFile formFile,Guid MasterId,IEventBus eventBus)
+        public static void EventBusFunc_UploadImg(string UploadImgType, IFormFile formFile,Guid MasterId,IEventBus eventBus)
         {
             var UploadFile = EventBusHelper.IFormFileToEventBusParameter(formFile);
             var CallBackNeed = new EventBusParameter.CallBackNeed(MasterId, EnumCallBackEntity.ArticleClassify, ConstEventName.Article_FileCallBackUpdated);
-            EventBusParameter.FileUpload_Parameter parameter = new EventBusParameter.FileUpload_Parameter(UploadFile, CallBackNeed);
+            EventBusParameter.FileUpload_Parameter parameter = new EventBusParameter.FileUpload_Parameter(UploadImgType, UploadFile, CallBackNeed);
             eventBus.publish(ConstEventName.FileUpload, parameter);
         }
     }

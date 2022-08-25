@@ -45,7 +45,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService.WebAPI", "I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommomJWT", "CommomJWT\CommomJWT.csproj", "{344E2BD4-7AF1-4ACB-9D11-5ED0E933249A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommomInterface", "CommomInterface\CommomInterface.csproj", "{E0AA8A4C-AC8C-4FB6-9CCA-B1586DF6351B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommomInterface", "CommomInterface\CommomInterface.csproj", "{E0AA8A4C-AC8C-4FB6-9CCA-B1586DF6351B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommomConst", "CommomConst\CommomConst.csproj", "{D788D341-5AE2-43F8-9841-8610A45AA82D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,6 +127,10 @@ Global
 		{E0AA8A4C-AC8C-4FB6-9CCA-B1586DF6351B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0AA8A4C-AC8C-4FB6-9CCA-B1586DF6351B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0AA8A4C-AC8C-4FB6-9CCA-B1586DF6351B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D788D341-5AE2-43F8-9841-8610A45AA82D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D788D341-5AE2-43F8-9841-8610A45AA82D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D788D341-5AE2-43F8-9841-8610A45AA82D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D788D341-5AE2-43F8-9841-8610A45AA82D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +154,7 @@ Global
 		{1CE422FB-7819-43C9-98FC-A8EBF8F3CF8B} = {DBF427F7-FCFD-46B7-8F1D-8D05AD51F6D7}
 		{344E2BD4-7AF1-4ACB-9D11-5ED0E933249A} = {C0400562-EB07-4DDA-994F-E3BAF8BA9D67}
 		{E0AA8A4C-AC8C-4FB6-9CCA-B1586DF6351B} = {C0400562-EB07-4DDA-994F-E3BAF8BA9D67}
+		{D788D341-5AE2-43F8-9841-8610A45AA82D} = {C0400562-EB07-4DDA-994F-E3BAF8BA9D67}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3E95441-400B-4DC3-95FC-51B201A85E65}

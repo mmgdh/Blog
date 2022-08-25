@@ -44,22 +44,22 @@ namespace StreamService.Infrastructure
             return await _context.Query<UploadItem>().Include(x => x.Uris).SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<UploadItem> UploadFileAsync(IFormFile file)
+        public async Task<UploadItem> UploadFileAsync(string UploadType, IFormFile file)
         {
             using Stream stream = file.OpenReadStream();
             string fileName = file.FileName;
             string hash = HashHelper.ComputeSha256Hash(stream);
             long fileSize = stream.Length;
             DateTime today = DateTime.Today;
-            string key = $"{today.Year}/{today.Month}/{today.Day}/{hash}/{fileName}";
-            List<Task<Uri>> uploadTasks = new List<Task<Uri>>();
+            string key = $"{UploadType}/{hash}/{fileName}";
+            List<Task<Tuple<string,string>>> uploadTasks = new List<Task<Tuple<string, string>>>();
             UploadItem uploadItem = UploadItem.Create(fileSize, fileName, hash);
             foreach (var storage in storageClients)
             {
                 var task = Task.Run(() =>
                  {
                      var ret = storage.UploadFileASync(key, file).Result;
-                     uploadItem.Uris.Add(UploadUri.CreateUploadUrl(ret.AbsoluteUri, storageClients.First().StorageType));
+                     uploadItem.Uris.Add(UploadUri.CreateUploadUrl(ret.Item1,ret.Item2, storageClients.First().StorageType));
                      return ret;
                  });
                 uploadTasks.Add(task);
@@ -68,5 +68,7 @@ namespace StreamService.Infrastructure
             var ret = await Task.WhenAny(uploadTasks);
             return uploadItem;
         }
+
+
     }
 }

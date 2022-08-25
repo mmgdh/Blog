@@ -47,7 +47,7 @@ namespace StreamService.Infrastructure.StorageClients
             throw new Exception("获取资源失败");
         }
 
-        public async Task<Uri> UploadFileASync(string key, IFormFile file)
+        public async Task<Tuple<string, string>> UploadFileASync(string key, IFormFile file)
         {
             var url = "https://sm.ms/api/v2/upload";
             string str = "";
@@ -82,7 +82,7 @@ namespace StreamService.Infrastructure.StorageClients
                     var json = JsonConvert.DeserializeObject<ResponseData>(resContent);
                     if (json != null && json.success)
                     {
-                        return new Uri(json.data.url);
+                        return new Tuple<string, string>(json.data.url,"");
                     }
                 }
                 else

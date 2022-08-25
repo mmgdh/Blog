@@ -36,13 +36,14 @@ namespace StreamService.WebAPI.EventHandlers
             if (eventData == null) return;
             var FileMessage = eventData.UploadFile;
             var CallBAckMessage = eventData.CallBackNeed;
+            var UploadType = eventData.UploadType;
             var bytes = ImageHelper.Base64ToImage(FileMessage.Base64);
             using Stream stream = new MemoryStream(bytes);
             FormFile formFile = new FormFile(stream, FileMessage.Offset, FileMessage.Length, FileMessage.Name, FileMessage.FileName);
             formFile.Headers = new HeaderDictionary();
             formFile.Headers.ContentType = FileMessage.ContentType;
             formFile.ContentType = FileMessage.ContentType;
-            var ret = await repository.UploadFileAsync(formFile);
+            var ret = await repository.UploadFileAsync(UploadType,formFile);
 
             var CallBackEntity = new EventBusParameter.CallBackUpdateEntity(CallBAckMessage, ret.Id);
             await dbContext.SaveChangesAsync();

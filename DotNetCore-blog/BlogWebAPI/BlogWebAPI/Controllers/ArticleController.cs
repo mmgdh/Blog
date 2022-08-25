@@ -4,6 +4,7 @@ using ArticleService.Domain.IRepository;
 using ArticleService.Infrastructure;
 using ArticleService.WebAPI.Controllers.ViewModels.RequestModel;
 using ArticleService.WebAPI.Controllers.ViewModels.ResponseModel;
+using CommomConst;
 using CommonHelpers;
 using CommonInfrastructure;
 using Commons;
@@ -179,7 +180,7 @@ namespace ArticleService.WebAPI.Controllers
         {
             var Classify = await domainService.CreateClassify(ClassName);
             dbCtx.Add(Classify);
-            EventBusHelper.EventBusFunc_UploadImg(formFile, Classify.Id, eventBus);
+            EventBusHelper.EventBusFunc_UploadImg(UploadImageType.ArticleClassifyImage, formFile, Classify.Id, eventBus);
             await dbCtx.SaveChangesAsync();
             return Classify.Id;
         }
@@ -191,7 +192,7 @@ namespace ArticleService.WebAPI.Controllers
             if (Classify == null) throw new Exception("未找到对应的文章分类");
             Classify.ClassifyName = articleClassify.ClassifyName;
             if (articleClassify.Img != null)
-                EventBusHelper.EventBusFunc_UploadImg(articleClassify.Img, Classify.Id, eventBus);
+                EventBusHelper.EventBusFunc_UploadImg(UploadImageType.ArticleClassifyImage, articleClassify.Img, Classify.Id, eventBus);
             await dbCtx.SaveChangesAsync();
             return true;
         }

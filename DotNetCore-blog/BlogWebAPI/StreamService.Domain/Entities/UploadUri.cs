@@ -4,7 +4,9 @@ namespace StreamService.Domain.Entities
 {
     public class UploadUri :BaseEntity
     {
-        public string Uri { get; private set; } = "";   
+        public string Uri { get; private set; } = "";
+
+        public string Key { get; private set; } = "";
 
         public EnumStorageType UrlType { get; private set; }
 
@@ -12,11 +14,12 @@ namespace StreamService.Domain.Entities
 
 
 
-        public static UploadUri CreateUploadUrl(string Uri, EnumStorageType urlType)
+        public static UploadUri CreateUploadUrl(string Uri,string key, EnumStorageType urlType)
         {
             UploadUri uploadUri = new UploadUri();
             uploadUri.Uri = Uri;
             uploadUri.UrlType = urlType;
+            uploadUri.Key = key;
             return uploadUri;
         }
 

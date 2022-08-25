@@ -24,8 +24,9 @@ namespace StreamService.WebAPI.Controllers
         public async Task<Uri> Upload([FromForm] UploadRequest request)
         {
             
-            var file = request.File;          
-            var ret = await repository.UploadFileAsync(file);
+            var file = request.File;
+            var Type = request.UploadType;
+            var ret = await repository.UploadFileAsync(Type,file);
             await _context.SaveChangesAsync();
             var ip = "localhost";
             if (hostEnv.IsProduction())
