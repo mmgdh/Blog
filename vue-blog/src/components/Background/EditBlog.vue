@@ -60,14 +60,7 @@ interface InterfaceSubmitArticle {
     content: string,
     tags: Array<ArticleTag>
 }
-let _SubmitArticle: InterfaceSubmitArticle = {
-    title: '',
-    classify: '',
-    image: "",
-    content: '',
-    tags: [] as Array<ArticleTag>
-};
-let SubmitArticle = ref(_SubmitArticle);
+let SubmitArticle = ref({} as InterfaceSubmitArticle);
 onMounted(() => {
     ArticleId = router.currentRoute.value.query.ArticleId as string;
     Ref_ArticleCLassify.value = ArticleStore.$state.Classifies
@@ -91,9 +84,9 @@ const onUploadImg = async (files: any, callback: any) => {
             return new Promise((rev, rej) => {
                 const form = new FormData();
                 form.append('file', file);
-
+                form.append('UploadType','文章内容图片');
                 UploadService.prototype.UploadImg(form)
-                    .then((res: any) => rev(res))
+                    .then((res: any) => rev(UploadService.prototype.getImageUri()+res))
                     .catch((error: any) => rej(error));
             });
         })

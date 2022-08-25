@@ -3,12 +3,14 @@
     <a-button type="primary" @click="AddClick">
       新增
     </a-button>
+
   </div>
+
   <a-table :dataSource="Ref_ClassifyList" :columns="columns" :pagination="pagination" @change="Func_RefreshClassify">
     <template #bodyCell="{ column, record }">
-      <template v-if="column.key === 'img'">
+      <template v-if="column.key === 'imgId'">
         <span>
-          <img :url="UploadService.prototype.GetImg(record.imgId)"/>
+          <img :src="ImgUrl + record.imgId" />
         </span>
       </template>
       <template v-else-if="column.key === 'action'">
@@ -16,10 +18,6 @@
           <a @click="ModifyClick(record)">编辑</a>
           <a-divider type="vertical" />
           <a @click="DeleteClick(record)">删除</a>
-          <a-divider type="vertical" />
-          <a class="ant-dropdown-link">
-            More actions
-          </a>
         </span>
       </template>
     </template>
@@ -32,33 +30,46 @@
     确定删除标签[{{ curRecord.classifyName }}]吗
   </a-modal>
   <a-modal v-model:visible="AddMsgVisible" title="新增标签" @ok="AddFunc()">
-    <a-input v-model:value="curRecord.classifyName"></a-input>
+
+    <img :src="ImgUrl + curRecord.imgId" />
+    <a-form :model="submitClassify" v-bind="layout" name="EditArticleClassify" :validate-messages="validateMessages">
+      <a-form-item name="classifyName" label="分类标题" :rules="[{ required: true }]">
+        <a-input v-model:value="submitClassify.classifyName"></a-input>
+      </a-form-item>
+      <a-form-item name="DefaultImage" label="分类图片" :rules="[{ required: true }]">
+        <a-input v-model:value="submitClassify.img"></a-input>
+
+      </a-form-item>
+    </a-form>
   </a-modal>
 
 </template>
 <script setup lang="ts">
-import { ArticleClassify } from "../../Entities/E_Article";
+import { ArticleClassify, ArticleClassifyRequest } from "../../Entities/E_Article";
 import { ref, computed } from 'vue'
 import ClassifyService from "../../Services/ArticleService"
 import UploadService from "../../Services/UploadService"
-import { PageRequest } from "../../Entities/CommomEntity"
-import { useRouter } from 'vue-router'
 import { useArticleStore } from '../../Store/Store'
 import { storeToRefs } from 'pinia';
 
+
+
 const ArticleStore = useArticleStore();
 const refStore = storeToRefs(ArticleStore);
-const router = useRouter();
+const ImgUrl = UploadService.prototype.getImageUri()
 let Ref_ClassifyList = refStore.Classifies;
 let Ref_Current = ref(1);
 let curRecord = ref({} as ArticleClassify);
+let submitClassify = ref({} as ArticleClassifyRequest);
+//控制modal的弹出
 let DeletMsgVisible = ref(false);
 let ModifyMsgVisible = ref(false);
 let AddMsgVisible = ref(false);
+
 const Func_RefreshClassify = () => {
   ArticleStore.GetClassifies();
 };
-Func_RefreshClassify();
+
 const pagination = computed(() => ({
   total: Ref_ClassifyList.value.length,
   current: Ref_Current.value,
@@ -70,12 +81,15 @@ const DeleteClick = (record: any) => {
 }
 const ModifyClick = (record: any) => {
   curRecord.value = record;
+  submitClassify.value = {
+    classifyName: curRecord.value.classifyName
+  } as ArticleClassifyRequest;
   ModifyMsgVisible.value = true;
 }
 const AddClick = async () => {
-  curRecord.value = {
-
-  } as ArticleClassify;
+  submitClassify.value = {
+    classifyName: curRecord.value.classifyName
+  } as ArticleClassifyRequest;
   AddMsgVisible.value = true;
 }
 const DeleteFunc = async (id: string) => {
@@ -86,14 +100,14 @@ const DeleteFunc = async (id: string) => {
   DeletMsgVisible.value = false;
 }
 const ModifyFunc = async () => {
-  var ret = await ClassifyService.prototype.ModifyArticlCLassify(curRecord.value);
+  var ret = await ClassifyService.prototype.ModifyArticlCLassify(submitClassify.value);
   if (ret == true) {
     Func_RefreshClassify();
   }
   ModifyMsgVisible.value = false;
 }
 const AddFunc = async () => {
-  var ret = await ClassifyService.prototype.AddArticleClassify(curRecord.value);
+  var ret = await ClassifyService.prototype.AddArticleClassify(submitClassify.value);
   Func_RefreshClassify();
   AddMsgVisible.value = false;
 }
@@ -107,12 +121,37 @@ const columns = [
   },
   {
     title: "图片",
-    dataindex: 'ImgId',
-    key: 'ImgId',
+    dataindex: 'imgId',
+    key: 'imgId',
   },
   {
     title: 'Action',
     key: 'action',
   },
 ]
+
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+
+
+const validateMessages = {
+  required: '${label} is required!',
+  types: {
+    email: '${label} is not a valid email!',
+    number: '${label} is not a valid number!',
+  },
+  number: {
+    range: '${label} must be between ${min} and ${max}',
+  },
+};
 </script>
+<style scoped>
+img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100px;
+}
+</style>

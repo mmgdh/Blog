@@ -1,4 +1,4 @@
-import {get,post} from './_Service'
+import {get,post,getUri} from './_Service'
 
 const controler = "FileUpload";
 
@@ -8,8 +8,11 @@ export default class UploadService{
     }
 
     async GetImg(ImgId:string){
-        return await post(controler+"/GetImage",ImgId);
+        return await get(controler+"/GetImage",ImgId);
     }
 
-
+    getImageUri(){
+        var ret =getUri()+"/"+controler+"/GetImage?id=";
+        return ret;
+    }
 }

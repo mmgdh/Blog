@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { message } from 'ant-design-vue';
 import qs from 'qs'
 
+
 const service = axios.create({
   // 联调
   baseURL: 'http://localhost:83',
@@ -17,8 +18,8 @@ const service = axios.create({
   },
   paramsSerializer: params => {
     return qs.stringify(params, {
-        indices: false
-      })
+      indices: false
+    })
   }
 })
 
@@ -41,13 +42,13 @@ service.interceptors.response.use((response: AxiosResponse) => {
   let msg = ''
   if (status < 200 || status >= 300) {
     // 处理http错误，抛到业务代码
-    if(response.data==""||response.data){
+    if (response.data == "" || response.data) {
       msg = showStatus(status)
     }
-    else{
-      msg=response.data
+    else {
+      msg = response.data
     }
-    
+
     message.warn(msg);
     if (typeof response.data === 'string') {
       response.data = { msg }
@@ -179,3 +180,6 @@ const showStatus = (status: number) => {
   }
   return `${message}，请检查网络或联系管理员！`
 }
+export function getUri(): string {
+  return service.getUri();
+} 
