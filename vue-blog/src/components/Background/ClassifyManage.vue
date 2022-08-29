@@ -27,17 +27,21 @@
     <a-input v-model:value="curRecord.classifyName"></a-input>
   </a-modal>
   <a-modal v-model:visible="DeletMsgVisible" title="标签删除" @ok="DeleteFunc(curRecord.id)">
-    确定删除标签[{{ curRecord.classifyName }}]吗
+    确定删除标签[{{  curRecord.classifyName  }}]吗
   </a-modal>
   <a-modal v-model:visible="AddMsgVisible" title="新增标签" @ok="AddFunc()">
-
-    <img :src="ImgUrl + curRecord.imgId" />
     <a-form :model="submitClassify" v-bind="layout" name="EditArticleClassify" :validate-messages="validateMessages">
       <a-form-item name="classifyName" label="分类标题" :rules="[{ required: true }]">
         <a-input v-model:value="submitClassify.classifyName"></a-input>
       </a-form-item>
-      <a-form-item name="DefaultImage" label="分类图片" :rules="[{ required: true }]">
-        <a-input v-model:value="submitClassify.img"></a-input>
+      <a-form-item name="DefaultImage" label="分类图片">
+        <a-upload v-model:file-list="fileList"  list-type="picture" :max-count="1"
+          :before-upload="beforeUpload">
+          <a-button>
+            <upload-outlined></upload-outlined>
+            Upload (Max: 1)
+          </a-button>
+        </a-upload>
 
       </a-form-item>
     </a-form>
@@ -45,22 +49,24 @@
 
 </template>
 <script setup lang="ts">
-import { ArticleClassify, ArticleClassifyRequest } from "../../Entities/E_Article";
+import { ArticleClassify } from "../../Entities/E_Article";
 import { ref, computed } from 'vue'
 import ClassifyService from "../../Services/ArticleService"
 import UploadService from "../../Services/UploadService"
 import { useArticleStore } from '../../Store/Store'
 import { storeToRefs } from 'pinia';
+import type { UploadProps } from 'ant-design-vue';
+import { any } from "vue-types";
 
 
-
+const fileList = ref([]);
 const ArticleStore = useArticleStore();
 const refStore = storeToRefs(ArticleStore);
 const ImgUrl = UploadService.prototype.getImageUri()
 let Ref_ClassifyList = refStore.Classifies;
 let Ref_Current = ref(1);
 let curRecord = ref({} as ArticleClassify);
-let submitClassify = ref({} as ArticleClassifyRequest);
+let submitClassify = ref({} as ArticleClassify);
 //控制modal的弹出
 let DeletMsgVisible = ref(false);
 let ModifyMsgVisible = ref(false);
@@ -83,13 +89,13 @@ const ModifyClick = (record: any) => {
   curRecord.value = record;
   submitClassify.value = {
     classifyName: curRecord.value.classifyName
-  } as ArticleClassifyRequest;
+  } as ArticleClassify;
   ModifyMsgVisible.value = true;
 }
 const AddClick = async () => {
   submitClassify.value = {
     classifyName: curRecord.value.classifyName
-  } as ArticleClassifyRequest;
+  } as ArticleClassify;
   AddMsgVisible.value = true;
 }
 const DeleteFunc = async (id: string) => {
@@ -100,18 +106,29 @@ const DeleteFunc = async (id: string) => {
   DeletMsgVisible.value = false;
 }
 const ModifyFunc = async () => {
-  var ret = await ClassifyService.prototype.ModifyArticlCLassify(submitClassify.value);
+  const formdata = new FormData();
+  fileList.value?.forEach(file => {
+    if (file)
+      formdata.append('file', file)
+  });
+
+  var ret = await ClassifyService.prototype.ModifyArticlCLassify(formdata);
   if (ret == true) {
     Func_RefreshClassify();
   }
   ModifyMsgVisible.value = false;
 }
 const AddFunc = async () => {
-  var ret = await ClassifyService.prototype.AddArticleClassify(submitClassify.value);
+  const formdata = new FormData();
+  var ret = await ClassifyService.prototype.AddArticleClassify(formdata);
   Func_RefreshClassify();
   AddMsgVisible.value = false;
 }
 
+const beforeUpload = file => {
+  fileList.value?.push(file);
+  return false;
+};
 
 const columns = [
   {

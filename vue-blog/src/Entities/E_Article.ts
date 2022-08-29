@@ -31,9 +31,3 @@ export interface ArticlePageRequest {
     TagIds: Array<string>,
     CreateTime: Date
 }
-
-export interface ArticleClassifyRequest {
-    id: string,
-    classifyName?: string,
-    img: FormData,
-}

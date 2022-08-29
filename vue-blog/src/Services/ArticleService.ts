@@ -1,5 +1,5 @@
 import { get, post, Delete, put } from './_Service'
-import { Article, ArticleClassifyRequest, ArticleTag } from '../Entities/E_Article'
+import { Article, ArticleTag } from '../Entities/E_Article'
 
 
 const controler = "Article";
@@ -31,10 +31,10 @@ export default class ArticleService {
         return await put(controler + "/ModifyTag", articleTag)
     }
 
-    async ModifyArticlCLassify(articleClassify: ArticleClassifyRequest) {
+    async ModifyArticlCLassify(articleClassify: FormData) {
         return await put(controler + "/ModifyCLassify", articleClassify)
     }
-    async AddArticleClassify(articleClassify: ArticleClassifyRequest) {
+    async AddArticleClassify(articleClassify: FormData) {
         return await post(controler + "/AddClassify", articleClassify)
     }
     async DeleteArticleClassify(ClassifyId: string) {
