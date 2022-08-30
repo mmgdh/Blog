@@ -176,23 +176,23 @@ namespace ArticleService.WebAPI.Controllers
         #region Classify相关API
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Guid>> AddClassify(string ClassName, IFormFile formFile)
+        public async Task<ActionResult<Guid>> AddClassify([FromForm] ArticleClassifyAddRequest articleClassifyAdd)
         {
-            var Classify = await domainService.CreateClassify(ClassName);
+            var Classify = await domainService.CreateClassify(articleClassifyAdd.ClassifyName);
             dbCtx.Add(Classify);
-            EventBusHelper.EventBusFunc_UploadImg(UploadImageType.ArticleClassifyImage, formFile, Classify.Id, eventBus);
+            EventBusHelper.EventBusFunc_UploadImg(UploadImageType.ArticleClassifyImage, articleClassifyAdd.file, Classify.Id, eventBus);
             await dbCtx.SaveChangesAsync();
             return Classify.Id;
         }
         [HttpPut]
         [Authorize]
-        public async Task<ActionResult<bool>> ModifyCLassify(ArticleClassifyRequest articleClassify)
+        public async Task<ActionResult<bool>> ModifyCLassify([FromForm]ArticleClassifyRequest articleClassify)
         {
             var Classify = await dbCtx.ArticleClassifies.FindAsync(articleClassify.Id);
             if (Classify == null) throw new Exception("未找到对应的文章分类");
             Classify.ClassifyName = articleClassify.ClassifyName;
-            if (articleClassify.Img != null)
-                EventBusHelper.EventBusFunc_UploadImg(UploadImageType.ArticleClassifyImage, articleClassify.Img, Classify.Id, eventBus);
+            if (articleClassify.file != null)
+                EventBusHelper.EventBusFunc_UploadImg(UploadImageType.ArticleClassifyImage, articleClassify.file, Classify.Id, eventBus);
             await dbCtx.SaveChangesAsync();
             return true;
         }
