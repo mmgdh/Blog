@@ -2,6 +2,7 @@
 using StreamService.Infrastructure;
 using StreamService.WebAPI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using CommonHelpers;
 
 namespace StreamService.WebAPI.Controllers
 {
@@ -12,12 +13,15 @@ namespace StreamService.WebAPI.Controllers
         private readonly IUploadItemRepository repository;
         private readonly UploadDbContext _context;
         private readonly IWebHostEnvironment hostEnv;
+        private readonly RedisHelper redisHelper;
 
-        public FileUploadController(IUploadItemRepository repository, UploadDbContext context, IWebHostEnvironment hostEnv)
+        public FileUploadController(IUploadItemRepository repository, UploadDbContext context, IWebHostEnvironment hostEnv, RedisHelper redisHelper)
         {
             this.repository = repository;
             _context = context;
             this.hostEnv = hostEnv;
+            this.redisHelper = redisHelper;
+            redisHelper.DbNum = 2;
         }
 
         [HttpPost]
@@ -33,7 +37,15 @@ namespace StreamService.WebAPI.Controllers
         [HttpGet]
         public async Task<FileContentResult> GetImage(Guid Id)
         {
+            var redisRet = redisHelper.GetFileCache(Id.ToString());
+            if (redisRet != null)
+            {
+                return new FileContentResult(redisRet.Item1, redisRet.Item2);
+            }
+
             var Tuple =await repository.GetFastFile(Id);
+            await redisHelper.AddFileCache(Id.ToString(),Tuple.Item1, Tuple.Item2);
+            
             return new FileContentResult(Tuple.Item1, Tuple.Item2);
         }
     }
