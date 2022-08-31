@@ -9,6 +9,11 @@
 
     <Md id="MyMarkDown" :preview-only="true" :show-code-row-number="true" v-model="content" :scroll-auto="false"
       class="DivCSS mdStyle hvr-float-shadow"></Md>
+      <md-atalog
+    :editorId="state.id"
+    :scroll-element="scrollElement"
+    :theme="state.theme"
+  />
   </div>
 </template>
 
@@ -33,8 +38,13 @@ ArticleService.prototype.GetArticleById(ArticleId).then(ret => {
   CurArticle.value = ret;
   content.value = ret.content;
 });
+const state = reactive({
+  theme: 'dark',
+  text: '标题',
+  id: 'my-editor'
+});
 
-
+const scrollElement = document.documentElement;
 </script>
 <style scoped>
 .MdContainerStyle {
