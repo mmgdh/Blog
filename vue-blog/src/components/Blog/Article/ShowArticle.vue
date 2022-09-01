@@ -6,21 +6,31 @@
       </div>
 
     </div>
-
-    <Md id="MyMarkDown" :preview-only="true" :show-code-row-number="true" v-model="content" :scroll-auto="false"
-      class="DivCSS mdStyle hvr-float-shadow"></Md>
-      <md-atalog
+    <md-editor
+    v-model="state.text"
+    :editorId="state.id"
+    preview-only
+    class="DivCSS mdStyle hvr-float-shadow"
+  />
+  <md-atalog
     :editorId="state.id"
     :scroll-element="scrollElement"
     :theme="state.theme"
   />
+    <!-- <Md id="MyMarkDown" :preview-only="true" :show-code-row-number="true" v-model="content" :scroll-auto="false"
+      class="DivCSS mdStyle hvr-float-shadow"></Md>
+      <md-atalog
+    editorId="MyMarkDown"
+    :scroll-element="scrollElement"
+    :theme="state.theme"
+  /> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed } from 'vue';
-import Md from 'md-editor-v3'
-import 'md-editor-v3/lib/style.css'
+import MdEditor from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
 import { useRoute } from 'vue-router'
 import { Article } from '../../../Entities/E_Article'
 import ArticleService from '../../../Services/ArticleService'

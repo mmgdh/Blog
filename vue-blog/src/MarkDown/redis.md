@@ -24,3 +24,5 @@ docker pull redis:6.0.8
 docker run  -p 6379:6379 --name myredis -v /home/lqh/DockerData/RedisConf/redis.conf:/etc/redis/redis.conf -v /home/lqh/DockerData/RedisConf/data:/data -d redis redis-server /etc/redis/redis.conf 
 ```
 #### 5.成功执行
+
+### 2.在.Net Core 中使用redis

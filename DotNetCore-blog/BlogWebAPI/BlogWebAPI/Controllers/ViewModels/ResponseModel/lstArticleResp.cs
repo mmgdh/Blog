@@ -49,7 +49,7 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.ResponseModel
                 resp.id = article.Id;
                 resp.Title = article.Title;
                 resp.Classify = article.Classify;
-                resp.Description = article.articleContent.Content;
+                resp.Description = article.Description;
                 resp.Tags = article.Tags;
                 resp.PinYin = article.PinYin;
                 resp.ImageId = article.ImageId;

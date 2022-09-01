@@ -15,7 +15,7 @@
   </div>
 
   <div class="PageStyle">
-    <a-pagination :show-quick-jumper="false" v-model="refPage.page" :total="ArticleCount"
+    <a-pagination :show-quick-jumper="false" v-model="refPage.page" :total="1"
       :page-size='pageRequest.pageSize' show-less-items @change="onChange" />
   </div>
 </template>
@@ -34,7 +34,7 @@ let router = useRouter()
 let refStore = storeToRefs(ArticleStore);
 let refPage = refStore.PageRequestParm;
 let Ref_ArticleList = refStore.CurPageArticles;
-let ArticleCount = refStore.CurArticleCount;
+let ArticleCount = refStore.CurArticleCount??0;
 let ShowQuikJumper = ref(false)
 
 watch(refPage.value, () => {

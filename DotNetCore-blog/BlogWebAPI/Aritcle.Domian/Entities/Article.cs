@@ -1,4 +1,5 @@
-﻿using Commons;
+﻿using CommonHelpers;
+using Commons;
 using DomainCommon;
 
 namespace ArticleService.Domain.Entities
@@ -25,6 +26,8 @@ namespace ArticleService.Domain.Entities
 
         public Guid ImageId { get; set; }
 
+        public string Description { get; set; }
+
         public string PinYin { get; private set; } = "";
         /// <summary>
         /// 文章内容
@@ -43,6 +46,7 @@ namespace ArticleService.Domain.Entities
             {
                 var article = new Article();
                 article.Title = Title;
+                article.Description = RegexHelper.GetContent(Content, 100);
                 article.articleContent = ArticleContent.Create(article, Content);
                 return article;
             }

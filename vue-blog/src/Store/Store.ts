@@ -41,7 +41,7 @@ export const useArticleStore = defineStore('Article', {
     async GetArticleByPage() {
       var ret  = await ArticleService.prototype.GetArticleByPage(this.PageRequestParm);
       this.CurPageArticles=ret.articles;
-      this.CurArticleCount=ret.pageArticleCount;
+      this.CurArticleCount=ret.pageArticleCount??0;
     }
   }
 })
