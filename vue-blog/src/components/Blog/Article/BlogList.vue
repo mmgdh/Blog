@@ -1,22 +1,15 @@
 <template>
   <div class="hvr-grow ArticleStyle DivCSS" v-for="_Article in Ref_ArticleList" :key="_Article.id"
     @click="router.push({ path: 'ShowArticle', query: { 'ArticleId': _Article.id } })">
-    <div class="TitleStyle">{{ _Article.title }}</div>
+    <ArticleCardVue>
 
-    <div class="BottomStyle">
-      <ClockCircleOutlined />
-      <span>{{ ToDate(_Article.createDateTime) }}</span>
-      <span>分类：{{ _Article.classify.classifyName }}</span>
-      <span class="TagStyle" v-for="_Tag in _Article.tags">
-        {{ _Tag.tagName }}
-      </span>
-    </div>
+    </ArticleCardVue>
 
   </div>
 
   <div class="PageStyle">
-    <a-pagination :show-quick-jumper="false" v-model="refPage.page" :total="1"
-      :page-size='pageRequest.pageSize' show-less-items @change="onChange" />
+    <a-pagination :show-quick-jumper="false" v-model="refPage.page" :total="1" :page-size='pageRequest.pageSize'
+      show-less-items @change="onChange" />
   </div>
 </template>
 
@@ -28,13 +21,14 @@ import { useRouter } from 'vue-router'
 import { ClockCircleOutlined } from '@ant-design/icons-vue'
 import { useArticleStore } from '../../../Store/Store'
 import { storeToRefs } from 'pinia';
+import ArticleCardVue from './ArticleCard.vue';
 
 let ArticleStore = useArticleStore();
 let router = useRouter()
 let refStore = storeToRefs(ArticleStore);
 let refPage = refStore.PageRequestParm;
 let Ref_ArticleList = refStore.CurPageArticles;
-let ArticleCount = refStore.CurArticleCount??0;
+let ArticleCount = refStore.CurArticleCount ?? 0;
 let ShowQuikJumper = ref(false)
 
 watch(refPage.value, () => {
@@ -66,7 +60,7 @@ const ToDate = (DateTime: Date) => {
 
 </script>
 
-<style>
+<style scoped>
 .ArticleStyle {
 
   font-size: large;

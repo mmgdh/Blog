@@ -28,6 +28,14 @@
 
                 </ArticleTagSelectVue>
             </a-form-item>
+            <a-form-item name="DefaultImage" label="分类图片">
+        <a-upload v-model:file-list="fileList" list-type="picture" :max-count="1" :before-upload="beforeUpload">
+          <a-button>
+            <upload-outlined></upload-outlined>
+            Upload (Max: 1)
+          </a-button>
+        </a-upload>
+      </a-form-item>
             <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
                 <a-button type="primary" html-type="submit">保存</a-button>
             </a-form-item>

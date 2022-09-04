@@ -22,6 +22,8 @@
 import BlogList from './Article/BlogList.vue'
 import Introduction from './IndexContent/Introduction.vue'
 import ArticleClssifyList from './Article/ArticleClassifyList.vue';
+import ArticleCardVue from './Article/ArticleCard.vue';
+import ArticleCard from './Article/ArticleCard.vue';
 
 </script>
 <style scoped>
