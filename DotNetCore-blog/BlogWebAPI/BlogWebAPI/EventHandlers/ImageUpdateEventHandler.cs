@@ -29,6 +29,11 @@ namespace ArticleService.WebAPI.EventHandlers
                     if (ArticleClassify == null) throw new Exception("未找到对应分类");
                     ArticleClassify.DefaultImgId = eventData.FileGuidId;
                     break;
+                case EnumCallBackEntity.ArticleTitleImage:
+                    var Article = await dbContext.Articles.FindAsync(ret.MasterGuidId);
+                    if (Article == null) throw new Exception("未找到对应文章");
+                    Article.ImageId = eventData.FileGuidId;
+                    break;
             }
             await dbContext.SaveChangesAsync();
         }

@@ -7,7 +7,8 @@
                 <a-divider>选择</a-divider>
 
                 <div class="WaitSelectTag">
-                    <a-tag class="Tag"  v-for="Tag in AllTags" color="success" :key="Tag.id" @click="AddTags(Tag)">{{ Tag.tagName }}
+                    <a-tag class="Tag" v-for="Tag in AllTags" color="success" :key="Tag.id" @click="AddTags(Tag)">
+                        {{ Tag.tagName }}
                     </a-tag>
                 </div>
 
@@ -72,14 +73,16 @@ if (props.FSelectArticleTags != null && props.FSelectArticleTags.length > 0) {
     border: 2px;
     background-color: aquamarine;
 }
-.WaitSelectTag{
+
+.WaitSelectTag {
     width: 300px;
     justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
 }
-.Tag{
-    flex: 0 1 ;
+
+.Tag {
+    flex: 0 1;
     margin-bottom: 10px;
 }
 </style>

@@ -6,7 +6,9 @@ export interface Article {
     classify: ArticleClassify,
     createDateTime: Date,
     tags: Array<ArticleTag>,
-    pinYin: string
+    pinYin: string,
+    description:string,
+    imageId:string
 }
 
 export interface ArticleTag {

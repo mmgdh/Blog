@@ -51,7 +51,6 @@ import UploadService from "../../Services/UploadService"
 import { useArticleStore } from '../../Store/Store'
 import { storeToRefs } from 'pinia';
 import type { UploadProps } from 'ant-design-vue';
-import { any } from "vue-types";
 
 
 const fileList = ref<UploadProps['fileList']>([]);

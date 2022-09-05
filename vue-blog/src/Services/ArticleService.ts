@@ -9,11 +9,11 @@ export default class ArticleService {
         return await get(controler + "/GetArticleById", { id: _id })
     }
 
-    async AddArticle(Article: Article) {
+    async AddArticle(Article: FormData) {
         return await post(controler + '/Add', Article)
     }
 
-    async ModifyArticle(Article: Article) {
+    async ModifyArticle(Article: FormData) {
         return await put(controler + '/Modify', Article)
     }
 

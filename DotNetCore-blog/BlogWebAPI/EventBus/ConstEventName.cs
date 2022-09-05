@@ -15,7 +15,8 @@ namespace EventBus
     public enum EnumCallBackEntity
     {
         ArticleClassify,
-        ArticleImage
+        ArticleImage,
+        ArticleTitleImage
     }
     
 }

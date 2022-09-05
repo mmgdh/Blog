@@ -2,25 +2,21 @@
     <article class="article-card">
 
         <div class="img-box">
-            <img src="./images/drawers.jpg" alt="" class="article-banner">
+            <img :src="ImgUrl + ArticleData.imageId" alt="" class="article-banner">
         </div>
-
 
         <div class="article-content">
 
             <a href="#">
-                <h3 class="article-title">Shift the overall look and feel by adding these wonderful
-                    touches to furniture in your home</h3>
+                <h3 class="article-title">{{ArticleData.title}}</h3>
             </a>
 
-            <p class="article-text">Ever been in a room and felt like something was missing? Perhaps
-                it felt slightly bare and uninviting. I’ve got some simple tips
-                to help you make any room feel complete.</p>
+            <p class="article-text">{{ArticleData.description}}</p>
 
             <div class="acticle-content-footer">
 
                 <div class="author">
-                    <img src="./images/avatar-michelle.jpg" alt="" class="author-avater">
+                    <img :src="ImgUrl + ArticleData.imageId" class="author-avater">
 
                     <div class="author-info">
                         <a href="#">
@@ -61,70 +57,78 @@
 </template>
 
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { Article } from '../../../Entities/E_Article';
+import UploadService from "../../../Services/UploadService"
+const ImgUrl = UploadService.prototype.getImageUri()
+const { ArticleData } = defineProps<{
+    ArticleData: Article
+}>()
+
+console.log(ArticleData)
 
 </script>
 
 <style scoped>
-    :root {
+:root {
 
-/**
+    /**
  * Colors 
  */
 
---very-dark-grayish-blue: hsl(217, 19%, 35%);
---desaturated-dark-blue:  hsl(214, 17%, 51%);
---light-grayish-blue:     hsl(210, 46%, 95%);
---grayish-blue:           hsl(212, 23%, 69%);
---white:                  hsl(0, 0%, 100%);
+    --very-dark-grayish-blue: hsl(217, 19%, 35%);
+    --desaturated-dark-blue: hsl(214, 17%, 51%);
+    --light-grayish-blue: hsl(210, 46%, 95%);
+    --grayish-blue: hsl(212, 23%, 69%);
+    --white: hsl(0, 0%, 100%);
 
-/**
+    /**
  * Typography 
  */
 
---fs-13: 13px;
+    --fs-13: 13px;
 
 }
-
-
-
-
 
 /*-----------------------------------*\
 #RESET & DEFAULT
 \*-----------------------------------*/
 
-*, *::before, *::after {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 a {
-text-decoration: none;
-color: var(--white);
+    text-decoration: none;
+    color: var(--white);
 }
 
 button {
-border: none;
-outline: none;
-cursor: pointer;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 
-img, ion-icon { display: block; }
+img,
+ion-icon {
+    display: block;
+}
 
 html {
-font-family: 'Manrope', sans-serif;
-font-weight: 500;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
 }
 
 body {
-min-height: 100vh;
-display:         flex;
-justify-content: center;
-align-items:     center;
-background: var(--light-grayish-blue);
-padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--light-grayish-blue);
+    padding: 20px;
 }
 
 
@@ -140,149 +144,158 @@ padding: 20px;
 */
 
 .article-card {
-display: grid;
-grid-template-columns: 285px minmax(300px, 445px);
-max-width: 730px;
-border-radius: 10px;
-box-shadow: 6px 6px 5px hsla(0, 0%, 0%, 0.02),
-            25px 25px 20px hsla(0, 0%, 0%, 0.03),
-            100px 100px 80px hsla(0, 0%, 0%, 0.05);
+    display: grid;
+    grid-template-columns: 285px minmax(300px, 445px);
+    max-width: 730px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 5px hsla(0, 0%, 0%, 0.02),
+        25px 25px 20px hsla(0, 0%, 0%, 0.03),
+        100px 100px 80px hsla(0, 0%, 0%, 0.05);
 }
 
 
 .img-box {
-border-radius: 10px 0 0 10px;
-overflow: hidden;
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
 }
 
 .article-banner {
-width:  100%;
-height: 100%;
-object-fit: cover;
-object-position: left;
-transition: all 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
+    transition: all 0.5s ease;
 }
 
-.article-card:hover .article-banner { transform: scale(1.1); }
+.article-card:hover .article-banner {
+    transform: scale(1.1);
+}
 
 .article-content {
-background: var(--white);
-padding: 32px 40px;
-border-radius: 0 10px 10px 0;
+    background: var(--white);
+    padding: 32px 40px;
+    border-radius: 0 10px 10px 0;
 }
 
 .article-title {
-font-size: 20px;
-color: var(--very-dark-grayish-blue);
-margin-bottom: 12px;
-line-height: 1.4;
+    font-size: 20px;
+    color: var(--very-dark-grayish-blue);
+    margin-bottom: 12px;
+    line-height: 1.4;
 }
 
 .article-text {
-color: var(--desaturated-dark-blue);
-font-size: var(--fs-13);
-line-height: 1.5;
-margin-bottom: 18px;
+    color: var(--desaturated-dark-blue);
+    font-size: var(--fs-13);
+    line-height: 1.5;
+    margin-bottom: 18px;
 }
 
 .acticle-content-footer {
-display:         flex;
-justify-content: space-between;
-align-items:     center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .author {
-display:     flex;
-align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .author-avater {
-width:  40px;
-height: 40px;
-border-radius: 50%;
-margin-right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
 }
 
 .author-name {
-color: var(--very-dark-grayish-blue);
-font-size: var(--fs-13);
+    color: var(--very-dark-grayish-blue);
+    font-size: var(--fs-13);
 }
 
 .publish-date {
-color: var(--grayish-blue);
-font-size: var(--fs-13);
+    color: var(--grayish-blue);
+    font-size: var(--fs-13);
 }
 
-.share { position: relative; }
+.share {
+    position: relative;
+}
 
 .share-button {
-background: var(--light-grayish-blue);
-padding: 6px;
-border-radius: 20px;
-font-size: 20px;
-color: var(--desaturated-dark-blue);
-transition: all 0.25s ease;
+    background: var(--light-grayish-blue);
+    padding: 6px;
+    border-radius: 20px;
+    font-size: 20px;
+    color: var(--desaturated-dark-blue);
+    transition: all 0.25s ease;
 }
 
-.share-button:hover, .share-button.active {
-background: var(--desaturated-dark-blue);
-color: var(--light-grayish-blue);
+.share-button:hover,
+.share-button.active {
+    background: var(--desaturated-dark-blue);
+    color: var(--light-grayish-blue);
 }
 
 .share-option {
-/**
+    /**
  * variable for transforming `.share-option` box 
  * without repeating all transform value
  */
---scale: 0;
---translateX: -50%;
---translateY: 0;
+    --scale: 0;
+    --translateX: -50%;
+    --translateY: 0;
 
-background: var(--very-dark-grayish-blue);
-position: absolute;
-bottom: calc(100% + 28px);
-left:   50%;
-transform: translate(var(--translateX), var(--translateY)) scale(var(--scale));
-display:     flex;
-align-items: center;
-gap: 12px;
-padding: 17px 40px;
-border-radius: 10px;
-box-shadow: 0 5px 20px -5px #0003;
-transform-origin: bottom;
-visibility: hidden;
-transition: all 0.25s ease;
+    background: var(--very-dark-grayish-blue);
+    position: absolute;
+    bottom: calc(100% + 28px);
+    left: 50%;
+    transform: translate(var(--translateX), var(--translateY)) scale(var(--scale));
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 17px 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px -5px #0003;
+    transform-origin: bottom;
+    visibility: hidden;
+    transition: all 0.25s ease;
 }
 
 .share-option.active {
---scale: 1;
-visibility: visible;
+    --scale: 1;
+    visibility: visible;
 }
 
 .share-option::after {
-content: '';
-background: var(--very-dark-grayish-blue);
-width:  20px;
-height: 20px;
-position: absolute;
-top: 100%;
-left: 50%;
-transform: translate(-50%, -60%) rotate(45deg);
+    content: '';
+    background: var(--very-dark-grayish-blue);
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -60%) rotate(45deg);
 }
 
 .share-option span {
-font-size: 11px;
-text-transform: uppercase;
-letter-spacing: 5px;
-color: var(--grayish-blue);
-margin-right: 5px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: var(--grayish-blue);
+    margin-right: 5px;
 }
 
-.share-option ion-icon { font-size: 22px; }
+.share-option ion-icon {
+    font-size: 22px;
+}
 
 .share-option ion-icon:hover,
 .article-title:hover,
-.author-name:hover { filter: invert(1); }
+.author-name:hover {
+    filter: invert(1);
+}
 
 
 
@@ -294,66 +307,83 @@ margin-right: 5px;
 
 @media screen and (max-width: 768px) {
 
-:root {
+    :root {
 
-  /**
+        /**
    * Typography 
    */
-  
-  --fs-13: 12px;
 
-}
+        --fs-13: 12px;
 
-/**
+    }
+
+    /**
  * article card responsive
  */
 
-.article-card {
-  grid-template-columns: 1fr;
-  max-width: 294px;
-  overflow: hidden;
-}
+    .article-card {
+        grid-template-columns: 1fr;
+        max-width: 294px;
+        overflow: hidden;
+    }
 
-.img-box, .article-content { border-radius: 0; }
+    .img-box,
+    .article-content {
+        border-radius: 0;
+    }
 
-.img-box { height: 180px; }
+    .img-box {
+        height: 180px;
+    }
 
-.article-content { padding: 30px 28px 20px; }
+    .article-content {
+        padding: 30px 28px 20px;
+    }
 
-.article-title { font-size: 15px; }
+    .article-title {
+        font-size: 15px;
+    }
 
-.article-text { margin-bottom: 30px; }
+    .article-text {
+        margin-bottom: 30px;
+    }
 
-.acticle-content-footer { position: relative; }
+    .acticle-content-footer {
+        position: relative;
+    }
 
-.author-avater {
-  width:  35px;
-  height: 35px;
-}
+    .author-avater {
+        width: 35px;
+        height: 35px;
+    }
 
-.share {
-  position: static;
-  z-index: 1; 
-}
+    .share {
+        position: static;
+        z-index: 1;
+    }
 
-.share-button { font-size: 16px; }
+    .share-button {
+        font-size: 16px;
+    }
 
-.share-option {
-  /**
+    .share-option {
+        /**
    * variable for transforming `.share-option` box 
    * without repeating all transform value
    */
-  --scale: 1;
-  --translateX: 0;
-  --translateY: 100%;
-  
-  inset: -20px -28px;
-  border-radius: 0;
-  padding: 17px 30px;
-  z-index: -1;
-}
+        --scale: 1;
+        --translateX: 0;
+        --translateY: 100%;
 
-.share-option.active { --translateY: 0; }
+        inset: -20px -28px;
+        border-radius: 0;
+        padding: 17px 30px;
+        z-index: -1;
+    }
+
+    .share-option.active {
+        --translateY: 0;
+    }
 
 }
 </style>
