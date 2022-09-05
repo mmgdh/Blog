@@ -68,27 +68,13 @@ console.log(ArticleData)
 
 </script>
 
-<style scoped>
-:root {
-
-    /**
- * Colors 
- */
-
-    --very-dark-grayish-blue: hsl(217, 19%, 35%);
-    --desaturated-dark-blue: hsl(214, 17%, 51%);
-    --light-grayish-blue: hsl(210, 46%, 95%);
-    --grayish-blue: hsl(212, 23%, 69%);
-    --white: hsl(0, 0%, 100%);
-
-    /**
- * Typography 
- */
-
-    --fs-13: 13px;
-
-}
-
+<style scoped lang="less">
+    @very-dark-grayish-blue: hsl(217, 19%, 35%);
+    @desaturated-dark-blue: hsl(214, 17%, 51%);
+    @light-grayish-blue: hsl(210, 46%, 95%);
+    @grayish-blue: hsl(212, 23%, 69%);
+    @white: hsl(0, 0%, 100%);
+    @fs-13: 13px;
 /*-----------------------------------*\
 #RESET & DEFAULT
 \*-----------------------------------*/
@@ -103,7 +89,7 @@ console.log(ArticleData)
 
 a {
     text-decoration: none;
-    color: var(--white);
+    color: @white;
 }
 
 button {
@@ -127,7 +113,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--light-grayish-blue);
+    background: @light-grayish-blue;
     padding: 20px;
 }
 
@@ -146,7 +132,7 @@ body {
 .article-card {
     display: grid;
     grid-template-columns: 285px minmax(300px, 445px);
-    max-width: 730px;
+    /* max-width: 730px; */
     border-radius: 10px;
     box-shadow: 6px 6px 5px hsla(0, 0%, 0%, 0.02),
         25px 25px 20px hsla(0, 0%, 0%, 0.03),
@@ -172,21 +158,21 @@ body {
 }
 
 .article-content {
-    background: var(--white);
+    background: @white;
     padding: 32px 40px;
     border-radius: 0 10px 10px 0;
 }
 
 .article-title {
     font-size: 20px;
-    color: var(--very-dark-grayish-blue);
+    color: @very-dark-grayish-blue;
     margin-bottom: 12px;
     line-height: 1.4;
 }
 
 .article-text {
-    color: var(--desaturated-dark-blue);
-    font-size: var(--fs-13);
+    color: @desaturated-dark-blue;
+    font-size: @fs-13;
     line-height: 1.5;
     margin-bottom: 18px;
 }
@@ -210,13 +196,13 @@ body {
 }
 
 .author-name {
-    color: var(--very-dark-grayish-blue);
-    font-size: var(--fs-13);
+    color: @very-dark-grayish-blue;
+    font-size: @fs-13;
 }
 
 .publish-date {
-    color: var(--grayish-blue);
-    font-size: var(--fs-13);
+    color: @grayish-blue;
+    font-size: @fs-13;
 }
 
 .share {
@@ -224,18 +210,18 @@ body {
 }
 
 .share-button {
-    background: var(--light-grayish-blue);
+    background: @light-grayish-blue;
     padding: 6px;
     border-radius: 20px;
     font-size: 20px;
-    color: var(--desaturated-dark-blue);
+    color: @desaturated-dark-blue;
     transition: all 0.25s ease;
 }
 
 .share-button:hover,
 .share-button.active {
-    background: var(--desaturated-dark-blue);
-    color: var(--light-grayish-blue);
+    background: @desaturated-dark-blue;
+    color: @light-grayish-blue;
 }
 
 .share-option {
@@ -243,15 +229,15 @@ body {
  * variable for transforming `.share-option` box 
  * without repeating all transform value
  */
-    --scale: 0;
-    --translateX: -50%;
-    --translateY: 0;
+    @scale: 0;
+    @translateX: -50%;
+    @translateY: 0;
 
-    background: var(--very-dark-grayish-blue);
+    background: @very-dark-grayish-blue;
     position: absolute;
     bottom: calc(100% + 28px);
     left: 50%;
-    transform: translate(var(--translateX), var(--translateY)) scale(var(--scale));
+    transform: translate(@translateX, @translateY) scale(@scale);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -270,7 +256,7 @@ body {
 
 .share-option::after {
     content: '';
-    background: var(--very-dark-grayish-blue);
+    background: @very-dark-grayish-blue;
     width: 20px;
     height: 20px;
     position: absolute;
@@ -283,7 +269,7 @@ body {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 5px;
-    color: var(--grayish-blue);
+    color: @grayish-blue;
     margin-right: 5px;
 }
 
@@ -307,15 +293,7 @@ body {
 
 @media screen and (max-width: 768px) {
 
-    :root {
-
-        /**
-   * Typography 
-   */
-
-        --fs-13: 12px;
-
-    }
+@fs-13: 12px;
 
     /**
  * article card responsive
@@ -371,9 +349,9 @@ body {
    * variable for transforming `.share-option` box 
    * without repeating all transform value
    */
-        --scale: 1;
-        --translateX: 0;
-        --translateY: 100%;
+        @scale: 1;
+        @translateX: 0;
+        @translateY: 100%;
 
         inset: -20px -28px;
         border-radius: 0;
