@@ -2,12 +2,12 @@
   <div class="MdContainerStyle ">
     <div class="ShowBlogTop">
       <div class="BlogTitle">
-        {{ CurArticle.title }}1111111111111111
+        {{ CurArticle.title }}
       </div>
 
     </div>
     <md-editor
-    v-model="state.text"
+    v-model="content"
     :editorId="state.id"
     preview-only
     class="DivCSS mdStyle hvr-float-shadow"

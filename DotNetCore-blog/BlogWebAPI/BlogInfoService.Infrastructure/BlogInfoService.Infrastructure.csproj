@@ -8,13 +8,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlogCommon\DomainCommon.csproj" />
-    <ProjectReference Include="..\CommonInfrastructure\CommonInfrastructure.csproj" />
+    <ProjectReference Include="..\BlogInfoService.Domain\BlogInfoService.Domain.csproj" />
     <ProjectReference Include="..\CommonInitializer\CommonInitializer.csproj" />
-    <ProjectReference Include="..\Commons\CommonHelpers.csproj" />
   </ItemGroup>
 
 </Project>
