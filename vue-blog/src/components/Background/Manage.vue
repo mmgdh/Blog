@@ -23,12 +23,17 @@
             </span>
           </template>
           <a-menu-item key="7" @click="topage('/Login')">登录</a-menu-item>
-          <a-menu-item key="8" @click="topage('/BlogMain')">回到主页</a-menu-item>
         </a-sub-menu>
-        <a-menu-item key="9">
-          <file-outlined />
-          <span>File</span>
-        </a-menu-item>
+        <a-sub-menu key="sub3">
+          <template #title>
+            <span>
+              <team-outlined />
+              <span>博客信息</span>
+            </span>
+          </template>
+          <a-menu-item key="8" @click="topage('/BlogParameter')">参数管理</a-menu-item>
+          <a-menu-item key="9" @click="topage('/BlogMain')">回到主页</a-menu-item>
+        </a-sub-menu>
       </a-menu>
     </a-layout-sider>
     <a-layout>

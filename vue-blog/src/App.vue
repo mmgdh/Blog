@@ -3,20 +3,21 @@
   <!-- <Main></Main> -->
 </template>
 <script setup lang="ts">
-import Manage from "./components/Background/Manage.vue"
-import Main from "./components/Blog/BlogMain.vue"
 import { onBeforeMount } from 'vue'
 import { useArticleStore } from './Store/Store'
+import { useParamStore } from './Store/BlogParameterStore'
 import { useRouter } from 'vue-router'
 
-const router =useRouter();
+const router = useRouter();
 router.push('./BlogMain');
 
 const ArticleStore = useArticleStore();
+const ParamStore = useParamStore();
 
 onBeforeMount(() => {
   ArticleStore.GetTags();
   ArticleStore.GetClassifies();
+  ParamStore.GetAllParameter();
   // ArticleStore.GetArticleCount();
 })
 

@@ -2,11 +2,11 @@
 
 namespace BlogInfoService.WebAPI.ViewModels.ResponseModel
 {
-    public record BlogParamterResponse(string paramName, string paramValue)
+    public record BlogParamterResponse(Guid id,string paramName, string paramValue)
     {
         public static BlogParamterResponse CreateResponse(BlogParameter blogParameter)
         {
-            BlogParamterResponse blogParamterResp = new BlogParamterResponse(blogParameter.ParamName, blogParameter.ParamValue);
+            BlogParamterResponse blogParamterResp = new BlogParamterResponse(blogParameter.Id,blogParameter.ParamName, blogParameter.ParamValue);
             return blogParamterResp;
         }
         public static List<BlogParamterResponse> CreatelstResponse(IEnumerable<BlogParameter> lstBlogParameter)

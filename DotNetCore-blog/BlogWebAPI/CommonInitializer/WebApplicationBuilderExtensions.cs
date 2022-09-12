@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using StackExchange.Redis;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using CommonHelpers;
+using CommomFilters;
 
 namespace CommonInitializer
 {
@@ -91,17 +92,21 @@ namespace CommonInitializer
             services.AddEventBus(initOptions.EventBusQueueName, assemblies);
             #endregion
 
-            #region NewtonsoftJson
-            services.AddControllers().AddNewtonsoftJson(option =>
+
+            services.AddControllers(option =>
+                option.Filters.Add(typeof(ExceptionFilter))
+            ).AddNewtonsoftJson(option =>
             {
+                #region NewtonsoftJson
                 //解决ef实体层层调用导致的json生成问题。
                 option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 //设置返回的时间格式不带T
                 option.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
                 //使返回格式不再是默认的小驼峰
                 //option.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                #endregion
             });
-            #endregion
+
 
             #region Redis
             string redisConnStr = configuration.GetValue<string>("Redis:ConnStr");

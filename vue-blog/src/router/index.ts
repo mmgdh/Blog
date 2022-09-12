@@ -26,13 +26,18 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'ClassifyManage',
                 component: () => import('../components/Background/ClassifyManage.vue')
             },
+            {
+                path: "/BlogParameter",
+                name: 'BlogParameter',
+                component: () => import('../components/Background/BlogParamManage.vue')
+            }
         ]
     },
     {
         path: "/BlogMain",
         name: "BlogMain",
         component: () => import('../components/Blog/BlogMain.vue'),
-        children:[
+        children: [
             {
                 path: "/BlogIndex",
                 name: "BlogIndex",

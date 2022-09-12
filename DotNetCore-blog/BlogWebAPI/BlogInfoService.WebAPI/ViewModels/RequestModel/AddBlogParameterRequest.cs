@@ -2,7 +2,7 @@
 
 namespace BlogInfoService.WebAPI.ViewModels.RequestModel
 {
-    public record AddBlogParameterRequest(string BlogParamName,string BlogParamValue)
+    public record AddBlogParameterRequest(string ParamName,string ParamValue,string? ParamType)
     {
     }
 
@@ -10,7 +10,7 @@ namespace BlogInfoService.WebAPI.ViewModels.RequestModel
     {
         public AddBlogParameterRequestValidator()
         {
-            RuleFor(x => x.BlogParamName).NotEmpty();
+            RuleFor(x => x.ParamName).NotEmpty();
         }
     }
 }

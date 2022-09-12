@@ -27,7 +27,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed } from 'vue';
+import { useParamStore } from '../../../Store/BlogParameterStore';
+import{ref} from 'vue'
+
+const ParamStore=useParamStore();
+const PictureUrl=ParamStore.GetParameterValue("MyHeadPortraitUrl");
+const refPictureUrl='121212'
 
 </script>
 <style scoped>
@@ -86,7 +91,7 @@ h4{
   top: -45px;
   left: 50%;
   transform: translate(-50%, 0%);
-  background-image: url('./image/photo.jpeg');
+  background-image: v-bind(refPictureUrl);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

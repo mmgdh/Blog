@@ -15,11 +15,13 @@ namespace BlogInfoService.Domain.Entities
 
         public string ParamType { get; set; }
 
-        public static BlogParameter Create(string paramName,string paramValue,string paramType="Text")
+        public static BlogParameter Create(string paramName,string paramValue,string? paramType)
         {
+            if (string.IsNullOrEmpty(paramType)) paramType = "Text";
             BlogParameter blogParameter = new BlogParameter();
             blogParameter.ParamName = paramName;
             blogParameter.ParamValue = paramValue;
+            blogParameter.ParamType = paramType;
             return blogParameter;
             
         }
