@@ -72,10 +72,15 @@ service.interceptors.response.use((response: AxiosResponse) => {
  */
 export function get(url: any, params: any = undefined, timeout: number = 1000 * 60 * 5): any {
   return new Promise((resolve, reject) => {
-    let data = {};
-    data = { params: params, timeout: timeout }
-    service
-      .get(url, data)
+    let method: Promise<any>;
+    if (params) {
+      method = service
+        .get(url, params)
+    }
+    else {
+      method = service.get(url)
+    }
+    method
       .then((response) => {
         resolve(response.data)
       })

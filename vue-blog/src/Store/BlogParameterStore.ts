@@ -8,12 +8,14 @@ export const useParamStore = defineStore('BlogParam', {
             BlogParameters: {} as Array<BlogParam>
         }
     },
-    actions:{
-        async GetAllParameter(){
-            let ret =await BlogInfoService.prototype.GetAllBlogParameters();
-            this.BlogParameters=ret;
+    actions: {
+        async GetAllParameter() {
+            let ret = await BlogInfoService.prototype.GetAllBlogParameters();
+            this.BlogParameters = ret;
         },
-        GetParameterValue(paramName:string){
+        async GetParameterValue(paramName: string) {
+            if(this.BlogParameters.length==undefined) await this.GetAllParameter();
+            if (this.BlogParameters.length == 0) return undefined;
             return this.BlogParameters.find(x=>x.paramName==paramName)?.paramValue;
         }
     }
