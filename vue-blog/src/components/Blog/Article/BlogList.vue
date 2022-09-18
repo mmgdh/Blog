@@ -21,7 +21,7 @@ import ArticleService from '../../../Services/ArticleService';
 import { Article } from '../../../Entities/E_Article'
 import { useRouter } from 'vue-router'
 import { ClockCircleOutlined } from '@ant-design/icons-vue'
-import { useArticleStore } from '../../../Store/Store'
+import { useArticleStore } from '../../../Store/ArticleStore'
 import { storeToRefs } from 'pinia';
 import ArticleCardVue from './ArticleCard.vue';
 
@@ -32,6 +32,7 @@ let refPage = refStore.PageRequestParm;
 let Ref_ArticleList = refStore.CurPageArticles;
 let ArticleCount = refStore.CurArticleCount ?? 0;
 let ShowQuikJumper = ref(false)
+console.log(Ref_ArticleList.value)
 
 watch(refPage.value, () => {
   ArticleStore.GetArticleByPage();

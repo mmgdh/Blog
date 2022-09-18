@@ -64,8 +64,6 @@ const { ArticleData } = defineProps<{
     ArticleData: Article
 }>()
 
-console.log(ArticleData)
-
 </script>
 
 <style scoped lang="less">

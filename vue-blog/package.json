@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
+    "@icon-park/vue-next": "^1.4.2",
     "@types/qs": "^6.9.7",
     "ant-design-vue": "^3.2.9",
     "axios": "^0.27.2",

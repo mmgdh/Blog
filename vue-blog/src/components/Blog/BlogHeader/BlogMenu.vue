@@ -1,24 +1,29 @@
 <template>
-    <div class="navBody">
+    <div class="menuBody">
         <nav class="nav">
             <div class="container">
-                <h1 class="logo"><a @click="topage('/BlogIndex')">主页</a></h1>
+                <div class="logo" @click="topage('/BlogIndex')" >
+                    <span>零柒贰</span>
+                    <span class="logoBottom" @click="topage('/BlogIndex')">LINQIER</span>
+                </div>
+
                 <ul>
                     <li><a href="#" class="current">Home</a> </li>
                     <li><a @click="topage('/BlogManage')">管理</a> </li>
-                    <li><a @click="topage('/Login')">登录</a> </li>
                 </ul>
             </div>
         </nav>
+        <OperationBar>
+
+        </OperationBar>
     </div>
 
 
 
 </template>
 <script setup lang="ts">
-import { defineComponent, ref } from 'vue';
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
 import { useRouter } from 'vue-router'
+import OperationBar from './OperationBar.vue'
 
 let router = useRouter()
 let topage = (url: string) => {
@@ -26,26 +31,32 @@ let topage = (url: string) => {
 }
 
 </script>
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+<style scoped lang="less">
 
-.navBody {
+.menuBody {
+    display: flex;
+    flex-grow: 1;
     font-family: 'Open Sans', sans-serif;
     color: #FFF;
+    height: 100px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
 
+    .logoBottom {
+        font-size: 10px;
+    }
+}
 
 .nav {
-    position: fixed;
-    background-color: #222;
-    top: 0;
-    left: 0;
-    right: 0;
     transition: all 0.3s ease-in-out;
 }
 
@@ -53,7 +64,6 @@ let topage = (url: string) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
     transition: all 0.3s ease-in-out;
 }
 
@@ -70,23 +80,4 @@ let topage = (url: string) => {
     padding: 7px 15px;
     transition: all 0.3s ease-in-out;
 }
-
-/* .nav.active {
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.nav.active a {
-    color: #000
-}
-
-.nav.active .container {
-    padding: 10px 0;
-}
-
-.nav a.current,
-.nav a:hover {
-    color: #c0392b;
-    font-weight: bold;
-} */
 </style>

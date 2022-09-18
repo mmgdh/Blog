@@ -54,7 +54,7 @@ import ArticleService from '../../Services/ArticleService'
 import UploadService from '../../Services/UploadService'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue';
-import { useArticleStore } from '../../Store/Store'
+import { useArticleStore } from '../../Store/ArticleStore'
 import type { UploadProps } from 'ant-design-vue';
 
 const fileList = ref<UploadProps['fileList']>([]);

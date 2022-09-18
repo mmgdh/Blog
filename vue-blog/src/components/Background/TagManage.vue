@@ -37,7 +37,7 @@ import { ref, computed } from 'vue'
 import TagService from "../../Services/ArticleService"
 import { PageRequest } from "../../Entities/CommomEntity"
 import { useRouter } from 'vue-router'
-import { useArticleStore } from '../../Store/Store'
+import { useArticleStore } from '../../Store/ArticleStore'
 import { storeToRefs } from 'pinia';
 
 const ArticleStore = useArticleStore();

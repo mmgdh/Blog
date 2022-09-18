@@ -2,8 +2,8 @@
   <div class="card">
     <div class="UserPicture"></div>
     <div class="info">
-      <h1></h1>
-      <h2>Senior UX/UI Designer</h2>
+      <h1>MMGDH</h1>
+      <h2>Full Stack developer</h2>
     </div>
     <div class="detail">
       <div class="col">
@@ -27,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import { useParamStore } from '../../../Store/BlogParameterStore';
+import { useAppStore } from '../../../../Store/AppStore';
 import { onBeforeMount, ref } from 'vue'
 const refPictureUrl = ref('http://localhost:83/FileUpload/GetImage?id=8877529d-f0d8-4f57-8d30-cfbd553d9fcc')
 onBeforeMount(async () => {
-  const ParamStore = useParamStore();
+  const ParamStore = useAppStore();
   const PictureUrl = await ParamStore.GetParameterValue("MyHeadPortraitUrl");
   refPictureUrl.value = `url(${PictureUrl})`
 })

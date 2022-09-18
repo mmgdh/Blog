@@ -40,10 +40,10 @@
 import { BlogParam } from "../../Entities/E_BlogParam";
 import { ref, computed } from 'vue'
 import BlogInfoService from "../../Services/BlogInfoService"
-import { useParamStore } from '../../Store/BlogParameterStore'
+import { useAppStore } from '../../Store/AppStore'
 import { storeToRefs } from 'pinia';
 
-const ParamStore = useParamStore();
+const ParamStore = useAppStore();
 const refStore = storeToRefs(ParamStore);
 let Ref_BlogParamList = refStore.BlogParameters;
 console.log(Ref_BlogParamList);

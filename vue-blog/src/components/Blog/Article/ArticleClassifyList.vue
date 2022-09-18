@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed, watch } from 'vue';
 import { ArticleClassify } from '../../../Entities/E_Article';
-import { useArticleStore } from '../../../Store/Store'
+import { useArticleStore } from '../../../Store/ArticleStore'
 import { storeToRefs } from 'pinia';
 const ArticleStore = useArticleStore();
 
@@ -35,7 +35,6 @@ const clickFunc = (Id: string) => {
 
 .Title {
   font-size: large;
-  background-color: antiquewhite;
 }
 
 .ClassifyDiv {

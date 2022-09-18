@@ -1,6 +1,13 @@
-.DivCSS{
-    background-color: #fff;
-    color: black;
-    border-radius: 10px;
-    box-shadow: 10px 10px 20px rgba(33, 44, 55, .3);
+.text-color-dim {
+  color: var(--text-dim);
+}
+
+.text-color-normal {
+  color: var(--text-normal);
+}
+
+
+:root {
+  --Max-Width: 500px;
+  --header_gradient_css: linear-gradient(130deg, #24c6dc, #5433ff 41.07%, #ff0099 76.05%);
 }

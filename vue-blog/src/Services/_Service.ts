@@ -75,7 +75,7 @@ export function get(url: any, params: any = undefined, timeout: number = 1000 * 
     let method: Promise<any>;
     if (params) {
       method = service
-        .get(url, params)
+        .get(url, { params: params, timeout: timeout })
     }
     else {
       method = service.get(url)

@@ -28,6 +28,11 @@ export const useArticleStore = defineStore('Article', {
       } as ArticlePageRequest
     }
   },
+  getters: {
+    FeatureArticle: (state):Article => {
+      return state.CurPageArticles[0]
+    }
+  },
   actions: {
     async GetTags() {
       let ret = await ArticleService.prototype.GetAllArticleTags();

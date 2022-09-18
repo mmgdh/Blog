@@ -41,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: "/BlogIndex",
                 name: "BlogIndex",
-                component: () => import('../components/Blog/BlogIndex.vue'),
+                component: () => import('../components/Blog/BlogContent/BlogIndex.vue'),
             },
             {
                 path: "/ShowArticle",
