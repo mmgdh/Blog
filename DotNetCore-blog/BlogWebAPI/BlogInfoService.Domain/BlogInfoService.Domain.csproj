@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlogCommon\DomainCommon.csproj" />
     <ProjectReference Include="..\CommomInterface\CommomInterface.csproj" />
+    <ProjectReference Include="..\CommonDomain\DomainCommon.csproj" />
   </ItemGroup>
 
 </Project>

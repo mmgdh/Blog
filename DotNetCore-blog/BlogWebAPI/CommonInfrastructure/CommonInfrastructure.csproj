@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlogCommon\DomainCommon.csproj" />
+    <ProjectReference Include="..\CommonDomain\DomainCommon.csproj" />
   </ItemGroup>
 
 </Project>
