@@ -30,20 +30,20 @@
                 <div class="share">
 
                     <button class="share-button">
-                        <ion-icon name="arrow-redo"></ion-icon>
+                        <!-- <ion-icon name="arrow-redo"></ion-icon> -->
                     </button>
 
                     <div class="share-option">
                         <span>Share</span>
 
                         <a href="#">
-                            <ion-icon name="logo-facebook"></ion-icon>
+                            <!-- <ion-icon name="logo-facebook"></ion-icon> -->
                         </a>
                         <a href="#">
-                            <ion-icon name="logo-twitter"></ion-icon>
+                            <!-- <ion-icon name="logo-twitter"></ion-icon> -->
                         </a>
                         <a href="#">
-                            <ion-icon name="logo-pinterest"></ion-icon>
+                            <!-- <ion-icon name="logo-pinterest"></ion-icon> -->
                         </a>
                     </div>
 
@@ -97,7 +97,7 @@ button {
 }
 
 img,
-ion-icon {
+.ion-icon {
     display: block;
 }
 
