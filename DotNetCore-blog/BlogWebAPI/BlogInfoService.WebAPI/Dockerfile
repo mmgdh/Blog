@@ -9,7 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["BlogInfoService.WebAPI/BlogInfoService.WebAPI.csproj", "BlogInfoService.WebAPI/"]
 COPY ["BlogInfoService.Domain/BlogInfoService.Domain.csproj", "BlogInfoService.Domain/"]
-COPY ["BlogCommon/DomainCommon.csproj", "BlogCommon/"]
+COPY ["CommonDomain/DomainCommon.csproj", "CommonDomain/"]
 COPY ["CommomInterface/CommomInterface.csproj", "CommomInterface/"]
 COPY ["BlogInfoService.Infrastructure/BlogInfoService.Infrastructure.csproj", "BlogInfoService.Infrastructure/"]
 COPY ["CommonInitializer/CommonInitializer.csproj", "CommonInitializer/"]

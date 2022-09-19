@@ -11,7 +11,7 @@ COPY ["StreamService.WebAPI/StreamService.WebAPI.csproj", "StreamService.WebAPI/
 COPY ["EventBus/EventBus.csproj", "EventBus/"]
 COPY ["CommomConst/CommomConst.csproj", "CommomConst/"]
 COPY ["StreamService.Domain/StreamService.Domain.csproj", "StreamService.Domain/"]
-COPY ["CommonDomain/DomainCommon.csproj", "CommonDomain/"]
+COPY ["BlogCommon/DomainCommon.csproj", "BlogCommon/"]
 COPY ["CommonInitializer/CommonInitializer.csproj", "CommonInitializer/"]
 COPY ["CommomFilters/CommomFilters.csproj", "CommomFilters/"]
 COPY ["CommonInfrastructure/CommonInfrastructure.csproj", "CommonInfrastructure/"]

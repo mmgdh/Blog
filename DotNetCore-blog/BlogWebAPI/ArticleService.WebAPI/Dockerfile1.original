@@ -8,9 +8,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["ArticleService.WebAPI/ArticleService.WebAPI.csproj", "ArticleService.WebAPI/"]
+COPY ["BlogCommon/DomainCommon.csproj", "BlogCommon/"]
 COPY ["ArticleService.Infrastructure/ArticleService.Infrastructure.csproj", "ArticleService.Infrastructure/"]
 COPY ["AritcleService.Domian/ArticleService.Domain.csproj", "AritcleService.Domian/"]
-COPY ["CommonDomain/DomainCommon.csproj", "CommonDomain/"]
 COPY ["CommonInfrastructure/CommonInfrastructure.csproj", "CommonInfrastructure/"]
 COPY ["Commons/CommonHelpers.csproj", "Commons/"]
 COPY ["CommonInitializer/CommonInitializer.csproj", "CommonInitializer/"]

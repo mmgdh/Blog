@@ -7,11 +7,11 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["IdentityService.WebAPI/IdentityService.WebAPI.csproj", "IdentityService.WebAPI/"]
-COPY ["IdentityService.Domain/IdentityService.Domain.csproj", "IdentityService.Domain/"]
-COPY ["CommonDomain/DomainCommon.csproj", "CommonDomain/"]
-COPY ["CommomJWT/CommomJWT.csproj", "CommomJWT/"]
+COPY ["BlogInfoService.WebAPI/BlogInfoService.WebAPI.csproj", "BlogInfoService.WebAPI/"]
+COPY ["BlogInfoService.Domain/BlogInfoService.Domain.csproj", "BlogInfoService.Domain/"]
+COPY ["BlogCommon/DomainCommon.csproj", "BlogCommon/"]
 COPY ["CommomInterface/CommomInterface.csproj", "CommomInterface/"]
+COPY ["BlogInfoService.Infrastructure/BlogInfoService.Infrastructure.csproj", "BlogInfoService.Infrastructure/"]
 COPY ["CommonInitializer/CommonInitializer.csproj", "CommonInitializer/"]
 COPY ["CommomFilters/CommomFilters.csproj", "CommomFilters/"]
 COPY ["CommonInfrastructure/CommonInfrastructure.csproj", "CommonInfrastructure/"]
@@ -19,16 +19,16 @@ COPY ["Commons/CommonHelpers.csproj", "Commons/"]
 COPY ["EventBus/EventBus.csproj", "EventBus/"]
 COPY ["CommomConst/CommomConst.csproj", "CommomConst/"]
 COPY ["CommonMiddleWare/CommonMiddleWare.csproj", "CommonMiddleWare/"]
-COPY ["IdentityService.Infrastructure/IdentityService.Infrastructure.csproj", "IdentityService.Infrastructure/"]
-RUN dotnet restore "IdentityService.WebAPI/IdentityService.WebAPI.csproj"
+COPY ["CommomJWT/CommomJWT.csproj", "CommomJWT/"]
+RUN dotnet restore "BlogInfoService.WebAPI/BlogInfoService.WebAPI.csproj"
 COPY . .
-WORKDIR "/src/IdentityService.WebAPI"
-RUN dotnet build "IdentityService.WebAPI.csproj" -c Release -o /app/build
+WORKDIR "/src/BlogInfoService.WebAPI"
+RUN dotnet build "BlogInfoService.WebAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "IdentityService.WebAPI.csproj" -c Release -o /app/publish
+RUN dotnet publish "BlogInfoService.WebAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "IdentityService.WebAPI.dll"]
+ENTRYPOINT ["dotnet", "BlogInfoService.WebAPI.dll"]
