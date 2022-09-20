@@ -5,7 +5,8 @@ import qs from 'qs'
 
 const service = axios.create({
   // 联调
-  baseURL: 'http://localhost:83',
+  baseURL: 'http://172.17.0.11:80',
+  // baseURL:'http://118.195.172.226:80',
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
   },
