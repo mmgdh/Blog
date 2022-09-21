@@ -36,3 +36,7 @@ docker run  -p 6379:6379 --name myredis -v /root/AppConfig/Redis/redis.conf:/etc
 docker update --restart=always 容器名或容器ID
 ```
 参考地址：https://www.cnblogs.com/xwgli/p/16160972.html
+
+
+# Portainer
+docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /home/lqh/DockerData/portainer/Data:/data --name portainer portainer/portainer

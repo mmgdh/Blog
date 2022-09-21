@@ -2,11 +2,13 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { message } from 'ant-design-vue';
 import qs from 'qs'
 
+const BaseURL='http://118.195.172.226:80'
 
 const service = axios.create({
   // 联调
-  baseURL: 'http://172.17.0.11:80',
-  // baseURL:'http://118.195.172.226:80',
+  // baseURL: 'http://172.17.0.11:80',
+  // baseURL: 'http://localhost:83',
+  baseURL:BaseURL,
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
   },
@@ -189,5 +191,5 @@ const showStatus = (status: number) => {
   return `${message}，请检查网络或联系管理员！`
 }
 export function getUri(): string {
-  return service.getUri();
+  return BaseURL;
 } 

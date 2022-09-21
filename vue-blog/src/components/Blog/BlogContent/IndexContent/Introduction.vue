@@ -29,11 +29,13 @@
 <script setup lang="ts">
 import { useAppStore } from '../../../../Store/AppStore';
 import { onBeforeMount, ref } from 'vue'
-const refPictureUrl = ref('http://118.195.172.226:80/FileUpload/GetImage?id=8877529d-f0d8-4f57-8d30-cfbd553d9fcc')
+import UploadService from "../../../../Services/UploadService"
+const ImgUrl = UploadService.prototype.getImageUri()
+const refPictureUrl = ref(ImgUrl+'8877529d-f0d8-4f57-8d30-cfbd553d9fcc')
 onBeforeMount(async () => {
   const ParamStore = useAppStore();
   const PictureUrl = await ParamStore.GetParameterValue("MyHeadPortraitUrl");
-  refPictureUrl.value = `url(${PictureUrl})`
+  refPictureUrl.value = `url(${ImgUrl+PictureUrl})`
 })
 
 

@@ -15,9 +15,9 @@ let topage = (url: string) => {
 </script>
 
 <style scoped lang="less">
-* {
-    Padding-right: 10px;
-}
+// * {
+//     Padding-right: 10px;
+// }
 
 .BarStyle {
     display: flex;
