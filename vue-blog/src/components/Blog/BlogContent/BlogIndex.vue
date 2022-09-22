@@ -3,7 +3,7 @@
     <BlogFeatureVue></BlogFeatureVue>
     <div class="IndexContainer">
       <div class="IndexBlogList">
-        <BlogList></BlogList>
+        <!-- <BlogList></BlogList> -->
       </div>
       <div class="IndexRightContent">
         <Introduction></Introduction>

@@ -1,12 +1,45 @@
-.DivCSS {
-    background-color: var(--background-primary-alt);
-    color: black;
-    border-radius: 10px;
-    box-shadow: 10px 10px 20px rgba(33, 44, 55, .3);
-}
-@MAXWidth:500px;
-
 :root {
-    --Max-Width: @MAXWidth;
+    --MAXWidth: 500px;
+    --Max-Width: var(--MAXWidth);
     --header_gradient_css: linear-gradient(130deg, #24c6dc, #5433ff 41.07%, #ff0099 76.05%);
+}
+
+.px(@value) {
+    padding-left: @value;
+    padding-right: @value;
+}
+
+.py(@value) {
+
+    padding-top: @value ;
+    padding-bottom: @value;
+}
+
+.gap(@value) {
+    gap: @value;
+}
+
+.relative {
+    position: relative;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.box-border {
+    box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+    .inverted-main-grid {
+        display: grid;
+        grid-template-columns: 245px minmax(0, 1fr);
+    }
+}
+
+.inverted-main-grid,
+.main-grid {
+    display: flex;
+    flex-direction: column;
 }

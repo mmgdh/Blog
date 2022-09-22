@@ -33,6 +33,7 @@
   --custom-quote-warning: #e98503;
   --custom-quote-danger: #dd2500;
   --custom-quote: #e93796;
+  --gradient-css:linear-gradient(130deg, #24c6dc, #5433ff 41.07%, #ff0099 76.05%);
 }
 :root[data-theme='theme-dark'] {
   --background-primary: #1a1a1a;
