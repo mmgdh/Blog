@@ -1,18 +1,20 @@
 <template>
     <div class="menuBody">
-        <nav class="nav">
-            <div class="container">
-                <div class="logo" @click="topage('/BlogIndex')" >
-                    <span>零柒贰</span>
-                    <span class="logoBottom" @click="topage('/BlogIndex')">LINQIER</span>
-                </div>
-
-                <ul>
-                    <li><a href="#" class="current">Home</a> </li>
-                    <li><a @click="topage('/BlogManage')">管理</a> </li>
-                </ul>
+        <div class="menuLeft">
+            <div class="logo" @click="topage('/BlogIndex')">
+                <span>零柒贰</span>
+                <span class="logoBottom" @click="topage('/BlogIndex')">LINQIER</span>
             </div>
-        </nav>
+            <nav class="nav">
+                <div class="container">
+                    <ul>
+                        <li><a href="#" class="current">Home</a> </li>
+                        <li><a @click="topage('/BlogManage')">管理</a> </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
         <OperationBar>
 
         </OperationBar>
@@ -32,7 +34,6 @@ let topage = (url: string) => {
 
 </script>
 <style scoped lang="less">
-
 .menuBody {
     display: flex;
     flex-grow: 1;
@@ -40,7 +41,13 @@ let topage = (url: string) => {
     color: #FFF;
     height: 100px;
     width: 100%;
+    position: relative;
     justify-content: space-between;
+    align-items: center;
+}
+
+.menuLeft {
+    display: flex;
     align-items: center;
 }
 
@@ -49,6 +56,7 @@ let topage = (url: string) => {
     flex-direction: column;
     align-items: center;
     font-size: 30px;
+    padding-right: 3rem;
     cursor: pointer;
 
     .logoBottom {
@@ -58,26 +66,17 @@ let topage = (url: string) => {
 
 .nav {
     transition: all 0.3s ease-in-out;
-}
+    ul {
 
-.nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease-in-out;
-}
+        display: flex;
+        justify-items: center;
+        align-items: center;
+    }
 
-.nav ul {
-    display: flex;
-    list-style-type: none;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 7px 15px;
-    transition: all 0.3s ease-in-out;
+    a {
+        color: #fff;
+        text-decoration: none;
+        padding: 7px 15px;
+    }
 }
 </style>

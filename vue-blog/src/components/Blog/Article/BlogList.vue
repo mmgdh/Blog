@@ -1,5 +1,5 @@
 <template>
-  <div class="hvr-grow  DivCSS" v-for="_Article in Ref_ArticleList" :key="_Article.id" @click="router.push({
+  <div class="hvr-grow" v-for="_Article in Ref_ArticleList" :key="_Article.id" @click="router.push({
     path: 'ShowArticle',
     query: { 'ArticleId': _Article.id }
   })">

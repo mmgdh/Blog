@@ -1,365 +1,172 @@
 <template>
-    <article class="article-card">
-
-        <div class="img-box">
-            <img :src="ImgUrl + ArticleData.imageId" alt="" class="article-banner">
-        </div>
-
-        <div class="article-content">
-
-            <a href="#">
-                <h3 class="article-title">{{ArticleData.title}}</h3>
-            </a>
-
-            <p class="article-text">{{ArticleData.description}}</p>
-
-            <div class="acticle-content-footer">
-
-                <div class="author">
-                    <img :src="ImgUrl + ArticleData.imageId" class="author-avater">
-
-                    <div class="author-info">
-                        <a href="#">
-                            <h4 class="author-name">Michelle Appleton</h4>
-                        </a>
-                        <div class="publish-date">28 Jun 2020</div>
-                    </div>
-                </div>
-
-
-                <div class="share">
-
-                    <button class="share-button">
-                        <!-- <ion-icon name="arrow-redo"></ion-icon> -->
-                    </button>
-
-                    <div class="share-option">
-                        <span>Share</span>
-
-                        <a href="#">
-                            <!-- <ion-icon name="logo-facebook"></ion-icon> -->
-                        </a>
-                        <a href="#">
-                            <!-- <ion-icon name="logo-twitter"></ion-icon> -->
-                        </a>
-                        <a href="#">
-                            <!-- <ion-icon name="logo-pinterest"></ion-icon> -->
-                        </a>
-                    </div>
-
-                </div>
-
+    <div class="article-container">
+        <span class="article-tag">
+            <b>Test</b>
+        </span>
+        <div class="article">
+            <div class="article-thumbnail">
+                <img :src="ImgUrl + ArticleData.imageId" alt="">
+                <span class="thumbnail-screen"></span>/* :style="gradientBackground"*/
             </div>
+            <div class="article-content">
+                <span>
+                    <b>{{ArticleData.classify.classifyName}}</b>
+                    <ul>
+                        <li v-for="Tag in ArticleData.tags" :key="Tag.id">
+                            <em>#{{Tag.tagName}}</em>
+                        </li>
+                    </ul>
+                </span>
+                <h1>{{ArticleData.title}}</h1>
+                <p>{{ArticleData.description}}</p>
 
+                <div class="article-footer">
+                    <div class="flex-center">
+                        <img src="../../../Img/sky.jpg" alt="">
+                        <span class="text-color-dim">
+                            <strong class="text-color-normal">零柒贰</strong> 发布于 {{ArticleData.createDateTime}}
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-
-    </article>
+    </div>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import { Article } from '../../../Entities/E_Article';
 import UploadService from "../../../Services/UploadService"
 const ImgUrl = UploadService.prototype.getImageUri()
 const { ArticleData } = defineProps<{
     ArticleData: Article
 }>()
-
+console.log(ArticleData)
 </script>
-
-<style scoped lang="less">
-    @very-dark-grayish-blue: hsl(217, 19%, 35%);
-    @desaturated-dark-blue: hsl(214, 17%, 51%);
-    @light-grayish-blue: hsl(210, 46%, 95%);
-    @grayish-blue: hsl(212, 23%, 69%);
-    @white: hsl(0, 0%, 100%);
-    @fs-13: 13px;
-/*-----------------------------------*\
-#RESET & DEFAULT
-\*-----------------------------------*/
-
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-a {
-    text-decoration: none;
-    color: @white;
-}
-
-button {
-    border: none;
-    outline: none;
-    cursor: pointer;
-}
-
-img,
-.ion-icon {
-    display: block;
-}
-
-html {
-    font-family: 'Manrope', sans-serif;
-    font-weight: 500;
-}
-
-body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: @light-grayish-blue;
-    padding: 20px;
-}
-
-
-
-
-
-/*-----------------------------------*\
-#MAIN STYLE
-\*-----------------------------------*/
-
-/**
-* article card 
-*/
-
-.article-card {
-    display: grid;
-    grid-template-columns: 285px minmax(300px, 445px);
-    /* max-width: 730px; */
-    border-radius: 10px;
-    box-shadow: 6px 6px 5px hsla(0, 0%, 0%, 0.02),
-        25px 25px 20px hsla(0, 0%, 0%, 0.03),
-        100px 100px 80px hsla(0, 0%, 0%, 0.05);
-}
-
-
-.img-box {
-    border-radius: 10px 0 0 10px;
-    overflow: hidden;
-}
-
-.article-banner {
-    width: 100%;
+<style scoped lang='less'>
+.article-container {
+    border-radius: 1rem;
     height: 100%;
-    object-fit: cover;
-    object-position: left;
-    transition: all 0.5s ease;
-}
-
-.article-card:hover .article-banner {
-    transform: scale(1.1);
-}
-
-.article-content {
-    background: @white;
-    padding: 32px 40px;
-    border-radius: 0 10px 10px 0;
-}
-
-.article-title {
-    font-size: 20px;
-    color: @very-dark-grayish-blue;
-    margin-bottom: 12px;
-    line-height: 1.4;
-}
-
-.article-text {
-    color: @desaturated-dark-blue;
-    font-size: @fs-13;
-    line-height: 1.5;
-    margin-bottom: 18px;
-}
-
-.acticle-content-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.author {
-    display: flex;
-    align-items: center;
-}
-
-.author-avater {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 15px;
-}
-
-.author-name {
-    color: @very-dark-grayish-blue;
-    font-size: @fs-13;
-}
-
-.publish-date {
-    color: @grayish-blue;
-    font-size: @fs-13;
-}
-
-.share {
+    list-style-type: none;
     position: relative;
-}
 
-.share-button {
-    background: @light-grayish-blue;
-    padding: 6px;
-    border-radius: 20px;
-    font-size: 20px;
-    color: @desaturated-dark-blue;
-    transition: all 0.25s ease;
-}
-
-.share-button:hover,
-.share-button.active {
-    background: @desaturated-dark-blue;
-    color: @light-grayish-blue;
-}
-
-.share-option {
-    /**
- * variable for transforming `.share-option` box 
- * without repeating all transform value
- */
-    @scale: 0;
-    @translateX: -50%;
-    @translateY: 0;
-
-    background: @very-dark-grayish-blue;
-    position: absolute;
-    bottom: calc(100% + 28px);
-    left: 50%;
-    transform: translate(@translateX, @translateY) scale(@scale);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 17px 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px -5px #0003;
-    transform-origin: bottom;
-    visibility: hidden;
-    transition: all 0.25s ease;
-}
-
-.share-option.active {
-    --scale: 1;
-    visibility: visible;
-}
-
-.share-option::after {
-    content: '';
-    background: @very-dark-grayish-blue;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -60%) rotate(45deg);
-}
-
-.share-option span {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    color: @grayish-blue;
-    margin-right: 5px;
-}
-
-.share-option ion-icon {
-    font-size: 22px;
-}
-
-.share-option ion-icon:hover,
-.article-title:hover,
-.author-name:hover {
-    filter: invert(1);
-}
-
-
-
-
-
-/*-----------------------------------*\
-#RESPONSIVE
-\*-----------------------------------*/
-
-@media screen and (max-width: 768px) {
-
-@fs-13: 12px;
-
-    /**
- * article card responsive
- */
-
-    .article-card {
-        grid-template-columns: 1fr;
-        max-width: 294px;
-        overflow: hidden;
+    .article-tag {
+        border-radius: .375rem;
+        display: flex;
+        align-items: flex-start;
+        font-weight: 700;
+        font-size: .875rem;
+        line-height: 1.25rem;
+        padding-left: .25rem;
+        padding-right: .25rem;
+        padding-top: .25rem;
+        padding-bottom: .75rem;
+        position: absolute;
+        left: 1.5rem;
+        top: -.25rem;
+        --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+        --tw-text-opacity: 1;
+        color: rgba(255, 255, 255, var(--tw-text-opacity));
+        text-transform: uppercase;
+        --tw-translate-x: 0;
+        --tw-translate-y: 0;
+        --tw-rotate: 0;
+        --tw-skew-x: 0;
+        --tw-skew-y: 0;
+        --tw-scale-x: 1;
+        --tw-scale-y: 1;
+        transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+        background: var(--main-gradient);
+        z-index: 0;
+        transition: transform .2s ease-in-out;
     }
+}
 
-    .img-box,
-    .article-content {
-        border-radius: 0;
-    }
+.article {
+    background-color: var(--background-secondary);
+    border-radius: 1rem;
+    display: grid;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    top: 0;
+    --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    z-index: 10;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    transition: transform .2s ease-in-out;
 
-    .img-box {
-        height: 180px;
-    }
-
-    .article-content {
-        padding: 30px 28px 20px;
-    }
-
-    .article-title {
-        font-size: 15px;
-    }
-
-    .article-text {
-        margin-bottom: 30px;
-    }
-
-    .acticle-content-footer {
+    .article-thumbnail {
         position: relative;
+        grid-row: span 1/span 1;
+
+        img {
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: block;
+            -o-object-fit: cover;
+            object-fit: cover;
+            position: absolute;
+            left: 0;
+            width: 120%;
+            z-index: 20;
+
+        }
+
+        .thumbnail-screen {
+            height: 120%;
+            opacity: .4;
+            pointer-events: none;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            z-index: 30;
+            max-width: 120%;
+            mix-blend-mode: screen;
+            background: linear-gradient(130deg, rgb(36, 198, 220), rgb(84, 51, 255) 41.07%, rgb(255, 0, 153) 76.05%);
+        }
     }
 
-    .author-avater {
-        width: 35px;
-        height: 35px;
+    .article-content {
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-bottom: 1.5rem;
+        position: relative;
+        z-index: 40;
+        grid-row: span 2/span 2;
+
+        h1 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            line-height: 2rem;
+            color: var(--text-bright);
+
+            margin-top: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .article-footer {
+            display: flex;
+            align-items: flex-end;
+            align-content: flex-end;
+            justify-content: flex-start;
+            flex: 1 1 0%;
+            font-size: .875rem;
+            line-height: 1.25rem;
+            width: 100%;
+
+            img {
+                border-radius: 9999px;
+                margin-right: 0.5rem;
+                height: 28px;
+                width: 28px;
+                cursor: pointer;
+                max-width: 100%;
+            }
+        }
     }
-
-    .share {
-        position: static;
-        z-index: 1;
-    }
-
-    .share-button {
-        font-size: 16px;
-    }
-
-    .share-option {
-        /**
-   * variable for transforming `.share-option` box 
-   * without repeating all transform value
-   */
-        @scale: 1;
-        @translateX: 0;
-        @translateY: 100%;
-
-        inset: -20px -28px;
-        border-radius: 0;
-        padding: 17px 30px;
-        z-index: -1;
-    }
-
-    .share-option.active {
-        --translateY: 0;
-    }
-
 }
 </style>

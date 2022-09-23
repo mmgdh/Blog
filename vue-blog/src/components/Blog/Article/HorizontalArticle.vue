@@ -71,14 +71,14 @@ const { articledata } = defineProps<{
     .feature-article>div:first-of-type:after {
         top: 13%;
         left: 0;
-        height: 120%;
+        height:@phoneHeight;
         width: 100%;
         background: var(--article-cover);
     }
 
     .feature-article {
         width: 100%;
-        height: 120%;
+        height:@ComputerHeight;
         grid-template-rows: repeat(3, minmax(0, 1fr));
 
         .feature-thumbnail span {

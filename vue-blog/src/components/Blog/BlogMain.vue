@@ -1,16 +1,15 @@
 <template>
-
     <div class="BlogBody">
         <div class="banner"></div>
 
-        <div class="Container">
+        <div class="BlogContainer">
             <BlogMenu class="BlogMenu"></BlogMenu>
             <router-view class="BlogView"></router-view>
         </div>
-        <div class="BlogBottom">
-            <p>个人博客系统</p>
-            <p>公安备案：</p>
-        </div>
+    </div>
+    <div class="BlogBottom">
+        <p>个人博客系统</p>
+        <p>公安备案：</p>
     </div>
 </template>
 
@@ -23,17 +22,12 @@ router.push('/BlogIndex')
 
 </script>
 <style lang="less">
-@media (max-width: 1024px) {
-    .Container {
-        width: 100%;
+@media (min-width: 1024px) {
+    .BlogContainer {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        max-width: 1536px;
     }
-}
-
-ol,
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
 a {
@@ -46,11 +40,11 @@ a {
 }
 
 
-.Container {
+.BlogContainer {
     color: var(--text-normal);
-    // margin: 0 auto;
-    width: 70%;
-    z-index: 10;
+    margin: 0 auto;
+    padding-left: .75rem;
+    padding-right: .75rem;
 }
 
 .BlogBody {
@@ -58,9 +52,12 @@ a {
     /* z-index: -2; */
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
+    min-width: 100%;
     align-items: center;
+    position: relative;
+    font-family: Rubik, Avenir, Helvetica, Arial, sans-serif;
 
     .banner {
         background: linear-gradient(130deg, rgb(36, 198, 220), rgb(84, 51, 255) 41.07%, rgb(255, 0, 153) 76.05%);
@@ -182,21 +179,27 @@ a {
         top: 0;
         z-index: 1;
     }
+}
 
-    .BlogBottom {
-        height: 100px;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-    }
+.BlogView{
+    z-index: 10;
+    position: relative;
+    display: block;
+}
 
-    .BlogBottom p {
+.BlogBottom {
+    height: 100px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 0;
+    bottom: 0;
+
+    p {
         margin: 5px;
         font-size: x-large;
     }
