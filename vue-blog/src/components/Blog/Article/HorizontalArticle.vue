@@ -1,5 +1,5 @@
 <template>
-    <div class="feature-article" @click="router.push({
+    <div class="feature-article hvr-grow" @click="router.push({
       path: 'ShowArticle',
       query: { 'ArticleId': articledata.id }
     })">
@@ -22,7 +22,7 @@
                     <img :src="refPictureUrl" alt="">
                     <span class="text-color-dim">
                         <strong class="text-color-normal">{{AuthorName}}</strong> 发布于 {{articledata.createDateTime}}
-                    </span>
+                    </span>nn
                 </div>
             </div>
         </div>
@@ -52,6 +52,7 @@ watch(refParamStore.HeadPortrait, (newValue, oldValue) => {
 </script>
 
 <style scoped lang="less">
+
 @ComputerHeight: 28rem;
 @phoneHeight: 120%;
 

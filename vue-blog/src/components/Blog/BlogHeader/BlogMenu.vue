@@ -24,13 +24,15 @@
 
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import OperationBar from './OperationBar.vue'
 import { useAppStore } from '../../../Store/AppStore';
+import { storeToRefs } from 'pinia';
 const ParamStore = useAppStore();
-const AuthorName = ParamStore.AuthorName;
-const AuthorPinYin=ParamStore.AuthorPinYin;
+const refParamStore = storeToRefs(ParamStore)
+let AuthorName = refParamStore.AuthorName;
+let AuthorPinYin = refParamStore.AuthorPinYin;
 let router = useRouter()
 let topage = (url: string) => {
     router.push(url)

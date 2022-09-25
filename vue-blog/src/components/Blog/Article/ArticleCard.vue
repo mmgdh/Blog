@@ -1,5 +1,5 @@
 <template>
-    <div class="article-container">
+    <div class="article-container hvr-grow">
         <span class="article-tag">
             <b>Test</b>
         </span>

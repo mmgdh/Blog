@@ -23,6 +23,10 @@ router.push('/BlogIndex')
 </script>
 <style lang="less">
 
+.transition{
+    transition: all 0.4s ease-in-out;
+}
+
 a {
     color: inherit;
     text-decoration: inherit;
@@ -38,9 +42,11 @@ a {
     margin: 0 auto;
     padding-left: .75rem;
     padding-right: .75rem;
+    .transition();
 }
 
 .BlogBody {
+    .transition();
     background-color: var(--background-primary);
     /* z-index: -2; */
     display: flex;

@@ -150,18 +150,19 @@ watch(refParamStore.HeadPortrait, (newValue, oldValue) => {
       color: var(--text-title-h2);
     }
 
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-items: center;
+      padding: 125px 0px 10px 0px;
+      transition: all 0.4s ease-in-out;
+    }
 
   }
 }
 
-.info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
-  padding: 125px 0px 10px 0px;
-  transition: all 0.4s ease-in-out;
-}
+
 
 .linkCSS {
   opacity: 0;
