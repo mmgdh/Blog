@@ -9,7 +9,7 @@ export default class BlogInfoService {
     }
 
     public async DelBlogParameter(id: string): Promise<boolean> {
-        return await Delete(controler + "/DelBlogParameter", id)
+        return await Delete(controler + "/DelBlogParameter", { id: id })
     }
 
     public async ModifyBlogParameter(parames: BlogParam): Promise<boolean> {
@@ -22,7 +22,11 @@ export default class BlogInfoService {
         return await get(controler + "/GetBlogParameters")
     }
 
-    public async GetBlogParameter(): Promise<BlogParam> {
-        return await get(controler + "/GetBlogParameter")
+    public async GetBlogParameter(ParamName:string): Promise<BlogParam> {
+        return await get(controler + "/GetBlogParameter",{ParamName:ParamName})
+    }
+
+    public async RefreshBlogParameter():Promise<boolean>{
+        return await post(controler+ "/RefreshBlogParameter")
     }
 }

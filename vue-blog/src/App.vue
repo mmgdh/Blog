@@ -18,7 +18,7 @@ onBeforeMount(() => {
   ArticleStore.GetTags();
   ArticleStore.GetClassifies();
   ParamStore.GetAllParameter();
-  // ArticleStore.GetArticleCount();
+  ArticleStore.GetArticleCount();
 
 })
 

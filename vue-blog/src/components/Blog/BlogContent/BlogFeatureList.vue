@@ -6,38 +6,38 @@
           <p>
             EDITOR'S SELECTION</p>
           <span>
-            Feature Articles
+            推荐文章
           </span>
         </h2>
       </div>
       <span class="BoardBack"></span>
     </div>
-
-    <!-- <ul class="grid lg:grid-cols-2 gap-8">
-      <template v-if="featuredArticles.length > 0">
-        <li v-for="article in featuredArticles" :key="article.id">
-          <ArticleCard :data="article" />
-        </li>
-      </template>
-      <template v-else>
-        <li v-for="n in 2" :key="n">
-          <ArticleCard :data="{}" />
-        </li>
-      </template>
-    </ul> -->
+    <ul>
+      <li v-for="article in Ref_ArticleList" :key="article.id">
+        <ArticleCardVue :ArticleData="article" />
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useArticleStore } from '../../../Store/ArticleStore'
+import { storeToRefs } from 'pinia';
+import ArticleCardVue from '../Article/ArticleCard.vue'
 
+let ArticleStore = useArticleStore();
+let router = useRouter()
+let refStore = storeToRefs(ArticleStore);
+let Ref_ArticleList = refStore.CurPageArticles;
 </script>
 
 <style scoped lang="less">
 @import '../../../CSS/CommomCSS.less';
 
 .container {
-  .inverted-main-grid();
+  display: flex;
+  flex-direction: column;
   .py(2rem);
   .gap(2rem);
   .box-border();
@@ -47,7 +47,6 @@ import { ref } from 'vue'
   .relative();
   .overflow-hidden();
   border-radius: 1rem;
-  background-color: var(--background-secondary);
   height: auto;
 
   .BoardContent {
@@ -64,6 +63,7 @@ import { ref } from 'vue'
     .px(2rem);
     border-radius: 1rem;
     background-color: var(--background-primary);
+    font-weight: bold;
 
     h2 {
       padding-bottom: 4rem;
@@ -72,12 +72,11 @@ import { ref } from 'vue'
       font-weight: inherit;
 
       p {
-        display: block;
         margin-block-start: 1em;
         margin-block-end: 1em;
         margin-inline-start: 0px;
         margin-inline-end: 0px;
-        background: var(--header_gradient_css);
+        .gradient-font()
       }
 
       span {
@@ -86,7 +85,6 @@ import { ref } from 'vue'
         font-weight: 600;
         position: relative;
         color: var(--text-bright);
-        background: var(--header_gradient_css);
       }
     }
   }
@@ -101,19 +99,51 @@ import { ref } from 'vue'
   }
 }
 
+ul {
+  .gap(2rem);
+  display: grid;
+}
 
-@media (min-width:1024px) {
+@media (min-width: 1024px) {
+  .container {
+    display: grid;
+    grid-template-columns: 245px minmax(0, 1fr);
+  }
+
   .lg\:h-auto {
     height: auto;
   }
+
+  ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-.gradientText {
 
-  color: var(--header_gradient_css)
-}
 
-.gradientBackground {
-  background-color: var(--header_gradient_css);
-}
+
+
+
+
+
+
+// .linear-gradient {
+//   background-image: linear-gradient(90deg, #f90, #3c9);
+//   background-clip: text;
+//   line-height: 80px;
+//   font-size: 60px;
+//   color: transparent;
+//   animation: hueRotate 5s linear infinite;
+// }
+
+// @keyframes hueRotate {
+//   from {
+//     filter: hue-rotate(0);
+//   }
+
+//   to {
+//     // hue-rotate滤镜除了支持deg，还支持其它CSS3单位，比如圈数turn、弧度rad等
+//     filter: hue-rotate(360deg); // 360度旋转
+//   }
+// }
 </style>

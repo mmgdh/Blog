@@ -9,6 +9,7 @@ namespace BlogInfoService.Infrastructure.EntityConfigs
         public void Configure(EntityTypeBuilder<BlogParameter> builder)
         {
             builder.ToTable("T_BlogParameter");
+            
         }
     }
 }

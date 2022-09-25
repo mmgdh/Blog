@@ -46,7 +46,7 @@ namespace ArticleService.Domain.Entities
             {
                 var article = new Article();
                 article.Title = Title;
-                article.Description = RegexHelper.GetContent(Content, 100);
+                article.Description = RegexHelper.GetContent(Content, 200);
                 article.articleContent = ArticleContent.Create(article, Content);
                 return article;
             }

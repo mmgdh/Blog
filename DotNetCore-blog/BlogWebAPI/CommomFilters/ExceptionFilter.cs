@@ -1,6 +1,7 @@
 ﻿using CommomFilters.Class;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net;
 
@@ -8,6 +9,12 @@ namespace CommomFilters
 {
     public class ExceptionFilter : IAsyncExceptionFilter
     {
+        public readonly ILogger<ExceptionFilter> logger;
+
+        public ExceptionFilter(ILogger<ExceptionFilter> logger)
+        {
+            this.logger = logger;
+        }
 
         public Task OnExceptionAsync(ExceptionContext context)
         {
@@ -28,15 +35,18 @@ namespace CommomFilters
                     Message = context.Exception.Message,
                     Data = ""
                 };
+                var JsonContent = JsonConvert.SerializeObject(result);
                 context.Result = new ContentResult
                 {
                     // 返回状态码设置为200，表示成功
                     StatusCode = (int)HttpStatusCode.OK,
                     // 设置返回格式
                     ContentType = "application/json;charset=utf-8",
-                    Content = JsonConvert.SerializeObject(result)
+                    Content = JsonContent
                 };
+                logger.LogError(JsonContent);
             }
+            
             // 设置为true，表示异常已经被处理了
             context.ExceptionHandled = true;
             return Task.CompletedTask;

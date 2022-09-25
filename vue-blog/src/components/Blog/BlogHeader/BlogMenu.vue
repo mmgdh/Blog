@@ -2,8 +2,8 @@
     <div class="menuBody">
         <div class="menuLeft">
             <div class="logo" @click="topage('/BlogIndex')">
-                <span>零柒贰</span>
-                <span class="logoBottom" @click="topage('/BlogIndex')">LINQIER</span>
+                <span>{{AuthorName}}</span>
+                <span class="logoBottom" @click="topage('/BlogIndex')">{{AuthorPinYin}}</span>
             </div>
             <nav class="nav">
                 <div class="container">
@@ -24,9 +24,13 @@
 
 </template>
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import OperationBar from './OperationBar.vue'
-
+import { useAppStore } from '../../../Store/AppStore';
+const ParamStore = useAppStore();
+const AuthorName = ParamStore.AuthorName;
+const AuthorPinYin=ParamStore.AuthorPinYin;
 let router = useRouter()
 let topage = (url: string) => {
     router.push(url)
@@ -66,6 +70,7 @@ let topage = (url: string) => {
 
 .nav {
     transition: all 0.3s ease-in-out;
+
     ul {
 
         display: flex;

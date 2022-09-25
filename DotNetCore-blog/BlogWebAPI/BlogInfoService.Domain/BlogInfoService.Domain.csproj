@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CommomInterface\CommomInterface.csproj" />
     <ProjectReference Include="..\CommonDomain\DomainCommon.csproj" />
+    <ProjectReference Include="..\Commons\CommonHelpers.csproj" />
   </ItemGroup>
 
 </Project>

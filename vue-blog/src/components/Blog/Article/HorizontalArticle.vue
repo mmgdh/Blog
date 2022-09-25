@@ -1,95 +1,61 @@
 <template>
     <div class="feature-article" @click="router.push({
-        path: 'ShowArticle',
-        query: { 'ArticleId': articledata.id }
-      })">
-    <div class=" feature-thumbnail">
-        <img v-if="articledata" class="ob-hz-thumbnail" :src="ImgUrl + articledata.imageId" />
-        <img v-else src="../../../Img/backgroud.png" />
-        <span class="thumbnail-screen"></span>
-    </div>
-    <div class="feature-content" v-if="articledata">
-        <span>
-            <b> {{articledata.classify.classifyName}} </b>
-            <ul v-for="tag in articledata.tags">
-                <li>#{{tag.tagName}}</li>
-            </ul>
-        </span>
-        <h1>{{articledata.title}}</h1>
-        <p>{{articledata.description}}</p>
-        <div class="article-footer">
-            <div class="flex-center">
-                <img src="../../../Img/sky.jpg" alt="">
-                <span class="text-color-dim">
-                    <strong class="text-color-normal">零柒贰</strong> 发布于 {{articledata.createDateTime}}
-                </span>
+      path: 'ShowArticle',
+      query: { 'ArticleId': articledata.id }
+    })">
+        <div class=" feature-thumbnail">
+            <img v-if="articledata" :src="ImgUrl + articledata.imageId" />
+            <img v-else src="../../../Img/backgroud.png" />
+            <span class="thumbnail-screen"></span>
+        </div>
+        <div class="feature-content" v-if="articledata">
+            <span>
+                <b> {{articledata.classify.classifyName}} </b>
+                <ul v-for="tag in articledata.tags">
+                    <li><em>#{{tag.tagName}}</em></li>
+                </ul>
+            </span>
+            <h1>{{articledata.title}}</h1>
+            <p>{{articledata.description}}</p>
+            <div class="article-footer">
+                <div class="flex-center">
+                    <img :src="refPictureUrl" alt="">
+                    <span class="text-color-dim">
+                        <strong class="text-color-normal">{{AuthorName}}</strong> 发布于 {{articledata.createDateTime}}
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
 <script setup lang='ts'>
-import { computed } from '@vue/reactivity';
 import { ref, onBeforeMount, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { Article } from '../../../Entities/E_Article';
 import UploadService from "../../../Services/UploadService"
+import { useAppStore } from '../../../Store/AppStore';
+import { storeToRefs } from 'pinia';
 const ImgUrl = UploadService.prototype.getImageUri()
 let router = useRouter()
 const { articledata } = defineProps<{
     articledata: Article
 }>()
+
+const ParamStore = useAppStore();
+const refParamStore = storeToRefs(ParamStore);
+var refPictureUrl = ref(`${refParamStore.HeadPortrait.value}`);
+const AuthorName = refParamStore.AuthorName;
+watch(refParamStore.HeadPortrait, (newValue, oldValue) => {
+    refPictureUrl.value = `${newValue}`;
+})
 </script>
 
 <style scoped lang="less">
 @ComputerHeight: 28rem;
 @phoneHeight: 120%;
 
-@media (min-width: 1024px) {
-    .feature-article {
-        height: @ComputerHeight;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: none;
 
-        .feature-thumbnail span {
-            height: @ComputerHeight;
-        }
-
-        .feature-thumbnail img {
-            height: @ComputerHeight;
-        }
-
-        .feature-content {
-            padding: 3rem;
-            grid-row: auto;
-        }
-    }
-}
-
-@media (max-width:1023px) {
-    .feature-article>div:first-of-type:after {
-        top: 13%;
-        left: 0;
-        height:@phoneHeight;
-        width: 100%;
-        background: var(--article-cover);
-    }
-
-    .feature-article {
-        width: 100%;
-        height:@ComputerHeight;
-        grid-template-rows: repeat(3, minmax(0, 1fr));
-
-        .feature-thumbnail span {
-            height: @phoneHeight;
-        }
-
-        .feature-thumbnail img {
-            height: @phoneHeight;
-        }
-    }
-}
 
 
 
@@ -129,22 +95,23 @@ const { articledata } = defineProps<{
             z-index: 30;
             background: var(--header_gradient_css)
         }
-    }
 
-    .feature-thumbnail:after {
-        pointer-events: none;
-        content: "";
-        position: absolute;
-        z-index: 35;
-        left: 71%;
-        top: 0;
-        height: @ComputerHeight;
-        width: 50%;
-        background: var(--gradient-cover);
-    }
+        &:after {
+            pointer-events: none;
+            content: "";
+            position: absolute;
+            z-index: 35;
+            left: 71%;
+            top: 0;
+            height: @ComputerHeight;
+            width: 50%;
+            background: var(--gradient-cover);
+        }
 
-    .thumbnail-screen {
-        mix-blend-mode: screen;
+        .thumbnail-screen {
+            mix-blend-mode: screen;
+        }
+
     }
 
     .feature-content {
@@ -162,7 +129,7 @@ const { articledata } = defineProps<{
             line-height: 1rem;
             color: var(--text-accent);
             text-transform: uppercase;
-            font-weight: bolder;
+
         }
 
         ul {
@@ -186,6 +153,10 @@ const { articledata } = defineProps<{
         }
 
         h1 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            line-height: 2rem;
+            margin-bottom: 1.5rem;
             color: var(--text-bright);
         }
 
@@ -207,15 +178,14 @@ const { articledata } = defineProps<{
                 cursor: pointer;
                 max-width: 100%;
             }
+
+            strong {
+                padding-right: 0.375rem;
+            }
         }
     }
 
 
-}
-
-
-.ob-hz-thumbnail {
-    max-width: 120%;
 }
 
 .flex-center {
@@ -223,5 +193,71 @@ const { articledata } = defineProps<{
     flex-direction: row;
     align-items: center;
 
+}
+
+@media (min-width: 1024px) {
+    .feature-article {
+        height: @ComputerHeight;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: none;
+
+        .feature-thumbnail {
+            span {
+                height: @ComputerHeight;
+            }
+
+            img {
+                height: @ComputerHeight;
+            }
+        }
+
+        .feature-content {
+            padding: 3rem;
+            grid-row: auto;
+
+            h1 {
+                font-size: 2.25rem;
+                line-height: 2.5rem;
+                margin-top: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            b {
+                font-size: 1rem;
+                line-height: 1.5rem;
+            }
+
+            ul {
+                font-size: 1rem;
+                line-height: 1.5rem;
+            }
+        }
+    }
+}
+
+@media (max-width:1023px) {
+    .feature-article>div:first-of-type:after {
+        top: 13%;
+        left: 0;
+        height: @phoneHeight;
+        width: 100%;
+        background: var(--article-cover);
+    }
+
+    .feature-article {
+        width: 100%;
+        height: @ComputerHeight;
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+
+        .feature-thumbnail {
+            span {
+                height: @phoneHeight;
+            }
+
+            img {
+                height: @phoneHeight;
+            }
+        }
+    }
 }
 </style>

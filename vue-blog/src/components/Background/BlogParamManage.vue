@@ -3,7 +3,9 @@
     <a-button type="primary" @click="AddClick">
       新增
     </a-button>
-
+    <a-button type="primary" @click="RefreshFunc" danger>
+      重置缓存
+    </a-button>
   </div>
 
   <a-table :dataSource="Ref_BlogParamList" :columns="columns" :pagination="pagination" @change="Func_RefreshBlogParam">
@@ -46,7 +48,7 @@ import { storeToRefs } from 'pinia';
 const ParamStore = useAppStore();
 const refStore = storeToRefs(ParamStore);
 let Ref_BlogParamList = refStore.BlogParameters;
-console.log(Ref_BlogParamList);
+console.log(Ref_BlogParamList.value);
 let Ref_Current = ref(1);
 let curRecord = ref({} as BlogParam);
 let submitBlogParam = ref({} as BlogParam);
@@ -106,6 +108,15 @@ const ModifyFunc = async () => {
   ModifyMsgVisible.value = false;
 }
 
+const RefreshFunc = async () => {
+  var ret = await BlogInfoService.prototype.RefreshBlogParameter();
+  if (ret == true) {
+    await ParamStore.GetAllParameter();
+    console.log("刷新成功");
+  }
+
+}
+
 const columns = [
   {
     title: '参数名',
@@ -140,7 +151,15 @@ const validateMessages = {
   },
 };
 </script>
-<style scoped>
+<style scoped lang="less">
+div {
+  button {
+    margin: 1rem;
+
+  }
+
+}
+
 img {
   width: auto;
   height: auto;

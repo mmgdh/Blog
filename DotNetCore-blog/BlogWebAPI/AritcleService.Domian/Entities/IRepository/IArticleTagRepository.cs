@@ -40,5 +40,7 @@ namespace ArticleService.Domain.IRepository
         public Task<bool> TagIsUsedByArticle(Guid id);
 
         public Task<bool> TagDeletAsync(Guid id);
+
+        public Task<Dictionary<ArticleTag, int>> GetArticleTagWithArticleCount();
     }
 }

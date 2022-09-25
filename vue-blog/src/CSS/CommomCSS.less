@@ -2,6 +2,7 @@
     --MAXWidth: 500px;
     --Max-Width: var(--MAXWidth);
     --header_gradient_css: linear-gradient(130deg, #24c6dc, #5433ff 41.07%, #ff0099 76.05%);
+    --gap:2rem;
 }
 
 .px(@value) {
@@ -27,6 +28,7 @@
     overflow: hidden;
 }
 
+
 .box-border {
     box-sizing: border-box;
 }
@@ -42,4 +44,13 @@
 .main-grid {
     display: flex;
     flex-direction: column;
+}
+
+.gradient-font{
+    background: linear-gradient(130deg, rgb(36, 198, 220), rgb(84, 51, 255) 41.07%, rgb(255, 0, 153) 76.05%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    background-clip:text;
 }

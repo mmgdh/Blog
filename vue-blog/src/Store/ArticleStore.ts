@@ -19,6 +19,7 @@ export const useArticleStore = defineStore('Article', {
       CurPageArticles: {
 
       } as Array<Article>,
+      AllArticleCount:Number,
       PageRequestParm: {
         page: 1,
         pageSize: 10,
@@ -41,9 +42,9 @@ export const useArticleStore = defineStore('Article', {
     async GetClassifies() {
       this.Classifies = await ArticleService.prototype.GetAllArticleClassify();
     },
-    // async GetArticleCount() {
-    //   this.AllArticleCount = await ArticleService.prototype.GetArticleCount();
-    // },
+    async GetArticleCount() {
+      this.AllArticleCount = await ArticleService.prototype.GetArticleCount();
+    },
     async GetArticleByPage() {
       var ret = await ArticleService.prototype.GetArticleByPage(this.PageRequestParm);
       this.CurPageArticles = ret.articles;

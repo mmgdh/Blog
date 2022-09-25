@@ -49,11 +49,26 @@ namespace CommonHelpers
             return result;
         }
 
+        public async Task ReSetRedisValue<T>(string KeyName,List<T>? values = null,Func<Task<List<T>>>? reSetFunc=null)
+        {
+            //删除后重新设置redis缓存
+            //KeyDelete(KeyName);
+            if (values == null)
+            {
+                if (reSetFunc != null)
+                    values = await reSetFunc.Invoke();
+                else
+                    values = new List<T>();
+            }
+            await AddListAsync<T>(KeyName, values);
+            await KeyExpire(KeyName, TimeSpan.FromSeconds(30));
+        }
         private RedisKey[] ConvertRedisKeys(List<string> rediskey)
         {
             return rediskey.Select(key => (RedisKey)key).ToArray();
         }
         #endregion
+
         #region 特殊方法
         public async Task<bool> AddFileCache(string key, byte[] bytes,string fileType)
         {
@@ -126,11 +141,19 @@ namespace CommonHelpers
                 return ConvertList<T>(values);
             });
         }
-        public bool AddList<T>(string key, IEnumerable<T> values)
+        public async Task<bool> AddListAsync<T>(string key, IEnumerable<T> values)
         {
             var value = values.Select(x => ConvertJson(x));
             IEnumerable<RedisValue> redisValues = value.Select(x => new RedisValue(x));
-            Do(db => db.ListRightPush(key, redisValues.ToArray()));
+            await Do(db => db.ListRightPushAsync(key, redisValues.ToArray()));
+            return true;
+        }
+        public async Task<bool> ListPushOneAsync<T>(string key,T value)
+        {
+            if (KeyExists(key))
+            {
+              await  Do(db => db.ListRightPushAsync(key, new RedisValue(ConvertJson(value))));
+            }
             return true;
         }
         #endregion
@@ -258,10 +281,10 @@ namespace CommonHelpers
         /// <param name="key"></param>
         /// <param name="expiry"></param>
         /// <returns></returns>
-        public bool KeyExpire(string key, TimeSpan? expiry)
+        public async Task<bool> KeyExpire(string key, TimeSpan? expiry)
         {
             if (expiry == null) expiry = new TimeSpan(0, 10, 0);//默认10分钟
-            return Do(db => db.KeyExpire(key, expiry));
+            return await Do(db => db.KeyExpireAsync(key, expiry));
         }
         /// <summary>
         /// key是否存在

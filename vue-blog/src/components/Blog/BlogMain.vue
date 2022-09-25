@@ -22,13 +22,6 @@ router.push('/BlogIndex')
 
 </script>
 <style lang="less">
-@media (min-width: 1024px) {
-    .BlogContainer {
-        padding-left: 2rem;
-        padding-right: 2rem;
-        max-width: 1536px;
-    }
-}
 
 a {
     color: inherit;
@@ -53,8 +46,8 @@ a {
     display: flex;
     flex-direction: column;
     height: 100%;
-    min-height: 100vh;
     min-width: 100%;
+    min-height: 1920px;
     align-items: center;
     position: relative;
     font-family: Rubik, Avenir, Helvetica, Arial, sans-serif;
@@ -202,6 +195,14 @@ a {
     p {
         margin: 5px;
         font-size: x-large;
+    }
+}
+
+@media (min-width: 1024px) {
+    .BlogContainer {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        max-width: 1536px;
     }
 }
 </style>

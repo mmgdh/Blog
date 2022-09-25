@@ -57,5 +57,20 @@ namespace ArticleService.Infrastructure.Repository
             dbCtx.Remove(tag);
             return true;
         }
+
+        public async Task<Dictionary<ArticleTag, int>> GetArticleTagWithArticleCount()
+        {
+            Dictionary<ArticleTag, int> result = new Dictionary<ArticleTag, int>();
+            var TagCounts = await dbCtx.Tags.Select(x => new
+            {
+                ArticleTag = x,
+                ArticleCount = x.Articles.Count()
+            }).ToListAsync();
+            foreach(var TagCount in TagCounts)
+            {
+                result.Add(TagCount.ArticleTag, TagCount.ArticleCount);
+            }
+            return result;
+        }
     }
 }

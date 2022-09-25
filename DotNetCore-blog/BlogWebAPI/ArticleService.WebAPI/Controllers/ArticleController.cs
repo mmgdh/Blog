@@ -174,9 +174,18 @@ namespace ArticleService.WebAPI.Controllers
             return ret;
         }
         [HttpGet]
-        public async Task<ActionResult<ArticleTag[]>> GetAllTags()
+        public async Task<ActionResult<ArticleTagResponse[]>> GetAllTags(bool? NeedCount)
         {
-            return await Tagrepository.GetAllArticleTagsAsync();
+            if (NeedCount==true)
+            {
+                var TagWithCount = await Tagrepository.GetArticleTagWithArticleCount();
+                return Ok(ArticleTagResponse.CreatelstResponse(TagWithCount));
+            }
+            else
+            {
+                return Ok(ArticleTagResponse.CreatelstResponse(await Tagrepository.GetAllArticleTagsAsync())); 
+            }
+
         }
         #endregion
 

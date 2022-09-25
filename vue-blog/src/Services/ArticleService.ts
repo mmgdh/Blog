@@ -40,8 +40,11 @@ export default class ArticleService {
     async DeleteArticleClassify(ClassifyId: string) {
         return await Delete(controler + "/DeleteClassify", {id:ClassifyId})
     }
+
+    
+    //Get请求
     async GetAllArticleTags() {
-        return await get(controler + '/GetAllTags')
+        return await get(controler + '/GetAllTags',{NeedCount:true})
     }
 
     async GetArticleByPage(parames: any) {

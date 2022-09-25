@@ -1,4 +1,5 @@
-﻿using DomainCommon;
+﻿using Commons;
+using DomainCommon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,25 @@ namespace BlogInfoService.Domain.Entities
 {
     public class BlogParameter: AggregateRootEntity
     {
-        public string ParamName { get; set; }
+        private string _name;
+        public string ParamName
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                PinYin = PinYinHelper.GetFrist(value);
+            }
+        }
 
         public string ParamValue { get; set; }
 
         public string ParamType { get; set; }
+
+        public string PinYin { get; private set; } = "";
 
         public static BlogParameter Create(string paramName,string paramValue,string? paramType)
         {

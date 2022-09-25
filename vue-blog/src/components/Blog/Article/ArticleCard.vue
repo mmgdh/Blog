@@ -6,7 +6,7 @@
         <div class="article">
             <div class="article-thumbnail">
                 <img :src="ImgUrl + ArticleData.imageId" alt="">
-                <span class="thumbnail-screen"></span>/* :style="gradientBackground"*/
+                <span class="thumbnail-screen"></span>
             </div>
             <div class="article-content">
                 <span>
@@ -22,9 +22,9 @@
 
                 <div class="article-footer">
                     <div class="flex-center">
-                        <img src="../../../Img/sky.jpg" alt="">
+                        <img :src="refPictureUrl" alt="">
                         <span class="text-color-dim">
-                            <strong class="text-color-normal">零柒贰</strong> 发布于 {{ArticleData.createDateTime}}
+                            <strong class="text-color-normal">{{AuthorName}}</strong> 发布于 {{ArticleData.createDateTime}}
                         </span>
                     </div>
                 </div>
@@ -34,15 +34,35 @@
 </template>
 
 <script setup lang="ts">
+import { ref,watch } from 'vue'
 import { Article } from '../../../Entities/E_Article';
 import UploadService from "../../../Services/UploadService"
+import { useAppStore } from '../../../Store/AppStore';
+import { storeToRefs } from 'pinia';
+
+
 const ImgUrl = UploadService.prototype.getImageUri()
 const { ArticleData } = defineProps<{
     ArticleData: Article
 }>()
-console.log(ArticleData)
+const ParamStore = useAppStore();
+const refParamStore=storeToRefs(ParamStore)
+var refPictureUrl = ref(`${refParamStore.HeadPortrait.value}`);
+const AuthorName = refParamStore.AuthorName;
+watch(refParamStore.HeadPortrait,(newValue,oldValue)=>{
+    refPictureUrl.value = `${newValue}`;
+})
 </script>
 <style scoped lang='less'>
+@media (min-width: 1024px) {
+    .feature-article .feature-content h1 {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+}
+
 .article-container {
     border-radius: 1rem;
     height: 100%;
@@ -109,6 +129,7 @@ console.log(ArticleData)
             position: absolute;
             left: 0;
             width: 120%;
+            height: 120%;
             z-index: 20;
 
         }
@@ -127,6 +148,18 @@ console.log(ArticleData)
         }
     }
 
+    .article-thumbnail:after {
+        pointer-events: none;
+        content: "";
+        position: absolute;
+        z-index: 35;
+        top: 13%;
+        left: 0;
+        height: 120%;
+        width: 100%;
+        background: var(--article-cover);
+    }
+
     .article-content {
         background-color: transparent;
         display: flex;
@@ -138,6 +171,9 @@ console.log(ArticleData)
         z-index: 40;
         grid-row: span 2/span 2;
 
+
+
+
         h1 {
             font-weight: 800;
             font-size: 1.5rem;
@@ -146,6 +182,28 @@ console.log(ArticleData)
 
             margin-top: 1rem;
             margin-bottom: 1.25rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        span {
+            filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .1));
+
+            ul {
+                display: inline-flex;
+                font-size: .75rem;
+                line-height: 1rem;
+                padding-left: 1rem;
+            }
+
+            b {
+                font-size: .75rem;
+                line-height: 1rem;
+                color: var(--text-accent);
+                text-transform: uppercase;
+            }
         }
 
         .article-footer {
