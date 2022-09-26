@@ -59,7 +59,12 @@ namespace BlogInfoService.WebAPI.Controllers
             var Param = await dbContext.blogParameters.FindAsync(request.id);
             if (Param == null) throw new Exception("查询不到对应参数");
             Param.ParamValue = request.paramValue;
-            return await dbContext.SaveChangesAsync() > 0;
+            var ret = await dbContext.SaveChangesAsync() > 0;
+            if (ret)
+            {
+                await redisHelper.ReSetRedisValue(KeyName, reSetFunc: new Func<Task<List<BlogParameter>>>(async () => { return await dbContext.blogParameters.ToListAsync(); }));
+            }
+            return ret;
         }
         [HttpPost]
         [Authorize]

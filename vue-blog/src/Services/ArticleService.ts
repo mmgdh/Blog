@@ -5,9 +5,6 @@ import { Article, ArticleTag } from '../Entities/E_Article'
 const controler = "Article";
 
 export default class ArticleService {
-    public async GetArticleById(_id: string) {
-        return await get(controler + "/GetArticleById", { id: _id })
-    }
 
     async AddArticle(Article: FormData) {
         return await post(controler + '/Add', Article)
@@ -43,6 +40,10 @@ export default class ArticleService {
 
     
     //Get请求
+    public async GetArticleById(_id: string,needDetail:boolean) {
+        return await get(controler + "/GetArticleById", { id: _id,needDetail:needDetail })
+    }
+
     async GetAllArticleTags() {
         return await get(controler + '/GetAllTags',{NeedCount:true})
     }

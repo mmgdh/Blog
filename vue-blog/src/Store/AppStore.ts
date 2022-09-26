@@ -18,7 +18,7 @@ const GetParameterValue = (paramName: string) => {
 }
 
 let BlogParamArray: BlogParam[] = [];
-let ref_BlogParamArray=ref(BlogParamArray);
+let ref_BlogParamArray = ref(BlogParamArray);
 
 export const useAppStore = defineStore('AppStore', {
     state: () => {
@@ -39,15 +39,15 @@ export const useAppStore = defineStore('AppStore', {
         },
         HeadPortrait(state) {
             var ret = ''
-            var pictureId = ref_BlogParamArray.value.find(x => x.paramName == 'Blog-HeadPortrait')?.paramValue 
+            var pictureId = ref_BlogParamArray.value.find(x => x.paramName == 'Blog-HeadPortrait')?.paramValue
 
             if (pictureId) {
                 ret = UploadService.prototype.getImageUri() + pictureId
             }
             return ret;
         },
-        BlogParameters(){
-           return ref_BlogParamArray.value
+        BlogParameters() {
+            return ref_BlogParamArray.value
         }
     },
     actions: {
@@ -55,8 +55,8 @@ export const useAppStore = defineStore('AppStore', {
             ref_BlogParamArray.value = await BlogInfoService.prototype.GetAllBlogParameters();
 
         },
-        async GetParameterValue(paramName: string) {
-            if (ref_BlogParamArray.value.length == undefined) await this.GetAllParameter();
+        GetParameterValue(paramName: string) {
+            if (ref_BlogParamArray.value.length == undefined) this.GetAllParameter();
             if (ref_BlogParamArray.value.length == 0) return undefined;
             return ref_BlogParamArray.value.find(x => x.paramName == paramName)?.paramValue;
         },

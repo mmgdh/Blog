@@ -52,7 +52,7 @@ namespace CommonHelpers
         public async Task ReSetRedisValue<T>(string KeyName,List<T>? values = null,Func<Task<List<T>>>? reSetFunc=null)
         {
             //删除后重新设置redis缓存
-            //KeyDelete(KeyName);
+            KeyDelete(KeyName);
             if (values == null)
             {
                 if (reSetFunc != null)

@@ -76,7 +76,7 @@ onMounted(() => {
     Ref_ArticleCLassify.value = ArticleStore.$state.Classifies
     //若ArticleId不为空，则代表编辑状态，查询对应的文章
     if (ArticleId != null) {
-        ArticleService.prototype.GetArticleById(ArticleId).then(ret => {
+        ArticleService.prototype.GetArticleById(ArticleId,true).then(ret => {
             SubmitArticle.value = ret;
             SubmitArticle.value.classify = ret.classify.id;
             content.value = ret.content;

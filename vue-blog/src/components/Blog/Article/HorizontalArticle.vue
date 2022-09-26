@@ -1,5 +1,5 @@
 <template>
-    <div class="feature-article hvr-grow" @click="router.push({
+    <div v-if="articledata" class="feature-article hvr-grow" @click="router.push({
       path: 'ShowArticle',
       query: { 'ArticleId': articledata.id }
     })">
@@ -41,7 +41,6 @@ let router = useRouter()
 const { articledata } = defineProps<{
     articledata: Article
 }>()
-
 const ParamStore = useAppStore();
 const refParamStore = storeToRefs(ParamStore);
 var refPictureUrl = ref(`${refParamStore.HeadPortrait.value}`);

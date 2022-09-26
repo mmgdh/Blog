@@ -1,10 +1,15 @@
+import {ref} from 'vue'
 import { defineStore } from 'pinia'
 import { ArticleTag, ArticleClassify, Article, ArticlePageRequest } from '../Entities/E_Article'
 import ArticleService from '../Services/ArticleService'
 import UploadService from "../Services/UploadService"
+import { useAppStore } from './AppStore'
+
 
 // useStore 可以是 useUser、useCart 之类的任何东西
 // 第一个参数是应用程序中 store 的唯一 id
+const ArticleArray:Article[]=[];
+
 export const useArticleStore = defineStore('Article', {
   state: () => {
     return {
@@ -16,10 +21,8 @@ export const useArticleStore = defineStore('Article', {
 
       } as Array<ArticleClassify>,
       CurArticleCount: Number,
-      CurPageArticles: {
-
-      } as Array<Article>,
-      AllArticleCount:Number,
+      CurPageArticles: ArticleArray,
+      AllArticleCount: Number,
       PageRequestParm: {
         page: 1,
         pageSize: 10,
@@ -30,8 +33,14 @@ export const useArticleStore = defineStore('Article', {
     }
   },
   getters: {
-    FeatureArticle: (state):Article => {
-      return state.CurPageArticles[0]
+    FeatureArticle: async (state): Promise<Article> => {
+      const AppStore = useAppStore();
+      var TopArticleId = AppStore.GetParameterValue('Blog-TopArticle');
+      if(TopArticleId){
+        return await ArticleService.prototype.GetArticleById(TopArticleId,true);
+      }
+      return state.CurPageArticles[0];
+
     }
   },
   actions: {
@@ -47,7 +56,7 @@ export const useArticleStore = defineStore('Article', {
     },
     async GetArticleByPage() {
       var ret = await ArticleService.prototype.GetArticleByPage(this.PageRequestParm);
-      this.CurPageArticles = ret.articles;
+      this.CurPageArticles= ret.articles;
       this.CurArticleCount = ret.pageArticleCount ?? 0;
     },
     ImgUrl(imgid: string) { return UploadService.prototype.getImageUri() + imgid }

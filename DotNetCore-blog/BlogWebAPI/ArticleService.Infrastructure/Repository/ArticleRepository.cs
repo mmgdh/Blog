@@ -15,7 +15,12 @@ namespace ArticleService.Infrastructure
 
         public async Task<Article?> GetArticleByIdAsync(Guid ArticleId)
         {
-            return await dbCtx.Articles.Include(x => x.Classify).Include(x => x.Tags).Include(x=>x.articleContent).FirstOrDefaultAsync(x => x.Id == ArticleId);
+            return await dbCtx.Articles.Include(x => x.Classify).Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == ArticleId);
+        }
+
+        public async Task<Article?> GetArticleByIdWithDetailAsync(Guid ArticleId)
+        {
+            return await dbCtx.Articles.Include(x => x.Classify).Include(x => x.Tags).Include(x => x.articleContent).FirstOrDefaultAsync(x => x.Id == ArticleId);
         }
     }
 }

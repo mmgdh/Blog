@@ -11,14 +11,15 @@ import { useRouter } from 'vue-router'
 const router = useRouter();
 router.push('./BlogMain');
 
-const ArticleStore = useArticleStore();
 const ParamStore = useAppStore();
+const ArticleStore = useArticleStore();
 
-onBeforeMount(() => {
-  ArticleStore.GetTags();
-  ArticleStore.GetClassifies();
-  ParamStore.GetAllParameter();
-  ArticleStore.GetArticleCount();
+
+onBeforeMount(async () => {
+  await ParamStore.GetAllParameter();
+  await ArticleStore.GetTags();
+  await ArticleStore.GetClassifies();
+  await ArticleStore.GetArticleCount();
 
 })
 

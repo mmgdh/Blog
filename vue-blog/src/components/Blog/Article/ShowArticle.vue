@@ -44,7 +44,7 @@ let _Article: Article = {
 } as Article;
 let CurArticle = ref(_Article)
 ArticleId = router.query.ArticleId as string;
-ArticleService.prototype.GetArticleById(ArticleId).then(ret => {
+ArticleService.prototype.GetArticleById(ArticleId,true).then(ret => {
   CurArticle.value = ret;
   content.value = ret.content;
 });

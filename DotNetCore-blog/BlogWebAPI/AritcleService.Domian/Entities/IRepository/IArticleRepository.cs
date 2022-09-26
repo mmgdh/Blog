@@ -10,8 +10,8 @@ namespace ArticleService.Domain.IRepository
         /// <param name="ArticleId"></param>
         /// <returns></returns>
         public Task<Article?> GetArticleByIdAsync(Guid ArticleId);
-     
 
+        public Task<Article?> GetArticleByIdWithDetailAsync(Guid ArticleId);
 
     }
 }
