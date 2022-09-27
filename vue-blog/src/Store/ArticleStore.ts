@@ -35,12 +35,21 @@ export const useArticleStore = defineStore('Article', {
   getters: {
     FeatureArticle: async (state): Promise<Article> => {
       const AppStore = useAppStore();
-      var TopArticleId = AppStore.GetParameterValue('Blog-TopArticle');
+      var TopArticleId = await AppStore.GetParameterValue('Blog-TopArticle');
       if(TopArticleId){
-        return await ArticleService.prototype.GetArticleById(TopArticleId,true);
+        return await ArticleService.prototype.GetArticleById(TopArticleId,false);
+      }
+      console.log('3'+TopArticleId)
+      return state.CurPageArticles[0];
+    },
+    RecommemtArticle:async (state):Promise<Article>=>{
+      const AppStore = useAppStore();
+      var strArticleId = await AppStore.GetParameterValue('Blog-RcommentArticle');
+      const ArticleIds =strArticleId?.split(',');
+      if(ArticleIds){
+        return await ArticleService.prototype.GetArticlesById(ArticleIds,false);
       }
       return state.CurPageArticles[0];
-
     }
   },
   actions: {

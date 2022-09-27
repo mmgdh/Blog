@@ -6,7 +6,7 @@ namespace ArticleService.Domain.Entities
 {
     public class Article : AggregateRootEntity
     {
-        private string _Title="";
+        private string _Title = "";
         /// <summary>
         /// 标题
         /// </summary>
@@ -26,7 +26,7 @@ namespace ArticleService.Domain.Entities
 
         public Guid ImageId { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public string PinYin { get; private set; } = "";
         /// <summary>
@@ -40,21 +40,18 @@ namespace ArticleService.Domain.Entities
 
 
 
-        public static Article Create(string Title,string Content)
+        public static Article Create(string Title, string Content)
         {
-            try
-            {
-                var article = new Article();
-                article.Title = Title;
-                article.Description = RegexHelper.GetContent(Content, 200);
-                article.articleContent = ArticleContent.Create(article, Content);
-                return article;
-            }
-            catch(Exception ex)
-            {
+            var article = new Article();
+            article.Title = Title;
+            article.articleContent = ArticleContent.Create(article, Content);
+            article.SetContent(Content);
+            return article;
+        }
 
-            }
-            return null;
+        public void SetContent(string Content)
+        {
+            this.Description = RegexHelper.GetContent(Content, 200);
         }
     }
 }

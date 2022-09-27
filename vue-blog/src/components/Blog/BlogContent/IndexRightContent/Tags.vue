@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Title :id="'ArticleTags'" :title-str="'TAGS'" :size="1" class="TitleCSS">
+        <Title :id="'ArticleTags'" :title-str="'TAGS'" :size="1">
             <!-- <tag-one theme="outline" strokeLinejoin="bevel"/> -->
             <tags-outlined />
         </Title>

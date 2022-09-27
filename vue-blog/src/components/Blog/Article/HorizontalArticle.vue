@@ -22,7 +22,7 @@
                     <img :src="refPictureUrl" alt="">
                     <span class="text-color-dim">
                         <strong class="text-color-normal">{{AuthorName}}</strong> 发布于 {{articledata.createDateTime}}
-                    </span>nn
+                    </span>
                 </div>
             </div>
         </div>
@@ -46,6 +46,7 @@ const refParamStore = storeToRefs(ParamStore);
 var refPictureUrl = ref(`${refParamStore.HeadPortrait.value}`);
 const AuthorName = refParamStore.AuthorName;
 watch(refParamStore.HeadPortrait, (newValue, oldValue) => {
+    console.log('change')
     refPictureUrl.value = `${newValue}`;
 })
 </script>

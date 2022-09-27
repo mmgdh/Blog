@@ -44,6 +44,10 @@ export default class ArticleService {
         return await get(controler + "/GetArticleById", { id: _id,needDetail:needDetail })
     }
 
+    public async GetArticlesById(_id: string[],needDetail:boolean) {
+        return await get(controler + "/GetArticlesById", { ids: _id,needDetail:needDetail })
+    }
+
     async GetAllArticleTags() {
         return await get(controler + '/GetAllTags',{NeedCount:true})
     }

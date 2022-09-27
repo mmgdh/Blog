@@ -21,6 +21,7 @@
 </template>
 
 <script setup lang='ts'>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useArticleStore } from '../../../Store/ArticleStore'
 import { storeToRefs } from 'pinia';
@@ -29,7 +30,11 @@ import ArticleCardVue from '../Article/ArticleCard.vue'
 let ArticleStore = useArticleStore();
 let router = useRouter()
 let refStore = storeToRefs(ArticleStore);
-let Ref_ArticleList = refStore.CurPageArticles;
+let ArticleList: any = undefined;
+let Ref_ArticleList = ref(ArticleList)
+refStore.RecommemtArticle.value.then(x => {
+  Ref_ArticleList.value = x;
+})
 </script>
 
 <style scoped lang="less">

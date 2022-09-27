@@ -10,15 +10,7 @@ const setTheme = (theme: string) => {
     document.documentElement.setAttribute('data-theme', theme)
 }
 
-const GetParameterValue = (paramName: string) => {
-    // if (!BlogParameters ||BlogParameters==null||BlogParameters.length==0) {
-    //     return '';
-    // }
-    return BlogParamArray.find(x => x.paramName == paramName)?.paramValue
-}
-
 let BlogParamArray: BlogParam[] = [];
-let ref_BlogParamArray = ref(BlogParamArray);
 
 export const useAppStore = defineStore('AppStore', {
     state: () => {
@@ -27,19 +19,19 @@ export const useAppStore = defineStore('AppStore', {
                 theme: 'theme-light',
                 header_gradient_css: 'var(--header_gradient_css)'
             },
+            AllBlogParam: BlogParamArray
         }
     },
     getters: {
         AuthorName(state) {
-
-            return ref_BlogParamArray.value.find(x => x.paramName == 'Blog-AuthorName')?.paramValue;
+            return state.AllBlogParam.find(x => x.paramName == 'Blog-AuthorName')?.paramValue;
         },
         AuthorPinYin(state) {
-            return ref_BlogParamArray.value.find(x => x.paramName == 'Blog-AuthorPinYin')?.paramValue
+            return state.AllBlogParam.find(x => x.paramName == 'Blog-AuthorPinYin')?.paramValue
         },
         HeadPortrait(state) {
             var ret = ''
-            var pictureId = ref_BlogParamArray.value.find(x => x.paramName == 'Blog-HeadPortrait')?.paramValue
+            var pictureId = state.AllBlogParam.find(x => x.paramName == 'Blog-HeadPortrait')?.paramValue
 
             if (pictureId) {
                 ret = UploadService.prototype.getImageUri() + pictureId
@@ -47,18 +39,17 @@ export const useAppStore = defineStore('AppStore', {
             return ret;
         },
         BlogParameters() {
-            return ref_BlogParamArray.value
+            return BlogParamArray
         }
     },
     actions: {
         async GetAllParameter() {
-            ref_BlogParamArray.value = await BlogInfoService.prototype.GetAllBlogParameters();
+            this.AllBlogParam = await BlogInfoService.prototype.GetAllBlogParameters();
 
         },
-        GetParameterValue(paramName: string) {
-            if (ref_BlogParamArray.value.length == undefined) this.GetAllParameter();
-            if (ref_BlogParamArray.value.length == 0) return undefined;
-            return ref_BlogParamArray.value.find(x => x.paramName == paramName)?.paramValue;
+        async GetParameterValue(paramName: string) {
+            if (this.AllBlogParam.length == undefined || this.AllBlogParam.length == 0) await this.GetAllParameter();
+            return this.AllBlogParam.find(x => x.paramName == paramName)?.paramValue;
         },
 
         toggleTheme(isDark?: boolean) {

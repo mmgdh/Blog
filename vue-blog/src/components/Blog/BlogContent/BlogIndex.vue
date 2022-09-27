@@ -2,7 +2,6 @@
   <div>
     <BlogFeatureVue></BlogFeatureVue>
     <Title :id="'Articlelist'" :title-str="'文章列表'" :size="2">
-      <!-- <bill theme="outline" strokeLinejoin="bevel"/> -->
       <file-text-outlined />
     </Title>
     <div class="IndexContainer">
@@ -13,6 +12,7 @@
       <div class="IndexRightContent">
         <Introduction></Introduction>
         <TagsVue class="right-box"></TagsVue>
+        <Notice class="right-box"></Notice>
       </div>
     </div>
 
@@ -27,7 +27,7 @@ import ArticleClssifyList from '../Article/ArticleClassifyList.vue';
 import BlogFeatureVue from './BlogFeature.vue';
 import Title from '../../common/Title.vue';
 import TagsVue from './IndexRightContent/Tags.vue';
-import {Bill} from '@icon-park/vue-next';
+import Notice from './IndexRightContent/Notice.vue';
 import { FileTextOutlined } from '@ant-design/icons-vue';
 
 </script>
@@ -36,19 +36,21 @@ import { FileTextOutlined } from '@ant-design/icons-vue';
   display: flex;
   flex-direction: column;
 }
-.IndexRightContent{
+
+.IndexRightContent {
   display: flex;
   flex-direction: column;
 }
+
 .right-box {
-    background-color: var(--background-secondary);
-    border-radius: 1rem;
-    margin-bottom: 2rem;
-    padding: 2rem;
-    /* position: relative; */
-    --tw-shadow: 0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);
-    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
-    width: 100%;
+  background-color: var(--background-secondary);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  /* position: relative; */
+  --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  width: 100%;
 }
 
 @media (min-width: 1024px) {

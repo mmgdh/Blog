@@ -43,7 +43,7 @@ namespace ArticleService.WebAPI.Controllers
         #region Article相关API
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Guid>> Add([FromForm]ArticleAddRequest request)
+        public async Task<ActionResult<Guid>> Add([FromForm] ArticleAddRequest request)
         {
             List<Guid> TagsGuid = new List<Guid>();
             if (request.Tags != null)
@@ -64,7 +64,7 @@ namespace ArticleService.WebAPI.Controllers
             dbCtx.Tags.UpdateRange(ArticleTags);
             if (request.file != null)
             {
-                EventBusHelper.EventBusFunc_UploadImg(EnumCallBackEntity.ArticleTitleImage,UploadImageType.ArticleTitleImage, request.file, AddArticle.Id, eventBus);
+                EventBusHelper.EventBusFunc_UploadImg(EnumCallBackEntity.ArticleTitleImage, UploadImageType.ArticleTitleImage, request.file, AddArticle.Id, eventBus);
             }
             await dbCtx.SaveChangesAsync();
 
@@ -73,17 +73,18 @@ namespace ArticleService.WebAPI.Controllers
         }
         [HttpPut]
         [Authorize]
-        public async Task<Article> Modify([FromForm]ArticleModifyRequest request)
+        public async Task<Article> Modify([FromForm] ArticleModifyRequest request)
         {
 
             List<Guid> TagsGuid = request.tags.ToList();
-            Article? ModifyArticle = await dbCtx.Articles.Include(x => x.Tags).Include(x=>x.articleContent).Include(x=>x.Classify).FirstAsync(x => x.Id == request.id);
+            Article? ModifyArticle = await dbCtx.Articles.Include(x => x.Tags).Include(x => x.articleContent).Include(x => x.Classify).FirstAsync(x => x.Id == request.id);
             if (ModifyArticle == null) throw new Exception("更新文章失败，通过Id未找到对应的文章");
             ModifyArticle.Title = request.title;
 
             var content = await dbCtx.ArticleContents.FindAsync(ModifyArticle.articleContent.Id);
-            if(content==null) throw new Exception("更新文章失败，未获取对应的内容信息");
+            if (content == null) throw new Exception("更新文章失败，未获取对应的内容信息");
             content.Content = request.Content;
+            ModifyArticle.SetContent(request.Content);
 
             //从数据库获取Classify并保存关系
             var Classify = await dbCtx.ArticleClassifies.FindAsync(request.classify);
@@ -96,7 +97,7 @@ namespace ArticleService.WebAPI.Controllers
             {
                 EventBusHelper.EventBusFunc_UploadImg(EnumCallBackEntity.ArticleTitleImage, UploadImageType.ArticleTitleImage, request.file, ModifyArticle.Id, eventBus);
             }
-           var ret =  await dbCtx.SaveChangesAsync();
+            var ret = await dbCtx.SaveChangesAsync();
 
             return ModifyArticle;
         }
@@ -132,23 +133,24 @@ namespace ArticleService.WebAPI.Controllers
             return response;
         }
         [HttpGet]
-        public async Task<ArticleResp> GetArticleById(Guid id,bool needDetail)
+        public async Task<ArticleResp> GetArticleById(Guid id, bool needDetail)
         {
-            Article? ret = new Article();
-            if (needDetail)
-            {
-                ret = await repository.GetArticleByIdWithDetailAsync(id);
-
-            }
-            else
-            {
-                ret = await repository.GetArticleByIdAsync(id);
-            }
+            Article? ret = await repository.GetArticleByIdAsync(id, needDetail);
             if (ret == null)
             {
                 throw new Exception("未找到对应的文章");
             }
-            return ArticleResp.Create(ret,needDetail);
+            return ArticleResp.Create(ret, needDetail);
+        }
+        [HttpGet]
+        public async Task<ArticleResp[]> GetArticlesById([FromQuery] ArticleGetRequest request)
+        {
+            var ret = await repository.GetArticlesByIdAsync(request.ids, request.NeedDetail);
+            if (ret == null)
+            {
+                throw new Exception("未找到对应的文章");
+            }
+            return ret.Select(x => ArticleResp.Create(x, request.NeedDetail)).ToArray();
         }
         [HttpGet]
         public async Task<int> GetArticleCount()
@@ -188,14 +190,14 @@ namespace ArticleService.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ArticleTagResponse[]>> GetAllTags(bool? NeedCount)
         {
-            if (NeedCount==true)
+            if (NeedCount == true)
             {
                 var TagWithCount = await Tagrepository.GetArticleTagWithArticleCount();
                 return Ok(ArticleTagResponse.CreatelstResponse(TagWithCount));
             }
             else
             {
-                return Ok(ArticleTagResponse.CreatelstResponse(await Tagrepository.GetAllArticleTagsAsync())); 
+                return Ok(ArticleTagResponse.CreatelstResponse(await Tagrepository.GetAllArticleTagsAsync()));
             }
 
         }
@@ -208,19 +210,19 @@ namespace ArticleService.WebAPI.Controllers
         {
             var Classify = await domainService.CreateClassify(articleClassifyAdd.ClassifyName);
             dbCtx.Add(Classify);
-            EventBusHelper.EventBusFunc_UploadImg(EnumCallBackEntity.ArticleClassify,UploadImageType.ArticleClassifyImage, articleClassifyAdd.file, Classify.Id, eventBus);
+            EventBusHelper.EventBusFunc_UploadImg(EnumCallBackEntity.ArticleClassify, UploadImageType.ArticleClassifyImage, articleClassifyAdd.file, Classify.Id, eventBus);
             await dbCtx.SaveChangesAsync();
             return Classify.Id;
         }
         [HttpPut]
         [Authorize]
-        public async Task<ActionResult<bool>> ModifyCLassify([FromForm]ArticleClassifyRequest articleClassify)
+        public async Task<ActionResult<bool>> ModifyCLassify([FromForm] ArticleClassifyRequest articleClassify)
         {
             var Classify = await dbCtx.ArticleClassifies.FindAsync(articleClassify.Id);
             if (Classify == null) throw new Exception("未找到对应的文章分类");
             Classify.ClassifyName = articleClassify.ClassifyName;
             if (articleClassify.file != null)
-                EventBusHelper.EventBusFunc_UploadImg(EnumCallBackEntity.ArticleClassify,UploadImageType.ArticleClassifyImage, articleClassify.file, Classify.Id, eventBus);
+                EventBusHelper.EventBusFunc_UploadImg(EnumCallBackEntity.ArticleClassify, UploadImageType.ArticleClassifyImage, articleClassify.file, Classify.Id, eventBus);
             await dbCtx.SaveChangesAsync();
             return true;
         }

@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang='ts'>
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref,watch } from 'vue';
 import HorizontalArticleVue from '../Article/HorizontalArticle.vue';
 import { useArticleStore } from '../../../Store/ArticleStore'
 import { storeToRefs } from 'pinia';
