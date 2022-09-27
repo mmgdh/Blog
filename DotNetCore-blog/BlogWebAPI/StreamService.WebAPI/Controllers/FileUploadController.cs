@@ -37,7 +37,7 @@ namespace StreamService.WebAPI.Controllers
         [HttpGet]
         public async Task<FileContentResult> GetImage(Guid Id)
         {
-            var redisRet = redisHelper.GetFileCache(Id.ToString());
+            var redisRet = await redisHelper.GetFileCacheAsync(Id.ToString());
             if (redisRet != null)
             {
                 return new FileContentResult(redisRet.Item1, redisRet.Item2);

@@ -8,15 +8,18 @@ import { useArticleStore } from './Store/ArticleStore'
 import { useAppStore } from './Store/AppStore'
 import { useRouter } from 'vue-router'
 
-const router = useRouter();
-router.push('./BlogMain');
+
+
 
 const ParamStore = useAppStore();
 const ArticleStore = useArticleStore();
-
+const router = useRouter();
 
 onBeforeMount(async () => {
-  await ParamStore.GetAllParameter();
+  ParamStore.GetAllParameter().then(() => {
+
+    router.push('./BlogMain');
+  });
   await ArticleStore.GetTags();
   await ArticleStore.GetClassifies();
   await ArticleStore.GetArticleCount();

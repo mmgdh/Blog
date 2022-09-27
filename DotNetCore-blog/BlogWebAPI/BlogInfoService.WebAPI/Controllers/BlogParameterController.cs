@@ -81,7 +81,7 @@ namespace BlogInfoService.WebAPI.Controllers
             var redisRet = redisHelper.KeyExists(KeyName);
             if (redisRet)
             {
-                blogParamters = redisHelper.ListRange<BlogParameter>(KeyName);
+                blogParamters = await redisHelper.ListRangeAsync<BlogParameter>(KeyName);
             }
             else
             {

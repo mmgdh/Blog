@@ -11,6 +11,7 @@ const setTheme = (theme: string) => {
 }
 
 let BlogParamArray: BlogParam[] = [];
+let IsLoading: boolean = false;
 
 export const useAppStore = defineStore('AppStore', {
     state: () => {
@@ -44,10 +45,12 @@ export const useAppStore = defineStore('AppStore', {
     },
     actions: {
         async GetAllParameter() {
+            IsLoading = true;
             this.AllBlogParam = await BlogInfoService.prototype.GetAllBlogParameters();
-
+            IsLoading = false;
         },
         async GetParameterValue(paramName: string) {
+
             if (this.AllBlogParam.length == undefined || this.AllBlogParam.length == 0) await this.GetAllParameter();
             return this.AllBlogParam.find(x => x.paramName == paramName)?.paramValue;
         },

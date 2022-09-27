@@ -49,7 +49,7 @@ namespace CommonHelpers
             return result;
         }
 
-        public async Task ReSetRedisValue<T>(string KeyName,List<T>? values = null,Func<Task<List<T>>>? reSetFunc=null)
+        public async Task ReSetRedisValue<T>(string KeyName,List<T>? values = null,Func<Task<List<T>>>? reSetFunc=null, TimeSpan? timeSpan=null)
         {
             //删除后重新设置redis缓存
             KeyDelete(KeyName);
@@ -61,7 +61,7 @@ namespace CommonHelpers
                     values = new List<T>();
             }
             await AddListAsync<T>(KeyName, values);
-            await KeyExpire(KeyName, TimeSpan.FromSeconds(30));
+            await KeyExpire(KeyName, timeSpan);
         }
         private RedisKey[] ConvertRedisKeys(List<string> rediskey)
         {
@@ -75,10 +75,10 @@ namespace CommonHelpers
             string strByte = Convert.ToBase64String(bytes);
             await HashSet(key, "Item1", strByte);
             await HashSet(key, "Item2", fileType);
-            KeyExpire(key, new TimeSpan(0, 10, 0));
+            await KeyExpire(key);
             return true;
         }
-        public Tuple<byte[], string>? GetFileCache(string key)
+        public async Task<Tuple<byte[], string>> GetFileCacheAsync(string key)
         {
             var Cache = HashGetAll(key);
             if (Cache == null || Cache.Count() == 0) return null;
@@ -86,7 +86,7 @@ namespace CommonHelpers
             var fileType = Cache.Where(x=>x.Name=="Item2").First().Value;
             if (string.IsNullOrEmpty(strbyte) || string.IsNullOrEmpty(fileType)) return null;
             var bytes = Convert.FromBase64String(strbyte!);
-            KeyExpire(key, new TimeSpan(0, 10, 0));
+            await KeyExpire(key, new TimeSpan(0, 10, 0));
             return new Tuple<byte[], string>(bytes, fileType!);
         }
         #endregion
@@ -133,11 +133,12 @@ namespace CommonHelpers
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public List<T> ListRange<T>(string key)
+        public async Task<List<T>> ListRangeAsync<T>(string key)
         {
-            return Do(redis =>
+            return await Do(async redis =>
             {
-                var values = redis.ListRange(key);
+                var values = await redis.ListRangeAsync(key);
+                await KeyExpire(key);
                 return ConvertList<T>(values);
             });
         }
@@ -281,7 +282,7 @@ namespace CommonHelpers
         /// <param name="key"></param>
         /// <param name="expiry"></param>
         /// <returns></returns>
-        public async Task<bool> KeyExpire(string key, TimeSpan? expiry)
+        public async Task<bool> KeyExpire(string key, TimeSpan? expiry=null)
         {
             if (expiry == null) expiry = new TimeSpan(0, 10, 0);//默认10分钟
             return await Do(db => db.KeyExpireAsync(key, expiry));
