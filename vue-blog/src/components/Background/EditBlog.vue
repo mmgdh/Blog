@@ -1,5 +1,5 @@
 <template>
-    <Md id="MdStyle" v-model="content" @on-upload-img="onUploadImg"></Md>
+    <Md id="MdStyle" v-model="content" @on-upload-img="onUploadImg" @on-html-changed="onHtmlChanged"></Md>
 
     <div id="BlogButton">
         <a-button shape="round" type="primary" @click="showDrawer">提交</a-button>
@@ -77,7 +77,7 @@ onMounted(() => {
     Ref_ArticleCLassify.value = ArticleStore.$state.Classifies
     //若ArticleId不为空，则代表编辑状态，查询对应的文章
     if (ArticleId != null) {
-        ArticleService.prototype.GetArticleById(ArticleId,true).then(ret => {
+        ArticleService.prototype.GetArticleById(ArticleId, true).then(ret => {
             SubmitArticle.value = ret;
             SubmitArticle.value.classify = ret.classify.id;
             content.value = ret.content;
@@ -87,7 +87,11 @@ onMounted(() => {
 
 //#region  markdown
 const content = ref<string>('');
+let html = '';
 
+const onHtmlChanged = (_html: string) => {
+    html = _html;
+}
 //MarkDown图片上传功能
 const onUploadImg = async (files: any, callback: any) => {
     const res = await Promise.all(
@@ -141,22 +145,22 @@ const validateMessages = {
 };
 const onFinish = (values: Article) => {
     values.content = content.value;
+    values.html = html;
     values.id = ArticleId;
     const formdata = new FormData();
     fileList.value?.forEach(file => {
         if (file)
             formdata.append('file', file.originFileObj as any)
     });
-    for(var prop in values){
-        const value =(values as any)[prop]
-        if(prop=="tags")
-        {
-            for(var arrayValue in value){
-                formdata.append(prop,value[arrayValue].id)
+    for (var prop in values) {
+        const value = (values as any)[prop]
+        if (prop == "tags") {
+            for (var arrayValue in value) {
+                formdata.append(prop, value[arrayValue].id)
             }
         }
-        else{
-            formdata.append(prop,value)
+        else {
+            formdata.append(prop, value)
         }
 
     }

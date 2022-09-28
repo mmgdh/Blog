@@ -37,7 +37,7 @@ export const useArticleStore = defineStore('Article', {
       const AppStore = useAppStore();
       var TopArticleId = await AppStore.GetParameterValue('Blog-TopArticle');
       if(TopArticleId){
-        return await ArticleService.prototype.GetArticleById(TopArticleId,false);
+        return await ArticleService.prototype.GetArticleById(TopArticleId);
       }
       console.log('3'+TopArticleId)
       return state.CurPageArticles[0];
@@ -47,7 +47,7 @@ export const useArticleStore = defineStore('Article', {
       var strArticleId = await AppStore.GetParameterValue('Blog-RcommentArticle');
       const ArticleIds =strArticleId?.split(',');
       if(ArticleIds){
-        return await ArticleService.prototype.GetArticlesById(ArticleIds,false);
+        return await ArticleService.prototype.GetArticlesById(ArticleIds);
       }
       return state.CurPageArticles[0];
     }

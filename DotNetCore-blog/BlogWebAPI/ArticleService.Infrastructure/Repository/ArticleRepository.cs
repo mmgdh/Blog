@@ -13,31 +13,23 @@ namespace ArticleService.Infrastructure
             dbCtx = _dbCtx;
         }
 
-        public async Task<Article?> GetArticleByIdAsync(Guid ArticleId, bool NeedDetail)
+        public async Task<Article?> GetArticleByIdAsync(Guid ArticleId, bool NeedContent, bool NeedHtml)
         {
-            if (NeedDetail)
-            {
-                return await dbCtx.Articles.Include(x => x.Classify).Include(x => x.Tags).Include(x=>x.articleContent).FirstOrDefaultAsync(x => x.Id == ArticleId);
-            }
-            else
-            {
-                return await dbCtx.Articles.Include(x => x.Classify).Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == ArticleId);
-            }
-
+            return await GetArticleQueryAble(NeedContent, NeedHtml).FirstOrDefaultAsync(x => x.Id == ArticleId);
         }
 
-        public async Task<Article[]?> GetArticlesByIdAsync(Guid[] Ids, bool NeedDetail)
+        public async Task<Article[]?> GetArticlesByIdAsync(Guid[] Ids, bool NeedContent, bool NeedHtml)
         {
-            if (NeedDetail)
-            {
-                return await dbCtx.Articles.Include(x => x.Classify).Include(x => x.Tags).Include(x=>x.articleContent).Where(x => Ids.Contains(x.Id)).ToArrayAsync();
-            }
-            else
-            {
-                return await dbCtx.Articles.Include(x => x.Classify).Include(x => x.Tags).Where(x => Ids.Contains(x.Id)).ToArrayAsync();
-            }
 
+            return await GetArticleQueryAble(NeedContent, NeedHtml).Where(x => Ids.Contains(x.Id)).ToArrayAsync();
+        }
 
+        public IQueryable<Article> GetArticleQueryAble(bool NeedContent, bool NeedHtml)
+        {
+            var linq = dbCtx.Articles.Include(x => x.Classify).Include(x => x.Tags).AsQueryable();
+            if (NeedContent) linq = linq.Include(x => x.articleContent);
+            if (NeedHtml) linq = linq.Include(x => x.articleHtml);
+            return linq;
         }
     }
 }

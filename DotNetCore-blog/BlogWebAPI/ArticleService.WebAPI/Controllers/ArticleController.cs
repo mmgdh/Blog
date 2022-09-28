@@ -48,7 +48,7 @@ namespace ArticleService.WebAPI.Controllers
             List<Guid> TagsGuid = new List<Guid>();
             if (request.Tags != null)
                 TagsGuid = request.Tags.ToList();
-            Article AddArticle = Article.Create(request.Title, request.content);
+            Article AddArticle = Article.Create(request.Title, request.content,request.html);
 
             //从数据库获取Classify并保存关系
             var Classify = await dbCtx.ArticleClassifies.FindAsync(request.Classify);
@@ -77,7 +77,7 @@ namespace ArticleService.WebAPI.Controllers
         {
 
             List<Guid> TagsGuid = request.tags.ToList();
-            Article? ModifyArticle = await dbCtx.Articles.Include(x => x.Tags).Include(x => x.articleContent).Include(x => x.Classify).FirstAsync(x => x.Id == request.id);
+            Article? ModifyArticle = await repository.GetArticleByIdAsync(request.id, true, true);
             if (ModifyArticle == null) throw new Exception("更新文章失败，通过Id未找到对应的文章");
             ModifyArticle.Title = request.title;
 
@@ -85,6 +85,10 @@ namespace ArticleService.WebAPI.Controllers
             if (content == null) throw new Exception("更新文章失败，未获取对应的内容信息");
             content.Content = request.Content;
             ModifyArticle.SetContent(request.Content);
+
+            var ArticleHtml = await dbCtx.ArticleHtmls.FindAsync(ModifyArticle.articleHtml.Id);
+            if (ArticleHtml == null) throw new Exception("更新文章失败，未获取对应的Html信息");
+            ArticleHtml.Html = request.Html;
 
             //从数据库获取Classify并保存关系
             var Classify = await dbCtx.ArticleClassifies.FindAsync(request.classify);
@@ -133,24 +137,24 @@ namespace ArticleService.WebAPI.Controllers
             return response;
         }
         [HttpGet]
-        public async Task<ArticleResp> GetArticleById(Guid id, bool needDetail)
+        public async Task<ArticleResp> GetArticleById(Guid id, bool needContent,bool needHtml)
         {
-            Article? ret = await repository.GetArticleByIdAsync(id, needDetail);
+            Article? ret = await repository.GetArticleByIdAsync(id, needContent, needHtml);
             if (ret == null)
             {
                 throw new Exception("未找到对应的文章");
             }
-            return ArticleResp.Create(ret, needDetail);
+            return ArticleResp.Create(ret, needContent,needHtml);
         }
         [HttpGet]
         public async Task<ArticleResp[]> GetArticlesById([FromQuery] ArticleGetRequest request)
         {
-            var ret = await repository.GetArticlesByIdAsync(request.ids, request.NeedDetail);
+            var ret = await repository.GetArticlesByIdAsync(request.ids, request.NeedContent, request.NeedHtml);
             if (ret == null)
             {
                 throw new Exception("未找到对应的文章");
             }
-            return ret.Select(x => ArticleResp.Create(x, request.NeedDetail)).ToArray();
+            return ret.Select(x => ArticleResp.Create(x, request.NeedContent,request.NeedHtml)).ToArray();
         }
         [HttpGet]
         public async Task<int> GetArticleCount()

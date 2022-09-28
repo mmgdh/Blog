@@ -34,17 +34,22 @@ namespace ArticleService.Domain.Entities
         /// </summary>
         public ArticleContent articleContent { get; set; } = new ArticleContent();
         /// <summary>
+        /// 文章MarkDown Html内容
+        /// </summary>
+        public ArticleHtml articleHtml { get; set; } = new ArticleHtml();
+        /// <summary>
         /// 标签
         /// </summary>
         public List<ArticleTag> Tags { get; set; } = new List<ArticleTag>();
 
 
 
-        public static Article Create(string Title, string Content)
+        public static Article Create(string Title, string Content,string html)
         {
             var article = new Article();
             article.Title = Title;
             article.articleContent = ArticleContent.Create(article, Content);
+            article.articleHtml = ArticleHtml.Create(article, html);
             article.SetContent(Content);
             return article;
         }

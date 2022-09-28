@@ -1,29 +1,41 @@
 <template>
-  <div class="MdContainerStyle ">
-    <div class="ShowBlogTop">
-      <div class="BlogTitle">
-        {{ CurArticle.title }}
+  <div v-if="CurArticle" class="MdContainerStyle ">
+    <div class="main-grid">
+      <div class="post-header">
+        <span class="post-labels">
+          <b>{{CurArticle.classify.classifyName}}</b>
+          <ul>
+            <li v-for="Tag in CurArticle.tags" :key="Tag.id">
+              <em>#{{Tag.tagName}}</em>
+            </li>
+          </ul>
+        </span>
+        <h1 class="post-title">{{ CurArticle.title }}</h1>
+        <div class="post-Author">
+          <div class="flex-center">
+            <img :src="refParamStore.HeadPortrait.value" alt="">
+            <span class="text-color-dim">
+              <strong class="text-color-normal">{{refParamStore.AuthorName.value}}</strong> 发布于
+              {{CurArticle.createDateTime}}
+            </span>
+          </div>
+        </div>
       </div>
 
     </div>
-    <md-editor
-    v-model="content"
-    :editorId="state.id"
-    preview-only
-    class="DivCSS mdStyle hvr-float-shadow"
-  />
-  <md-atalog
-    :editorId="state.id"
-    :scroll-element="scrollElement"
-    :theme="state.theme"
-  />
-    <!-- <Md id="MyMarkDown" :preview-only="true" :show-code-row-number="true" v-model="content" :scroll-auto="false"
-      class="DivCSS mdStyle hvr-float-shadow"></Md>
-      <md-atalog
-    editorId="MyMarkDown"
-    :scroll-element="scrollElement"
-    :theme="state.theme"
-  /> -->
+    <div class="main-grid">
+      <div class="BlogContent">
+        <div id="markdownContent" v-html="CurArticle.html">
+
+        </div>
+        <!-- <md-editor v-model="content" :editorId="state.id" preview-only class="mdStyle hvr-float-shadow" /> -->
+      </div>
+      <div class="rightContent">
+        <Introduction></Introduction>
+      </div>
+    </div>
+
+    <!-- <md-atalog :editorId="state.id" :scroll-element="scrollElement" :theme="state.theme" /> -->
   </div>
 </template>
 
@@ -34,17 +46,21 @@ import 'md-editor-v3/lib/style.css';
 import { useRoute } from 'vue-router'
 import { Article } from '../../../Entities/E_Article'
 import ArticleService from '../../../Services/ArticleService'
-
-
+import { useAppStore } from '../../../Store/AppStore';
+import { storeToRefs } from 'pinia';
+import Introduction from '../BlogContent/IndexRightContent/Introduction.vue'
 let router = useRoute();
 let ArticleId: string;
 let content = ref('');
-let _Article: Article = {
+let _Article: any = undefined
 
-} as Article;
+const ParamStore = useAppStore();
+const refParamStore = storeToRefs(ParamStore);
+
 let CurArticle = ref(_Article)
 ArticleId = router.query.ArticleId as string;
-ArticleService.prototype.GetArticleById(ArticleId,true).then(ret => {
+
+ArticleService.prototype.GetArticleById(ArticleId, false, true).then(ret => {
   CurArticle.value = ret;
   content.value = ret.content;
 });
@@ -56,36 +72,149 @@ const state = reactive({
 
 const scrollElement = document.documentElement;
 </script>
-<style scoped>
+<style scoped lang="less">
 .MdContainerStyle {
-  width: 100%;
-  /* height: 100vh; */
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
 }
 
-.ShowBlogTop {
-
-  height: 200px;
-  width: 100%;
+.main-grid {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+
+  .post-header {
+    margin-bottom: 1rem;
+
+    .post-labels {
+      position: relative;
+      bottom: -0.375rem;
+
+      b {
+        border-radius: .375rem;
+        display: inline-flex;
+        font-size: .75rem;
+        line-height: 1rem;
+        opacity: .9;
+        padding: .125rem;
+        --tw-text-opacity: 1;
+        color: rgba(255, 255, 255, var(--tw-text-opacity));
+        text-transform: uppercase;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, .5);
+      }
+
+      ul {
+        display: inline-flex;
+        padding-left: .5rem;
+
+        li {
+          font-size: .875rem;
+          line-height: 1.25rem;
+          margin-right: .75rem;
+          opacity: .7;
+          --tw-text-opacity: 1;
+          color: rgba(255, 255, 255, var(--tw-text-opacity));
+          text-shadow: 0 2px 2px rgb(0 0 0 / 50%);
+        }
+      }
+    }
+
+    .post-title {
+      margin-top: .5rem;
+      margin-bottom: 1rem;
+      font-size: clamp(1.2rem, 1rem + 3.5vw, 4rem);
+      text-shadow: 0 2px 2px rgb(0 0 0 / 50%);
+      line-height: 1.1;
+      color: rgba(255, 255, 255, 1);
+    }
+
+    .post-Author {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: row;
+      display: flex;
+
+      .flex-center {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        img {
+          border-radius: 9999px;
+          margin-right: 0.5rem;
+          height: 28px;
+          width: 28px;
+          cursor: pointer;
+          max-width: 100%;
+        }
+
+        strong {
+          padding-right: 0.375rem;
+        }
+      }
+    }
+  }
+
+  .BlogContent {
+    color: var(--text-bright);
+  }
+}
+
+@media (min-width:1024px) {
+  .main-grid {
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: minmax(0, 1fr) 320px;
+
+    #markdownContent {
+      margin-bottom: 0;
+      padding: 3.5rem;
+    }
+  }
+}
+
+#markdownContent {
+  word-wrap: break-word;
+  word-break: break-all;
+  background-color: var(--background-secondary);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+  h1 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    color: var(--text-bright);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    padding-top: 1.75rem;
+    position: relative;
+    color: var(--text-bright);
+    font-weight: 600;
+
+
+  }
+
+  a {
+    color: var(--text-bright);
+  }
 }
 
 .BlogTitle {
   font-size: xx-large;
   font-family: 'Courier New', Courier, monospace;
-}
-
-.mdStyle {
-  width: 100%;
-  height: 100%;
-  /* background-color: #2c3e50; */
-  padding: 20px;
-  color: black;
-  min-height: 100vh;
 }
 </style>

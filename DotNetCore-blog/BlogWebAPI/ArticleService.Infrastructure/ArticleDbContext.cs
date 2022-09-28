@@ -15,6 +15,7 @@ namespace ArticleService.Infrastructure
         public DbSet<ArticleTag> Tags { get; set; }
         public DbSet<ArticleClassify> ArticleClassifies { get; set; }
         public DbSet<ArticleContent> ArticleContents { get; set; }
+        public DbSet<ArticleHtml> ArticleHtmls { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

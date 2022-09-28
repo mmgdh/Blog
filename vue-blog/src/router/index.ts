@@ -2,6 +2,11 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
     {
+        path: "/",
+        name: 'waiting',
+        component: () => import('../components/common/waiting.vue')
+    },
+    {
         path: "/BlogManage",
         name: 'BlogManage',
         component: () => import('../components/Background/Manage.vue'),

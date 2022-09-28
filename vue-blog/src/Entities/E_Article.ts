@@ -3,6 +3,7 @@ export interface Article {
     id: string,
     title: string,
     content: string,
+    html:string,
     classify: ArticleClassify,
     createDateTime: Date,
     tags: Array<ArticleTag>,

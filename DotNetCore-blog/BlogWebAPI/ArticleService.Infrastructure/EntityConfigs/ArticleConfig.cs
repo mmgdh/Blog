@@ -14,7 +14,8 @@ namespace ArticleService.Infrastructure.EntityConfigs
             builder.HasMany(s => s.Tags).WithMany(t => t.Articles).UsingEntity(j => j.ToTable("T_Articles_Tags"));
 
             builder.HasOne(s => s.Classify).WithMany(t => t.Articles);
-            builder.HasOne(x => x.articleContent).WithOne(t => t.article).HasForeignKey<ArticleContent>(x=>x.ArticleId);
+            builder.HasOne(x => x.articleContent).WithOne(t => t.article).HasForeignKey<ArticleContent>(x => x.ArticleId);
+            builder.HasOne(x => x.articleHtml).WithOne(t => t.article).HasForeignKey<ArticleHtml>(x => x.ArticleId);
         }
     }
 }

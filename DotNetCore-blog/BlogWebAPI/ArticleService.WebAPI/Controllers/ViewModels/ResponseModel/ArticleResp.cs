@@ -22,6 +22,10 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.ResponseModel
         /// </summary>
         public string? Content { get; set; }
         /// <summary>
+        /// 文章内容Html
+        /// </summary>
+        public string? Html { get; set; }
+        /// <summary>
         /// 创建日期
         /// </summary>
         public DateTime CreateDateTime { get; set; }
@@ -34,7 +38,7 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.ResponseModel
         /// </summary>
         public List<ArticleTag> Tags { get; set; } = new List<ArticleTag>();
 
-        public static ArticleResp Create(Article article,bool needDetail)
+        public static ArticleResp Create(Article article, bool needContent, bool needHtml)
         {
             ArticleResp resp = new ArticleResp();
 
@@ -49,10 +53,8 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.ResponseModel
             resp.CreateDateTime = article.CreationTime;
             resp.UpdateDateTime = article.LastModificationTime;
             resp.Description = article.Description;
-            if (needDetail)
-            {
-                resp.Content = article.articleContent.Content;
-            }
+            if (needContent) resp.Content = article.articleContent.Content;
+            if (needHtml) resp.Html = article.articleHtml.Html;
             return resp;
 
         }

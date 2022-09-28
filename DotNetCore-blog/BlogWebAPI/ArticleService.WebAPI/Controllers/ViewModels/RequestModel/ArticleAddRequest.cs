@@ -7,7 +7,7 @@ using ArticleService.Domain.Entities;
 
 namespace ArticleService.WebAPI.Controllers.ViewModels.RequestModel
 {
-    public record ArticleAddRequest(string Title, string content, Guid Classify, Guid[] Tags, IFormFile? file)
+    public record ArticleAddRequest(string Title, string content,string html, Guid Classify, Guid[] Tags, IFormFile? file)
     {
         public ArticleTag[] ToArticleTagArray(ArticleTagRequest[] tagRequests)
         {
@@ -21,6 +21,7 @@ namespace ArticleService.WebAPI.Controllers.ViewModels.RequestModel
         {
             RuleFor(x => x.Title).NotEmpty();
             RuleFor(x => x.content).NotEmpty();
+            RuleFor(x => x.html).NotEmpty();
             RuleFor(x => x.Tags).NotEmpty();
             //异步报错了，后续再解决
             RuleFor(x => x.Tags).Must((Tags) => dbCtx.Query<ArticleTag>().Any(T => Tags.Contains(T.Id)))

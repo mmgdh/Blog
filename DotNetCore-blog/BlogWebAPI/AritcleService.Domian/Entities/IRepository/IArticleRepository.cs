@@ -9,9 +9,9 @@ namespace ArticleService.Domain.IRepository
         /// </summary>
         /// <param name="ArticleId"></param>
         /// <returns></returns>
-        public Task<Article?> GetArticleByIdAsync(Guid ArticleId,bool NeedDetail);
+        public Task<Article?> GetArticleByIdAsync(Guid ArticleId,bool NeedDetail,bool NeedHtml);
 
-        public Task<Article[]?> GetArticlesByIdAsync(Guid[] Ids, bool NeedDetail);
+        public Task<Article[]?> GetArticlesByIdAsync(Guid[] Ids, bool NeedDetail, bool NeedHtml);
 
     }
 }

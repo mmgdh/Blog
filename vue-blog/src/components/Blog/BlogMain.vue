@@ -7,9 +7,17 @@
             <router-view class="BlogView"></router-view>
         </div>
     </div>
-    <div class="BlogBottom">
-        <p>个人博客系统</p>
-        <p>公安备案：</p>
+    <div class="BlogFooter">
+        <span>
+            <div class="FootContainer">
+                <div class="FootContent">
+                    <p>个人博客系统</p>
+                    <p>公安备案：</p>
+                </div>
+
+            </div>
+        </span>
+
     </div>
 </template>
 
@@ -22,8 +30,7 @@ router.push('/BlogIndex')
 
 </script>
 <style lang="less">
-
-.transition{
+.transition {
     transition: all 0.4s ease-in-out;
 }
 
@@ -180,35 +187,73 @@ a {
     }
 }
 
-.BlogView{
+.BlogView {
     z-index: 10;
     position: relative;
     display: block;
 }
 
-.BlogBottom {
-    height: 100px;
+.BlogFooter {
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     position: relative;
-    left: 0;
-    bottom: 0;
+    padding-top: .25rem;
+    background: var(--header_gradient_css);
 
-    p {
-        margin: 5px;
-        font-size: x-large;
+    span {
+        justify-content: center;
+        display: flex;
+        background-color: var(--background-primary);
+
+        .FootContainer {
+            grid-template-rows: repeat(1, minmax(0, 1fr));
+            gap: 2rem;
+            width: 100%;
+            color: var(--text-normal);
+            padding: 1.5rem;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: .875rem;
+            line-height: 1.25rem;
+            height: 9rem;
+            justify-content: center;
+            align-items: center;
+            border-radius: .5rem;
+            background-color: var(--background-primary);
+
+            .FootContent {
+                grid-row: span 1/span 1;
+                gap: 1.5rem;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                flex-direction: column;
+                display: flex;
+            }
+        }
     }
 }
+
+
 
 @media (min-width: 1024px) {
     .BlogContainer {
         padding-left: 2rem;
         padding-right: 2rem;
         max-width: 1536px;
+    }
+
+    .FootContent {
+        grid-template-rows: none;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        max-width: 1536px;
+
+        .FootContent {
+            grid-column: span 5/span 5;
+            gap: 3rem;
+            text-align: left;
+            flex-direction: row;
+
+        }
     }
 }
 </style>

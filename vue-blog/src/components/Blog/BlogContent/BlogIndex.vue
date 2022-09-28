@@ -15,8 +15,6 @@
         <Notice class="right-box"></Notice>
       </div>
     </div>
-
-
   </div>
 </template>
 
