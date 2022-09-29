@@ -1,5 +1,5 @@
 <template>
-  <div v-if="CurArticle" class="MdContainerStyle ">
+  <div v-if="CurArticle" class="MdContainerStyle " ref="articleRef">
     <div class="main-grid">
       <div class="post-header">
         <span class="post-labels">
@@ -25,13 +25,15 @@
     </div>
     <div class="main-grid">
       <div class="BlogContent">
-        <div id="markdownContent" v-html="CurArticle.html">
+        <!-- <div id="markdownContent" v-html="CurArticle.html">
 
-        </div>
-        <!-- <md-editor v-model="content" :editorId="state.id" preview-only class="mdStyle hvr-float-shadow" /> -->
+        </div> -->
+        <md-editor id="markdownContent"  v-model="content" :editorId="state.id" preview-only
+          class="mdStyle hvr-float-shadow" />
       </div>
       <div class="rightContent">
         <Introduction></Introduction>
+        <div id="toc1">12132131</div>
       </div>
     </div>
 
@@ -54,15 +56,54 @@ let ArticleId: string;
 let content = ref('');
 let _Article: any = undefined
 
+const articleRef = ref(null)
+const initTocbot = () => {
+  let nodes = articleRef.value.children
+  if (nodes.length) {
+    for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i]
+      let reg = /^H[1-4]{1}$/
+      if (reg.exec(node.tagName)) {
+        node.id = i
+      }
+    }
+  }
+  tocbot.init({
+    tocSelector: '#toc1',
+    contentSelector: '.markdownContent',
+    headingSelector: 'h1, h2, h3',
+    onClick: function (e) {
+      e.preventDefault()
+    }
+  })
+  // const imgs = articleRef.value.getElementsByTagName('img')
+  // for (var i = 0; i < imgs.length; i++) {
+  //   reactiveData.images.push(imgs[i].src)
+  //   imgs[i].addEventListener('click', function (e: any) {
+  //     handlePreview(e.target.currentSrc)
+  //   })
+  // }
+}
+onMounted(()=>{
+  console.log('获取dom元素',articleRef)
+  initTocbot();
+  
+
+})
+
+
+
+
 const ParamStore = useAppStore();
 const refParamStore = storeToRefs(ParamStore);
 
 let CurArticle = ref(_Article)
 ArticleId = router.query.ArticleId as string;
 
-ArticleService.prototype.GetArticleById(ArticleId, false, true).then(ret => {
+ArticleService.prototype.GetArticleById(ArticleId, true, false).then(ret => {
   CurArticle.value = ret;
   content.value = ret.content;
+  initTocbot()
 });
 const state = reactive({
   theme: 'dark',
@@ -70,7 +111,6 @@ const state = reactive({
   id: 'my-editor'
 });
 
-const scrollElement = document.documentElement;
 </script>
 <style scoped lang="less">
 .MdContainerStyle {
