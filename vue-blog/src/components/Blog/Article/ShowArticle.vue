@@ -1,5 +1,5 @@
 <template>
-  <div v-if="CurArticle" class="MdContainerStyle " ref="articleRef">
+  <div v-if="CurArticle" class="MdContainerStyle " ref="test">
     <div class="main-grid">
       <div class="post-header">
         <span class="post-labels">
@@ -28,7 +28,7 @@
         <!-- <div id="markdownContent" v-html="CurArticle.html">
 
         </div> -->
-        <md-editor id="markdownContent"  v-model="content" :editorId="state.id" preview-only
+        <md-editor id="markdownContent" v-model="content" :editorId="state.id" preview-only
           class="mdStyle hvr-float-shadow" />
       </div>
       <div class="rightContent">
@@ -56,26 +56,29 @@ let ArticleId: string;
 let content = ref('');
 let _Article: any = undefined
 
-const articleRef = ref(null)
+const test = ref()
 const initTocbot = () => {
-  let nodes = articleRef.value.children
-  if (nodes.length) {
-    for (let i = 0; i < nodes.length; i++) {
-      let node = nodes[i]
-      let reg = /^H[1-4]{1}$/
-      if (reg.exec(node.tagName)) {
-        node.id = i
+  if (test!=null) {
+    let nodes = test.value.children
+    if (nodes.length) {
+      for (let i = 0; i < nodes.length; i++) {
+        let node = nodes[i]
+        let reg = /^H[1-4]{1}$/
+        if (reg.exec(node.tagName)) {
+          node.id = i
+        }
       }
     }
   }
-  tocbot.init({
-    tocSelector: '#toc1',
-    contentSelector: '.markdownContent',
-    headingSelector: 'h1, h2, h3',
-    onClick: function (e) {
-      e.preventDefault()
-    }
-  })
+
+  // tocbot.init({
+  //   tocSelector: '#toc1',
+  //   contentSelector: '.markdownContent',
+  //   headingSelector: 'h1, h2, h3',
+  //   onClick: function (e) {
+  //     e.preventDefault()
+  //   }
+  // })
   // const imgs = articleRef.value.getElementsByTagName('img')
   // for (var i = 0; i < imgs.length; i++) {
   //   reactiveData.images.push(imgs[i].src)
@@ -84,10 +87,10 @@ const initTocbot = () => {
   //   })
   // }
 }
-onMounted(()=>{
-  console.log('获取dom元素',articleRef)
+onMounted(() => {
+  console.log('获取dom元素', test.value)
   initTocbot();
-  
+
 
 })
 
