@@ -1,4 +1,5 @@
 using BlogInfoService.Infrastructure;
+using BlogInfoService.WebAPI.Hubs;
 using CommonInitializer;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -12,6 +13,7 @@ builder.ConifgureExtraService(new InitializerOptions
     EventBusQueueName = "BlogInfoService",
     curAssembly = curAssembly
 });
+builder.Services.AddSignalR();
 //builder.Services.AddValidatorsFromAssemblyContaining<ArticleService.WebAPI.Controllers.ViewModels.RequestModel.ArticleAddRequestValidator>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -26,8 +28,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+app.MapHub<BlogInfoHub>("BlogInfoHub");
 app.UseDefault();
 app.MapControllers();
-
 app.Run();

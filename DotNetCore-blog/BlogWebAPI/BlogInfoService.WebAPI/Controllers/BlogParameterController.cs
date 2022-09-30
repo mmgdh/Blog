@@ -1,11 +1,13 @@
 ﻿using BlogInfoService.Domain;
 using BlogInfoService.Domain.Entities;
 using BlogInfoService.Infrastructure;
+using BlogInfoService.WebAPI.Hubs;
 using BlogInfoService.WebAPI.ViewModels.RequestModel;
 using BlogInfoService.WebAPI.ViewModels.ResponseModel;
 using CommonHelpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogInfoService.WebAPI.Controllers
@@ -18,13 +20,15 @@ namespace BlogInfoService.WebAPI.Controllers
         private BlogParamDbContext dbContext;
         private readonly RedisHelper redisHelper;
         const string KeyName = "Blog-BlogInfo-AllParameters";
+        private readonly IHubContext<BlogInfoHub> hubContext;
 
-        public BlogParameterController(BlogParameterDomainService blogParameterDomainService, BlogParamDbContext dbContext, RedisHelper redisHelper)
+        public BlogParameterController(BlogParameterDomainService blogParameterDomainService, BlogParamDbContext dbContext, RedisHelper redisHelper, IHubContext<BlogInfoHub> hubContext)
         {
             this.blogParameterDomainService = blogParameterDomainService;
             this.dbContext = dbContext;
             this.redisHelper = redisHelper;
             redisHelper.DbNum = 3;
+            this.hubContext = hubContext;
         }
         [HttpPost]
         [Authorize]
@@ -63,7 +67,9 @@ namespace BlogInfoService.WebAPI.Controllers
             if (ret)
             {
                 await redisHelper.ReSetRedisValue(KeyName, reSetFunc: new Func<Task<List<BlogParameter>>>(async () => { return await dbContext.blogParameters.ToListAsync(); }));
+                await hubContext.Clients.All.SendAsync("UpdateParameter", Param.Id, Param.ParamValue);
             }
+
             return ret;
         }
         [HttpPost]
@@ -76,7 +82,7 @@ namespace BlogInfoService.WebAPI.Controllers
         [HttpGet]
         public async Task<List<BlogParamterResponse>> GetAllBlogParameters()
         {
-
+            await hubContext.Clients.All.SendAsync("ReceiveMessage", "ces111", "csssss");
             List<BlogParameter> blogParamters = new List<BlogParameter>();
             var redisRet = redisHelper.KeyExists(KeyName);
             if (redisRet)
